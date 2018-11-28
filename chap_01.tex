@@ -1,0 +1,66 @@
+\documentclass{article}
+
+\begin{document}
+    \subsection{Mathematical Structures}
+    \subsubsection{Sets}
+    \begin{defn}[Set]
+    	A \emph{set} is a collection of distinct objects. 
+    \end{defn}
+    \subsubsection{Group}
+    \begin{defn}[Group]
+    	A \emph{group} is a set $G$ with a binary operation $\cdot$, denoted $(G,\cdot)$, which satisfies the following conditions:
+    	\begin{itemize}
+    		\item \textbf{Closure}: $\forall a,b \in G, a \cdot b \in G$
+    		\item \textbf{Associativity}: $\forall a,b,c \in G, (a \cdot b) \cdot c=a \cdot (b \cdot c)$
+    		\item \textbf{Identity}: $\exists e \in G, \forall a \in G, a \cdot e=e \cdot a=a$
+    		\item \textbf{Inverse}: $\forall a \in G, \exists a^{-1} \in G, a \cdot a^{-1}=a^{-1} \cdot a=e$
+    	\end{itemize}
+    \end{defn}
+	\begin{defn}[Semigroup]
+		A \emph{semigroup} is $(G,\cdot)$, which satisfies Closure and Associativity.
+	\end{defn}
+	\begin{defn}[Monoid]
+		A \emph{monoid} is a semigroup $(G,\cdot)$ which also has identity.
+	\end{defn}
+	\begin{defn}[Abelian Group]
+		An \emph{Abelian Group} or \emph{Commutative Group} is a group $(G,\cdot)$ with the following property:
+		\begin{itemize}
+			\item \textbf{Commutativity}: $\forall a,b \in G, a \cdot b=b \cdot a$
+		\end{itemize}
+	\end{defn}
+    \subsubsection{Ring}
+    \begin{defn}[Ring]
+    	A \emph{Ring} is a set $R$ with two binary operations $+$ and $\cdot$, often called the addition and multiplication of the ring, denoted $(R,+,\cdot)$, which satisfies the following conditions:
+    	\begin{itemize}
+    		\item $(R,+)$ is an abelian group
+    		\item $(R,\cdot)$ is a semigroup
+    		\item \textbf{Distribution} $\cdot$ is distributive with respect to $+$, that is, $\forall a,b,c \in R$:
+    		\begin{itemize}[label=-]
+    			\item $a \cdot (b + c)=(a \cdot b) + (a \cdot c)$
+    			\item $(a + b) \cdot c=(a \cdot c) + (b \cdot c)$
+    		\end{itemize}
+    	\end{itemize}
+    	The identity element of $+$ is often noted $0$.
+    \end{defn}
+	\begin{defn}[Ring with identity(1)]
+		A \emph{Ring with identity} is a ring $(R,+,\cdot)$ of which $(R,\cdot)$ is a monoid. The identity element of $\cdot$ is often noted $1$.
+	\end{defn}
+	\begin{defn}[Commutative Ring]
+		A \emph{commutative ring} is a ring $(R,+,\cdot)$ of which $\cdot$ is commutative.
+	\end{defn}
+	\begin{defn}[Zero Divisor]
+		For a ring $(R,+,\cdot)$, let $0$ be the identity of $+$.\\
+		$a,b\in R$, $a \neq 0$ and $b \neq 0$, if $a \cdot b=0$, $a,b$ are called the zero divisors of the ring.
+	\end{defn}
+	\begin{defn}[Integral Domain]
+		An \emph{integral domain} is a commutative ring $(R,+,\cdot)$ with 1 which does not have zero divisors.
+	\end{defn}
+    \subsubsection{Field}
+    \begin{defn}
+    	A \emph{Field} is a set $F$ with two binary operations $+$ and $\cdot$, often called the addition and multiplication of the field, denoted $(R,+,\cdot)$, which satisfies the following conditions:
+    	\begin{itemize}
+    		\item $(F,+,\cdot)$ is a ring
+    		\item $(F\backslash \{0\},\cdot)$ is a group
+    	\end{itemize}
+    \end{defn}
+\end{document}
