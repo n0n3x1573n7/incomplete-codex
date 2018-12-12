@@ -1,9 +1,8 @@
-\documentclass{article}
+\documentclass{report}
 
 \usepackage{fontspec}
 \setmainfont{D2Coding}
 
-%\usepackage[hangul]{kotex}
 \usepackage[hidelinks,unicode,bookmarks=true]{hyperref}
 \usepackage{fancyvrb}
 \usepackage{color}
@@ -19,28 +18,67 @@
 \usepackage{standalone}
 \usepackage{enumitem}
 
-\setlength{\droptitle}{-3em}
+\usepackage{ulem}
 
-\newtheorem{thm}{Theorem}
-\newtheorem{coro}{Corollary}
-\newtheorem{lemma}{Lemma}
-\newtheorem{prob}{Problem}
-\renewcommand*{\proofname}{Proof}
+\setlength{\droptitle}{-3em}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem*{coro}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{remark}{Remark}
+\renewcommand*{\proofname}{Proof}
 
-\usepackage{hyperref}
+\title{
+	The Incomplete Codex of Basic Mathematics for Computer Scientists\\
+	\large From Programmers to Hackers: Mathematical Basis to Computer Science
+}
 
-\title{Basic Cryptography}
-
-\author{None(\href{https://www.twitter.com/n0n3x1573n7}{n0n3x1573n7})}
+\author{None(\href{https://www.twitter.com/n0n3x1573n7}{@n0n3x1573n7})}
 
 \date{\today}
 
 \begin{document}
 	\maketitle
+
+	\chapter{Introduction}
+		\input{./chapters/ch_01_introduction.tex}
 	
-	\section{Preliminaries}
-	\input{./chap_01.tex}
+	\tableofcontents
+	
+	\part{Mathematical Preliminaries}
+	
+		\chapter{Algebraic Structures}
+			\input{./chapters/ch_02_algebraic_structures.tex}
+	
+		\chapter{Number Theory}
+			\input{./chapters/ch_03_number_theory.tex}
+	
+		\chapter{Analysis}
+			\input{./chapters/ch_04_analysis.tex}
+		
+		\chapter{Linear Algebra}
+			\input{./chapters/ch_05_linear_algebra.tex}
+		
+		\chapter{Calculus}
+			\input{./chapters/ch_06_calculus.tex}
+	
+		\chapter{Logic}
+			\input{./chapters/ch_07_logic.tex}
+
+	\part{Applications to Computer Science}
+	
+		\chapter{Relational algebra}
+			\input{./chapters/ch_08_relational_algebra.tex}
+		
+		\chapter{Automata}
+			\input{./chapters/ch_09_automata.tex}
+		
+		\chapter{Complexity Theory}
+			\input{./chapters/ch_10_complexity_theory.tex}
+		
+		\chapter{Cryptosystem}
+			\input{./chapters/ch_11_cryptosystem.tex}
+
 \end{document}

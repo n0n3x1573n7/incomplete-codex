@@ -1,0 +1,222 @@
+\documentclass{report}
+
+\begin{document}
+
+	\section{Algebraic Structures}
+
+		\subsection{Sets}
+
+			\begin{defn}[Set] \label{def_set}
+				A \emph{set} is a collection of distinct objects. 
+			\end{defn}
+
+			\begin{defn}[Order] \label{def_order}
+				Let $S$ be a set. An \emph{order} on $S$ is a relation, denoted by $<$, with the following properties:
+				\begin{itemize}
+					\item If $x \in S$ and $y \in S$ then one and only one of the following statements is true:
+					\begin{displaymath}
+						x<y, x=y, y<x
+					\end{displaymath}
+					\item For $x,y,z \in S$, if $x<y$ and $y<z$, then $x<z$.
+				\end{itemize}
+			\end{defn}
+
+			\begin{remark} \label{remark_order}
+				\begin{itemize}
+					\item[]
+					\item It is possible to write $x>y$ in place of $y<x$
+					\item The notation $x \leq y$ indicates that $x<y$ or $x=y$.
+				\end{itemize}
+			\end{remark}
+
+		\begin{defn}[Ordered Set] \label{def_ordered_set}
+			An \emph{ordered set} is a set in which an order is defined.
+		\end{defn}
+
+		\begin{defn}[Bound] \label{def_bound}
+			Suppose $S$ is an ordered set, and $E\subset S$.\\
+			If there exists $\beta \in S$ such that $x \leq \beta$ for every $x \in E$, we say that E is \emph{bounded above}, and call $\beta$ an \emph{upper bound} of E.
+			If there exists $\alpha \in S$ such that $x \geq \alpha$ for every $x \in E$, we say that E is \emph{bounded below}, and call $\alpha$ a \emph{lower bound} of E.
+		\end{defn}
+
+		\begin{defn}[Least Upper Bound] \label{def_supremum}
+			Suppose that $S$ is an ordered set, and $E \subset S$.
+			If there exists a $\beta \in S$ with the following properties:
+			\begin{itemize}
+				\item $\beta$ is an upper bound of $E$
+				\item If $\gamma < \beta$, then $\gamma$ is not an upper bound of E
+			\end{itemize}
+			Then $\beta$ is called the \emph{Least Upper Bound} of E or the \emph{supremum} of E, denoted
+			\begin{displaymath}
+				\beta=sup(E)
+			\end{displaymath}
+		\end{defn}
+
+		\begin{defn}[Greatest Lower Bound] \label{def_infimum}
+			Suppose that $S$ is an ordered set, and $E \subset S$.
+			If there exists a $\alpha \in S$ with the following properties:
+			\begin{itemize}
+				\item $\alpha$ is a lower bound of $E$
+				\item If $\gamma < \alpha$, then $\gamma$ is not an lower bound of E
+			\end{itemize}
+			Then $\alpha$ is called the \emph{Greatest Lower Bound} of E or the \emph{infimum} of E, denoted
+			\begin{displaymath}
+			\beta=inf(E)
+			\end{displaymath}
+		\end{defn}
+
+		\begin{defn}[least-upper-bound property] \label{def_least_upper_bound_property}
+			An ordered set $S$ is said to have the \emph{least-upper-bound property} if the following is true:\\
+			if $E \subset S$, $E$ is not empty, and $E$ is bounded above, then $sup(E)$ exists in $S$.
+		\end{defn}
+
+		\begin{defn}[greatest-lower-bound property] \label{def_greatest_lower_bound_property}
+			An ordered set $S$ is said to have the \emph{greatest-lower-bound property} if the following is true:\\
+			if $E \subset S$, $E$ is not empty, and $E$ is bounded below, then $inf(E)$ exists in $S$.
+		\end{defn}
+
+		\begin{thm} \label{thm_glb_lub_property}
+			Suppose $S$ is an ordered set with the least-upper-bound property, $B \subset S$, $B$ is not empty, and $B$ is bounded below.\\
+			Let $L$ be the set of all lower bounds of $B$. Then
+			\begin{displaymath}
+				\alpha=sup(L)
+			\end{displaymath}
+			exists in $S$, and $\alpha=inf(B)$.
+		\end{thm}
+
+		\begin{proof}
+			Note that $\forall x \in L, y \in B, x \leq y$.\\
+			$L$ is nonempty as $B$ is bounded below.\\
+			$L$ is bounded above since $\forall x \in S \backslash L, \forall y \in L, x>y$.\\
+			Since $S$ has the least-upper-bound property and $L \subset S$, $\exists \alpha=sup(L)$.\\
+			The followings hold:
+			\begin{itemize}
+				\item $\alpha$ is a lower bound of $B$.
+					\\($\because$) $\forall \gamma \in B, \gamma > \alpha$
+				\item $\beta$ with $\beta > \alpha$ is not a lower bound of $B$
+					\\($\because$)Since $\alpha$ is an upper bound of $L$, $\beta \notin L$.
+			\end{itemize}
+			Hence $\alpha=inf(B)$.
+		\end{proof}
+		
+		\begin{coro} \label{coro_glb_lub_property_equiv}
+			For all ordered sets, the Least Upper Bound property and the Greatest Lower Bound Porperty are equivalent.
+		\end{coro}
+
+		\subsection{Group}
+
+			\begin{defn}[Group] \label{def_group}
+				A \emph{group} is a set $G$ with a binary operation $\cdot$, denoted $(G,\cdot)$, which satisfies the following conditions:
+				\begin{itemize}
+					\item \textbf{Closure}: $\forall a,b \in G, a \cdot b \in G$
+					\item \textbf{Associativity}: $\forall a,b,c \in G, (a \cdot b) \cdot c=a \cdot (b \cdot c)$
+					\item \textbf{Identity}: $\exists e \in G, \forall a \in G, a \cdot e=e \cdot a=a$
+					\item \textbf{Inverse}: $\forall a \in G, \exists a^{-1} \in G, a \cdot a^{-1}=a^{-1} \cdot a=e$
+				\end{itemize}
+			\end{defn}
+
+		\begin{defn}[Semigroup] \label{def_semigroup}
+			A \emph{semigroup} is $(G,\cdot)$, which satisfies Closure and Associativity.
+		\end{defn}
+
+		\begin{defn}[Monoid] \label{def_monoid}
+			A \emph{monoid} is a semigroup $(G,\cdot)$ which also has identity.
+		\end{defn}
+
+		\begin{defn}[Abelian Group] \label{def_abelian_group}
+			An \emph{Abelian Group} or \emph{Commutative Group} is a group $(G,\cdot)$ with the following property:
+			\begin{itemize}
+				\item \textbf{Commutativity}: $\forall a,b \in G, a \cdot b=b \cdot a$
+			\end{itemize}
+		\end{defn}
+
+		\subsection{Ring}
+
+			\begin{defn}[Ring] \label{def_ring}
+				A \emph{Ring} is a set $R$ with two binary operations $+$ and $\cdot$, often called the addition and multiplication of the ring, denoted $(R,+,\cdot)$, which satisfies the following conditions:
+				\begin{itemize}
+					\item $(R,+)$ is an abelian group
+					\item $(R,\cdot)$ is a semigroup
+					\item \textbf{Distribution}: $\cdot$ is distributive with respect to $+$, that is, $\forall a,b,c \in R$:
+					\begin{itemize}[label=-]
+						\item $a \cdot (b + c)=(a \cdot b) + (a \cdot c)$
+						\item $(a + b) \cdot c=(a \cdot c) + (b \cdot c)$
+					\end{itemize}
+				\end{itemize}
+			The identity element of $+$ is often noted $0$.
+			\end{defn}
+
+		\begin{defn}[Ring with identity(1)] \label{def_ring_with_1}
+			A \emph{Ring with identity} is a ring $(R,+,\cdot)$ of which $(R,\cdot)$ is a monoid. The identity element of $\cdot$ is often noted $1$.
+		\end{defn}
+
+		\begin{defn}[Commutative Ring] \label{def_commutative_ring}
+			A \emph{commutative ring} is a ring $(R,+,\cdot)$ of which $\cdot$ is commutative.
+		\end{defn}
+
+		\begin{defn}[Zero Divisor] \label{def_zero_divisor}
+			For a ring $(R,+,\cdot)$, let $0$ be the identity of $+$.\\
+			$a,b\in R$, $a \neq 0$ and $b \neq 0$, if $a \cdot b=0$, $a,b$ are called the zero divisors of the ring.
+		\end{defn}
+
+		\begin{defn}[Integral Domain] \label{def_integral_domain}
+			An \emph{integral domain} is a commutative ring $(R,+,\cdot)$ with 1 which does not have zero divisors.
+		\end{defn}
+
+		\subsection{Field}
+
+		\begin{defn}[Field] \label{def_field}
+			A \emph{Field} is a set $F$ with two binary operations $+$ and $\cdot$, often called the addition and multiplication of the field, denoted $(R,+,\cdot)$, which satisfies the following conditions:
+			\begin{itemize}
+				\item $(F,+,\cdot)$ is a ring
+				\item $(F\backslash \{0\},\cdot)$ is a group
+			\end{itemize}
+			Alternatively, a Field may be defined with a set of \emph{Field Axioms} listed below:
+			\begin{itemize}
+					\item[(A)] \textbf{Axioms for Addition}
+					\begin{itemize}
+						\item[(A1)] \textbf{Closed under Addition}\\$\forall a,b \in F, a+b \in F$
+						\item[(A2)] \textbf{Addition is Commutative}\\$\forall a,b \in F, a+b=b+a$
+						\item[(A3)] \textbf{Addition is Associative}\\$\forall a,b,c \in F, (a+b)+c=a+(b+c)$
+						\item[(A4)] \textbf{Identity of Addition}\\$\exists 0 \in F, \forall a \in F, 0+a=a$
+						\item[(A5)] \textbf{Inverse of Addition}\\$\forall a \in F, \exists -a \in F, a+(-a)=0$
+					\end{itemize}
+					\item[(M)] \textbf{Axioms for Multiplication}
+					\begin{itemize}
+						\item[(M1)] \textbf{Closed under Multiplication}\\$\forall a,b \in F, a \cdot b \in F$
+						\item[(M2)] \textbf{Multiplication is Commutative}\\$\forall a,b \in F, a \cdot b=b \cdot a$
+						\item[(M3)] \textbf{Multiplication is Associative}\\$\forall a,b,c \in F, (a \cdot b) \cdot c=a \cdot (b \cdot c)$
+						\item[(M4)] \textbf{Identity of Multiplication}\\$\exists 1 \in F, \forall a \in F, 1 \cdot a=a$
+						\item[(M5)] \textbf{Inverse of Multiplication}\\$\forall a \in F\backslash\{0\}, \exists a^{-1} \in F, a \cdot a^{-1}=1$
+					\end{itemize}
+				\item[(D)] \textbf{Distributive Law}
+				\\$\forall a,b,c \in F, (a+b) \cdot c=a \cdot c+b \cdot c$\\where $\cdot$ takes precedence over $+$.
+			\end{itemize}
+		\end{defn}
+
+		\begin{defn} \label{def_ordered_field}
+			An \emph{ordered field} is a field $F$ which is an ordered set, such that
+			\begin{itemize}
+				\item $x+y<x+z$ if $x,y,z \in F$ and $y<z$
+				\item $xy>0$ if $x,y \in F$, $x>0$ and $y>0$
+			\end{itemize}
+			\end{defn}
+
+		\begin{thm} \label{thm_existence_real_number}
+			There exists an ordered field $\mathbb{R}$ containing $\mathbb{Q}$ as a subfield which has the least-upper-bound property.
+		\end{thm}
+
+		\begin{defn} \label{def_extended_real_number_system}
+			The \emph{extended real number system}, denoted $\overline{\mathbb{R}}$, $[-\infty,\infty]$, or $\mathbb{R} \cup \{-\infty,\infty\}$, consists of the real field $\mathbb{R}$ and two symbols, $+\infty$ and $-\infty$. We preserve the original order in $\mathbb{R}$, and define $\forall x \in \mathbb{R}$,
+			\begin{displaymath}
+				-\infty<x<\infty
+			\end{displaymath}
+		\end{defn}
+
+		\begin{remark} \label{remark_extended_real_number_system_not_field}
+			The extended real number system does not form a field.
+		\end{remark}
+
+	\section{From $\mathbb{N}$ to $\mathbb{R}$}
+
+\end{document}
