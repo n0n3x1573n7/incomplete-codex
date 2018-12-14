@@ -22,7 +22,12 @@
 
 \setlength{\droptitle}{-3em}
 
-\theoremstyle{definition}
+\newtheoremstyle{break}
+{\topsep}{\topsep}%
+{\itshape}{}%
+{\bfseries}{}%
+{\newline}{}%
+\theoremstyle{break}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem*{coro}{Corollary}
@@ -43,42 +48,45 @@
 	\maketitle
 
 	\chapter{Introduction}
-		\input{./chapters/ch_01_introduction.tex}
+		\input{./chapters/introduction.tex}
 	
 	\tableofcontents
 	
 	\part{Mathematical Preliminaries}
 	
 		\chapter{Algebraic Structures}
-			\input{./chapters/ch_02_algebraic_structures.tex}
+			\input{./chapters/mathematics/algebraic_structures.tex}
 	
 		\chapter{Number Theory}
-			\input{./chapters/ch_03_number_theory.tex}
+			\input{./chapters/mathematics/number_theory.tex}
 	
 		\chapter{Analysis}
-			\input{./chapters/ch_04_analysis.tex}
+			\input{./chapters/mathematics/analysis.tex}
 		
 		\chapter{Linear Algebra}
-			\input{./chapters/ch_05_linear_algebra.tex}
+			\input{./chapters/mathematics/linear_algebra.tex}
 		
 		\chapter{Calculus}
-			\input{./chapters/ch_06_calculus.tex}
+			\input{./chapters/mathematics/calculus.tex}
+		
+		\chapter{Statistics}
+			\input{./chapters/mathematics/statistics.tex}
 	
 		\chapter{Logic}
-			\input{./chapters/ch_07_logic.tex}
+			\input{./chapters/mathematics/logic.tex}
 
 	\part{Applications to Computer Science}
 	
 		\chapter{Relational algebra}
-			\input{./chapters/ch_08_relational_algebra.tex}
+			\input{./chapters/applications/relational_algebra.tex}
 		
 		\chapter{Automata}
-			\input{./chapters/ch_09_automata.tex}
+			\input{./chapters/applications/automata.tex}
 		
 		\chapter{Complexity Theory}
-			\input{./chapters/ch_10_complexity_theory.tex}
+			\input{./chapters/applications/complexity_theory.tex}
 		
 		\chapter{Cryptosystem}
-			\input{./chapters/ch_11_cryptosystem.tex}
+			\input{./chapters/applications/cryptosystem.tex}
 
 \end{document}
