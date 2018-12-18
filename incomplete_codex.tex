@@ -1,7 +1,7 @@
 \documentclass{report}
 
 \usepackage{fontspec}
-\setmainfont{Courier New}
+\setmainfont{Courier New}%\setmainfont{D2Coding}
 
 \usepackage[hidelinks,unicode,bookmarks=true]{hyperref}
 \usepackage{fancyvrb}
@@ -22,11 +22,16 @@
 
 \setlength{\droptitle}{-3em}
 
-\newtheoremstyle{break}
-{\topsep}{\topsep}%
-{}{}%
-{\bfseries}{}%
-{\newline}{}%
+\newtheoremstyle{break}% name of the style to be used
+{\topsep}% measure of space to leave above the theorem
+{\topsep}% measure of space to leave below the theorem
+{}% name of font to use in the body of the theorem
+{}% measure of space to indent
+{\bfseries}% name of head font
+{}% punctuation between head and body
+{\newline}% space after theorem head; " " = normal interword space
+{}% Manually specify head
+
 \theoremstyle{break}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
