@@ -1,13 +1,50 @@
 %\documentclass{report}
 
 \begin{document}
-
-    \section{test}
-
-        \subsection{subtest}
+    \section{Turing Machine and Complexity}
+        (TODO: Before giving the definition of Turing Machine, I have to give some intuition here.)
+        \begin{defn}[Turing machine] \label{def_tm}
+            A \emph{Turing machine} is a tuple $M=(\Gamma,Q,\delta)$, where: \begin{itemize}
+                \item $Q$ is the set of states, which contains the starting state $q_0$ and the halting state $q_F$.
+                \item $\Gamma$ is the set of symbols, which contains the blank symbol $square$, and two numbers $0$ and $1$. $\Gamma$ is called the \emph{alphabet} of $M$.
+                \item $\delta:Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R\}$ is the \emph{decision function}.
+            \end{itemize}
+        \end{defn}
         
-            \begin{defn}[This] \label{def_this}
-                This is Sparta.
-            \end{defn}
-
+        The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state.
+        
+        In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\{0,1\}^\ast \rightarrow \{0,1\}$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
+        
+        (TODO: Write something about asymptotic notation here)
+        
+        \begin{defn}[Asymptotic notation] \label{def_bigo}
+            Let $f$ and $g$ be two functions from $\mathbb{N}$ to $\mathbb{N}$. Then we say: \begin{itemize}
+                \item $f=O(g)$ if there is a constant $c$ such that $f(n) \leq c \cdot g(n)$ for every sufficiently large $n$. That is, $n>N$ for some $N$.
+                \item $f=\Omega(g)$ if $g=O(f)$.
+                \item $f=\Theta(g)$ if $f=O(g)$ and $g=O(f)$.
+                \item $f=o(g)$ if for every constant $c>0$, $f(n) < c \cdot g(n)$ for every sufficiently large $n$.
+                \item $f=\omega(g)$ if $g=o(f)$.
+            \end{itemize} 
+        \end{defn}
+        
+    \section {Complexity Classes}
+        \begin{defn}[P] \label{def_comp_p}
+        $\mathbf{P}$ is the set of boolean function computable in time $O(n^c)$ for some constant $c>0$.
+        \end{defn}
+        
+        (TODO: Non-deterministic Turing Machine)
+        
+        (TODO: NP)
+        
+        (TODO: EXP)
+    
+    \section {Reduction}
+        (TODO: Polynomial-time reduction)
+        
+        (TODO: NP-Hard, NP-Complete)
+        
+        (TODO: SAT)
+        
+        (TODO: NP-Complete problems)
+        
 \end{document}
