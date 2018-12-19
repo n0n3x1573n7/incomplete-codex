@@ -252,9 +252,39 @@
 				\item If $(R,+,\cdot)$ is a integral domain, then $(R[x],+,\cdot)$ is a integral domain.
 			\end{enumerate}
 		\end{thm}
-		\begin{thm}[Division Algorithm of Polynomials] \label{thm_polynomial_division_algorithm}
-			content...
+		\begin{thm}[Division Algorithm for Polynomials over a Ring] \label{thm_polynomial_division_algorithm_ring}
+			Let $(R,+,\cdot)$ be a commutative ring with $1$.\\
+			Let $f(x),g(x) \in R[x]$, $g(x) \ne 0$ with the leading coefficient of $g(x)$ being invertible.\\
+			Then, $\exists! q(x),r(x) \in R[x]$ such that
+			\begin{displaymath}
+				f(x)=q(x)g(x)+r(x)
+			\end{displaymath}
+			where either $r(x)=0$ or $\deg(r)<\deg(g)$.
 		\end{thm}
+		\begin{proof}
+				Use induction on $\deg(f)$.\\
+				1. $f(x)=0$ or $\deg(f)<\deg(g)$: $q(x)=0, r(x)=f(x)$\\
+				2. $\deg(f)=\deg(g)=0$: $q(x)=f(x) \cdot g(x)^{-1}, r(x)=0$\\
+				3. $\deg(f)\ge\deg(g)$:\\
+				
+				1) Existence\\
+				Let $\deg(f)=n$, $\deg(g)=m$, $n>m$.\\
+				Suppose the theorem holds for $\deg(f)<n$.\\
+				Let $f(x)=a_0+a_1x^1+\cdots+a_nx^n$, $g(x)=b_0+b_1x^1+\cdots+b_mx^m$.\\
+				Choose $f_1(x)=f(x)-(a_nb_m^{-1})x^{n-m}g(x)\in R[x]$.\\
+				Since $\deg(f_1)<n$, $\exists q(x),r(x)\in R[x]$ so that $f_1(x)=g(x)q(x)+r(x)$, where $r(x)=0$ or $\deg(r)<\deg(g)$.\\
+				$f_1(x)=f(x)-(a_nb_m^{-1})x^{n-m}g(x)=g(x)q(x)+r(x)$\\
+				$f(x)=g(x)((a_nb_m^{-1})x^{n-m}+q(x))+r(x)$\\
+				Hence such pair exists.\\
+				
+				2) Uniqueness\\
+				Suppose $f(x)=g(x)q_1(x)+r_1(x)=g(x)q_2(x)+r_2(x)$.\\
+				$g(x)(q_1(x)-q_2(x))=r_2(x)-r_1(x)$\\
+				If $r_1 \ne r_2$, $\deg(g)>\deg(r_2-r_1)=\deg(g(q_1-q_2))$.\\
+				Since $\deg(g(q_1-q_2))\ge\deg(g)$ if $q_1-q_2\ne0$, $q_1=q_2$, but if so, $r_1=r_2$.\\
+				If $r_1=r_2$, trivially $q_1=q_2$.\\
+				Hence they exist uniquely.
+		\end{proof}
 	\section{From $\mathbb{N}$ to $\mathbb{R}$}
 
 \end{document}

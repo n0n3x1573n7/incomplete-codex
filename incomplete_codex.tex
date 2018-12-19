@@ -20,6 +20,10 @@
 
 \usepackage{ulem}
 
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
 \setlength{\droptitle}{-3em}
 
 \newtheoremstyle{break}% name of the style to be used
@@ -63,6 +67,9 @@
 	
 	\part{Mathematical Preliminaries}
 	
+		\chapter{Logic}
+			\input{./chapters/mathematics/logic.tex}
+
 		\chapter{Algebraic Structures}
 			\input{./chapters/mathematics/algebraic_structures.tex}
 	
@@ -80,9 +87,6 @@
 		
 		\chapter{Statistics}
 			\input{./chapters/mathematics/statistics.tex}
-	
-		\chapter{Logic}
-			\input{./chapters/mathematics/logic.tex}
 
 	\part{Applications to Computer Science}
 	
