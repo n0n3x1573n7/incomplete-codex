@@ -91,6 +91,23 @@
 					\forall A \exists P(A) \forall B((B \subseteq A) \Leftrightarrow (B \in P(A)))
 				\end{displaymath}
 			\end{defn}
+		
+			\begin{defn}[Equivalence Relation] \label{def_equiv_rel}
+				Let $S$ be a set. An \emph{Equivalence Relation} on $S$ is a relation, denoted by $\textasciitilde$, with the following properties, $\forall a,b,c \in S$:
+				\begin{itemize}
+					\item \textbf{Reflexivity} $a\textasciitilde a$
+					\item \textbf{Symmetry} $a\textasciitilde b \Leftrightarrow b\textasciitilde a$
+					\item \textbf{Transitivity} $(a\textasciitilde b) \wedge (b\textasciitilde c) \Rightarrow (a\textasciitilde c)$
+				\end{itemize}
+			\end{defn}
+		
+			\begin{defn}[Setoid] \label{def_setoid}
+				A \emph{setoid} is a set in which an equivalence relation is defined, denoted $(S,\textasciitilde )$.
+			\end{defn}
+	
+			\begin{defn}[Equivalence Class] \label{def_equivalence_class}
+				The equivalence class of $a\in S$ under $\textasciitilde $, denoted $[a]$, is defined as $[a]=\{b \in S|a \textasciitilde b\}$.
+			\end{defn}
 
 			\begin{defn}[Order] \label{def_order}
 				Let $S$ be a set. An \emph{order} on $S$ is a relation, denoted by $<$, with the following properties:
@@ -112,7 +129,7 @@
 			\end{remark}
 
 		\begin{defn}[Ordered Set] \label{def_ordered_set}
-			An \emph{ordered set} is a set in which an order is defined.
+			An \emph{ordered set} is a set in which an order is defined, denoted $(S,<)$.
 		\end{defn}
 
 		\begin{defn}[Bound] \label{def_bound}
@@ -375,7 +392,7 @@
 		\end{proof}
 	\section{From $\mathbb{N}$ to $\mathbb{R}$}
 		\subsection{$\mathbb{N}$: The set of Natural Numbers}
-			\subsubsection{Construction}
+			\subsubsection{Construction of $\mathbb{N}$}
 			We start from the Axioms of Set and the following definitions:
 			
 			\begin{defn}[Successor] \label{defn_successor}
@@ -439,7 +456,7 @@
 			\end{proof}
 		
 			Using this theorem, we can finally define the set of natural numbers:
-			\begin{defn}
+			\begin{defn}[The Set $\mathbb(N)$ of natural numbers] \label{def_N}
 				Take any inductive set $S$, and let
 				\begin{displaymath}
 					N=\bigcap_{\substack{A \subseteq S\\A \text{ is inductive}}}A
@@ -447,7 +464,108 @@
 				This set is the natural numbers, which we denote as $\mathbb{N}$.
 			\end{defn}
 			
-			\subsubsection{Properties}
+			\subsubsection{Properties of $\mathbb{N}$}
+				Many of the mathematics book defines the set of Natural Numbers as the set satisfying the \emph{Peano Axioms}.
+				\begin{prop}[Peano Axioms] \label{peano_axioms}
+					\begin{enumerate}
+						\item[]
+						\item $0$, which we defined as the empty set $\emptyset$, is a natural number.
+						\item There exist a distinguished set map $\sigma: \mathbb{N} \rightarrow \mathbb{N}$
+						\item $\sigma$ is injective
+						\item There does not exist an element $n \in \mathbb{N}$ such that $\sigma(n)=0$
+						\item (Principle of Induction) If $S \in N$ is inductive, then $S=N$.
+					\end{enumerate}
+				\end{prop}
+			
+				\begin{prop}
+					Suppose that $a$ is a natural number, and that $b \in a$. Then $b \subseteq a$, $a \nsubseteq b$.
+				\end{prop}
+			
+				\begin{prop}
+					For any two natural numbers $a,b\in \mathbb{N}$, if $\sigma(a)=\sigma(b)$, then $a=b$.
+				\end{prop}
+			
+				\begin{lemma}
+					If $n \in \mathbb{N}$ and $n \ne 0$, then there exists $m \in \mathbb{N}$ such that $\sigma(m)=n$.
+				\end{lemma}
+		
+			\subsubsection{Operations on $\mathbb{N}$}
+				We now define two operations on $mathbb{N}$, addition($+$) and multiplication($\cdot$).
+				
+				\begin{defn}[Addition and Multiplication on $\mathbb{N}$] \label{def_add_mult_N}
+					The operation of addition, denoted by $+$, is defined by following two recursive rules:
+					\begin{enumerate}
+						\item $\forall n \in \mathbb{N}, n+0=n$
+						\item $\forall n,m \in \mathbb{N}, n+\sigma(m)=\sigma(n+m)$
+					\end{enumerate}
+					Similarly the operation of multiplication, denoted by $\cdot$, is defined by following two recursive rules:
+					\begin{enumerate}
+						\item $\forall n \in \mathbb{N}, n \cdot 0=0$
+						\item $\forall n,m \in \mathbb{N}, n \cdot \sigma(m)=n \cdot m+n$
+					\end{enumerate}
+				\end{defn}
+			
+				\begin{lemma}[Operations on $0$] \label{thm_n_op_on_0}
+					$\forall x \in \mathbb{N}$
+					\begin{itemize}
+						\item $x+0=0+x$
+						\item $x \cdot 0=0 \cdot x$
+					\end{itemize}
+				\end{lemma}
+			
+				\begin{prop}[Properties of $+$ and $\cdot$] \label{thm_property_of_operation_on_N}
+					$\forall x,y,z \in \mathbb{N}$,
+					\begin{itemize}
+						\item \textbf{Associativity of Addition} $x+(y+z)=(x+y)+z$
+						\item \textbf{Commutativity of Addition} $x+y=y+x$
+						\item \textbf{Associativity of Multiplication} $x \cdot (y \cdot z)=(x \cdot y) \cdot z$
+						\item \textbf{Commutativity of Multiplication} $x \cdot y=y \cdot x$
+						\item \textbf{Distributive Law} $x \cdot (y+z)=x \cdot y+x \cdot z$
+						\item \textbf{Cancellation Law for Addition} $x+z=y+z \Rightarrow x=y$
+					\end{itemize}
+				\end{prop}
+			
+			\subsubsection{Ordering on $\mathbb{N}$}
+				\begin{defn}[Ordering on $\mathbb{N}$] \label{def_order_N}
+					For $n,m \in \mathbb{N}$, we say that $n$ is less than $m$, written $n \ge m$, if there exists a $k \in \mathbb{N}$ such that $m=n+k$. We also write $n<m$ if $k \ne 0$.
+				\end{defn}
+			
+				\begin{thm}
+					$(N,<)$ is an ordered set[\ref{def_ordered_set}].
+				\end{thm}
+			
+				\begin{prop}
+					The followings are true:
+					\begin{itemize}
+						\item If $n \ne 0$, then $0<n$.
+						\item Let $x,y,z \in \mathbb{N}$. Then the followings are true:
+						\begin{itemize}
+							\item $(x \le y) \wedge (y<z) \Rightarrow (x<z)$
+							\item $(x<y) \wedge (y \le z) \Rightarrow (x<z)$
+							\item $(x \le y) \wedge (y \le z) \Rightarrow (x \le z)$
+							\item $(x<y) \Rightarrow (x+z<y+z)$
+							\item $(x<y) \Rightarrow (xz<yz)$
+						\end{itemize}
+						\item $\forall n \in \mathbb{N}, n \ne n+1$
+						\item $\forall n,k \in \mathbb{N}, k \ne 0, n \ne n+k$
+					\end{itemize}
+				\end{prop}
+			
+				\begin{defn}[Least Element] \label{def_least_element}
+					Let $S \subset \mathbb{N}$. An element $n \in S$ is called a \emph{least element} if $\forall m \in S, n \le m$
+				\end{defn}
+			
+				\begin{prop}[Uniqueness of the Least Element] \label{thm_unique_least_element}
+					Let $S \subset \mathbb{N}$. Then if $S$ has a least element, then it is unique.
+				\end{prop}
+			
+				\begin{thm}[Well-Ordering Property] \label{thm_well_ordering_property}
+					Let $S$ be a nonempty subset of $\mathbb{N}$. Then $S$ has a least element.
+				\end{thm}
+				
+				\begin{note}
+					The well-ordering property states that the set of natural numbers $\mathbb{N}$ has the greatest lower bound property[\ref{def_greatest_lower_bound_property}] and thereby theorem \ref{thm_glb_lub_property}, has the least upper bound property[\ref{def_least_upper_bound_property}].
+				\end{note}
 
 		\subsection{$\mathbb{Z}$: The set of Integers}
 		\subsection{$\mathbb{Q}$: The set of Rational Numbers}

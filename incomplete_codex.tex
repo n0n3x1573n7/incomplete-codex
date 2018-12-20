@@ -4,8 +4,14 @@
 \setmainfont{Courier New}%\setmainfont{D2Coding}
 
 \usepackage[hidelinks,unicode,bookmarks=true]{hyperref}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[round]{natbib}
+\hypersetup{colorlinks,
+	citecolor=Blue,
+	linkcolor=Blue,
+	urlcolor=Blue}
+
 \usepackage{fancyvrb}
-\usepackage{color}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -36,12 +42,12 @@
 {}% Manually specify head
 
 \theoremstyle{break}
-\newtheorem{axiom}{Axiom}
 \newtheorem{defn}{Definition}
-\newtheorem{thm}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{prop}{Proposition}
-\newtheorem*{coro}{Corollary}
+\newtheorem{axiom}[defn]{Axiom}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{lemma}[defn]{Lemma}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{coro}[defn]{Corollary}
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem*{prob}{Problem}
