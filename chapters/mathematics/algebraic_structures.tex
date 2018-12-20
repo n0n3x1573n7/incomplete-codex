@@ -9,6 +9,88 @@
 			\begin{defn}[Set] \label{def_set}
 				A \emph{set} is a collection of distinct objects. 
 			\end{defn}
+		
+			To see some traits on sets, we literally start from nothing:
+			\begin{axiom}[Empty Set Axiom] \label{axiom_empty_set}
+				There is a set containing no members, that is:
+				\begin{displaymath}
+				\exists B \text{ such that } \forall x, (x \notin B)
+				\end{displaymath}
+				We call this set the \emph{empty set}, and denote it by the symbol $\emptyset$.
+			\end{axiom}
+
+			We now have $\emptyset$; we now write down a few rules for how to manipulate sets.
+			\begin{axiom}[Axiom of Extensionality] \label{axiom_extensionality}
+				Two sets are equal if and only if they share the same elements, that is:
+				\begin{displaymath}
+				\forall A,B [\forall z,((z \in A) \Leftrightarrow (z \in B)) \Rightarrow (A=B)]
+				\end{displaymath}
+			\end{axiom}
+
+			\begin{axiom}[Axiom of Pairing] \label{axiom_pairing}
+				Given any two sets $A$ and $B$, there is a set which have the members just $A$ and $B$, that is:
+				\begin{displaymath}
+					\forall A,B \exists C \forall x [x \in C \Leftrightarrow ((x=A) \vee (x=B))]
+				\end{displaymath}
+				If $A$ and $B$ are distinct sets, we write this set $C$ as $\{A,B\}$; if $A=B$, we write it as $\{A\}$.
+			\end{axiom}
+	
+			\begin{axiom}[Axiom of Union, simple version] \label{axiom_union_simple}
+				Given any two sets $A$ and $B$, there is a set whose members are those sets belonging to either $A$ or $B$, that is:
+				\begin{displaymath}
+					\forall A,B \exists C \forall x [x \in C \Leftrightarrow ((x \in A) \vee (x \in B))]
+				\end{displaymath}
+				We write this set $C$ as $A \cup B$.
+			\end{axiom}
+			
+			In the simplified version of Axiom of Union, we take union of only two things, but we sometimes we want to take unions of more than two things or even more than finitely many things. This is given by the full version of the axiom:
+		
+			\begin{axiom}[Axiom of Union, full version] \label{axiom_union_full}
+				Given any set $A$, there is a set $C$ whose elements are exactly the members of the members of $A$, that is:
+				\begin{displaymath}
+					\forall A \exists C [x \in C \Leftrightarrow (\exists A'(A' \in A) \wedge (x \in A'))]
+				\end{displaymath}
+				We denote this set $C$ as
+				\begin{displaymath}
+					\bigcup_{A' \in A}A'
+				\end{displaymath}
+			\end{axiom}
+
+			\begin{axiom}[Axiom of Intersection, simple version] \label{axiom_intersection_simple}
+				Given any two sets $A$ and $B$, there is a set whose members are member of both $A$ and $B$, that is:
+				\begin{displaymath}
+					\forall A,B \exists C \forall x [(x \in C) \Leftrightarrow ((x \in A ) \wedge (x \in B))]
+				\end{displaymath}
+			\end{axiom}
+	
+			Sometimes as union, we would want to take intersection of more than finitely many things. This is given by the full version of the axiom:
+			
+			\begin{axiom}[Axiom of Intersection, full version] \label{axiom_intersection_full}
+				Given any set $A$, there is a set $C$ whose elements are exactly the members of all members of $A$, that is:
+				\begin{displaymath}
+					\forall A \exists C \forall x [(x \in C) \Leftrightarrow (\forall A'((A' \in A) \Rightarrow (x \in A')))]
+				\end{displaymath}
+				We denote this set $C$ as
+				\begin{displaymath}
+					\bigcap_{A' \in A}A'
+				\end{displaymath}
+			\end{axiom}
+		
+			\begin{axiom}[Axiom of Subset] \label{axiom_subset}
+				For any two sets $A$ and $B$, we say that $B \subset A$ if and only if every member of B is a member of A, that is:
+				\begin{displaymath}
+					(B \subseteq A) \Leftrightarrow (\forall x (x \in B) \Rightarrow (x \in A))
+				\end{displaymath}
+			\end{axiom}
+			
+			By the Axiom of Subset we can define the power set of an any given set:
+			
+			\begin{defn}[Power Set] \label{def_powerset}
+				For any set $A$, the \emph{power set} of the set $A$, denoted $P(A)$, whose members are precisely the collection of all possible subsets of A, that is:
+				\begin{displaymath}
+					\forall A \exists P(A) \forall B((B \subseteq A) \Leftrightarrow (B \in P(A)))
+				\end{displaymath}
+			\end{defn}
 
 			\begin{defn}[Order] \label{def_order}
 				Let $S$ be a set. An \emph{order} on $S$ is a relation, denoted by $<$, with the following properties:
@@ -227,6 +309,7 @@
 			The \emph{degree} of the polynomial $\deg(f)$ is defined as $\deg(f)=\max\{n|n\in\mathbb{N}, a_n\ne0 \}$.
 			The \emph{leading coefficient} of the polynomial is defined as $a_{\deg(f)}$.
 		\end{defn}
+
 		\begin{defn}[Addition and Multiplication of Polynomials] \label{def_add_mult_polynomial}
 			Let $f(x)=\sum_{i=0}^{\infty}a_ix^i$, $g(x)=\sum_{i=0}^{\infty}b_ix^i$, $a_i,b_i \in R$ be a polynomial over the ring $(R,+,\cdot)$. Define:
 			\begin{gather*}
@@ -234,9 +317,11 @@
 				f(x)g(x)=\sum_{k=0}^{\infty}(c_k)x^k \text{ where } c_k=\sum_{i+j=k}a_ib_j
 			\end{gather*}
 		\end{defn}
+
 		\begin{defn}[Polynomial Ring] \label{def_polynomial_ring}
 			The set of polynomials over the ring $(R,+,\cdot)$, $R[x]=\{f(x)|f(x) \text{ is a polynomial over } R \}$ is called the \emph{Polynomial Ring(or Polynomials) over $R$}.
 		\end{defn}
+
 		\begin{thm}[Degree of Polynomial on Addition and Multiplication] \label{thm_add_mult_deg}
 			Let $f(x),g(x) \in R[x]$ with $\deg(f)=n$, $\deg(g)=m$.
 			\begin{itemize}
@@ -245,6 +330,7 @@
 				\subitem If $(R,+,\cdot)$ is an integral domain, $\deg(fg) = \deg(f)+\deg(g)$
 			\end{itemize}
 		\end{thm}
+
 		\begin{thm}[Relationship between a Ring and its Polynomial Ring] \label{thm_ring_polynomial_relationship}
 			Let $(R,+,\cdot)$ be a ring and $R[x]$ the polynomials over $R$.
 			\begin{enumerate}
@@ -252,6 +338,7 @@
 				\item If $(R,+,\cdot)$ is a integral domain, then $(R[x],+,\cdot)$ is a integral domain.
 			\end{enumerate}
 		\end{thm}
+
 		\begin{thm}[Division Algorithm for Polynomials over a Ring] \label{thm_polynomial_division_algorithm_ring}
 			Let $(R,+,\cdot)$ be a commutative ring with $1$.\\
 			Let $f(x),g(x) \in R[x]$, $g(x) \ne 0$ with the leading coefficient of $g(x)$ being invertible.\\
@@ -261,6 +348,7 @@
 			\end{displaymath}
 			where either $r(x)=0$ or $\deg(r)<\deg(g)$.
 		\end{thm}
+
 		\begin{proof}
 				Use induction on $\deg(f)$.\\
 				1. $f(x)=0$ or $\deg(f)<\deg(g)$: $q(x)=0, r(x)=f(x)$\\
@@ -286,5 +374,49 @@
 				Hence they exist uniquely.
 		\end{proof}
 	\section{From $\mathbb{N}$ to $\mathbb{R}$}
+		\subsection{$\mathbb{N}$: The set of Natural Numbers}
+		We start from the Axioms of Set and the following definitions:
+		
+		\begin{defn}[Successor] \label{defn_successor}
+			For any set $x$, the \emph{successor of $x$}, denoted $\sigma(x)$, is defined as the following set:
+			\begin{displaymath}
+				\sigma(x)=x \cup \{x\}
+			\end{displaymath}
+		\end{defn}
+	
+		Let us define $0=\emptyset$, $1=\sigma(\emptyset)=\sigma(0)$. Using the definition of successors, and following the pattern, $2=\sigma(1)$, $3=\sigma(2)$, and so on. Basically we can make any finite number using the definition of successor and the Axioms of Set, but actually getting all of the natural numbers at once(or any infinitely large set, since only the empty set is guaranteed to exist by the axioms) is not possible with our axioms. We define the concept of Inductive Sets and make another Axiom for this purpose:
+	
+		\begin{defn}[Inductive Set] \label{defn_inductive_set}
+			A set $A$ is called \emph{inductive} if it satisfies the following two properties:
+			\begin{itemize}
+				\item $\emptyset \in A$
+				\item $(x \in A) \Rightarrow (\sigma(x) \in A)$
+			\end{itemize}
+		\end{defn}
+		
+		\begin{axiom}[Axiom of Infinity] \label{axiom_infinity}
+			There is an inductive set, that is:
+			\begin{displaymath}
+				\exists A (\emptyset \in A) \wedge (\forall x \in A, \sigma(x) \in A)
+			\end{displaymath}
+		\end{axiom}
+	
+		For any inductive set $S$, let us define $N_S$ to be defined as follows:
+		\begin{displaymath}
+			N_S=\bigcap_{\substack{A \subseteq S\\A \text{ is inductive}}}A
+		\end{displaymath}
+
+		\begin{thm}
+			Take any two inductive sets, $S$ and $T$. Then $N_S=N_T$.
+		\end{thm}
+	
+		\begin{proof}
+			%todo
+		\end{proof}
+
+		\subsection{$\mathbb{Z}$: The set of Integers}
+		\subsection{$\mathbb{Q}$: The set of Rational Numbers}
+		\subsection{$\mathbb{R}$: The set of Real Numbers}
+		\subsection{$\mathbb{I}$: The set of Complex Numbers}
 
 \end{document}
