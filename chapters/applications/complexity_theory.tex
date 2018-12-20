@@ -1,5 +1,8 @@
 %\documentclass{report}
 
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\strs}{\{0,1\}^\ast}
+
 \begin{document}
     \section{Turing Machine and Complexity}
         (TODO: Move this to Automata.) (TODO: Before giving the definition of Turing Machine, I have to give some intuition here.)
@@ -13,7 +16,7 @@
         
         The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state.
         
-        In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\{0,1\}^\ast \rightarrow \{0,1\}$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
+        In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\strs \rightarrow \zo$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
         
         (TODO: Write something about asymptotic notation here)
         
@@ -39,11 +42,40 @@
         (TODO: EXP)
     
     \section {Reduction}
-        (TODO: Polynomial-time reduction)
+        Is there a polynomial-time algorithm for a given decision problem? Computer scientists are interested in this question because if there is one, it is usually a small-degree polynomial like $O(n^2)$ or $O(n^5)$. Some problems have a special property that if the problem has a polynomial-time algorithm, then several other problems do.
         
-        (TODO: NP-Hard, NP-Complete)
+        \begin{defn}[Polynomial-time Karp reduction] \label{def_poly_karp}
+            A problem $A \subseteq \strs$ is \emph{polynomial-time Karp reducible} to $B \subseteq \strs$, denoted $A \leq_p B$, if there is a polynomial-time computable function $f: \strs \rightarrow \strs$ such that for every $x \in \strs$, $x \in A$ iff $f(x) \in B$.
+        \end{defn}
+        
+        The intuitive meaning is that a problem of $A$ can be "reduced" to a problem of $B$, and if we can solve $B$ in polynomial-time, then we can solve $A$ in polynomial-time too.
+        
+        \begin{defn}[NP-complete] \label{def_npc}
+            A problem $A$ is \emph{NP-hard} if every problem in $\mathbf{NP}$ is polynomial-time reducible to $A$, and \emph{NP-complete} if $A$ is NP-hard and NP.
+        \end{defn}
+        
+        \begin{thm} \label{thm_leqp_transitive}
+            \begin{enumerate}
+                \item If $A \leq_p B$ and $B \leq_p C$, then $A \leq_p C$.
+                \item An NP-complete problem $A$ is in $\mathbf{P}$ iff $\mathbf{P}=\mathbf{NP}$.
+                \item If $A \leq_p B$ and $A$ is NP-hard, then $B$ is NP-hard.
+            \end{enumerate}
+            %If $A \leq_p B$ and $B \leq_p C$, then $A \leq_p C$. Also, an NP-complete problem $A$ is in $\mathbf{P}$ iff $\mathbf{P}=\mathbf{NP}$.
+        \end{thm}
+        
+        \begin{proof}
+            (1) Let $f$ be a reduction from $A$ to $B$ with polynomial time $p(n)$, and $g$ from $B$ to $C$ with $q(n)$. Then $g \circ f$ is a reduction from $A$ to $C$ with polynomial time $q(p(n))$.
+            
+            (2) Suppose $A$ is NP-complete and in $\mathbf{P}$. Then any problem $B$ in $\mathbf{NP}$ can be polynomial-time reduced to $A$, so transitivity implies that $B$ is polynomial-time computable. The converse is trivial.
+            
+            (3) Any problem $C$ in $\mathbf{NP}$ can be polynomial-time reduced to $A$. Transitivity implies that $C$ can be polynomial-time reduced to $B$.
+        \end{proof}
+        
+        Now the obvious question is, does such a strong problem actually exist? The answer is yes, and a lot of important problems are NP-complete.
         
         (TODO: SAT)
+        
+        Having proven that SAT is NP-hard, more problems can be proven NP-hard if we can reduce SAT to those problems in polynomial-time.
         
         (TODO: NP-Complete problems)
         
