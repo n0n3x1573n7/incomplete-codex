@@ -98,7 +98,7 @@
 			\end{itemize}
 		\end{lemma}
 		
-		\begin{prop}[Properties of $+$ and $\cdot$] \label{thm_property_of_operation_on_N}
+		\begin{prop}[Properties of $+$ and $\cdot$] \label{thm_property_operation_N}
 			$\forall x,y,z \in \mathbb{N}$,
 			\begin{itemize}
 				\item \textbf{Associativity of Addition} $x+(y+z)=(x+y)+z$
@@ -119,7 +119,7 @@
 			$(N,<)$ is an ordered set[\ref{def_ordered_set}].
 		\end{thm}
 		
-		\begin{prop}
+		\begin{prop} \label{thm_property_order_N}
 			The followings are true:
 			\begin{itemize}
 				\item If $n \ne 0$, then $0<n$.
@@ -154,7 +154,7 @@
 		
 		\subsection{Properties of $\mathbb{N}$}
 		Many of the mathematics book defines the set of Natural Numbers as the set satisfying the \emph{Peano Axioms}.
-		\begin{prop}[Peano Axioms] \label{peano_axioms}
+		\begin{prop}[Peano Axioms] \label{peano_axioms} \label{thm_property_N}
 			\begin{enumerate}
 				\item[]
 				\item $0$, which we defined as the empty set $\emptyset$, is a natural number.
@@ -179,14 +179,134 @@
 	
 	\section{$\mathbb{Z}$: The set of Integers}
 		\subsection{Construction of $\mathbb{Z}$}
+		We now have the set of natural numbers, and starting there, we construct the set of integers.
+		
+		\begin{prop} \label{def_Z_equiv_class}
+			Define a relation $\equiv$ on $\mathbb{N} \times \mathbb{N}$ by $(a,b) \equiv (c,d)$ iff $a+d=b+c$. This relation is an equivalence relation on $\mathbb{N} \times \mathbb{N}$.
+		\end{prop}
+	
+		Let $\mathbb{Z}$ be the set of equivalence classes under this relation, and the equivalence class containing $(a,b)$ be denoted by $[a,b]$.
+		
 		\subsection{Operations on $\mathbb{Z}$}
+		\begin{defn}[Addition and Multiplication on $\mathbb{Z}$] \label{def_add_mult_Z}
+			Addition and multiplication on $\mathbb{Z}$ are defined by:
+			\begin{itemize}
+				\item $[a,b]+[c,d]=[a+c,b+d]$
+				\item $[a,b] \cdot [c,d]=[ac+bd,ad+bc]$
+			\end{itemize}
+		\end{defn}
+		
+		\begin{defn}[Subtraction on $\mathbb{Z}$] \label{def_sub_Z}
+			Subtraction on $\mathbb{Z}$ is defined by:
+			\begin{displaymath}
+				[a,b]-[c,d]=[a,b]+[d,c]
+			\end{displaymath}
+		\end{defn}
+	
 		\subsection{Ordering on $\mathbb{Z}$}
+
+			\begin{defn}[Ordering on $\mathbb{Z}$] \label{def_order_Z}
+				Let $[a,b],[c,d] \in \mathbb{Z}$. $[a,b]<[c,d]$ iff $a+d<b+c$.
+			\end{defn}
+
+\begin{comment}%todo: find out what the positive set is
+			\begin{prop}
+				The subset $\mathbb{N}=\{[0,n]|n \text{ is a natural number}\}$ is a positive set in $\mathbb{Z}$.
+			\end{prop}
+		
+			\begin{proof}
+				$\mathbb{N}$ is closed under addition and multiplication by definition.\\
+				Let $[a,b] \in  \mathbb{Z}$. Since $a,b \in \mathbb{N}$ and $\mathbb{N}$ is well-ordered, either $a<b$, $a=b$, or $b<a$. So either $[a,b]$ is $[0,b-a]$, $[0,0]$, or $[a-b,0]$.\\
+				Thus either $[a,b]\in\mathbb{N}$, $[a,b]=0$, or $-[a,b]=[b,a]\in\mathbb{n}$.
+			\end{proof}
+\end{comment}
+	
 		\subsection{Property of $\mathbb{Z}$}
+		
+			\begin{thm}[Arithmetic Properties of $\mathbb{Z}$] \label{thm_property_Z}
+				\begin{enumerate}
+					\item[]
+					\item Addition and multiplication are well-defined.
+					\item Addition and multiplication have identity elements $[n,n]$ and $[n,n+1]$, respectively.
+					\item Addition and multiplication are commutative and associative.
+					\item The distributive law holds.
+					\item Each element $[a,b]$ has an additive inverse $[b,a]$.
+				\end{enumerate}
+			\end{thm}
+	
+			We can treat $\mathbb{N}$ to be a subset of $\mathbb{Z}$ by identifying the number $n$ with the class $[0,n]$. Since $[0,a]+[0,b]=[0,a+b]$ and $[0,a] \cdot [0,b]=[0,ab]$, these operations mirror the corresponding operation in $\mathbb{N}$.
+			
+			Given $n \in \mathbb{N}$, we write $-n$ for $[n,0]$, $0$ for $[n,n]$, and $1$ for $[n,n+1]$. By the fifth arithmetic property of $\mathbb{Z}$[\ref{thm_property_Z}], this defines $-n$ to be the additive inverse of $n$. We also use the minus sign for subtraction; it is therefore natural to write $[a,b]$ as $b-a$.
+			
+		\begin{prop}
+			For $a,b \in \mathbb{N}$, let $-b$, $a$, and $b$ be defined in $\mathbb{Z}$ as above. Then
+			\begin{displaymath}
+				a-b=a+(-b) \text{   and   } -(-b)=b
+			\end{displaymath}
+		\end{prop}
+
 	\section{$\mathbb{Q}$: The set of Rational Numbers}
+		We construct the set of rational numbers from the set of integers as follows:
 		\subsection{Construction of $\mathbb{Q}$}
+		
+			\begin{prop}\label{def_Q_equiv_class}
+				Define a relation $\equiv$ on $\mathbb{Z} \times (\mathbb{Z} \textbackslash \{0\})$ by $(a,b)\equiv(c,d)$ iff $ad=bc$. This relation is an equivalence relation on $\mathbb{Z} \times (\mathbb{Z} \textbackslash \{0\})$.
+			\end{prop}
+		
+			Let $\mathbb{Q}$ be the set of equivalence classes under this relation, and the equivalence class containing $(a,b)$ is denoted by $a/b$ or $\frac{a}{b}$, and $\frac{a}{b}=\frac{c}{d}$ mean that $(a,b)$ and $(c,d)$ belong to the same equivalence class. Especially we write $0$ and $1$ to denote $\frac{0}{1}$ and $\frac{1}{1}$, respectively.
+		
 		\subsection{Operations on $\mathbb{Q}$}
+		
+			\begin{defn}[Addition and Multiplication on $\mathbb{Q}$] \label{def_add_mult_Q}
+				The \emph{sum} and \emph{product} of $\frac{a}{b}, \frac{c}{d} \in \mathbb{Q}$ are defined by
+				\begin{displaymath}
+					\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd} \text{   and   } \frac{a}{b}\frac{c}{d}=\frac{ac}{bd}
+				\end{displaymath}
+			\end{defn}
+		
+			\begin{defn}[Subtraction on $\mathbb{Q}$] \label{def_sub_Q}
+				Subtraction on $\mathbb{Z}$ is defined by:
+				\begin{displaymath}
+					\frac{a}{b}-\frac{c}{d}=\frac{ad-bc}{bd}
+				\end{displaymath}
+			\end{defn}
+			
+			\begin{defn}[Division on $\mathbb{Q}$] \label{def_div_Q}
+				Division on $\mathbb{Z}$ is defined by:
+				\begin{displaymath}
+					\frac{a}{b}\div\frac{c}{d}=\frac{ad}{bc}
+				\end{displaymath}
+			\end{defn}
+		
 		\subsection{Ordering on $\mathbb{Q}$}
+		
+			\begin{defn}[Ordering on $\mathbb{Q}$] \label{def_order_Q}
+				Let $\frac{a}{b},\frac{c}{d} \in \mathbb{Q}$. $\frac{a}{b}<\frac{c}{d}$ iff $(bd>0 \wedge ad<bc) \vee (bd<0 \wedge ad>bc)$.
+			\end{defn}
+			
+\begin{comment}%todo: find out what the positive set is
+			\begin{prop}
+				The subset $P=\{\frac{a}{b}\in\mathbb{Q}|ab>0}$ is a positive set in $\mathbb{Q}$.
+			\end{prop}
+\end{comment}
+		
 		\subsection{Property of $\mathbb{Q}$}
+		
+			\begin{thm}[Arithmetic Properties of $\mathbb{Z}$] \label{thm_property_Q}
+				\begin{enumerate}
+					\item[]
+					\item Addition and multiplication are well-defined.
+					\item Addition and multiplication have identity elements $0$ and $1$, respectively.
+					\item Addition and multiplication are commutative and associative.
+					\item The distributive law holds.
+					\item Each element $\frac{a}{b}$ has an additive inverse $\frac{b}{a}$.
+				\end{enumerate}
+			\end{thm}
+		
+			\begin{thm}
+				$(\mathbb{Q},+,\cdot)$ forms an ordered field.
+			\end{thm}
+		
 	\section{$\mathbb{R}$: The set of Real Numbers}
 		\subsection{Construction of $\mathbb{R}$}
 		
@@ -195,7 +315,7 @@
 			\end{thm}
 			
 			\begin{defn}[Extended Real Number System] \label{def_extended_real_number_system}
-				The \emph{extended real number system}, denoted $\overline{\mathbb{R}}$, $[-\infty,\infty]$, or $\mathbb{R} \cup \{-\infty,\infty\}$, consists of the real field $\mathbb{R}$ and two symbols, $+\infty$ and $-\infty$. We preserve the original order in $\mathbb{R}$, and define $\forall x \in \mathbb{R}$,
+				The \emph{extended real number system}, denoted $\mathbb{R}^+$, $[-\infty,\infty]$, or $\mathbb{R} \cup \{-\infty,\infty\}$, consists of the real field $\mathbb{R}$ and two symbols, $+\infty$ and $-\infty$. We preserve the original order in $\mathbb{R}$, and define $\forall x \in \mathbb{R}$,
 				\begin{displaymath}
 					-\infty<x<\infty
 				\end{displaymath}
@@ -206,12 +326,32 @@
 			\end{remark}
 
 		\subsection{Operations on $\mathbb{R}$}
+		
+			
+		
 		\subsection{Ordering on $\mathbb{R}$}
+		
+			
+		
 		\subsection{Property of $\mathbb{R}$}
-	
+		
+			
+		
 	\section{$\mathbb{I}$: The set of Complex Numbers}
 		\subsection{Construction of $\mathbb{I}$}
+		
+			
+		
 		\subsection{Operations on $\mathbb{I}$}
+		
+			
+		
 		\subsection{Ordering on $\mathbb{I}$}
+		
+			
+		
 		\subsection{Property of $\mathbb{I}$}
+		
+			
+		
 \end{document}
