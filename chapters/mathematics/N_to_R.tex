@@ -292,7 +292,7 @@
 		
 		\subsection{Property of $\mathbb{Q}$}
 		
-			\begin{thm}[Arithmetic Properties of $\mathbb{Z}$] \label{thm_property_Q}
+			\begin{thm}[Arithmetic Properties of $\mathbb{Q}$] \label{thm_property_Q}
 				\begin{enumerate}
 					\item[]
 					\item Addition and multiplication are well-defined.
@@ -309,34 +309,84 @@
 		
 	\section{$\mathbb{R}$: The set of Real Numbers}
 		\subsection{Construction of $\mathbb{R}$}
-		
+			One simple way to construct $\mathbb{R}$ is by proving the following theorem:
+			
 			\begin{thm}[Existence of $\mathbb{R}$] \label{thm_existence_real_number}
 				There exists an ordered field $\mathbb{R}$ containing $\mathbb{Q}$ as a subfield which has the least-upper-bound property.
 			\end{thm}
-			
+		
+			But where's the fun in that? We will be constructing the field of real numbers using Cauchy sequences[\ref{def_cauchy_sequence}], starting with the following proposition:
+		
+			\begin{thm}
+				Define a relation $\equiv$ on the set $S$ of Cauchy sequences of rational numbers as follows:
+				\begin{displaymath}
+					\{a_n\} \equiv \{b_n\} \text{   iff   } (a_n-b_n)\rightarrow 0
+				\end{displaymath}
+				This relation is an equivalence relation.
+			\end{thm}
+		
+			Now let us define $\mathbb{R}$ as the set of equivalence classes of $S$ under the relation $\equiv$.
+
+		\subsection{Operations on $\mathbb{R}$}
+		
+			Before the definition of operations on $\mathbb{R}$, we need to find out whether if the Cauchy sequences of rational numbers are closed under addition and multiplication, and it turns out they do, as stated in the following proposition:
+		
+			\begin{prop}
+				The set $S$ of Cauchy sequences of rational numbers is closed under addition, multiplication, and scalar multiplication, that is:
+				\begin{enumerate}
+					\item If $\{a_n\}\in S$ and $\{b_n\}\in S$, then $\{a_n+b_n\}\in S$
+					\item If $\{a_n\}\in S$ and $\{b_n\}\in S$, then $\{a_nb_n\}\in S$
+					\item If $\{a_n\}\in S$ and $c \in \mathbb{Q}$, then $\{ca_n\}\in S$
+				\end{enumerate}
+			\end{prop}
+		
+			We can finally go on to defining the operations on $\mathbb{R}$.
+		
+			\begin{defn}[Addition and Multiplication on $\mathbb{R}$] \label{def_add_mult_R}
+				Let $\{a_n\}$ and $\{b_n\}$ be sequences contained in the real numbers $\alpha$, $\beta$, respectively. Then the \emph{sum} and \emph{product} of $\alpha$ and $\beta$ are defined by:
+				\begin{displaymath}
+					\alpha+\beta=\{a_n+b_n\} \text{   and   } \alpha\beta=\{\alpha\beta\}
+				\end{displaymath}
+			\end{defn}
+		
+			We can define subtraction and division on $\mathbb{R}$ similar to addition and multiplication, by term-by-term calculation on each term of the Cauchy sequence.
+		
+		\subsection{Ordering on $\mathbb{R}$}
+		
+			\begin{defn}[Ordering on $\mathbb{R}$] \label{def_order_R}
+				Let $\alpha=\{a_n\},\beta=\{b_n\} \in \mathbb{R}$. $\alpha<\beta$ iff $\exists N \in \mathbb{N}, \forall n \ge N, a_n<b_n$.
+			\end{defn}
+		
+		\subsection{Property of $\mathbb{R}$}
+		
+			\begin{thm}[Arithmetic Properties of $\mathbb{R}$] \label{thm_property_R}
+				\begin{enumerate}
+					\item[]
+					\item Addition and multiplication are well-defined.
+					\item Addition and multiplication have identity elements $\{0\}$ and $\{1\}$, respectively.
+					\item Addition and multiplication are commutative and associative.
+					\item The distributive law holds.
+					\item Each element $\{a_n\}$ has an additive inverse $\{-a_n\}$.
+				\end{enumerate}
+			\end{thm}
+		
+			\begin{thm}
+				$(\mathbb{R},+,\cdot)$ forms an ordered field.
+			\end{thm}
+
+			We now define an extension to $\mathbb{R}$ as follows:
+
 			\begin{defn}[Extended Real Number System] \label{def_extended_real_number_system}
 				The \emph{extended real number system}, denoted $\mathbb{R}^+$, $[-\infty,\infty]$, or $\mathbb{R} \cup \{-\infty,\infty\}$, consists of the real field $\mathbb{R}$ and two symbols, $+\infty$ and $-\infty$. We preserve the original order in $\mathbb{R}$, and define $\forall x \in \mathbb{R}$,
 				\begin{displaymath}
-					-\infty<x<\infty
+				-\infty<x<\infty
 				\end{displaymath}
 			\end{defn}
-
+			
 			\begin{remark} \label{remark_extended_real_number_system_not_field}
 				The extended real number system does not form a field.
 			\end{remark}
 
-		\subsection{Operations on $\mathbb{R}$}
-		
-			
-		
-		\subsection{Ordering on $\mathbb{R}$}
-		
-			
-		
-		\subsection{Property of $\mathbb{R}$}
-		
-			
-		
 	\section{$\mathbb{I}$: The set of Complex Numbers}
 		\subsection{Construction of $\mathbb{I}$}
 		
