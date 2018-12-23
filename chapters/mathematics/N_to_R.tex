@@ -75,7 +75,7 @@
 		\end{defn}
 		
 		\subsection{Operations on $\mathbb{N}$}
-		We now define two operations on $mathbb{N}$, addition($+$) and multiplication($\cdot$).
+		We now define two operations on $\mathbb{N}$, addition($+$) and multiplication($\cdot$).
 		
 		\begin{defn}[Addition and Multiplication on $\mathbb{N}$] \label{def_add_mult_N}
 			The operation of addition, denoted by $+$, is defined by following two recursive rules:
@@ -317,7 +317,7 @@
 		
 			But where's the fun in that? We will be constructing the field of real numbers using Cauchy sequences[\ref{def_cauchy_sequence}], starting with the following proposition:
 		
-			\begin{thm}
+			\begin{thm} \label{def_R_equiv_class}
 				Define a relation $\equiv$ on the set $S$ of Cauchy sequences of rational numbers as follows:
 				\begin{displaymath}
 					\{a_n\} \equiv \{b_n\} \text{   iff   } (a_n-b_n)\rightarrow 0
@@ -387,21 +387,15 @@
 				The extended real number system does not form a field.
 			\end{remark}
 
-	\section{$\mathbb{I}$: The set of Complex Numbers}
-		\subsection{Construction of $\mathbb{I}$}
-		
+	\section{$\mathbb{C}$: The set of Complex Numbers}
+			We construct the set of complex numbers from $\mathbb{R}$. Unlike the previous constructions, we do not construct it using equivalence class. Instead the construction is done by considering the quotient ring of polynomial ring over $\mathbb{R}$ modulo $i^2+1$.
 			
+			\begin{defn} \label{def_C_quotient_ring}
+				Complex number is defined as the quotient ring $\mathbb{R}[i]/(i^2+1)$, with operations defined as normal.
+			\end{defn}
 		
-		\subsection{Operations on $\mathbb{I}$}
-		
-			
-		
-		\subsection{Ordering on $\mathbb{I}$}
-		
-			
-		
-		\subsection{Property of $\mathbb{I}$}
-		
-			
+			\begin{thm}
+				$(\mathbb{C},+,\cdot)$ forms a field.
+			\end{thm}
 		
 \end{document}
