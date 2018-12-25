@@ -2,8 +2,88 @@
 
 \begin{document}
 	\section{Basic Terminology}
-	
-	\section{Symmetric-key Cryptosystems}
-
-	\section{Asymmetric-key Cryptosystems}
+		\begin{defn}[Basic Terminology on Cryptosystems]
+			\begin{itemize}
+				\item[]
+				\item \textbf{Plaintext}: The text before encryption
+				\item \textbf{Ciphertext}: The text after encryption
+				\item \textbf{Cryptosystems}: Encryption and decryption algorithms, see definition below for more
+				\subitem \textbf{Encryption}: Using some sort of algorithm to change the content of a message so that it is unrecognizable.
+				\subitem \textbf{Decryption}: Processing the encrypted message to change it back to the message.
+				\item \textbf{Key}: A value required to encrypt or decrypt.
+				\subitem \textbf{Encryption Key}: The key for encryption.
+				\subitem \textbf{Decryption Key}: The key for decryption.
+				\item \textbf{Cryptanalysis}: Decrypting the ciphertext without any prior knowledge(i.e. key).
+			\end{itemize}
+		\end{defn}
+		
+		\begin{defn}[Cryptosystem]
+			A cryptosystem is defined as a set of three algorithms, $(G,E,D)$;
+			\begin{itemize}
+				\item[$G$]
+				\subitem The key generation algorithm, sometimes abbreviated as \emph{KeyGen}, chooses the encryption key $k_1$ and the decryption key $k_2$ from the set of possible keys. The set of possible keys is called the \emph{key space}. Usually each key from the key space is chosen at uniformly random probability.
+				\item[$E$]
+				\subitem The Encryption Algorithm, sometimes abbreviated as \emph{Enc}, uses the encryption key $k_1$, takes the plaintext $m$ as an input, and produces the ciphertext $c$. This is usually denoted as follows:
+				\begin{displaymath}
+					E_{k_1}(m)=c
+				\end{displaymath}
+				\item[$D$]
+				\subitem The Decryption Algorithm, sometimes abbreviated as \emph{Dec}, uses the decryption key $k_2$, takes the ciphertext $c$ as an input, and gains the plaintext $m$. This is usually denoted as follows:
+				\begin{displaymath}
+					D_{k_2}(c)=m
+				\end{displaymath}
+			\end{itemize}
+			For a cryptosystem to be valid, by encrypting the plaintext $m$ and decrypting the ciphertext, we must be able to get $m$, that is;
+			\begin{displaymath}
+				D_{k_2}(E_{k_1}(m))=m
+			\end{displaymath}
+		\end{defn}
+		
+		A cryptosystem is classified into two categories; if the encryption key is the same as the decryption key, it is called a \emph{Symmetric Key Algorithm}; if not, it is called an \emph{Asymmetric Key Algorithm}.
+		
+		\begin{defn}[Kerckhoffs' Principle]
+			Kerckhoffs' Principle states that a cryptosystem must be secure even if everything about the cryptosystem except for the key is exposed.
+		\end{defn}
+		Kerckhoffs' Principle says that the cryptosystem's security must depend only on the secrecy of the key. Its core comes from the idea that ``The enemy knows the system``. In some, ``Security through obscurity``(i.e. hiding the cryptosystem itself) holds but Kerckhoffs' Principle has its value for the following reasons:
+		\begin{enumerate}
+			\item Storing a smaller sized key is easier than hiding the entire cryptosystem. Also the cryptosystem is not safe from reverse engineering, but keys are, as they are usually a random number.
+			\item If the key is exposed, it is easier to change only the key, not the entire cryptosystem.
+			\item A cryptosystem is often used for many users, and everybody using the same cryptosystem allows for more efficient usage of space.
+			\item If the cryptosystem itself is kept a secret, if a problem arises(i.e. reverse engineering) to expose the cryptosystem, then the entire thing must be redesigned. This takes a lot of knowledge and time.
+			\item A cryptosystem is made weak by a small mistake; these mistakes are not found before the cryptosystems are analyzed fully, which is most easily done by making the system public. If they are indeed made public, the cryptosystem can be checked for security, allowing for a more secure system.
+		\end{enumerate}
+		
+	\section{Classical Cryptosystems}
+		
+		
+	\section{Modes of Operation}
+		
+		
+	\section{Data Encryption Standard(DES)}
+		
+		
+	\section{Advanced Encryption Standard(AES)}
+		
+		
+	\section{RSA Cryptosystem}
+		
+		
+	\section{Rabin Cryptosystem}
+		
+		
+	\section{ElGamal Cryptosystem}
+		
+		
+	\section{NTRU Cryptosystem}
+		
+		
+	\section{Cryptographic Hash Functions}
+		
+		
+	\section{Entity Authentication}
+		
+		
+	\section{Key Management}
+		
+		
 \end{document}
