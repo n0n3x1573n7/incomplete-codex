@@ -56,6 +56,7 @@
         
         \begin{thm} \label{thm_leqp_transitive}
             \begin{enumerate}
+                \item[]
                 \item If $A \leq_p B$ and $B \leq_p C$, then $A \leq_p C$.
                 \item An NP-complete problem $A$ is in $\mathbf{P}$ iff $\mathbf{P}=\mathbf{NP}$.
                 \item If $A \leq_p B$ and $A$ is NP-hard, then $B$ is NP-hard.
@@ -77,6 +78,15 @@
         
         Having proven that SAT is NP-hard, more problems can be proven NP-hard if we can reduce SAT to those problems in polynomial-time.
         
-        (TODO: NP-Complete problems)
-        
+        \begin{defn}[NP-complete problems] \label{def_npc_examples} \begin{itemize}
+            \item[]
+            \item The \emph{3-SAT problem} is a SAT problem where each clause contains exactly 3 variables.
+            \item Given a graph $G$ and an integer $0 \leq k \leq |V(G)|$, the \emph{clique problem} asks whether there is a complete induced subgraph of $G$ with size at least $k$.
+            \item The \emph{independent set problem} asks whether there is a subset $S$ of $V(G)$ with size at least $k$ such that no two vertices in $S$ are adjacent, and 0 otherwise.
+            \item The \emph{vertex cover problem} asks whether there is a subset $S$ of $V(G)$ with size at most $k$ such that each edge is adjacent to at least one vertex in $S$.
+            \item The \emph{chromatic number problem} asks whether $G$ is $k$-colorable.
+            \item Given a set $S$ of integers and an integer $k$, the \emph{subset sum problem} asks whether there is a subset of $S$ whose sum of elements equals $k$.
+            \item Given an $n \times m$ matrix $A$ and an $n \times 1$ matrix $b$ of integers, the \emph{integer programming problem} asks whether there is an $m \times 1$ matrix $x$ of integers such that each element of $Ax+b$ is non-negative.
+        \end{itemize}
+        \end{defn}
 \end{document}
