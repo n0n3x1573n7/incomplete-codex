@@ -1,5 +1,47 @@
-\documentclass{report}
+%\documentclass{report}
 
 \begin{document}
-
+    \section{Basic Graph Definitions}
+    
+    \section{Degrees}
+    
+    \section{Trees}
+    
+    \section{Planar Graphs}
+    
+    \section{Coloring}
+        \begin{defn}[Coloring] \label{def_coloring}
+            A \emph{$k$-coloring} of a graph $G$ is a function $c: V(G) \rightarrow \{1,2,\cdots,k\}$ such that if $u$ and $v$ are adjacent vertices, then $c(u) \neq c(v)$. $G$ is \emph{$k$-colorable} if there is a $k$-coloring of $G$. The \emph{chromatic number} $\chi(G)$ of $G$ is the smallest integer $k$ such that $G$ is $k$-colorable.
+        \end{defn}
+        
+        Perhaps the most famous theorem about graph coloring is the four-color theorem. (TODO: write something) 
+        
+        \begin{thm}[Four-color Theorem] \label{thm_four_color}
+            If $G$ is planar, then $\chi(G) \leq 4$.
+        \end{thm}
+        
+        Unfortunately, the proof is too long and complicated to contain in the codex. We prove a weaker result:
+        
+        \begin{thm}[Five-color Theorem] \label{thm_five_color}
+            If $G$ is planar, then $\chi(G) \leq 5$.
+        \end{thm}
+        
+        \begin{proof}
+            Induction on $|V(G)|$. For $|V(G)| \leq 5$, the theorem is trivial.
+            
+            From [TODO: which theorem?], $G$ has a vertex $v$ of degree at most 5. If $deg_G(v) < 5$, then inductively find a 5-coloring of $G-v$, and color $v$ by some color in $\{1,2,3,4,5\}$ not appearing in the neighbors of $v$. If $deg_G(v) = 5$ and not all colors are used in the neighbors of $v$, then the same argument applies.
+            
+            Now suppose all 5 colors are used. Denote the neighbors of $v$ as $u_1$, $u_2$, $u_3$, $u_4$, $u_5$, in clockwise order. Without loss of generality, we will assume that $c(u_i)=i$.
+            
+            The main idea of the rest of the proof is that we want to change the color of one of the neighbors, say change $c(u_i)$ to $k$. This is impossible if $u_i$ has a neighbor of color $k$, in which case we want to also change the color of that neighbor, to $k'$. But then that neighbor might have yet another neighbor of color $k'$, and this continues to form a chain. Hence we introduce the \emph{Kempe chain}, named after Alfred Kempe.
+            
+            Let $V_{ij}$ be the set of vertices $w$ in $G$ such that there is a path from $u_i$ to $w$ consisting of vertices of color $i$ or $j$. Note that if we switch the colors of the vertices in $V_{ij}$ (i.e. change $i$ to $j$ and $j$ to $i$), and leave everything else the same, then the result is still a coloring.
+            
+            If $V_{13}$ does not contain $u_3$, then switch the colors of the vertices in $V_{13}$ and color $v$ by 1. Otherwise, $V_{24}$ does not contain $u_4$; switch the colors of the vertices in $V_{24}$ and color $v$ by 2. This gives a 5-coloring of $G$.
+            
+            (TODO: picture)
+        \end{proof}
+        
+        Fun fact: In 1879, the Kempe chain method was used to ``prove" the four-color theorem by Alfred Kempe. No one noticed that this ``proof" had an error until eleven years later when Percy Heawood found the error. What we saw above is the modification of the incorrect proof to prove the weaker theorem. The correct proof of four-color theorem was completed in 1976 by Kenneth Appel and Wolfgang Haken.
+    
 \end{document}
