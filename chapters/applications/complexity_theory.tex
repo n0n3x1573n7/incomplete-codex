@@ -76,7 +76,7 @@
         
         (TODO: SAT)
         
-        Having proven that SAT is NP-hard, more problems can be proven NP-hard if we can reduce SAT to those problems in polynomial-time.
+        Having proven that SAT is NP-hard, more problems can be proven NP-hard if we can reduce SAT to those problems in polynomial-time. Here are only a tiny fraction of the NP-complete problems:
         
         \begin{defn}[NP-complete problems] \label{def_npc_examples} \begin{itemize}
             \item[]
@@ -84,9 +84,17 @@
             \item Given a graph $G$ and an integer $0 \leq k \leq |V(G)|$, the \emph{clique problem} asks whether there is a complete induced subgraph of $G$ with size at least $k$.
             \item The \emph{independent set problem} asks whether there is a subset $S$ of $V(G)$ with size at least $k$ such that no two vertices in $S$ are adjacent, and 0 otherwise.
             \item The \emph{vertex cover problem} asks whether there is a subset $S$ of $V(G)$ with size at most $k$ such that each edge is adjacent to at least one vertex in $S$.
-            \item The \emph{chromatic number problem} asks whether $G$ is $k$-colorable.
+            \item The \emph{chromatic number problem} asks whether $G$ is 3-colorable.
             \item Given a set $S$ of integers and an integer $k$, the \emph{subset sum problem} asks whether there is a subset of $S$ whose sum of elements equals $k$.
             \item Given an $n \times m$ matrix $A$ and an $n \times 1$ matrix $b$ of integers, the \emph{integer programming problem} asks whether there is an $m \times 1$ matrix $x$ of integers such that each element of $Ax+b$ is non-negative.
         \end{itemize}
         \end{defn}
+        
+        \begin{thm} \label{thm_npc_examples}
+            All problems in \ref{def_npc_examples} are NP-complete.
+        \end{thm}
+        
+        \begin{proof}
+            123
+        \end{proof}
 \end{document}
