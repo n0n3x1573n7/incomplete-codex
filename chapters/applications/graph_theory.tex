@@ -9,12 +9,49 @@
     
     \section{Planar Graphs}
         \begin{defn}[Planar Graph] \label{def_planar_graph}
-            A \emph{plane graph} is a graph where: \begin{itemize}
+            A \emph{plane graph} is a graph $G$ where: \begin{itemize}
                 \item $V \subseteq \mathbb{R}^2$;
                 \item every edge is an arc between two endpoints;
                 \item the interior of each edge contains no vertex and no point of any other edge.
             \end{itemize}
+            The connected components of $\mathbb{R}^2 \backslash G$ are called \emph{faces} of $G$. Since $G$ is contained in a sufficiently large disc, exactly one face is unbounded; that face is called the \emph{outer face} of $G$. All other faces are called \emph{inner faces} of $G$. A graph $H$ is \emph{planar} if it is isomorphic to some plane graph.
         \end{defn}
+        
+        \begin{thm}[Euler's Formula] \label{thm_euler_vef}
+            If $G$ is a connected plane graph, and the number of faces of $G$ is $F$, then \begin{displaymath}
+                |V| - |E| + F = 2.
+            \end{displaymath}
+        \end{thm}
+        
+        \begin{proof}
+            Induction on $|E|$. The base case is when $G$ has no edges, one vertex, and one face; the formula clearly holds.
+            
+            Pick any edge $e$. If $e$ is a loop, removing it reduces $|E|$ and $F$ by one. Otherwise, contracting it reduces $|V|$ and $|E|$ by one. Either way the result follows by induction.
+        \end{proof}
+        
+        \begin{thm} \label{thm_planar_ve}
+            If $G$ is simple and planar, then $|E| \leq 3|V|-6$. If in addition $G$ has no triangles (i.e. $K_3$ as a subgraph), then $|E| \leq 2|V|-4$.
+        \end{thm}
+        
+        \begin{proof}
+            Count the number $N$ of pairs $(f, e)$ where the face $f$ and the edge $e$ are incident. For each face, there are at least 3 edges incident to it, for otherwise there would be parallel edges or loops. Therefore $N \geq 3F$. On the other hand, each edge is incident to exactly two faces, so $N = 2|E|$. This gives $3F \leq 2|E|$. From [\ref{thm_euler_vef}], $3F = 6-3|V|+3|E| \leq 2|E|$, and the first result follows.
+            
+            The second result can be proved in the exactly same way, using $N \geq 4F$.
+        \end{proof}
+        
+        \begin{coro} \label{cor_k5_k33}
+            $K_5$ and $K_{3,3}$ are not planar.
+        \end{coro}
+        
+        \begin{proof}
+            $K_5$ has 5 vertices and 10 edges. $K_{3,3}$ has no triangles, 6 vertices, and 9 edges. The result follows from [\ref{thm_planar_ve}].
+        \end{proof}
+        
+        It clearly follows that any subdivision of $K_5$ or $K_{3,3}$ are not planar. Surprisingly, those two graphs are the only graphs that ``need to be checked" to determine if a given graph is planar. The proof requires several more lemmas and theorems, so we have moved the proof to the appendix. (TODO: prove it in the appendix)
+        
+        \begin{thm}[Kuratowski's Theorem] \label{thm_kuratowski}
+            A graph $G$ is planar if and only if it does not contain a subdivision of $K_5$ or $K_{3,3}$ as a subgraph.
+        \end{thm}
     
     \section{Coloring}
         \begin{defn}[Coloring] \label{def_coloring}
@@ -34,9 +71,9 @@
         \end{thm}
         
         \begin{proof}
-            Induction on $|V(G)|$. For $|V(G)| \leq 5$, the theorem is trivial.
+            Induction on $|V|$. For $|V| \leq 5$, the theorem is trivial.
             
-            From [TODO: which theorem?], $G$ has a vertex $v$ of degree at most 5. If $deg_G(v) < 5$, then inductively find a 5-coloring of $G-v$, and color $v$ by some color in $\{1,2,3,4,5\}$ not appearing in the neighbors of $v$. If $deg_G(v) = 5$ and not all colors are used in the neighbors of $v$, then the same argument applies.
+            From [\ref{thm_planar_ve}], $G$ has a vertex $v$ of degree at most 5. If $deg_G(v) < 5$, then inductively find a 5-coloring of $G-v$, and color $v$ by some color in $\{1,2,3,4,5\}$ not appearing in the neighbors of $v$. If $deg_G(v) = 5$ and not all colors are used in the neighbors of $v$, then the same argument applies.
             
             Now suppose all 5 colors are used. Denote the neighbors of $v$ as $u_1$, $u_2$, $u_3$, $u_4$, $u_5$, in clockwise order. Without loss of generality, we will assume that $c(u_i)=i$.
             
