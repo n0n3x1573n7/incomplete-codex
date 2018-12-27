@@ -307,18 +307,281 @@
 		It is said that an attack is valid if the attack succeeds with a non-negligible probability.
 		
 	\section{Zero-Knowledge Authentication}
+		Three major ways to authenticate a user is using password, challenge-response, and zero-knowledge authentication. Passwords must be sent through network, thereby they are susceptible to interception. Challenge-response can be abused by malicious users to crack the secret key. That is where the concept of zero-knowledge interactive proof comes in.
 		
+		An interactive proof system can be described as a communication between the verifier and the prover. They exchange messages to check whether if the statement is true or false. In here, the prover is assumed to have unlimited calculating power but cannot be trusted; the verifier has bounded computation power but is assumed to be always honest. Messages are sent between the prover and the verifier until the verifier has an answer to the problem and has convinces itself that the answer is correct.
+		Any interactive proof system must have the following properties:
+		\begin{itemize}
+			\item \textbf{Completeness}: If the statement is true, the honest verifier will be convinced of this fact by an honest prover.
+			\item \textbf{Soundness}: If the statement is false, no cheating prover can convince the honest verifier that it is true, except with some small probability.
+		\end{itemize}
+		In authentication, if the proof is only interactive, a malicious verifier may abuse the protocol to reveal the ``knowledge``(in the case for cryptosystems, private keys) only the prover knows. This is where the concept of ``Zero-knowledgeness`` comes in.
+		\begin{itemize}
+			\item \textbf{Zero-knowledgeness}: If the statement is true, no verifier can learn anything apart from the fact that the statement is true.
+		\end{itemize}
+		The best way to describe this is by an analogy of a colorblind person. Suppose the person has two balls that looks the exactly same for them. Their friend, as a non-colorblind person, want to prove that the two balls are of different color. The colorblind person resumes the role of verifier and the non-colorblind friend the prover. Here is an example protocol on how the fact can be proven:
+		\begin{enumerate}
+			\item Verifier shows you a ball.
+			\item Prover memorize it.
+			\item Verifier then hides both balls, and choose to keep the ball shown before or change the ball.
+			\item Verifier shows the newly chosen ball.
+			\item Prover tell verifier whether if the ball has been changed or not.
+			\item If the prover is wrong, the prover has told a lie; end the protocol.
+			\item If the prover is right, the prover may be telling the truth; continue the protocol until convinced.
+		\end{enumerate}
+		If the statement(`The two balls are of different color`) is false, then the prover(in this case, cheating) cannot tell whether if the ball has been changed; therefore their guess is right for 50\% of the time. $n$ consecutive application of the protocol gives $\frac{1}{2^n}$ chance of success, and as the number of trials increase, the less the cheating prover will be able to pass the protocol.
 		
-	\section{RSA Cryptosystem}
+		If the statement, on the other hand, is indeed true, then the prover can tell whether if the ball has been switched every time. In the verifier's point of view, the prover's $n$-th consecutive success for verification proves that they are lying at $\frac{1}{2^n}$ probability; their improbable probability of success at lying will thereby prove their honesty.
 		
+	\section{RSA Cryptosystem and Signature}
+		\subsection{Keygen}
+		\begin{enumerate}
+			\item Choose two primes $p$ and $q$.
+			\item Let $n=p\cdot q$.
+			\item Choose $e$ such that $(e,\phi(n))=1$
+			\item Find $d$ such that $e\cdot d\equiv 1 \mod \phi(n)$
+		\end{enumerate}
+		\textbf{Public Key}: $(n,e)$\\
+		\textbf{Private Key}: $d$ or $(p,q,d)$, depending on the method.
 		
-	\section{Rabin Cryptosystem}
+		\subsection{Cryptosystem}
+			\subsubsection{Encryption}
+			$C\equiv M^e \mod n$
+			
+			\subsubsection{Decryption}
+			\begin{itemize}
+				\item \textbf{Basic Method}\\
+				$C^d \equiv (M^e)^d \equiv M^{\phi(n)\cdot k+1}\equiv M \mod n$
+				\item \textbf{Chinese Remainder Theorem}\\
+				Split $C^d \mod n$ into two congruences: $C^d \mod p$ and $C^d \mod q$.\\
+				Using Euler's Theorem(If $(a,n)=1$, $a^{\phi(n)} \mod n$.), reduce $d$ to reduce the number of multiplication.
+			\end{itemize}
 		
+		\subsection{Signature}
+			\subsubsection{Signing}
+			$S \equiv M^d \mod n$
+			
+			\subsubsection{Verifying}
+			Compare $S^e \mod n$ to $M$. If equal, accept; otherwise reject.
+		
+		\subsection{Attacking the Cryptosystem}
+			\subsubsection{On the Case of Exposed Private Key $e$}
+			For the public key, $n=pq$ where $p$ and $q$ are primes.\\
+			Then, $\phi(n)=(p-1)(q-1)$.\\
+			We know that $ed \equiv 1 \mod \phi(n)$.\\
+			By the definition of modular, $ed-1=k \phi(n)$ for some $k$.\\
+			For a large enough $n=pq$, $\frac{\phi(n)}{n} = \frac{(p-1)(q-1)}{pq} = 1 - \frac{1}{p} - \frac{1}{q} +\frac{1}{pq}  \simeq 1$.\\
+			We can find $k$ by dividing both sides of the equation $ed-1=k \phi(n)$ by $n$, since $\frac{ed-1}{n}=k\frac{\phi(n)}{n} \simeq k$.\\
+			We can then find $\phi(n)=\frac{ed-1}{k}$.\\
+			Since $n=pq$ and $\phi(n)=(p-1)(q-1)=pq-(p+q)+1=n-(p+q)+1$, $p+q=n-\phi(n)+1$.\\
+			Then the quadratic equation $(x-p)(x-q)=x^2-(p+q)x+pq=x^2-(n-\phi(n)+1)x+n=0$ can be solved to yield $p$ and $q$.
+			
+			\subsubsection{Chosen Ciphertext Attack}
+			\begin{enumerate}
+				\item Alice sends $C\equiv M^e \mod n$ to Bob
+				\item Eve intercepts Alice's transmission; chooses $x$ s.t. $(x,n)=1$(and therefore $x^{-1} \mod n$ exists) to send $C'=Cx^e \mod n$ to Bob.
+				\item Bob decrypts $C'$ as $(C')^d \equiv (Cx^e)^d \equiv C^d x^{ed} \equiv Mx \mod n$
+				\item Eve intercepts Bob's decryption result, $Mx$, and multiplies $x^{-1}$ modulo $n$ to gain $M$.
+			\end{enumerate}
+			
+			\subsubsection{Coppersmith Attack} \label{coppersmith-attack}
+			\begin{thm}[Coppersmith]
+				Let $n \in \mathbb{Z}$ and $f \in \mathbb{Z}[x]$ be a monic polynomial(i.e. leading coefficient of $f$ is $1$) of degree $d$ over integer.\\
+				Set $X=n^{1/d-\epsilon}$ for $1/d>epsilon>0$.
+				Then given $n$ and $f$, the attacker, using the \href{https://en.wikipedia.org/wiki/Lenstra\%E2\%80\%93Lenstra\%E2\%80\%93Lov\%C3\%A1sz_lattice_basis_reduction_algorithm}{LLL Algorithm}, can efficiently find all integer $x_0<X$ such that $f(x_0) \equiv 0 \mod n$.
+			\end{thm}
+			\begin{note}
+				In the case of RSA, Finding $M$ when given $C \equiv M^e \mod n$ can be interpreted as finding the solution of the equation $f(x) \equiv x^e - C \mod n$. This attack's strength is the ability to find all small roots of the polynomials modulo a composite $N$.
+			\end{note}
+			
+			\subsubsection{Håstad's Broadcast Attack}
+			This attack is viable if the value of $e$ is fixed and is small, and the same message is broadcast without padding.
+			
+			Suppose the same plaintext $M$ is encrypted to multiple people, each using same $e$ and different moduli, say $N_i$. If Eve successfully intercepts $e$ or more messages, say $C_1,C_2,\cdots,C_e$, $C_i \equiv M^e \mod N_i$. We may assume $(N_i,N_j)=1$ for $i \ne j$, otherwise the attacker will be able to factorize some $N_i$ by finding their GCD. Using the Chinese Remainder Theorem on the $e$ congruences, the attacker may compute $C \in Z_{\Pi N_i}^*$ such that $C_i \equiv C \mod N_i$. Then, $C \equiv M^e \mod \Pi N_i$; however since $M<N_i$ for each $i$, $M^e<\Pi N_i$; thus $C=M^e$ holds over the integers, and the attacker can easily find the message $M$.
+			
+			For more generalized version, the following theorem is available:
+			\begin{thm}[Håstad]
+				Suppose $N_1,\cdots,N_k$ are relatively prime integers and set $N_{\min}=\min_i\{N_i\}$. Let $g_i(x) \in \mathbb{Z}/N_i[x]$ be $k$ polynomials of maximum degree $q$. Suppose there exists a unique $M<N_{\min}$ satisfying $g_i(M) \equiv 0 \mod N_i \forall i \in \{1,\cdots,k\}$. Furthermore, suppose $k>q$. Then there is an efficient algorithm which, given $\left< N_i,g_i(x)\right> \forall i$, computes $M$.
+			\end{thm}
+			This theorem can be used in the following way:\\
+			Suppose the $i$-th plaintext is padded with the polynomial $f_i(x)$. Let $g_i(x)=(f_i(x))^{e_i}-C_i \mod N_i$. Then $g_i(M) \equiv 0 \mod N_i$ is true, and the Coppersmith's Attack[\ref{coppersmith-attack}] can be used.
+			
+			\subsubsection{Franklin-Reiter Related Message Attack}
+			This attack is viable if the value of $e$ is fixed and is small, and the same message is broadcast with padding.
+			
+			\begin{thm}
+				Let $(n,e)$ be the public key of RSA, and $e$ is small.
+				Let $f(x)=ax+b \in Z_n[x]$, $b \ne 0$; i.e. $f$ is the padding function.\\
+				Suppose that $M_1 \ne M_2$ and $M_1 \equiv f(M_2) \mod n$.\\
+				Then, given the quintuplet $(n,e,C_1,C_2,f)$, $M_1$ and $M_2$ can be recovered in $O((log_2n)^2)$
+			\end{thm}
+			
+			\begin{proof}
+				\begin{math}
+				\\
+				C_1 \equiv M_1^e \mod n\\
+				C_2 \equiv M_2^e \mod n\\
+				M_1 \equiv f(M_2) \equiv aM_2+b \mod n\\
+				\\
+				\text{Let } g_2(x)=x^e-C_2 \mod n \text{, and } g_1(x)=(ax+b)^e-C_1 \mod n\\
+				\\
+				g_1(x)=(ax+b)^e-C_1\\
+				=(ax+b)^e-M_1^e\\
+				=(ax+b)^e-(aM_2+b)^e\\
+				=((ax+b)-(aM_2+b))Q(x)\\
+				=a(x-M_2)Q(x)\\
+				\\
+				g_2(x)=x^e-C_2\\
+				=x^e-M_2^e\\
+				=(x-M_2)Q'(x)\\
+				\\
+				\rightarrow (x-M_2)|(g_1(x),g_2(x)\\
+				\end{math}
+				Using the euclidean algorithm on the two polynomials $g_1$ and $g_2$, $M_2$ can be recovered.
+			\end{proof}
+		
+		\subsection{Forgeries of the Signature}
+			\subsubsection{Known Message Attack}
+			Suppose $(M_1,S_1)$ and $(M_2,S_2)$ are both valid signatures.\\
+			Then, $(M_1M_2,S_1S_2)$ is also a valid signature.
+			
+			\subsubsection{Chosen Message Attack}
+			Eve chooses $M_1$ and $M_2$ s.t. $M=M_1M_2$.\\
+			Eve asks Alice to sign $M_1$ and $M_2$; let them be $S_1$ and $S_2$.\\
+			Then $S_1S_2$ is a valid signature for $M$.
 		
 	\section{ElGamal Cryptosystem}
+		\subsection{Keygen}
+			Choose a prime $p$. Note that $(Z_p^*,\times)$ is a cyclic group.
+			\begin{itemize}
+				\item Choose $e_1$ to be the primitive root of $(Z_p^*,\times)$
+				\item Choose $d \in Z_p^*$ and compute $e_2 \equiv e_1^d \mod p$
+			\end{itemize}
+			In theory, $p$ and $e_1$ can be shared as long as $e_2$ are kept distinct.
+			\textbf{Public Key}: $(e_1,e_2,p)$\\
+			\textbf{Private Key}: $d$
 		
+		\subsection{Cryptosystem}
+			\subsubsection{Encryption}
+				Randomly choose $r \in Z_p^*$. $M$ is the message.
+				\begin{itemize}
+					\item $C_1 \equiv e_1^r \mod p$
+					\item $C_2 \equiv Me_2^r \mod p$
+				\end{itemize}
+				\textbf{Ciphertext}: $(C_1,C_2)$
+			
+			\subsubsection{Decryption}
+				$C_2(C_1^d)^{-1} \equiv Me_2^r(e_1^{rd})^{-1} \equiv M(e_1^d)^r(e_1^{rd})^{-1} \equiv M \mod p$
 		
-	\section{NTRU Cryptosystem}
+		\subsection{Signature}
+			\subsubsection{Signing}
+				Randomly choose $r \in Z_p^*$. $M$ is the message.
+				\begin{itemize}
+					\item $S_1 \equiv e_1^r \mod p$
+					\item $S_2 \equiv (M-dS_1)r^{-1} \mod (p-1)$
+				\end{itemize}
+				\textbf{Signature}: $(S_1,S_2)$
+			
+			\subsubsection{Verifying}
+				Calculate:
+				\begin{itemize}
+					\item $V_1 \equiv e_1^M \mod p$
+					\item $V_2 \equiv e_2^{S_1}S_1^{S_2} \mod p$
+				\end{itemize}
+				Verify with:
+				\begin{itemize}
+					\item Check $0<S_1<p$, $0<S_2<p-1$.
+					\item Check $V_1=V_2$
+				\end{itemize}
+				\begin{math}
+				V_2 \equiv e_2^{S_1}S_1^{S_2} \equiv (e_1^d)^{S_1}(e_1^r)^{S_2} \equiv e_1^{dS_1+rS_2} \equiv e_1^M \equiv V_1 \mod p
+				\end{math}
 		
+		\subsection{Attacking the Cryptosystem}
+			\subsubsection{Exposure of $r$}
+				Since $(C_1,C_2)$ and $r$ are exposed, $M=C_2(e_2^r)^{-1} \mod p$.
+			
+			\subsubsection{Baby step, Giant step}
+				When the random number $r$ is small, then the following meet-in-the-middle attack is possible:\\
+				$y=e_1^x \mod p$.\\
+				Let $m= \lceil \sqrt{p} \rceil$.\\
+				Then, $\exists q,r \in \mathbb{Z}$ such that $x=mq+r, 0 \le r \le m-1$\\
+				$\Rightarrow y=e_1^x \equiv e_1^{mq+r} \mod p$\\
+				$\Rightarrow y(e_1^{-m})^q \equiv g^r \mod p$\\
+				Hence we can find $r$ using the following protocol:
+				\begin{enumerate}
+					\item Construct the table with entries $(r,e_1^r \mod p), 0 \le r \le m-1$: (Baby step table)
+					\item Compute the value $g^{-m} \mod p$: (Giant step value)
+					\item For $q$ from $0$ to $m-1$, find $q$ such that $y(g^{-m})^q \equiv g^r \mod p$ in the table.
+				\end{enumerate}
+			
+			\subsubsection{Known Plaintext Attack}
+				Suppose the random number $r$ is reused to encrypt two distinct messages, $M$ and $M'$.\\
+				Suppose $M$ encrypted to $(C_1,C_2)$; $M'$ encrypted to $(C_1',C_2')$.\\
+				Note that $C_1=C_1'=e_1^r$, $C_2=Me_2^r$, $C_2'=M'e_2^r$.\\
+				If we know $M'$, then $\frac{C_2\times M'}{C_2'}=\frac{Me_2^r\times M'}{M'e_2^r}=M$
 		
+		\subsection{Forgeries of the Signature}
+			\subsubsection{Constructing from Scratch: One Variable}
+				Choose $1<x<p-1$.
+				\begin{itemize}
+					\item $S_1 \equiv e_1^xe_2 \mod p$
+					\item $S_2 \equiv -S_1 \mod (p-1)$
+					\item $M \equiv xS_2 \mod (p-1)$
+				\end{itemize}
+			
+			\subsubsection{Constructing from Scratch: Two Variables}
+				Choose $u,v\in Z_p^*$ such that $(v,p-1)=1$ so that $\exists v^{-1} \mod(p-1)$
+				\begin{itemize}
+					\item $S_1 \equiv e_1^ue_2^v \mod p$
+					\item $S_2 \equiv -S_1v^{-1} \mod (p-1)$
+					\item $M \equiv S_2u \mod(p-1)$
+				\end{itemize}
+		
+			\subsubsection{Known Plaintext Attack}
+				A valid signature $(M,(S_1,S_2))$ is given for $(M,p-1)=1$ so that  $\exists M^{-1} \mod (p-1)$.\\
+				Choose a message $M'$.\\
+				Set $u=M'M^{-1} \mod (p-1)$.\\
+				Compute $S_2 \equiv S_2u \mod (p-1)$.\\
+				Solve the following set of linear congruences using CRT:
+				\begin{displaymath}
+				\begin{cases}
+				S_1'=S_1u \mod(p-1)\\
+				S_1'=S_1 \mod p
+				\end{cases}
+				\end{displaymath}
+				Then, $(M',(S_1',S_2'))$ is also a valid signature, if the range conditions are not checked.
+		
+	\section{Schnorr Digital Signature}
+		Signatures based on cryptosystems have a weakness: they pose a threat to expose the secret key, or makes it easier to forge a specific message. Schnorr Digital Signature is a signature-only algorithm that helps solve this.
+		\subsection{Keygen}
+			\begin{itemize}
+				\item Choose a cryptographic hash function $h$.
+				\item Choose a prime $p$.
+				\item Choose a prime $q$ such that:
+					\subitem $q|p-1$, and;
+					\subitem The size of $q$ is the same as the hash output.
+				\item Choose $e_0$ such that it is a generator in $Z_p^*$.
+				\item Set $e_1 \equiv e_0^{(p-1)/q} \not\equiv 1 \mod p$.
+				\item Choose $d$.
+				\item Set $e_2 \equiv e_1^d \mod p$.
+			\end{itemize}
+			\textbf{Public Key}: $(h,e_1,e_2,p,q)$\\
+			\textbf{Private Key}: $d$
+
+		\subsection{Signature}
+			\subsubsection{Signing}
+				Choose $r \in Z_q^*$ at random.
+				\begin{itemize}
+					\item $S_1=h(M||e_1^r \mod p)$ where $||$ is concatenation.
+					\item $S_2=r+dS_1 \mod q$
+				\end{itemize}
+				\textbf{Signature}: $(S_1,S_2)$
+			
+			\subsubsection{Verifying}
+				Calculate $V=h(M||e_1^{S_2}e_2^{-S_1} \mod p)$.\\
+				If $V=S_1$, then $M$ is accepted.\\
+				\begin{math}
+					e_1^{S_2}e_2^{-S_1}=e_1^{r+dS_1}e_1^{-dS_1}=e_1^r \mod p
+				\end{math}
 \end{document}
