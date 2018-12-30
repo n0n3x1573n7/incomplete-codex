@@ -6,6 +6,52 @@
     \section{Degrees}
     
     \section{Trees}
+        One of the important classes of graphs is a tree. There are many ways to define a tree. First we will state one definition, and then prove that other definitions are equivalent.
+        \begin{defn}[Tree] \label{def_tree}
+            A \emph{forest} is a simple graph without any cycle. A \emph{tree} is a connected forest. A \emph{leaf} of a forest is a vertex with degree 1.
+        \end{defn}
+        
+        \begin{thm} \label{thm_tree}
+            The following statements are equivalent for a simple graph $G$: \begin{enumerate}
+                \item $G$ is a tree.
+                \item For any two vertices $u$ and $v$ of $G$, there is exactly one path connecting them.
+                \item $G$ is connected, and for any $e$ of $G$, $G \backslash e$ is disconnected.
+                \item $G$ has no cycle, and for any two vertices $u$ and $v$ not having an edge between them, $G+uv$ has a cycle.
+                \item $G$ is connected, and $|E| = |V|-1$.
+            \end{enumerate}
+        \end{thm}
+
+        \begin{proof}
+            TODO
+            %(1 $\Rightarrow$ 4) $T$ has no cycles. For any $x,y \in V$, there is a path from $y$ to $x$. That path and $xy$ creates a cycle in $T+xy$.
+            
+            %(4 $\Rightarrow$ 3) For any $x,y \in V$, $T+xy$ has a cycle and that cycle must contain $xy$. Removing $xy$ from the cycle yields a path from $x$ to $y$. Therefore $T$ is connected. Now suppose $T \backslash e$ is connected for some $e \in E$, and $e$ connects $x$ and $y$. There is a path from $y$ to $x$ in $T \backslash e$, and that path and $e$ creates a cycle in $T$: contradiction.
+            
+            %(3 $Righatrrow$ 2) $G$ is connected.
+        \end{proof}
+    
+    \subsection{Spanning Trees}
+        \begin{defn}[Spanning Subgraph] \label{def_spanning}
+            A \emph{spanning subgraph} of a graph $G$ is a subgraph of $G$ such that its vertex set equals $V(G)$. A \emph{spanning tree} is a spanning graph that is a tree.
+        \end{defn}
+        
+        \begin{thm} \label{thm_spanning_tree}
+            A connected graph $G$ has a spanning tree.
+        \end{thm}
+        
+        \begin{proof}
+            Let $m = |E|$, and label the edges as $e_0$, $\cdots$, $e_m$, arbitrarily. Define the subsets $E_0$, $\cdots$, $E_m$ of $E$, as \begin{displaymath} \begin{cases}
+                E_0 = \varnothing \\
+                E_i = E_{i-1} \cup \{e_i\} & \text{if the spanning subgraph of $G$} \\
+                & \text{with $E = E_{i-1} \cup \{e_i\}$ has no cycle} \\
+                E_i = E_{i-1} & \text{otherwise.}
+            \end{cases} \end{displaymath}
+            Let $H$ be the spanning subgraph of $G$ with $E = E_m$. Clearly, $H$ has no cycle. If $e_i \notin E_m$ and $H+e_i$ has no cycle, then $E_i$ would contain $e_i$, contradiction. From [\ref{thm_tree}], $H$ is a tree.
+        \end{proof}
+        
+        (TODO: minimum spanning tree)
+        
+        There are other minimum spanning tree algorithms like Prim's algorithm or Borůvka's algorithm.
     
     \section{Planar Graphs}
         \begin{defn}[Planar Graph] \label{def_planar_graph}
@@ -30,7 +76,7 @@
         \end{proof}
         
         \begin{thm} \label{thm_planar_ve}
-            If $G$ is simple and planar, then $|E| \leq 3|V|-6$. If in addition $G$ has no triangles (i.e. $K_3$ as a subgraph), then $|E| \leq 2|V|-4$.
+            If $G$ is simple and planar, and $|V| \geq 3$, then $|E| \leq 3|V|-6$. If in addition $G$ has no triangles (i.e. $K_3$ as a subgraph), then $|E| \leq 2|V|-4$.
         \end{thm}
         
         \begin{proof}
@@ -47,7 +93,7 @@
             $K_5$ has 5 vertices and 10 edges. $K_{3,3}$ has no triangles, 6 vertices, and 9 edges. The result follows from [\ref{thm_planar_ve}].
         \end{proof}
         
-        It clearly follows that any subdivision of $K_5$ or $K_{3,3}$ are not planar. Surprisingly, those two graphs are the only graphs that ``need to be checked" to determine if a given graph is planar. The proof requires several more lemmas and theorems, so we have moved the proof to the appendix. (TODO: prove it in the appendix)
+        It clearly follows that any subdivision of $K_5$ or $K_{3,3}$ are not planar. Surprisingly, those two graphs are the only graphs that ``need to be checked" to determine if a given graph is planar. The proof requires several more lemmas and theorems, so we have moved the proof to the appendix.
         
         \begin{thm}[Kuratowski's Theorem] \label{thm_kuratowski}
             A graph $G$ is planar if and only if it does not have $K_5$ or $K_{3,3}$ as a topological minor.
