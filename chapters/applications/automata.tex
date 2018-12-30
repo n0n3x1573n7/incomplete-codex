@@ -1,10 +1,31 @@
 \documentclass{report}
 
 \begin{document}
+	Automaton is defined as a machine or control mechanism designed to automatically follow a predetermined sequence of operations, or respond to predetermined instructions. Theoretically, they all can be considered as the simplest form of algorithm, whether it is finite state automaton, push down automaton, or Turing machine. They all accept an input, and produce output; usually the output is $accept$ or $reject$, but in the case of Turing machines, the output may be something different.
 	\section{Regular Language}
-		\subsection{Deterministic Finite State Automata}
+		\subsection{Deterministic Finite State Automaton}
+			\begin{defn}[Deterministic Finite Automaton(DFA)]
+				A DFA $M$ is a 5-tuple, $(Q,\Sigma,\delta,q_0,F)$, consisting of:
+				\begin{itemize}
+					\item Finite set of states $Q$;
+					\item Finite set of input symbols called the alphabet $\Sigma$;
+					\item Transition function $\delta:Q \times \Sigma \rightarrow Q$;
+					\item Initial state $q_0 \in Q$;
+					\item Set of accepting states $F \subseteq Q$.
+				\end{itemize}
+			\end{defn}
 		
-		\subsection{Nondeterministic Finite Automata}
+		\subsection{Nondeterministic Finite Automaton}
+			\begin{defn}[Nondeterministic Finite Automaton(NFA)]
+				A NFA $M$ is a 5-tuple, $(Q,\Sigma,\Delta,q_0,F)$, consisting of:
+				\begin{itemize}
+					\item Finite set of states $Q$;
+					\item Finite set of input symbols called the alphabet $\Sigma$;
+					\item Transition function $\Delta: Q \times \Sigma \rightarrow P(Q)$ where $P$ is the powerset function;
+					\item Initial state $q_0 \in Q$;
+					\item Set of accepting states $F \subseteq Q$.
+				\end{itemize}
+			\end{defn}
 		
 		\subsection{Regular Expression}
 		
@@ -14,19 +35,75 @@
 			\subsubsection{RE version}
 	
 	\section{Context-Free Language}
-		\subsection{Push-down Automata}
+		\subsection{Push-down Automaton}
+			Similar to Finite Automatons, Push-down automatons have deterministic version and nondeterministic version; Only the nondeterministic version is shown here as similar method can be used to convert it into a deterministic version.
+			\begin{defn}[Push-down Automata(PDA)]
+				A PDA is a 6-tuple $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ where:
+				\begin{itemize}
+					\item $Q$ is the set of states;
+					\item $\Sigma$ is the set of input alphabet;
+					\item $\Gamma$ is the set of stack alphabet;
+					\item $q_0$ is the starting state;
+					\item $\Delta$ is the transition relation of $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \times Q \times \Gamma_\epsilon$
+					\item $F$ is the set of accepting states
+				\end{itemize}
+				$\Delta$ is often written as a transition function of $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \times \rightarrow P(Q \times \Gamma_\epsilon)$ where $P$ is the powerset function.\\
+				Sometimes the last element of the relation is extended to $\Gamma_\epsilon^*$; in that case, when inserting into the stack, insert the last element first.
+			\end{defn}
 		
-		\subsection{Context-free grammar}
+		\subsection{Context-free Language}
+			\begin{defn}[Context-Free Language(CFL)]
+				A CFL is a 4-tuple $(V,\Sigma,R,S)$ where:
+				\begin{itemize}
+					\item $V$ is the set of nonterminal variables;
+					\item $\Sigma$ is the set of terminal characters;
+					\item $R$ is the set of rules, where each rules are in the form of $A\rightarrow w, A\in V, w\in (\Sigma \cup V)^*$
+					\item $S$ is the starting variable.
+				\end{itemize}
+			\end{defn}
+			\begin{thm}
+				Every CFL can be represented into an equivalent PDA.
+			\end{thm}
+			\begin{proof}
+				Suppose a CFL $(V_0,\Sigma_0,R_0,S_0)$ is given.\\
+				We can construct a new PDA $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ from the given CFL s.t.
+				\begin{itemize}
+					\item $Q=\{Q_S,Q_M,Q_F\}$
+					\item $\Sigma=\Sigma_0$
+					\item $\Gamma=V_0 \cup \Sigma_0$
+					\item $q_0=Q_S$
+					\item $F=Q_F$
+					\item $\Delta=$\\
+					\begin{math}
+					\{(Q_S,\epsilon,\epsilon,Q_M,S\$)\}\cup\\
+					\{(Q_M,\epsilon,\epsilon,X,Q_M,W)|X->W \in R\}\cup\\
+					\{(Q_M,a,a,Q_M,\epsilon)|a \in \Sigma_0\}\cup\\
+					\{(Q_M,\epsilon,\$,Q_F,\epsilon)\}
+					\end{math}
+				\end{itemize}
+				This exactly simulates the parse tree of the CFL.
+			\end{proof}
 	
 	\section{Turing Machines}
-		\section{Turing Machine}
-		
+		\begin{defn}[Turing Machine]
+			A TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
+			\begin{itemize}
+				\item $Q$ is the set of states;
+				\item $\Sigma$ is the set of input alphabet;
+				\item $\Gamma$ is the set of tape alphabet;
+				\item $\delta$ is the transition function of $Q \times \gamma \rightarrow Q \times \gamma \times \{L,R\}$
+				\item $q_0$ is the starting state
+				\item $q_{accept}$ is the accepting state
+				\item $q_{reject}$ is the rejecting state distinct from $q_{accept}$
+			\end{itemize}
+		\end{defn}
 		\section{Decidable Language}
 		
-		\section{Push-down Automata with Two Stacks}
+		\section{Push-down Automaton with Two Stacks}
 		
 		\section{Recognizable Language}
 		
 		\section{Variations on the Turing Machine}
 		
+		\section{Lambda Calculus}
 \end{document}
