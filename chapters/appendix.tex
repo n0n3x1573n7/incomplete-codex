@@ -7,10 +7,26 @@
     \section{Kuratowski Theorem}
         In this section we prove [\ref{thm_kuratowski}].
         
-        (TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html and my lecture note)
+        (TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html http://www.math.caltech.edu/~2014-15/2term/ma006b/11\%20Planar4.pdf and my lecture note)
+    
+    \subsection{The Preparation}
+    
+        First, we show that a planar graph can be drawn so that an arbitrary vertex or an edge is incident to the outer face.
+    
+        \begin{lemma} \label{lem_stereographic}
+            If $G$ is planar and $v \in V(G)$, then there is a planar embedding of $G$ such that $v$ is on the boundary of the outer face. The same can be done for $e \in E(G)$.
+        \end{lemma}
         
+        \begin{proof}
+            We use the \emph{stereographic projection}. In $\mathbb{R}^3$, let $z=-1$ be the plane $P$ and $x^2+y^2+z^2=1$ be the sphere $S$. $(0,0,1)$ is the ``north pole'' of $S$. Define the projection $\rho: S \backslash \{(0,0,1)\} \rightarrow P$ as follows: given $(x,y,z)$ on $S$ which is not the north pole, draw a straight line through $(0,0,1)$ and $(x,y,z)$. There is a unique intersection of this line with $P$, denoted as $(X,Y,-1)$. Then $\rho(x,y,z)=(X,Y,-1)$. Clearly $\rho$ is bijective.
+            
+            Given an embedding of a planar graph $G$ on $P$, $\rho^{-1}$ gives an embedding of $G$ on $S$. Rotate the embedding so that a face incident to $v$ or $e$ contains the north pole. $\rho$ gives an embedding of $G$ on $P$ such that the face is the outer face.
+        \end{proof}
+        
+        Next, we introduce the notion of connectivity. Although connectivity is a crucial part of graph theory, we didn't put this into the main part of the codex because of the length concerns.
+    
         \begin{defn}[Connectivity] \label{def_connectivity}
-            .
+            A graph $G$ is \emph{$k$-connected} if $|V| \geq k$ and, for every $S \subset V$ with $|S| < k$, $G \backslash S$ is connected.
         \end{defn}
         
         \begin{thm} \label{thm_3conn}
@@ -20,6 +36,8 @@
         \begin{proof}
             .
         \end{proof}
+        
+        Then, we show the connection between minors and topological minors.
         
         \begin{lemma} \label{lem_minor}
             $K_{3,3}$ is a topological minor of $G$ iff $K_{3,3}$ is a minor of $G$.
@@ -36,14 +54,22 @@
         \begin{proof}
             .
         \end{proof}
-        
+    
+    \subsection{The Proof}
+    
+        The last step is closely related to the Kuratowski's theorem.
+    
         \begin{defn}[Convex Embedding] \label{def_convex_embed}
-            .
+            A \emph{convex embedding} of a planar graph $G$ is a plane graph in which all edges are straight line segments and all face boundaries are convex polygons.
         \end{defn}
         
         \begin{lemma} \label{lem_convex_embed}
-            If $G$ is simple, 3-connected, and has no $K_5$ or $K_{3,3}$ as a minor, then $G$ has a convex embedding on a plane.
+            If $G$ is simple, 3-connected, and has no $K_5$ or $K_{3,3}$ as a minor, then $G$ has a convex embedding on a plane, with no three vertices on a line.
         \end{lemma}
+        
+        \begin{proof}
+            TODO
+        \end{proof}
         
         We are finally ready to prove the Kuratowski's theorem. For convenience, we will restate the theorem:
         
@@ -52,7 +78,15 @@
         \end{quote}
         
         \begin{proof}
-            .
+            Induction on $|V|$, with trivial base case $|V| \leq 4$.
+            
+            If $G$ is disconnected, from induction there is a planar embedding of each component. Since each embedding is bounded by a finite disc, their union can be drawn on a plane.
+            
+            If $G$ is connected but not 2-connected, then take a cut-vertex $v$, and partition $V(G \backslash v)$ into $A$ and $B$ such that no edge connects a vertex in $A$ and a vertex in $B$. TODO
+            
+            If $G$ is 2-connected but not 3-connected, TODO
+            
+            If $G$ is 3-connected, the conclusion immediately follows from [\ref{lem_convex_embed}].
         \end{proof}
     
 \end{document}
