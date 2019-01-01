@@ -1,23 +1,7 @@
 %\documentclass{report}
 
-\newcommand{\zo}{\{0,1\}}
-\newcommand{\strs}{\{0,1\}^\ast}
-
 \begin{document}
     \section{Turing Machine and Complexity}
-        (TODO: Move this to Automata.) (TODO: Before giving the definition of Turing Machine, I have to give some intuition here.)
-        \begin{defn}[Turing machine] \label{def_tm}
-            A \emph{Turing machine} is a tuple $M=(\Gamma,Q,\delta)$, where: \begin{itemize}
-                \item $Q$ is the set of states, which contains the starting state $q_0$ and the halting state $q_F$.
-                \item $\Gamma$ is the set of symbols, which contains the blank symbol $\square$, and two numbers $0$ and $1$. $\Gamma$ is called the \emph{alphabet} of $M$.
-                \item $\delta:Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R\}$ is the \emph{decision function}.
-            \end{itemize}
-        \end{defn}
-        
-        The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state.
-        
-        In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\strs \rightarrow \zo$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
-        
         (TODO: Write something about asymptotic notation here)
         
         \begin{defn}[Asymptotic notation] \label{def_bigo}

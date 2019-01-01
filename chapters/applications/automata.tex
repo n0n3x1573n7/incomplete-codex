@@ -4,7 +4,7 @@
 	Automaton is defined as a machine or control mechanism designed to automatically follow a predetermined sequence of operations, or respond to predetermined instructions. Theoretically, they all can be considered as the simplest form of algorithm, whether it is finite state automaton, push down automaton, or Turing machine. They all accept an input, and produce output; usually the output is $accept$ or $reject$, but in the case of Turing machines, the output may be something different.
 	\section{Regular Language}
 		\subsection{Deterministic Finite State Automaton}
-			\begin{defn}[Deterministic Finite Automaton(DFA)]
+			\begin{defn}[Deterministic Finite Automaton(DFA)] \label{def_DFA}
 				A DFA $M$ is a 5-tuple, $(Q,\Sigma,\delta,q_0,F)$, consisting of:
 				\begin{itemize}
 					\item Finite set of states $Q$;
@@ -16,7 +16,7 @@
 			\end{defn}
 		
 		\subsection{Nondeterministic Finite Automaton}
-			\begin{defn}[Nondeterministic Finite Automaton(NFA)]
+			\begin{defn}[Nondeterministic Finite Automaton(NFA)] \label{def_NFA}
 				A NFA $M$ is a 5-tuple, $(Q,\Sigma,\Delta,q_0,F)$, consisting of:
 				\begin{itemize}
 					\item Finite set of states $Q$;
@@ -37,7 +37,7 @@
 	\section{Context-Free Language}
 		\subsection{Push-down Automaton}
 			Similar to Finite Automatons, Push-down automatons have deterministic version and nondeterministic version; Only the nondeterministic version is shown here as similar method can be used to convert it into a deterministic version.
-			\begin{defn}[Push-down Automata(PDA)]
+			\begin{defn}[Push-down Automaton(PDA)] \label{def_pda}
 				A PDA is a 6-tuple $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ where:
 				\begin{itemize}
 					\item $Q$ is the set of states;
@@ -52,7 +52,7 @@
 			\end{defn}
 		
 		\subsection{Context-free Language}
-			\begin{defn}[Context-Free Language(CFL)]
+			\begin{defn}[Context-Free Language(CFL)] \label{def_cfl}
 				A CFL is a 4-tuple $(V,\Sigma,R,S)$ where:
 				\begin{itemize}
 					\item $V$ is the set of nonterminal variables;
@@ -61,9 +61,11 @@
 					\item $S$ is the starting variable.
 				\end{itemize}
 			\end{defn}
-			\begin{thm}
+		
+			\begin{thm} \label{thm_cfl_pda_equivalence}
 				Every CFL can be represented into an equivalent PDA.
 			\end{thm}
+		
 			\begin{proof}
 				Suppose a CFL $(V_0,\Sigma_0,R_0,S_0)$ is given.\\
 				We can construct a new PDA $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ from the given CFL s.t.
@@ -85,7 +87,7 @@
 			\end{proof}
 	
 	\section{Turing Machines}
-		\begin{defn}[Turing Machine]
+		\begin{defn}[Turing Machine] \label{def_tm}
 			A TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
 			\begin{itemize}
 				\item $Q$ is the set of states;
@@ -97,13 +99,58 @@
 				\item $q_{reject}$ is the rejecting state distinct from $q_{accept}$
 			\end{itemize}
 		\end{defn}
-		\section{Decidable Language}
+		The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. Some include $N$ in the final output of the transition function. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state. Some of the many variations on the Turing machine are mentioned in \ref{var_TM}.
 		
-		\section{Push-down Automaton with Two Stacks}
+		In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\strs \rightarrow \zo$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
 		
-		\section{Recognizable Language}
+		We now give the following thesis from the creator of the $\lambda$-calculus, Alonzo Church and Alan Turing.
+		\begin{thesis}[Church-Turing Thesis] \label{thm_church_turing}
+			A function on Natural Numbers which is computable by a human being following an algorithm, ignoring resource limitations, if and only if it is computable by a Turing Machine.
+		\end{thesis}
 		
-		\section{Variations on the Turing Machine}
+		\section{Decidable and Recognizable Languages}
 		
-		\section{Lambda Calculus}
+		
+		\section{Equivalences to Turing Machine}
+			The followings can be shown to be equivalent to a Turing machine; however no proofs are given.
+			\subsection{Push-down Automaton with Two Stacks}
+			
+			\subsection{Variations on the Turing Machine} \label{var_TM}
+			
+			\subsection{General Recursive Functions}
+				\begin{defn}[General Recursive Functions] \label{def_general_recursive_function}
+					General Recursive Functions, otherwise known as $\mu$-recursive functions, is a set of functions $\forall n \in \mathbb{N}, f:\mathbb{N}^n \rightarrow \mathbb{N}$ that includes the three "Initial", or "Basic" functions, and closed under three operators:
+					\begin{itemize}
+						\item Initial Functions
+						\begin{itemize}
+							\item \textbf{Constant Function:} $\forall n,k \in \mathbb{N}, f(x_1,\dots,x_k)=n$
+								\subitem Alternative definition use a Zero function: $\forall k \in \mathbb{N}, Z(x_1,\dots,x_k)=0$
+							\item \textbf{Successor Function $S$:} $S(x)=x+1$
+							\item \textbf{Projection Function $P_i^k$:}
+								\subitem This is also called the Identity Function $I_i^k$
+						\end{itemize}
+						\item Operators
+						\begin{itemize}
+							\item \textbf{Composition Operator $\circ$:} Given an m-ary function $h(x_1,\dots,x_m)$ and m k-ary functions $g_1(x_1,\dots,x_k),\dots,g_m(x_1,\dots,x_k)$:
+							\begin{displaymath}
+								h \circ (g_1,\dots,g_m)=f \text{   where   } f(x_1,\dots,x_k)=h(g_1(x_1,\dots,x_k),\dots,g_m(x_1,\dots,x_k))
+							\end{displaymath}
+								\subitem This is also called the Substitution Operator.
+							\item \textbf{Primitive Recursion Operator $\rho$:} Given the k-ary function $g(x_1,\dots,x_k)$ and (k+2)-ary function $h(y,z,x_1,\dots,x_k)$:
+							\begin{align*}
+								\rho(g,h)&=f \text{   where}\\
+								f(0,x_1,\dots,x_k)&=g(x_1,\dots,x_k)\\
+								f(y+1,x_1,\dots,x_k)&=h(y,f(y,x_1,\dots,x_k),x_1,\dots,x_k)
+							\end{align*}
+							\item \textbf{Minimization Operator $\mu$:} Given a (k+1)-ary total function $f(y,x_1,\dots,x_k)$:
+							\begin{align*}
+								\mu (f)(x_1,\dots,x_k)=z \Leftrightarrow& f(z,x_1,\dots,x_k)=0 \text{   and}\\&f(i,x_1,\dots,x_k)>0 \text{   for   } i=0,\dots,z-1
+							\end{align*}
+								\subitem Intuitively, this operator seeks the smallest argument that causes the function to return 0; if none exists, the search never ends and therefore cannot return.
+						\end{itemize}
+					\end{itemize}
+				\end{defn}
+			
+			\subsection{Lambda Calculus}
+			
 \end{document}
