@@ -28,6 +28,21 @@
 			\end{defn}
 		
 		\subsection{Regular Expression}
+			\begin{defn}[Regular Expression(RE)] \label{def_RE}
+				Given a finite alphabet $\Sigma$, the following constants are defined as regular expressions:
+				\begin{itemize}
+					\item \textbf{Empty set}: $\emptyset$, denoting the set $\emptyset$.
+					\item \textbf{Empty string}: $\epsilon$, denoting the set containing only the "empty" string, which has no characters at all.
+					\item \textbf{Literal character}: $a \in \Sigma$, denoting the only character $a$.
+				\end{itemize}
+				And when given regular expressions $R$ and $S$, the following operations over them produce regular expressions:
+				\begin{itemize}
+					\item \textbf{Concatenation}: $RS$, denoting the concatenation of strings in $R$ and $S$, in that order.
+						\subitem $R^n$ denotes the concatenation of $R$, $n$ times: Specifically, $R^0=\{\epsilon\}$.
+					\item \textbf{Alternation}: $R|S$, denoting the set union of the strings in $R$ and $S$.
+					\item \textbf{Kleene star}: $R^*$, denoting $\bigcup_{i \in \mathbb{N}}R^i$.
+				\end{itemize}
+			\end{defn}
 		
 		\subsection{Pumping Lemma}
 			\subsubsection{NFA version}
@@ -112,7 +127,7 @@
 		
 		
 		\section{Equivalences to Turing Machine}
-			The followings can be shown to be equivalent to a Turing machine; however no proofs are given.
+			The followings can be shown to be equivalent to a Turing machine; however no proofs are given since they are usually long and arduous.
 			\subsection{Push-down Automaton with Two Stacks}
 			
 			\subsection{Variations on the Turing Machine} \label{var_TM}
@@ -152,5 +167,25 @@
 				\end{defn}
 			
 			\subsection{Lambda Calculus}
+				Lambda Calculus, first defined by Alonzo Church, is a formal system of mathematical logic for expressing computation based on function-like objects.
+				\begin{defn}[Lambda Expression] \label{def_lambda_expression}
+					Lambda expressions are composed of:
+					\begin{itemize}
+						\item Variables, $v_1,\dots,v_n,\dots$
+						\item The abstraction symbols lambda $\lambda$ and dot $.$
+						\item Parentheses $( )$
+					\end{itemize}
+					For some applications, terms for logical and mathematical constants and operation may be included.
+					
+					The set of lambda expressions, $\Lambda$, can be defined inductively:
+					\begin{itemize}
+						\item If $x$ is a variable, then $x \in \Lambda$
+						\item If $x$ is a variable and $M \in \Lambda$, then $(\lambda x.M)\in \Lambda$
+							\subitem This rule is also known as Abstractions.
+						\item If $M,N \in \Lambda$, then $(M N) \in \Lambda$
+							\subitem This rule is also known as Application.
+					\end{itemize}
+				\end{defn}
+				Though only the definition is given, \href{https://en.wikipedia.org/wiki/Lambda_calculus#Formal_definition}{This Wikipedia article} can be helpful to understand how lambda calculus works.
 			
 \end{document}
