@@ -7,7 +7,7 @@
     \section{Kuratowski Theorem}
         In this section we prove [\ref{thm_kuratowski}].
         
-        (TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html http://www.math.caltech.edu/~2014-15/2term/ma006b/11\%20Planar4.pdf and my lecture note)
+        (TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html http://www.cs.rpi.edu/~goldberg/14-GT/19-kurat.pdf and my lecture note)
     
     \subsection{The Preparation}
     
@@ -26,15 +26,21 @@
         Next, we introduce the notion of connectivity. Although connectivity is a crucial part of graph theory, we didn't put this into the main part of the codex because of the length concerns.
     
         \begin{defn}[Connectivity] \label{def_connectivity}
-            A graph $G$ is \emph{$k$-connected} if $|V| \geq k$ and, for every $S \subset V$ with $|S| < k$, $G \backslash S$ is connected.
+            A graph $G$ is \emph{$k$-connected} if $|V| > k$ and, for every $S \subset V$ with $|S| < k$, $G \backslash S$ is connected.
         \end{defn}
         
         \begin{thm} \label{thm_3conn}
-            If $G$ is 3-connected, then there is an edge $e$ such that $G/e$ is 3-connected.
+            If $G$ is 3-connected with $|V(G)| \geq 5$, then there is an edge $e$ such that $G/e$ is 3-connected.
         \end{thm}
         
         \begin{proof}
-            .
+            Let $e=xy$ and suppose $G/e$ is not 3-connected. Then $G/e$ has a cut set $\{v, z\}$. Since $G$ is 3-connected, this set has a vertex, say $v$, which is the new vertex made by contracting $e$. That is, $\{x, y, z\}$ is a cut set of $G$.
+            
+            Suppose that for every $e$, $G/e$ is not 3-connected, so to every $e$ corresponds a vertex $z_e$. Among all edges, take $e=xy$ and $z_e$ such that $G-x-y-z$ has the largest component $C$, and denote the other component as $D$. Since $G$ is 3-connected, each of $x,y,z$ has neighbors in $C$ and in $D$. Take a neighbor $u$ of $z$ in $D$ and let $v=z_{zu}$.
+            
+            If $v \in V(C) \cup \{x,y\}$, then $G-z-v$ is disconnected. Otherwise, $G-z-u-v$ has a component larger than $C$. Either way brings contradiction.
+            
+            (TODO: picture)
         \end{proof}
         
         Then, we show the connection between minors and topological minors.
@@ -82,7 +88,7 @@
             
             If $G$ is disconnected, from induction there is a planar embedding of each component. Since each embedding is bounded by a finite disc, their union can be drawn on a plane.
             
-            If $G$ is connected but not 2-connected, then take a cut-vertex $v$, and partition $V(G \backslash v)$ into $A$ and $B$ such that no edge connects a vertex in $A$ and a vertex in $B$. TODO
+            If $G$ is connected but not 2-connected, then take a cut-vertex $v$. Let $G_1$, $\cdots$, $G_n$ be the connected components of $G-v$, and $H_i$ be the subgraph induced by $V(G_i) \cup \{v\}$. Take an embedding of each $H_i$ such that $v$ is in the outer face [\ref{lem_stereographic}] and squeeze it into an angle $< 2\pi / n$ at the vertex $v$. Joining those embeddings together forms an embedding of $G$.
             
             If $G$ is 2-connected but not 3-connected, TODO
             
