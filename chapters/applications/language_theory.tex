@@ -2,32 +2,17 @@
 
 \begin{document}
 	Automaton is defined as a machine or control mechanism designed to automatically follow a predetermined sequence of operations, or respond to predetermined instructions. Theoretically, they all can be considered as the simplest form of algorithm, whether it is finite state automaton, push down automaton, or Turing machine. They all accept an input, and produce output; usually the output is $accept$ or $reject$, but in the case of Turing machines, the output may be something different.
+	
+	Before we start talking about the machines however we need to define what "Language" is.
+	\begin{defn}[Language] \label{def_language}
+		A (formal) language $L$ over an alphabet $\Sigma$ is a subset of $\Sigma^*$, that is, a set of words over that alphabet.
+	\end{defn}
+	
+	In this section, we explore \emph{Regular Language}[\ref{def_RL}], \emph{Context-free Language}[\ref{def_cfl}], \emph{Decidable Language}[\ref{def_decidable_language}], and \emph{Recognizable Language}[\ref{def_recognizable_language}] and the mechanisms, or machines, that are related those languages.
+	
 	\section{Regular Language}
-		\subsection{Deterministic Finite State Automaton}
-			\begin{defn}[Deterministic Finite Automaton(DFA)] \label{def_DFA}
-				A DFA $M$ is a 5-tuple, $(Q,\Sigma,\delta,q_0,F)$, consisting of:
-				\begin{itemize}
-					\item Finite set of states $Q$;
-					\item Finite set of input symbols called the alphabet $\Sigma$;
-					\item Transition function $\delta:Q \times \Sigma \rightarrow Q$;
-					\item Initial state $q_0 \in Q$;
-					\item Set of accepting states $F \subseteq Q$.
-				\end{itemize}
-			\end{defn}
-		
-		\subsection{Nondeterministic Finite Automaton}
-			\begin{defn}[Nondeterministic Finite Automaton(NFA)] \label{def_NFA}
-				A NFA $M$ is a 5-tuple, $(Q,\Sigma,\Delta,q_0,F)$, consisting of:
-				\begin{itemize}
-					\item Finite set of states $Q$;
-					\item Finite set of input symbols called the alphabet $\Sigma$;
-					\item Transition function $\Delta: Q \times \Sigma \rightarrow P(Q)$ where $P$ is the powerset function;
-					\item Initial state $q_0 \in Q$;
-					\item Set of accepting states $F \subseteq Q$.
-				\end{itemize}
-			\end{defn}
-		
 		\subsection{Regular Expression}
+			If you have studied regular expression using some programming languages, then you might have easier time understanding the following definition. The regular expression used in real life is much more powerful than the regular expression mentioned below, as more special characters and syntaxes are allowed. However the following regular expression consists of the "basics" of regular expression, and is used in language theories as the regular expression:
 			\begin{defn}[Regular Expression(RE)] \label{def_RE}
 				Given a finite alphabet $\Sigma$, the following constants are defined as regular expressions:
 				\begin{itemize}
@@ -45,17 +30,77 @@
 			\end{defn}
 			
 			\begin{defn}[Regular Languages] \label{def_RL}
-				
+				\emph{Regular Languages} are languages that can be represented with regular expressions.
 			\end{defn}
 			
 			\begin{thm}[Pumping Lemma for Regular Languages] \label{thm_pumping_lemma_RL}
-				
+				Let $L$ be a regular language. Then, there exists an integer $p \ge 1$, depending only on $L$, such that every string $w \in L$ of length at least $p$, called the \emph{pumping length}, can be written as $w=xyz$(i.e. $w$ can be divided into three substrings), satisfying the following conditions:
+				\begin{itemize}
+					\item $|y| \ge 1$
+					\item $|xy| \le p$
+					\item $\forall n \ge 0, xy^nz \in L$
+				\end{itemize}
+			\end{thm}
+		
+		\subsection{Deterministic Finite State Automaton}
+			\begin{defn}[Deterministic Finite Automaton(DFA)] \label{def_DFA} %todo:computation
+				A DFA $M$ is a 5-tuple, $(Q,\Sigma,\delta,q_0,F)$, consisting of:
+				\begin{itemize}
+					\item Finite set of states $Q$;
+					\item Finite set of input symbols called the alphabet $\Sigma$;
+					\item Transition function $\delta:Q \times \Sigma \rightarrow Q$;
+					\item Initial state $q_0 \in Q$;
+					\item Set of accepting states $F \subseteq Q$.
+				\end{itemize}
+			\end{defn}
+		
+			\begin{thm} \label{thm_DFA_RL}
+				DFAs recognize exactly the set of regular languages.
+			\end{thm}
+		
+		\subsection{Nondeterministic Finite Automaton}
+			\begin{defn}[Nondeterministic Finite Automaton(NFA)] \label{def_NFA} %todo:computation
+				A NFA $M$ is a 5-tuple, $(Q,\Sigma,\Delta,q_0,F)$, consisting of:
+				\begin{itemize}
+					\item Finite set of states $Q$;
+					\item Finite set of input symbols called the alphabet $\Sigma$;
+					\item Transition function $\Delta: Q \times \Sigma \rightarrow P(Q)$ where $P$ is the powerset function;
+					\item Initial state $q_0 \in Q$;
+					\item Set of accepting states $F \subseteq Q$.
+				\end{itemize}
+			\end{defn}
+			
+			\begin{thm} \label{thm_NFA_RL}
+				NFAs recognize exactly the set of regular languages.
 			\end{thm}
 	
 	\section{Context-Free Language}
+		\subsection{Context-free Grammar}
+			\begin{defn}[Context-Free Grammar(CFG)] \label{def_cfl}
+				A CFL is a 4-tuple $(V,\Sigma,R,S)$ where:
+				\begin{itemize}
+					\item $V$ is the set of nonterminal variables;
+					\item $\Sigma$ is the set of terminal characters;
+					\item $R$ is the set of rules, where each rules are in the form of $A\rightarrow w, A\in V, w\in (\Sigma \cup V)^*$
+					\item $S$ is the starting variable.
+				\end{itemize}
+			\end{defn}
+			
+			\begin{defn}[Context-free Languages] \label{def_CFL}
+				\emph{Context-free Languages} are languages that can be represented with context-free grammars.
+			\end{defn}
+			
+			\begin{thm}[Pumping Lemma for Context-free Languages] \label{thm_pumping_lemma_CFL}
+				Let $L$ be a regular language. Then, there exists an integer $p \ge 1$, depending only on $L$, such that every string $s \in L$ of length at least $p$, called the \emph{pumping length}, can be written as $s=uvwxy$(i.e. $w$ can be divided into five substrings), satisfying the following conditions:
+				\begin{itemize}
+					\item $|vx| \ge 1$
+					\item $|vwx| \le p$
+					\item $\forall n \ge 0, uv^nwx^ny \in L$
+				\end{itemize}
+			\end{thm}
 		\subsection{Push-down Automaton}
 			Similar to Finite Automatons, Push-down automatons have deterministic version and nondeterministic version; Only the nondeterministic version is shown here as similar method can be used to convert it into a deterministic version.
-			\begin{defn}[Push-down Automaton(PDA)] \label{def_pda}
+			\begin{defn}[Push-down Automaton(PDA)] \label{def_pda} %todo:computation
 				A PDA is a 6-tuple $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ where:
 				\begin{itemize}
 					\item $Q$ is the set of states;
@@ -68,32 +113,14 @@
 				$\Delta$ is often written as a transition function of $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \times \rightarrow P(Q \times \Gamma_\epsilon)$ where $P$ is the powerset function.\\
 				Sometimes the last element of the relation is extended to $\Gamma_\epsilon^*$; in that case, when inserting into the stack, insert the last element first.
 			\end{defn}
-		
-		\subsection{Context-free Grammar}
-			\begin{defn}[Context-Free Grammar(CFG)] \label{def_cfl}
-				A CFL is a 4-tuple $(V,\Sigma,R,S)$ where:
-				\begin{itemize}
-					\item $V$ is the set of nonterminal variables;
-					\item $\Sigma$ is the set of terminal characters;
-					\item $R$ is the set of rules, where each rules are in the form of $A\rightarrow w, A\in V, w\in (\Sigma \cup V)^*$
-					\item $S$ is the starting variable.
-				\end{itemize}
-			\end{defn}
-
-			\begin{defn}[Context-free Languages] \label{def_CFL}
-				
-			\end{defn}
-
-			\begin{thm}[Pumping Lemma for Context-free Languages] \label{thm_pumping_lemma_CFL}
-				
-			\end{thm}
-		
-			\begin{thm} \label{thm_cfl_pda_equivalence}
-				Every CFL can be represented into an equivalent PDA.
+			
+			\begin{thm} \label{thm_PDA_CFL}
+				PDAs recognize exactly the set of CFLs.
 			\end{thm}
 		
 			\begin{proof}
-				Suppose a CFL $(V_0,\Sigma_0,R_0,S_0)$ is given.\\
+				The proof is quite tedious; so only a partial proof is given: we are going to convert any given CFG into PDA.
+				Suppose a CFG $(V_0,\Sigma_0,R_0,S_0)$ is given.\\
 				We can construct a new PDA $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ from the given CFL s.t.
 				\begin{itemize}
 					\item $Q=\{Q_S,Q_M,Q_F\}$
@@ -113,7 +140,7 @@
 			\end{proof}
 	
 	\section{Turing Machines}
-		\begin{defn}[Turing Machine] \label{def_tm}
+		\begin{defn}[Turing Machine] \label{def_TM} %todo:computation
 			A TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
 			\begin{itemize}
 				\item $Q$ is the set of states;
@@ -135,10 +162,18 @@
 		\end{thesis}
 		
 		\section{Decidable and Recognizable Languages}
+		\begin{defn}[Decidable Languages] \label{def_decidable_language}
+			\emph{Decidable Languages} are languages that can be represented with decidable Turing machines; that is, the set of Turing machines that always accepts accepting words and rejects others.
+		\end{defn}
+	
+		\begin{defn}[Recognizable Languages] \label{def_recognizable_language}
+			\emph{Recognizable Languages} are languages that can be represented with recognizable Turing machines; that is, the set of Turing machines that always accepts accepting words.
+		\end{defn}
 		
+		Decidable and Recognizable Turing Machines seem similar; however recognizable machines does not have to reject a non-accepting word; it may instead loop infinitely.
 		
 		\section{Equivalences to Turing Machine}
-			The followings can be shown to be equivalent to a Turing machine; however no proofs are given since they are usually long and arduous.
+			The followings can be shown to be computationally equivalent to a Turing machine; however no proofs are given since they are usually long and arduous.
 			\subsection{Push-down Automaton with Two Stacks}
 			
 			\subsection{Variations on the Turing Machine} \label{var_TM}
