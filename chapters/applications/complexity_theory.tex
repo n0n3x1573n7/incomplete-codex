@@ -1,7 +1,7 @@
 %\documentclass{report}
 
 \begin{document}
-    \section{Turing Machine and Complexity}
+    \section{Complexity}
         (TODO: Write something about asymptotic notation here)
         
         \begin{defn}[Asymptotic notation] \label{def_bigo}
@@ -14,16 +14,22 @@
             \end{itemize} 
         \end{defn}
         
-    \section {Complexity Classes}
-        \begin{defn}[P] \label{def_comp_p}
-        $\mathbf{P}$ is the set of boolean function computable in time $O(n^c)$ for some constant $c>0$.
+        \begin{defn}[P, NP, EXP] \label{def_comp_p}
+            \begin{itemize}
+                \item []
+                \item $\mathbf{P}$ is the set of boolean functions computable with a deterministic Turing machine in time $O(n^c)$ for some constant $c>0$.
+                \item $\mathbf{NP}$ is the set of boolean functions computable with a non-deterministic Turing machine in time $O(n^c)$ for some constant $c>0$.
+                \item $\mathbf{EXP}$ is the set of boolean functions computable with a deterministic Turing machine in time $O(2^{n^c})$ for some constant $c>0$.
+            \end{itemize}
         \end{defn}
         
-        (TODO: Non-deterministic Turing Machine)
+        \begin{thm} \label{thm_pnpexp}
+            $\mathbf{P} \subseteq \mathbf{NP} \subseteq \mathbf{EXP}$.
+        \end{thm}
         
-        (TODO: NP)
-        
-        (TODO: EXP)
+        \begin{proof}
+            .
+        \end{proof}
     
     \section {Reduction}
         Is there a polynomial-time algorithm for a given decision problem? Computer scientists are interested in this question because if there is one, it is usually a small-degree polynomial like $O(n^2)$ or $O(n^5)$. Some problems have a special property that if the problem has a polynomial-time algorithm, then several other problems do.
@@ -75,10 +81,29 @@
         \end{defn}
         
         \begin{thm} \label{thm_npc_examples}
-            All problems in \ref{def_npc_examples} are NP-complete.
+            All problems in [\ref{def_npc_examples}] are NP-complete.
         \end{thm}
         
         \begin{proof}
-            123
+        Clearly all problems described are NP. We will only show that they are all NP-hard.
+        
+        If we can reduce SAT to 3-SAT in polynomial time, then [\ref{thm_leqp_transitive}] will show that 3-SAT is NP-hard. To do this, note that \begin{itemize}
+            \item $x$ is equivalent to $x \vee x \vee x$,
+            \item $x_1 \vee x_2$ is equivalent to $x_1 \vee x_2 \vee x_2$,
+            \item $x_1 \vee \cdots \vee x_n$ is equivalent to $(x_1 \vee x_2 \vee y_1) \wedge (\neg y_1 \vee x_3 \vee y_2) \wedge \cdots (\neg y_{n-4} \vee x_{n-2} \vee y_{n-3}) \wedge (\neg y_{n-3} \vee x_{n-1} \vee x_{n})$, where $n \geq 4$ and $y_1,\cdots,y_{n-3}$ are new variables unused in the original SAT formula.
+        \end{itemize}
+        
+        Next, we reduce 3-SAT to a clique problem. (TODO)
+        
+        $G$ has a clique of size $k$ iff $\bar{G}$ has an independent set of size $k$. This shows that clique and independent set are polynomial-time reducible to each other.
+        
+        $G$ has an independent set of size $k$ iff $G$ has a vertex cover of size $|V(G)| - k$, by taking the complement of the independent set. Therefore independent set and vertex cover are polynomial-time reducible to each other.
+        
+        We reduce 3-SAT to a chromatic number problem. (TODO)
+        
+        We reduce 3-SAT to a subset sum problem. (TODO)
+        
+        Finally, we reduce 3-SAT to an integer programming problem. Given a 3-SAT formula with $n$ variables, set $0 \leq x_i \leq 1$ for $i=1,\cdots,n$, and convert the clause $(x_a \vee x_b \vee x_c)$ into $x_a + x_b + x_c \geq 1$. If the clause contains $\neg x_a$, convert it to $1-x_a$. This system of inequalities can easily be converted to the matrix form.
+        
         \end{proof}
 \end{document}

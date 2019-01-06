@@ -7,7 +7,7 @@
     \section{Kuratowski Theorem}
         In this section we prove [\ref{thm_kuratowski}].
         
-        (TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html http://www.cs.rpi.edu/~goldberg/14-GT/19-kurat.pdf and my lecture note)
+        %(TODO: complete this, based on http://www.cs.xu.edu/~otero/math330/kuratowski.html http://www.cs.rpi.edu/~goldberg/14-GT/19-kurat.pdf and my lecture note)
     
     \subsection{The Preparation}
     
@@ -36,24 +36,26 @@
         \begin{proof}
             Let $e=xy$ and suppose $G/e$ is not 3-connected. Then $G/e$ has a cut set $\{v, z\}$. Since $G$ is 3-connected, this set has a vertex, say $v$, which is the new vertex made by contracting $e$. That is, $\{x, y, z\}$ is a cut set of $G$.
             
-            Suppose that for every $e$, $G/e$ is not 3-connected, so to every $e$ corresponds a vertex $z_e$. Among all edges, take $e=xy$ and $z_e$ such that $G-x-y-z$ has the largest component $C$, and denote the other component as $D$. Since $G$ is 3-connected, each of $x,y,z$ has neighbors in $C$ and in $D$. Take a neighbor $u$ of $z$ in $D$ and let $v=z_{zu}$.
+            Suppose that for every $e$, $G/e$ is not 3-connected, so to every $e$ corresponds a vertex $z_e$. Among all edges, take $e=xy$ and $z_e$ such that $G-x-y-z$ has the largest component $C$, and denote another component as $D$. Each of $x,y,z$ has neighbors in $C$ and in $D$ since $G$ is 3-connected. Take a neighbor $u$ of $z$ in $D$ and let $v=z_{zu}$.
             
-            If $v \in V(C) \cup \{x,y\}$, then $G-z-v$ is disconnected. Otherwise, $G-z-u-v$ has a component larger than $C$. Either way brings contradiction.
+            If $v \in V(C) \cup \{x,y\}$, then $G-z-v$ is disconnected, contradicting the connectivity of $G$. Otherwise, $G-z-u-v$ has a component that contains all vertices in $C$ and $x$ and $y$ in addition, contradicting the choice of $C$.
             
             (TODO: picture)
         \end{proof}
         
         Then, we show the connection between minors and topological minors.
         
-        \begin{lemma} \label{lem_minor}
+        \begin{lemma} \label{lem_minor_K33}
             $K_{3,3}$ is a topological minor of $G$ iff $K_{3,3}$ is a minor of $G$.
         \end{lemma}
         
         \begin{proof}
-            .
+            A topological minor of $G$ is also a minor of $G$. We just need to prove the other direction of the lemma.
+            
+            
         \end{proof}
         
-        \begin{lemma} \label{lem_minor2}
+        \begin{lemma} \label{lem_minor_K5}
             If $K_5$ is a minor of $G$, then $K_{3,3}$ or $K_5$ is a topological minor of $G$.
         \end{lemma}
         
