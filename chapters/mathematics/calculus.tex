@@ -1,5 +1,91 @@
-\documentclass{report}
+%\documentclass{report}
 
 \begin{document}
+
+    \section{Limits}
+        You may have seen an equation of the form $\lim_{x \to a}f(x) = L$. Intuitively, it means that as $x$ \textit{approaches} $a$, $f(x)$ goes \textit{arbitrarily close} to $L$. But no, this ``intuition'' is not how mathematics works. What do you mean by ``approaches?'' What do you mean by ``arbitrarily close?'' How are you going to prove any theorem with this ``definition?''
+    
+        Let's give a precise definition of a limit. $f(x)$ goes arbitrarily close to $L$, but how close does that mean? It can go closer than any positive number. That means for any $\epsilon > 0$, $f(x)$ can go closer to $L$ than $\epsilon$. That is, $|f(x) - L| < \epsilon$.
+    
+        Next, $x$ approaches $a$, but how close does it approach $a$? How much should $x$ approach $a$ so that $f(x)$ goes arbitrarily close to $L$, in other words, $|f(x) - L| < \epsilon$? Well, close enough. When $x$ is closer to $a$ than some threshold, say $\delta$, we would have $|f(x) - L| < \epsilon$. But it doesn't need to exactly be $a$. Expressing this mathematically, we get $0 < |x-a| < \delta$.
+    
+        Combine those two inequalities, and presto! We have this definition of a limit.
+    
+        \begin{defn}[Limit at $a$] \label{def_lim1}
+            Let $f$ be a function defined on some open interval that contains $a$, except possibly at $a$ itself. Then we say $\displaystyle\lim_{x \to a} f(x) = L$ if for every number $\epsilon > 0$ there is a number $\delta > 0$ such that $0 < |x-a| < \delta$ implies $|f(x) - L | < \epsilon$.
+        \end{defn}
+    
+        Similarly, we can define left-hand limits, right-hand limits, and limits at infinity.
+    
+        \begin{defn} \label{def_lim2}
+            .
+        \end{defn}
+    
+        This allows us to prove the theorems involving limits.
+    
+        \begin{thm} \label{def_lim_add}
+            .
+        \end{thm}
+    
+        \begin{defn}[Continuous function] \label{def_continuous_R}
+            .
+        \end{defn}
+    
+    \section{Differentiation}
+    
+        \begin{defn}[Derivative] \label{def_derivative}
+            The \emph{derivative of a function $f$ at $a$}, denoted $f'(a)$, is $f'(a)=\displaystyle\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}$, if this limit exists. $f$ is \emph{differentiable at $a$} if $f'(a)$ exists.
+        \end{defn}
+        
+        \begin{thm} \label{thm_diff_cont}
+            If $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+        \end{thm}
+        
+        \begin{proof}
+            .
+        \end{proof}
+    
+    \section{Derivative Formulae}
+    
+        \begin{thm} \label{thm_derivative}
+            Let $f$ and $g$ be differentiable functions and $c$ be a constant. \begin{enumerate}
+                \item $c' = 0$.
+                \item $(cf)' = c(f')$.
+                \item $(f+g)' = f'+g'$.
+                \item $(f-g)' = f'-g'$.
+                \item $(fg)' = fg'+gf'$.
+                \item $(\frac{f}{g})' = \frac{gf'-fg'}{g^2}$, where $g(x) \neq 0$.
+                \item $(x^c)' = cx^{c-1}$, where $c$ is a rational number. (It also holds for real numbers, but we won't prove it here.)
+            \end{enumerate}
+        \end{thm}
+        
+        \begin{proof}
+            .
+        \end{proof}
+        
+        \begin{thm} \label{thm_derivative_trig}
+            \begin{enumerate} \item[]
+                \item $(\sin x)' = \cos x$.
+                \item $(\cos x)' = -\sin x$.
+                \item $(\tan x)' = \sec^2 x$.
+                \item $(\csc x)' = -\csc x \cot x$.
+                \item $(\sec x)' = \sec x \tan x$.
+                \item $(\cot x)' = -\csc^2 x$.
+            \end{enumerate}
+        \end{thm}
+        
+        \begin{proof}
+            .
+        \end{proof}
+        
+        \begin{thm}[Chain rule] \label{thm_chain_rule}
+            If $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$, then $F = f \circ g$ defined by $F(x) = f(g(x))$ is differentiable at $x$ and $F'(x) = f'(g(x))g'(x)$.
+        \end{thm}
+        
+        \begin{proof}
+            .
+        \end{proof}
+    
+    \section{Integration}
 
 \end{document}
