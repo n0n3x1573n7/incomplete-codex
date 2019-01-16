@@ -43,7 +43,7 @@
 			\end{thm}
 		
 		\subsection{Deterministic Finite State Automaton}
-			\begin{defn}[Deterministic Finite Automaton(DFA)] \label{def_DFA} %todo:computation
+			\begin{defn}[Deterministic Finite Automaton(DFA)] \label{def_DFA}
 				A DFA $M$ is a 5-tuple, $(Q,\Sigma,\delta,q_0,F)$, consisting of:
 				\begin{itemize}
 					\item Finite set of states $Q$;
@@ -52,6 +52,13 @@
 					\item Initial state $q_0 \in Q$;
 					\item Set of accepting states $F \subseteq Q$.
 				\end{itemize}
+				
+				Let $w=a_1a_2\dots a_n$ be a string over the alphabet $\Sigma$. DFA $M$ accepts the string $w$ if a sequence of states, $r_0,r_1,\dots,r_n \in Q$ exists with the following conditions:
+				\begin{itemize}
+					\item $r_0=q_0$
+					\item $r_{i+1}=\delta (r_i,a_{i+1}), i=0,\dots,n-1$
+					\item $r_n \in F$
+				\end{itemize}
 			\end{defn}
 		
 			\begin{thm} \label{thm_DFA_RL}
@@ -59,7 +66,7 @@
 			\end{thm}
 		
 		\subsection{Nondeterministic Finite Automaton}
-			\begin{defn}[Nondeterministic Finite Automaton(NFA)] \label{def_NFA} %todo:computation
+			\begin{defn}[Nondeterministic Finite Automaton(NFA)] \label{def_NFA}
 				A NFA $M$ is a 5-tuple, $(Q,\Sigma,\Delta,q_0,F)$, consisting of:
 				\begin{itemize}
 					\item Finite set of states $Q$;
@@ -67,6 +74,14 @@
 					\item Transition function $\Delta: Q \times \Sigma \rightarrow P(Q)$ where $P$ is the powerset function;
 					\item Initial state $q_0 \in Q$;
 					\item Set of accepting states $F \subseteq Q$.
+				\end{itemize}
+				Sometimes the transition function $\Delta$ is represented as the transition relation, $\Delta \subseteq Q \times \Sigma \times Q$.
+				
+				Let $w=a_1a_2\dots a_m$ be a string over the alphabet $\Sigma$, where $a_i \in \Sigma_\epsilon$. NFA $M$ accepts the string $w$ if a sequence of states, $r_0,r_1,\dots,r_n \in Q$ exists with the following conditions:
+				\begin{itemize}
+					\item $r_0=q_0$
+					\item $r_{i+1}\in \Delta (r_i,a_{i+1})$, or in relation form, $(r_i,a_{i+1},r_{i+1}) \in \Delta$, $i=0,\dots,n-1$
+					\item $r_n \in F$
 				\end{itemize}
 			\end{defn}
 			
@@ -100,7 +115,7 @@
 			\end{thm}
 		\subsection{Push-down Automaton}
 			Similar to Finite Automatons, Push-down automatons have deterministic version and nondeterministic version; Only the nondeterministic version is shown here as similar method can be used to convert it into a deterministic version.
-			\begin{defn}[Push-down Automaton(PDA)] \label{def_pda} %todo:computation
+			\begin{defn}[Push-down Automaton(PDA)] \label{def_pda}
 				A PDA is a 6-tuple $(Q,\Sigma,\Gamma,q_0,\Delta,F)$ where:
 				\begin{itemize}
 					\item $Q$ is the set of states;
@@ -112,6 +127,13 @@
 				\end{itemize}
 				$\Delta$ is often written as a transition function of $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \times \rightarrow P(Q \times \Gamma_\epsilon)$ where $P$ is the powerset function.\\
 				Sometimes the last element of the relation is extended to $\Gamma_\epsilon^*$; in that case, when inserting into the stack, insert the last element first.
+				Let $w=w_1w_2\dots w_m$ be a string over the alphabet $\Sigma$, where $w_i \in \Sigma_\epsilon$. NFA $M$ accepts the string $w$ if a sequence of states, $r_0,r_1,\dots,r_n \in Q$, and a sequence of stack strings $s_0,s_1,\dots,s_n \in \Gamma^*$ exists with the following conditions:
+				\begin{itemize}
+					\item $r_0=q_0$, $s_0=\epsilon$
+					\item $(r_i,w_{i+1},a,r_{i+1},b)\in \Delta$, where $s_i=at$ and $s_{i+1}=bt$ for some $a,b \in \Gamma_\epsilon$, and $t \in \Gamma^*$.
+					\subitem If $b=\epsilon$, then it is a pop-operation. If $a=\epsilon$, then it is a push-operation.
+					\item $r_m \in F$, $s_m=\epsilon$
+				\end{itemize}
 			\end{defn}
 			
 			\begin{thm} \label{thm_PDA_CFL}
@@ -140,17 +162,18 @@
 			\end{proof}
 	
 	\section{Turing Machines}
-		\begin{defn}[Turing Machine] \label{def_TM} %todo:computation
+		\begin{defn}[Turing Machine] \label{def_TM}
 			A TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
 			\begin{itemize}
 				\item $Q$ is the set of states;
-				\item $\Sigma$ is the set of input alphabet;
 				\item $\Gamma$ is the set of tape alphabet;
-				\item $\delta$ is the transition function of $Q \times \gamma \rightarrow Q \times \gamma \times \{L,R\}$
-				\item $q_0$ is the starting state
-				\item $q_{accept}$ is the accepting state
-				\item $q_{reject}$ is the rejecting state distinct from $q_{accept}$
+				\item $b \in \Gamma$ is the blank symbol, the only symbol allowed to occur infinitely often at any step of the computation;
+				\item $\Sigma \subseteq \Gamma \textbackslash \{b\}$ is the set of input symbols, that is, the set of symbols allowed to appear in the initial tape contents;
+				\item $q_0 \in Q$ is the starting state;
+				\item $F \subseteq Q$ is the set of accepting states, and the initial tape contents is said to be accepted by $M$ if it eventually halts in a state from $F$;
+				\item $\delta$ is a partial function called the transition function of $(Q \textbackslash F) \times \gamma \rightarrow Q \times \gamma \times \{L,R\}$, where $L$ and $R$ signifies left and right shifts of the tape. If $\delta$ is undefined on the current state and the current tape symbol, then the machine halts.
 			\end{itemize}
+			A Turing machine 
 		\end{defn}
 		The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. Some include $N$ in the final output of the transition function. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state. Some of the many variations on the Turing machine are mentioned in \ref{var_TM}.
 		
@@ -174,10 +197,28 @@
 		
 		\section{Equivalences to Turing Machine}
 			The followings can be shown to be computationally equivalent to a Turing machine; however no proofs are given since they are usually long and arduous.
+
 			\subsection{Push-down Automaton with Two Stacks}
+			The simplest version that is equivalent to a Turing Machine would be a PDA which has two stacks. The two stacks can simulate the tape of the Turing machine by pushing and popping.
 			
 			\subsection{Variations on the Turing Machine} \label{var_TM}
-			
+			The following variations on the Turing machine are equivalent to the original Turing machine:
+			\begin{itemize}
+				\item Variations on the Definition
+				\begin{itemize}
+					\item Allowing $N$, "no shift", in the movement rules;
+					\item Having a single accepting state, say $q_{accept}$ and a single rejecting state, say $q_{reject}$, and forcing the transition function $\delta$ to be a function. In this variant, the machine accepts iff it ends in $q_{accept}$, and rejects iff it ends in $q_{reject}$.
+				\end{itemize}
+				\item Variations on the Form of the Machine
+				\begin{itemize}
+					\item Tape is infinite only in one direction;
+					\item Tape is infinite in both directions;
+					\item Tape is 2-dimensional;
+					\item There exists multiple tapes that the machine can access concurrently.
+				\end{itemize}
+			\end{itemize}
+			There are many more variations other than these.
+
 			\subsection{General Recursive Functions}
 				\begin{defn}[General Recursive Functions] \label{def_general_recursive_function}
 					General Recursive Functions, otherwise known as $\mu$-recursive functions, is a set of functions $\forall n \in \mathbb{N}, f:\mathbb{N}^n \rightarrow \mathbb{N}$ that includes the three "Initial", or "Basic" functions, and closed under three operators:
