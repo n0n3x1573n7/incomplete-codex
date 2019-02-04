@@ -97,4 +97,16 @@
             If $G$ is 3-connected, the conclusion immediately follows from [\ref{lem_convex_embed}].
         \end{proof}
     
+    \section{What's Wrong With Kempe's Proof?}
+        
+        Kempe argued that switching $V_{13}$ and $V_{52}$ allows $v$ to be colored by 1, but consider the following graph:
+        
+        (TODO: counterexample picture)
+        
+        Both chains cannot be switched because then the vertices $a$ and $b$ would have the same color!
+        
+        In this graph, such a problem could be avoided by deliberately changing the order of vertices to be selected for induction. However, there are graphs on which such a workaround is not possible. The following is the smallest counterexample possible, and is called the Soifer graph:
+        
+        (TODO: Soifer graph)
+    
 \end{document}
