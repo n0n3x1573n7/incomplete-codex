@@ -133,5 +133,19 @@
         \end{proof}
         
         Fun fact: In 1879, the Kempe chain method was used to ``prove" the four-color theorem by Alfred Kempe. No one noticed that this ``proof" had an error until eleven years later when Percy Heawood found the error. What we saw above is the modification of the incorrect proof to prove the weaker theorem. The correct proof of four-color theorem was completed in 1976 by Kenneth Appel and Wolfgang Haken.
+        
+        Here is his ``proof." Argue similarly as above with induction. If $deg_G(v) = 4$ and all 4 colors are used, then apply the Kempe chain method. Now suppose $deg_G(v) = 5$ and all 4 colors are used. Then one color is used exactly twice.
+        
+        There are two cases: the two neighbors with that color are next to each other in clockwise order, or they are not. The first case is easy, just use the Kempe chain method. The second case is where the fun starts.
+        
+        (TODO: picture. u5-u4-u1-u2-u3 clockwise; u1 and u5 has the same color. Cetner is noted v.)
+        
+        WLOG, $u_k$ has color $k$. For convenience, color 5 is the same as color 1.
+        
+        If $V_{42}$ does not contain $u_2$, then switch the colors of the vertices in $V_{25}$ and color $v$ by 4. Otherwise, if $V_{43}$ does not contain $u_3$, then switch and color $v$ by 4. Otherwise, $V_{13}$ does not contain $u_3$ and $V_{52}$ does not contain $u_2$. Switch each chain and color $v$ by 1.
+        
+        (TODO: second case picture.)
+        
+        Can you find a critical error in this argument? If you want to know, refer to the appendix.
     
 \end{document}
