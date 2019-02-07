@@ -2,6 +2,52 @@
 
 \begin{document}
     \section{Basic Graph Definitions}
+        
+        \begin{defn}[Graph] \label{def_graph}
+            A \emph{graph} $G$ is represented by a pair of two sets $(V(G), E(G))$, and a relation $\delta \subseteq V(G) \times E(G)$ such that for each $e \in E(G)$, there are exactly one or two $v \in V(G)$ such that $(v,e) \in \delta$. An element of $V(G)$ is a \emph{vertex}, and an element of $E(G)$ is an \emph{edge}. If $(v,e) \in \delta$, we say $v$ is \emph{incident} with $e$, $v$ is an \emph{end} of $e$, and denote $v \sim _G e$.
+        \end{defn}
+        
+        From now on, we will skip $(G)$ and just write $V$ and $E$ if the context is obvious. Similarly we will skip $_G$ and just write $\sim$. Also, for simple graphs, we may write an edge as $vw$ where $v$ and $w$ are the ends of the edge.
+        
+        \begin{defn}[Graph Terminologies] \label{def_graph_terms} \begin{itemize}
+            \item[]
+            \item A vertex $v$ is \emph{adjacent} to another vertex $w$ if there is an edge $e$ such that $v \sim e$ and $w \sim e$. We also say that $v$ is a \emph{neighbor} of $w$.
+            \item A \emph{loop} is an edge with exactly one end.
+            \item Two edges $e_1$ and $e_2$ are \emph{parallel} if $e_1 \neq e_2$ and the set of ends of $e_1$ equals that of $e_2$.
+            \item A graph $G$ is \emph{simple} if it has no loops or parallel edges.
+            \item Two graphs $G$ and $H$ are \emph{isomorphic} if there are two bijections $f_V : V(G) \to V(H)$ and $f_E : E(G) \to E(H)$ such that for all $v \in V(G)$ and $e \in E(G)$, $v \sim_G e$ iff $f_V(v) \sim_H f_E(e)$.
+        \end{itemize} \end{defn}
+        
+        Note that some texts might use a different definition of graphs. One common definition is that $E(G)$ is a set of two-element subsets of $V(G)$. With this definition, our definition of a simple graph is just called a graph, and our definition of a graph is called a multigraph.
+        
+        \begin{defn}[Subgraph] \label{def_subgraph} \begin{itemize}
+            \item[]
+            \item A graph $G$ is a \emph{subgraph} of a graph $H$ if $V(G) \subseteq V(H)$, $E(G) \subseteq E(H)$, with the same incidence relation, i.e. the set of ends of any edge $e$ in $G$ equals that of $e$ in $H$.
+            \item For $e \in E$, $G \backslash e$ is $(V(G), E(G) \backslash \{e\})$ with the same incidence relation.
+            \item For $v \in V$, $G \backslash v$ is $(V(G) \backslash \{v\}, E')$, where $E'$ is the set of edges in $G$ not incident with $v$, with the same incidence relation.
+            \item A subgraph $H$ of $G$ is \emph{spanning} if $V(H) = V(G)$.
+            \item A subgraph $H$ of $G$ is \emph{induced} if $E(H)$ equals the set of edges in $G$ whose set of ends is contained in $V(H)$. We say $H$ is \emph{induced by} $V(H)$.
+            \item For $X \subseteq V$, $G[X]$ is a subgraph of $G$ induced by $X$.
+        \end{itemize} \end{defn}
+        
+        \begin{defn}[Examples] \label{def_graph_example} \begin{itemize}
+            \item[]
+            \item A \emph{complete graph} with $n$ vertices, denoted $K_n$, is a simple graph in which for any pair of different vertices there is an edge connecting them.
+            \item A \emph{cycle graph} with $n$ vertices, denoted $C_n$, is a simple graph whose edge set is $\{v_1v_2, \cdots, v_{n-1}v_n, v_nv_1\}$, where $V = \{v_1, \cdots, v_n\}$.
+            \item A graph $G$ is \emph{bipartite} if $V$ can be partitioned into non-empty subsets $A$ and $B$ such that no edges connect two vertices in $A$ or two vertices in $B$.
+            \item A \emph{complete bipartite graph} with $n+m$ vertices, denoted $K_{n,m}$, is a simple bipartite graph with $|A|=n$, $|B|=m$ in which for any vertex in $A$ and in $B$, there is an edge connecting them.
+            \item For a simple graph $G$, the \emph{complement} $\bar{G}$ of $G$ is a simple graph on $V(G)$ such that any two different vertices $v$ and $w$ are adjacent in $G$ iff they are not adjacent in $\bar{G}$.
+        \end{itemize} \end{defn}
+        
+        \begin{defn}[Walk, Path, Cycle, etc.] \label{def_graph_path} \begin{itemize}
+            \item[]
+            \item A \emph{walk} from $v \in V$ and $w \in V$ is an alternating sequence $v_0 e_1 v_1 e_2 \cdots e_k v_k$ of vertices and edges such that $v_0 = v$, $v_k = w$, and the set of ends of $e_i$ equals $\{v_{i-1}, v_i\}$. $k$ is the \emph{length} of the walk.
+            \item A \emph{trail} is a walk with distinct edges.
+            \item A \emph{closed walk} is a walk with $v=w$ and $k>0$.
+            \item A \emph{circuit} is a trail that is also a closed walk.
+            \item A \emph{path} is a walk with distinct vertices.
+            \item A \emph{cycle} is a circuit with distinct $\{v_0, \cdots, v_{k-1}\}$.
+        \end{itemize} \end{defn}
     
     \section{Degrees}
     
@@ -101,7 +147,7 @@
     
     \section{Coloring}
         \begin{defn}[Coloring] \label{def_coloring}
-            A \emph{$k$-coloring} of a graph $G$ is a function $c: V(G) \rightarrow \{1,2,\cdots,k\}$ such that if $u$ and $v$ are adjacent vertices, then $c(u) \neq c(v)$. $G$ is \emph{$k$-colorable} if there is a $k$-coloring of $G$. The \emph{chromatic number} $\chi(G)$ of $G$ is the smallest integer $k$ such that $G$ is $k$-colorable.
+            A \emph{$k$-coloring} of a graph $G$ is a function $c: V(G) \to \{1,2,\cdots,k\}$ such that if $u$ and $v$ are adjacent vertices, then $c(u) \neq c(v)$. $G$ is \emph{$k$-colorable} if there is a $k$-coloring of $G$. The \emph{chromatic number} $\chi(G)$ of $G$ is the smallest integer $k$ such that $G$ is $k$-colorable.
         \end{defn}
         
         Perhaps the most famous theorem about graph coloring is the four-color theorem. (TODO: write something) 
