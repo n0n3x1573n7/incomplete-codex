@@ -163,7 +163,13 @@
 	
 	\section{Turing Machines}
 		\begin{defn}[Turing Machine] \label{def_TM}
-			A TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
+			A Turing machine consists of:
+			\begin{itemize}
+				\item A \emph{tape} divided into consecutive cells. Each cell contains a symbol from the tape alphabet, which contains a blank symbol and one or more other symbols. The tape is assumed to be infinitely long to the left; cells that have not been written before are assumed to be filled with the blank symbol.
+				\item A \emph{head} which can read a single symbol on the tape at a time, and is able to move one(and only one at once) cell to the right or the left.
+				\item A \emph{state register} which stores the state of the TM, starting from the starting state(defined below) and following the transition function's rule(also defined below).
+			\end{itemize}
+			Formally, a TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
 			\begin{itemize}
 				\item $Q$ is the set of states;
 				\item $\Gamma$ is the set of tape alphabet;
@@ -171,11 +177,11 @@
 				\item $\Sigma \subseteq \Gamma \textbackslash \{b\}$ is the set of input symbols, that is, the set of symbols allowed to appear in the initial tape contents;
 				\item $q_0 \in Q$ is the starting state;
 				\item $F \subseteq Q$ is the set of accepting states, and the initial tape contents is said to be accepted by $M$ if it eventually halts in a state from $F$;
-				\item $\delta$ is a partial function called the transition function of $(Q \textbackslash F) \times \gamma \rightarrow Q \times \gamma \times \{L,R\}$, where $L$ and $R$ signifies left and right shifts of the tape. If $\delta$ is undefined on the current state and the current tape symbol, then the machine halts.
+				\item $\delta$ is a partial function called the transition function of $(Q \textbackslash F) \times \Gamma \rightarrow Q \times \Gamma \times \{L,R\}$, where $L$ and $R$ signifies left and right shifts of the tape. If $\delta$ is undefined on the current state and the current tape symbol, then the machine halts.
 			\end{itemize}
-			A Turing machine 
+			Using the components of TM and the formal definition, the Turing machine accepts iff it halts on the set of accepting states, and it rejects iff it halts on the set of rejecting states. It may loop infinitely, of which it neither accepts nor rejects the tape.
 		\end{defn}
-		The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include the "starting symbol" in the alphabet. Some include $N$ in the final output of the transition function. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state. Some of the many variations on the Turing machine are mentioned in \ref{var_TM}.
+		The definition of a Turing Machine is not unique. Some definitions use multiple tapes, using one of them as the input tape that can't be modified and another as the output tape. Some has more than one halting states. Some include $N$ in the final output of the transition function, indicating no movement of the head. But in general, a Turing machine starts from one state, follows the decision function every step, and halts at the halting state. Some of the many variations on the Turing machine are mentioned in \ref{var_TM}.
 		
 		In fact, the different definitions of a Turing machine turns out to be the same, in the sense that a function $f:\strs \rightarrow \zo$ is computable using one definition of a Turing machine iff it is computable using another definition of a Turing Machine.
 		
