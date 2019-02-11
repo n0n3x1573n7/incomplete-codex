@@ -39,6 +39,8 @@
             \item For a simple graph $G$, the \emph{complement} $\bar{G}$ of $G$ is a simple graph on $V(G)$ such that any two different vertices $v$ and $w$ are adjacent in $G$ iff they are not adjacent in $\bar{G}$.
         \end{itemize} \end{defn}
         
+        (TODO: pictures)
+        
         \begin{defn}[Walk, Path, Cycle, etc.] \label{def_graph_path} \begin{itemize}
             \item[]
             \item A \emph{walk} from $v \in V$ and $w \in V$ is an alternating sequence $v_0 e_1 v_1 e_2 \cdots e_k v_k$ of vertices and edges such that $v_0 = v$, $v_k = w$, and the set of ends of $e_i$ equals $\{v_{i-1}, v_i\}$. $k$ is the \emph{length} of the walk.
@@ -48,8 +50,52 @@
             \item A \emph{path} is a walk with distinct vertices.
             \item A \emph{cycle} is a circuit with distinct $\{v_0, \cdots, v_{k-1}\}$.
         \end{itemize} \end{defn}
+        
+        \begin{defn}[Connectivity] \label{def_connected_graph} \begin{itemize}
+            \item []
+            \item A graph is \emph{connected} if for any two vertices in $V$ there is a path connecting them.
+            \item A \emph{connected component} of a graph $G$ is $G[X]$ such that $G[X]$ is connected, and for any $Y \subseteq V$ such that $X \subsetneq Y$, $G[Y]$ is not connected.
+        \end{itemize} \end{defn}
     
     \section{Degrees}
+    
+        \begin{defn}[Degree] \label{def_graph_degree}
+            The \emph{degree} of $v \in V(G)$, denoted $deg_G(v)$, is the number of non-loop edges incident with $v$, plus two times the number of loops incident with $v$.
+        \end{defn}
+        
+        Again, we might skip $G$ and write $deg(v)$. As we progress, it will be clear why it is convenient to count a loop twice.
+        
+        \begin{lemma}[Degree Sum Formula] \label{lem_degree_sum}
+            $\sum_{v \in V}deg(v) = 2|E|$.
+        \end{lemma}
+        
+        \begin{proof}
+            Induction on $|E|$, with the trivial base case $|E| = 0$. Suppose $|E| > 0$. Let $\sum_{v \in V}deg(v) = A$ and $2|E| = B$. Take any edge $e$, and the induction with $G\backslash e$ shows that $A-2 = B-2$. Therefore $A=B$.
+        \end{proof}
+        
+        \begin{lemma}[Handshaking Lemma]
+            A graph has an even number of odd-degree vertices.
+        \end{lemma}
+        
+        \begin{proof}
+            $2|E|$ is an even number. From [\ref{lem_degree_sum}], exactly even number of the terms $deg(v)$ must be odd.
+        \end{proof}
+        
+        The degree sum formula is sometimes also called the handshaking lemma.
+        
+        \begin{defn}[Degree Sequence] \label{def_graph_score}
+            The \emph{degree sequence} of a graph $G$, or the \emph{score} of $G$, is the sequence of degrees $(deg(v_1),\cdots,deg(v_|V|))$.
+        \end{defn}
+        
+        Now, how can we figure out if a sequence is a degree sequence of some graph? The following theorem gives a simple $O(\sum d_i)$-time algorithm to answer the question:
+        
+        \begin{thm}[Havel-Hakimi Algorithm] \label{thm_havel_hakimi}
+            Let $(d_1,\cdots,d_n)$ be a sequence of integers such that $0 \leq d_1 \leq \cdots \leq d_n$ and $n>1$. It is a degree sequence of some simple graph iff $(d_1,\cdots,d_{z+1},d_z-1,\cdots,d_{n-1}-1)$ is a degree sequence of some simple graph, where $z = n-d_n$.
+        \end{thm}
+        
+        \begin{proof}
+            123
+        \end{proof}
     
     \section{Trees}
         One of the important classes of graphs is a tree. There are many ways to define a tree. First we will state one definition, and then prove that other definitions are equivalent.
@@ -74,6 +120,16 @@
             %(4 $\Rightarrow$ 3) For any $x,y \in V$, $T+xy$ has a cycle and that cycle must contain $xy$. Removing $xy$ from the cycle yields a path from $x$ to $y$. Therefore $T$ is connected. Now suppose $T \backslash e$ is connected for some $e \in E$, and $e$ connects $x$ and $y$. There is a path from $y$ to $x$ in $T \backslash e$, and that path and $e$ creates a cycle in $T$: contradiction.
             
             %(3 $Righatrrow$ 2) $G$ is connected.
+        \end{proof}
+        
+        How can we figure out if a sequence is a degree sequence of some tree? It turns out to be a lot simpler than [\ref{thm_havel_hakimi}] and basically anything that makes sense can be a degree sequence of a tree:
+        
+        \begin{thm}[Degree Sequence of a Tree] \label{thm_tree_degree}
+            A sequence $(d_1,\cdots,d_n)$ is a degree sequence of some tree iff all $d_i$ are positive and $\sum d_i = 2n-2$.
+        \end{thm}
+        
+        \begin{proof}
+            123
         \end{proof}
     
     \subsection{Spanning Trees}
