@@ -90,11 +90,17 @@
         Now, how can we figure out if a sequence is a degree sequence of some graph? The following theorem gives a simple $O(\sum d_i)$-time algorithm to answer the question:
         
         \begin{thm}[Havel-Hakimi Algorithm] \label{thm_havel_hakimi}
-            Let $(d_1,\cdots,d_n)$ be a sequence of integers such that $0 \leq d_1 \leq \cdots \leq d_n$ and $n>1$. It is a degree sequence of some simple graph iff $(d_1,\cdots,d_{z+1},d_z-1,\cdots,d_{n-1}-1)$ is a degree sequence of some simple graph, where $z = n-d_n$.
+            Let $(d_1,\cdots,d_n)$ be a sequence of integers such that $0 \leq d_1 \leq \cdots \leq d_n$ and $n>1$. It is a degree sequence of some simple graph iff $(d_1,\cdots,d_{z-1},d_z-1,\cdots,d_{n-1}-1)$ is a degree sequence of some simple graph, where $z = n-d_n$.
         \end{thm}
         
         \begin{proof}
-            123
+            ($\Leftarrow$) If $(d_1,\cdots,d_{z-1},d_z-1,\cdots,d_{n-1}-1)$ is a degree sequence of some simple graph, then we can make $(d_1,\cdots,d_n)$ by adding a vertex and connecting to the vertices with degrees $d_z-1,\cdots,d_{n-1}-1$.
+            
+            ($\Rightarrow$) Let $G$ be a simple graph such that $deg_G(v_i)=d_i$ for all $v_i \in V(G)$. We will construct a simple graph $H$ with $deg_H(u_i)=d_i$ for all $u_i \in V(H)$ such that $v_n$ is connected to $v_{n-d_n},\cdots,v_n-1$. Then the conclusion follows by taking $H-v_n$.
+            
+            If $d_n=n-1$, then simply take $H=G$. Otherwise, define $j(G)$ as the largest index $j$ such that $v_n$ is not adjacent to $v_j$. Among all graphs with $deg_H(u_i)=d_i$, take one graph with the smallest $j(H)$. (Note that such $H$ exists because at least one graph, namely $G$, satisfies the degree sequence condition.)
+            
+            Suppose $j=j(H) \geq n-d_n$. Then there is an index $i<j$ such that $u_n$ is adjacent to $u_i$. Since $deg_H(u_i) \leq deg_H(u_j)$, there is a vertex $w$ adjacent to $u_j$ but not to $u_i$. Now, consider a new graph $H'$ derived from $H$ by removing $u_iu_n$ and $u_ju_k$, and adding $u_ju_n$ and $u_iu_k$. Then $deg_{H'}(u_i)=d_i$ and $j(H')<j(H)$, contradicting the minimality of $H$. Therefore $j(H) = n-d_n$.
         \end{proof}
     
     \section{Trees}
@@ -122,6 +128,14 @@
             %(3 $Righatrrow$ 2) $G$ is connected.
         \end{proof}
         
+        \begin{thm} \label{thm_tree_leaf}
+            A tree with at least 2 vertices has at least 2 leaves.
+        \end{thm}
+        
+        \begin{proof}
+            From [\ref{thm_tree}](5) and [\ref{lem_degree_sum}], the sum of degrees is $2|V|-2$. None of the degrees are 0. Therefore at least 2 degrees must equal 1.
+        \end{proof}
+        
         How can we figure out if a sequence is a degree sequence of some tree? It turns out to be a lot simpler than [\ref{thm_havel_hakimi}] and basically anything that makes sense can be a degree sequence of a tree:
         
         \begin{thm}[Degree Sequence of a Tree] \label{thm_tree_degree}
@@ -129,7 +143,9 @@
         \end{thm}
         
         \begin{proof}
-            123
+            ($\Rightarrow$) Clear from [\ref{thm_tree}](5) and [\ref{lem_degree_sum}].
+            
+            ($\Leftarrow$) Induction on $n$, with trivial base cases $n \leq 2$. Now suppose $n \geq 3$. There exists $i$ and $j$ such that $d_i=1$ and $d_j>1$; WLOG assume $i=1$ and $j=2$. From induction, $(d_2-1,d_3,\cdots,d_n)$ is a degree sequence of some tree. Take any vertex $v$ in the tree with degree $d_2-1$, and add a leaf adjacent to $v$. This constructs a tree with the degree sequence $(d_1,\cdots,d_n)$.
         \end{proof}
     
     \subsection{Spanning Trees}
