@@ -1,7 +1,7 @@
 \documentclass{report}
 
 \begin{document}
-	Cryptography is one of the most advanced area of applied mathematics.
+	Cryptography is one of the most advanced area of applied mathematics. It uses many terms not used in many other branches of mathematics or applied mathematics, and is often called "state-of-the-art"-est part of mathematics.
 	\section{Basic Terminology}
 		\begin{defn}[Basic Terminology on Cryptosystems]
 			\begin{itemize}
@@ -18,8 +18,9 @@
 			\end{itemize}
 		\end{defn}
 		
+		Now that the basic terminologies are defined, we can go on with defining "Cryptosystem":
 		\begin{defn}[Cryptosystem]
-			A cryptosystem is defined as a set of three algorithms, $(G,E,D)$;
+			A cryptosystem is defined as a tuple of three algorithms, $(G,E,D)$;
 			\begin{itemize}
 				\item[$G$]
 				\subitem The key generation algorithm, sometimes abbreviated as \emph{KeyGen}, chooses the encryption key $k_1$ and the decryption key $k_2$ from the set of possible keys. The set of possible keys is called the \emph{key space}. Usually each key from the key space is chosen at uniformly random probability.
@@ -56,23 +57,23 @@
 		
 	\section{Encryption of Arbitrary Length Message}
 		\subsection{Padding}
-		When using a block cipher, we need the length of the message to be an exact multiple of the length of the block used in the block cipher. If not, we use \emph{padding} to make the message longer to make it an exact multiple. There are many ways to do so, but:
+		When using a block cipher, we need the length of the message to be an exact multiple of the length of the block used in the block cipher. If not, we use \emph{padding} to make the message longer to make it an exact multiple. There are many ways to do so, but the following paddings are the most prominent:
 		\begin{itemize}
 			\item \emph{Zero Padding}, otherwise known as \emph{Null Padding}
 			\subitem Pad the message with zero($00$) bytes to make the length be an exact multiple of the cipher block length. This may cause a problem if the last bytes of the message are $00$.
 			
 			\item \emph{Bit Padding}
-			\subitem Pad the message with $10|00^n$, so that we can know the start of padding. We must pad the message even if its length is a multiple of the cipher block length.
+			\subitem Pad the message with $10|00^n$, so that we can know the start of padding. In this case, the message must be padded even if its length is a multiple of the cipher block length.
 			
 			\item \emph{Byte Padding}
-			\subitem Same as zero padding, except the last byte is equal to the length of padding, that is; if we require four more bytes, the padding is $00|00|00|04$. We must pad the message even if its length is a multiple of the cipher block length.
+			\subitem Same as zero padding, except the last byte is equal to the length of padding, that is; if we require four more bytes, the padding is $00|00|00|04$. The message must also be padded even if its length is a multiple of the cipher block length.
 			
 			\item \emph{PKCS\#7 Padding}
 			\subitem Similar to byte padding, except every byte of the padding is equal to the length of padding, that is; if we require four more bytes, the padding is $04|04|04|04$.
 		\end{itemize}
 	
 		\subsection{Modes of Operation}
-			Sometimes we are required to encrypt a longer message than the length of the block. The plaintext are first padded using one of the techniques above, and the padded plaintext $P$ is separated into blocks of padding length, $P_1,P_2,\cdots,P_N$. They are then encrypted using the key $K$, sometimes with the help of the initialization vector $IV$, and produces the ciphertexts $C_1,C_2,\cdots,C_N$. There are five major ways to do this; ECB, CBC, CFB, OFB, and CTR.
+			Sometimes we are required to encrypt a longer message than the length of the block. The plaintext are first padded using one of the techniques above, and the padded plaintext $P$ is separated into blocks of padding length, $P_1,P_2,\cdots,P_N$. They are then encrypted using the key $K$, sometimes with the help of the initialization vector $IV$, and produces the ciphertexts $C_1,C_2,\cdots,C_N$. There are five major ways(or ``modes``) to do this; ECB, CBC, CFB, OFB, and CTR.
 			
 			\subsubsection{Electronic Code Book(ECB)}
 				ECB mode is the simplest mode of them all. They simply take each blocks and encrypt them separately. In equation:
@@ -245,7 +246,7 @@
 			If the adversary cannot guess $b$ correctly with significantly greater than 50\% probability, then the scheme is said to be semantically secure under CPA.
 			
 			\item Indistinguishability
-			\subitem If a cryptosystem is indistinguishable, then an adversary would not be able to distinguish pairs of ciphertexts based on the message they encrypt. There are three types: IND-CPA, IND-CCA1, and IND-CCA2. They can be represented as a game between the oracle and the adversary. In both cases, they are said to be secure if the adversary does not have a clear advantage.
+			\subitem If a cryptosystem is indistinguishable, then an adversary would not be able to distinguish pairs of ciphertexts based on the message they encrypt. There are three types: IND-CPA, IND-CCA1, and IND-CCA2. They can be represented as a game between the oracle and the adversary. In both cases, they are said to be secure if the adversary does not have a clear advantage. Note that for any nonzero $\alpha$, if the adversary has access to the LR-oracle multiple times, and if the probability of advantage of the adversary is $0.5 \pm \alpha$, a repetitive trial is capable of bringing the odds up close to $1$(for $0.5+\alpha$) or down close to $0$(for $0.5-\alpha$, in which the adversary may simply chooses the opposite).
 			\begin{itemize}
 				\item \textbf{IND-CPA}
 				\begin{enumerate}
@@ -273,7 +274,7 @@
 			This can be said with a random oracle. In that case, the adversary submits only one message and the oracle returns the encryption of the message or the random string equal to the length of the encryption with a fair chance. The adversary then guesses whether if the message is randomly generated or encrypted.
 
 			\item Non-malleability
-			\subitem Cryptosystems are called "malleable" if it is possible to transform a ciphertext into another ciphertext which decrypts to a related plaintext. Cryptosystems that are not malleable are called non-malleable. These, similar to indistinguishability, can be represented as a game between the oracle and the adversary, and are called NM-CPA, NM-CCA1, NM-CCA2.
+			\subitem Cryptosystems are called "malleable" if it is possible to transform a ciphertext into another ciphertext which decrypts to a related plaintext. Cryptosystems that are not malleable are called non-malleable. These, similar to indistinguishability, can be represented as a game between the oracle and the adversary, and are called NM-CPA, NM-CCA1, NM-CCA2. Some cryptosystems, however, are malleable by design(i.e. RSA cryptosystem), but has low probability that it would be abused.
 		\end{itemize}
 	
 		\begin{thm}
@@ -311,6 +312,7 @@
 		Three major ways to authenticate a user is using password, challenge-response, and zero-knowledge authentication. Passwords must be sent through network, thereby they are susceptible to interception. Challenge-response can be abused by malicious users to crack the secret key. That is where the concept of zero-knowledge interactive proof comes in.
 		
 		An interactive proof system can be described as a communication between the verifier and the prover. They exchange messages to check whether if the statement is true or false. In here, the prover is assumed to have unlimited calculating power but cannot be trusted; the verifier has bounded computation power but is assumed to be always honest. Messages are sent between the prover and the verifier until the verifier has an answer to the problem and has convinces itself that the answer is correct.
+		
 		Any interactive proof system must have the following properties:
 		\begin{itemize}
 			\item \textbf{Completeness}: If the statement is true, the honest verifier will be convinced of this fact by an honest prover.
@@ -355,7 +357,7 @@
 				$C^d \equiv (M^e)^d \equiv M^{\phi(n)\cdot k+1}\equiv M \mod n$
 				\item \textbf{Chinese Remainder Theorem}\\
 				Split $C^d \mod n$ into two congruences: $C^d \mod p$ and $C^d \mod q$.\\
-				Using Euler's Theorem(If $(a,n)=1$, $a^{\phi(n)} \mod n$.), reduce $d$ to reduce the number of multiplication.
+				Using Euler's Theorem(If $(a,n)=1$, $a^{\phi(n)} \mod n$.), reduce $d$ to reduce the number of multiplication. There is a more formularized version of this, which will not be mentioned in here.
 			\end{itemize}
 		
 		\subsection{Signature}
@@ -367,6 +369,7 @@
 		
 		\subsection{Attacking the Cryptosystem}
 			\subsubsection{On the Case of Exposed Private Key $e$}
+			Total break is possible.\\
 			For the public key, $n=pq$ where $p$ and $q$ are primes.\\
 			Then, $\phi(n)=(p-1)(q-1)$.\\
 			We know that $ed \equiv 1 \mod \phi(n)$.\\
@@ -458,7 +461,7 @@
 				\item Choose $e_1$ to be the primitive root of $(Z_p^*,\times)$
 				\item Choose $d \in Z_p^*$ and compute $e_2 \equiv e_1^d \mod p$
 			\end{itemize}
-			In theory, $p$ and $e_1$ can be shared as long as $e_2$ are kept distinct.
+			In theory, $p$ and $e_1$ can be shared as long as $e_2$ are kept distinct.\\
 			\textbf{Public Key}: $(e_1,e_2,p)$\\
 			\textbf{Private Key}: $d$
 		
@@ -540,6 +543,7 @@
 				\end{itemize}
 		
 			\subsubsection{Known Plaintext Attack}
+				This method can be used if the range conditions are not checked properly.\\
 				A valid signature $(M,(S_1,S_2))$ is given for $(M,p-1)=1$ so that  $\exists M^{-1} \mod (p-1)$.\\
 				Choose a message $M'$.\\
 				Set $u=M'M^{-1} \mod (p-1)$.\\
