@@ -1,5 +1,66 @@
 \documentclass{report}
 
 \begin{document}
-
+	There wouldn't be math or any branch of science if there weren't logic. In this section, basic mathematical proofs and the methods of proof will be discussed.
+	\section{Boolean Algebra}
+	Most branches of mathematics use propositions; that is, mathematical statements that can be determined to be either true or false. In Boolean algebra, variables and constants can take on two values: true(1) or false(0). By taking the statements to be the variables in Boolean algebra, we can think of mathematical statements as formulas of Boolean algebra.
+	
+	In Boolean algebra, there are only two values, true(1) and false(0), and three basic operators, two of which are binary and one unary.
+	
+	AND operator(conjunction), often denoted as $p \cdot q$ or $p \wedge q$, has the value true iff p and q are both true; false if either $p$ or $q$ are false. The truth-table for the AND operator is as follows:
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		$p$ & $q$ & $p \wedge q$ \\
+		0 & 0 & 0\\
+		0 & 1 & 0\\
+		1 & 0 & 0\\
+		1 & 1 & 1
+	\end{tabular}
+	\end{center}
+	
+	OR operator(disjunction), often denoted as $p + q$ or $p \vee q$, has the value false iff $p$ and $q$ are both false; true if either $p$ or $q$ are true. The truth-table for the OR operator is as follows:
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		$p$ & $q$ & $p \vee q$ \\
+		0 & 0 & 0\\
+		0 & 1 & 1\\
+		1 & 0 & 1\\
+		1 & 1 & 1
+	\end{tabular}
+	\end{center}
+	
+	NOT operator(negation), often denoted as $p'$, $\textasciitilde p$, or $\neg p$, is a unary operator. The operator switched the state of the variable, that is, if it is true its value is false; if false the value is true. The truth-table for the NOT operator is as follows:
+	
+	\begin{center}
+	\begin{tabular}{cc}
+		$p$ & $\neg p$\\
+		0 & 1\\
+		1 & 0
+	\end{tabular}
+	\end{center}
+	
+	Derived by composition of the basic operators, there are many secondary operators: to name the most important operators, implication($\rightarrow$), exclusive-or(XOR, $\bigoplus$), and equivalence($=$, $\equiv$). The truth-table for the operators are as follows:
+	
+	\begin{center}
+	\begin{tabular}{ccccc}
+		$p$ & $q$ & $p \rightarrow q$ & $p \bigoplus q$ & $p \equiv q$ \\
+		0   & 0   & 1                 & 0               & 1     \\
+		0   & 1   & 1                 & 1               & 0     \\
+		1   & 0   & 0                 & 1               & 0     \\
+		1   & 1   & 1                 & 0               & 1    
+	\end{tabular}
+	\end{center}
+	
+	The operators are derived as follows:\\
+	\begin{center}
+	\begin{tabular}{lllll}
+		$p \rightarrow q$ & $=$ & $\neg p \vee y$                       &   &                                          \\
+		$p \bigoplus q$   & $=$ & $(p \vee q) \wedge \neg (p \wedge q)$ & $=$ & $(p \wedge \neg q) \vee (\neg p \wedge q)$ \\
+		$p \equiv q$      & $=$ & $\neg (p \bigoplus q)$                & $=$ & $(p \wedge q) \vee (\neg p \wedge \neg q)$
+	\end{tabular}
+	\end{center}
+	
+	\section{Proof Techniques}
 \end{document}
