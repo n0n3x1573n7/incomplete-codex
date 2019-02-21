@@ -4,12 +4,24 @@
     \section{Basic Graph Definitions}
         
         \begin{defn}[Graph] \label{def_graph}
-            A \emph{graph} $G$ is represented by a pair of two sets $(V(G), E(G))$, and a relation $\delta \subseteq V(G) \times E(G)$ such that for each $e \in E(G)$, there are exactly one or two $v \in V(G)$ such that $(v,e) \in \delta$. An element of $V(G)$ is a \emph{vertex}, and an element of $E(G)$ is an \emph{edge}. If $(v,e) \in \delta$, we say $v$ is \emph{incident} with $e$, $v$ is an \emph{end} of $e$, and denote $v \sim _G e$.
+            A \emph{graph} $G$ is represented by a pair of sets $(V(G), E(G))$, and a relation $\sim _G \subseteq V(G) \times E(G)$ such that for each $e \in E(G)$, there are exactly one or two $v \in V(G)$ such that $v \sim _G e$. An element of $V(G)$ is a \emph{vertex}, and an element of $E(G)$ is an \emph{edge}. If $v \sim _G e$, we say $v$ is \emph{incident} with $e$, and $v$ is an \emph{end} of $e$.
         \end{defn}
+        
+        \begin{figure}[h] \centering \begin{tikzpicture}
+            \draw[fill=black] (0,0) circle (3pt);
+            \draw[fill=black] (0,2) circle (3pt);
+            \draw[fill=black] (1,1) circle (3pt);
+            \draw[fill=black] (3,1) circle (3pt);
+            \draw[fill=black] (4,0) circle (3pt);
+            \draw[fill=black] (4,2) circle (3pt);
+            \draw[thick] (1,1) -- (0,2) -- (0,0) -- (1,1) -- (3,1) -- (4,0) -- (4,2) -- (3,1);
+        \end{tikzpicture}
+        \caption{A graph with 6 vertices and 7 edges.} \label{fig-graph_example}
+        \end{figure}
         
         From now on, we will skip $(G)$ and just write $V$ and $E$ if the context is obvious. Similarly we will skip $_G$ and just write $\sim$. Also, for simple graphs, we may write an edge as $vw$ where $v$ and $w$ are the ends of the edge.
         
-        \begin{defn}[Graph Terminologies] \label{def_graph_terms} \begin{itemize}
+        \begin{defn} \label{def_graph_terms} \begin{itemize}
             \item[]
             \item A vertex $v$ is \emph{adjacent} to another vertex $w$ if there is an edge $e$ such that $v \sim e$ and $w \sim e$. We also say that $v$ is a \emph{neighbor} of $w$.
             \item A \emph{loop} is an edge with exactly one end.
@@ -30,7 +42,7 @@
             \item For $X \subseteq V$, $G[X]$ is a subgraph of $G$ induced by $X$.
         \end{itemize} \end{defn}
         
-        \begin{defn}[Examples] \label{def_graph_example} \begin{itemize}
+        \begin{defn} \label{def_graph_example} \begin{itemize}
             \item[]
             \item A \emph{complete graph} with $n$ vertices, denoted $K_n$, is a simple graph in which for any pair of different vertices there is an edge connecting them.
             \item A \emph{cycle graph} with $n$ vertices, denoted $C_n$, is a simple graph whose edge set is $\{v_1v_2, \cdots, v_{n-1}v_n, v_nv_1\}$, where $V = \{v_1, \cdots, v_n\}$.
@@ -39,7 +51,46 @@
             \item For a simple graph $G$, the \emph{complement} $\bar{G}$ of $G$ is a simple graph on $V(G)$ such that any two different vertices $v$ and $w$ are adjacent in $G$ iff they are not adjacent in $\bar{G}$.
         \end{itemize} \end{defn}
         
-        (TODO: pictures)
+        \begin{figure}[h] \centering \begin{tikzpicture}
+            % K3
+            \draw[fill=black] (0,0) circle (3pt);
+            \draw[fill=black] (0,1.5) circle (3pt);
+            \draw[fill=black] (1.3,0.75) circle (3pt);
+            \draw[thick] (0,0) -- (0,1.5) -- (1.3,0.75) -- (0,0);
+            % K4
+            \draw[fill=black] (2,0) circle (3pt);
+            \draw[fill=black] (2,1.5) circle (3pt);
+            \draw[fill=black] (3.5,0) circle (3pt);
+            \draw[fill=black] (3.5,1.5) circle (3pt);
+            \draw[thick] (2,0) -- (2,1.5) -- (3.5,1.5) -- (3.5,0) -- (2,0) -- (3.5,1.5) -- (3.5,0) -- (2,1.5);
+            % C3
+            \draw[fill=black] (4,0) circle (3pt);
+            \draw[fill=black] (4,1.5) circle (3pt);
+            \draw[fill=black] (5.3,0.75) circle (3pt);
+            \draw[thick] (4,0) -- (4,1.5) -- (5.3,0.75) -- (4,0);
+            % C4
+            \draw[fill=black] (6,0) circle (3pt);
+            \draw[fill=black] (6,1.5) circle (3pt);
+            \draw[fill=black] (7.5,0) circle (3pt);
+            \draw[fill=black] (7.5,1.5) circle (3pt);
+            \draw[thick] (6,0) -- (6,1.5) -- (7.5,1.5) -- (7.5,0) -- (6,0);
+            % K23
+            \draw[fill=black] (8,0.3) circle (3pt);
+            \draw[fill=black] (8,1.2) circle (3pt);
+            \draw[fill=black] (9.5,0) circle (3pt);
+            \draw[fill=black] (9.5,0.75) circle (3pt);
+            \draw[fill=black] (9.5,1.5) circle (3pt);
+            \draw[thick] (8,0.3) -- (9.5,0) -- (8,1.2) -- (9.5,0.75) -- (8,0.3) -- (9.5,1.5) -- (8,1.2);
+            % C4 complement
+            \draw[fill=black] (10,0) circle(3pt);
+            \draw[fill=black] (10,1.5) circle(3pt);
+            \draw[fill=black] (11.5,1.5) circle(3pt);
+            \draw[fill=black] (11.5,0) circle(3pt);
+            \draw[thick] (10,0) -- (11.5,1.5);
+            \draw[thick] (10,1.5) -- (11.5,0);
+        \end{tikzpicture}
+        \caption{From left to right: $K_3$, $K_4$, $C_3$, $C_4$, $K_{2,3},$ and $\bar{C_4}$. Note that $K_3$ is isomorphic to $C_3$.} \label{fig-K3_K4}
+        \end{figure}
         
         \begin{defn}[Walk, Path, Cycle, etc.] \label{def_graph_path} \begin{itemize}
             \item[]
