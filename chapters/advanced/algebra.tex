@@ -5,7 +5,7 @@
     
     The first thing we would encounter in abstract algebra is a group... but you already encountered it. Refer to the chapter "Algebraic Structures" for the definition of a group and an Abelian group.
     
-    If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$.
+    If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$. The identity of $G$ will be denoted $e$ or $1$.
     
     \begin{thm} \label{thm_group_basics}
         If $G$ is a group, and $a,b,c \in G$, then \begin{enumerate}
@@ -19,11 +19,11 @@
     
     \begin{proof}
         \begin{enumerate} \item[]
-        \item
-        \item
-        \item
-        \item
-        \item
+        \item Let $e_1$ and $e_2$ be the identities of $G$. Then $e_1e_2=e_2e_1=e_1$, and $e_2e_1=e_1e_2=e_2$, from the definition of the identity. Therefore $e_1=e_2$.
+        \item Let $b_1$ and $b_2$ the inverses of $a$. Then $b_1 = b_1(ab_2) = (b_1a)b_2 = b_2$.
+        \item The definition of an inverse shows that $a$ is an inverse of $a^{-1}$. From (ii), such an inverse is unique.
+        \item $(ab)b^{-1}a^{-1} = a(bb^{-1})a^{-1} = aa^{-1} = e$. Similarly $b^{-1}a^{-1}(ab) = e$. From (ii), the inverse of $ab$ is unique.
+        \item $ab=ac \implies a^{-1}ab=a^{-1}ac \implies b=c$. Similar argument for $ba=ca$.
         \end{enumerate}
     \end{proof}
 
