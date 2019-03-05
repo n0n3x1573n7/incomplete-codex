@@ -1,11 +1,15 @@
 %\documentclass{report}
 
 \begin{document}
-    \section{Groups}
+    \section{Group Basics}
     
-    The first thing we would encounter in abstract algebra is a group... but you already encountered it. Refer to the chapter "Algebraic Structures" for the definition of a group and an Abelian group.
+    The first thing we would encounter in abstract algebra is a group... but you already encountered it. Refer to the chapter "Algebraic Structures" for the definition of a group and an abelian group.
     
     If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$. The identity of $G$ will be denoted $e$ or $1$.
+    
+    \begin{defn} \label{def_group_power}
+        The product of $n$ occurrences of $x$ is denoted $x^n$. The product of $n$ occurrences of $x^{-1}$ is denoted $x^{-n}$. Also $x^0 = 1$.
+    \end{defn}
     
     \begin{thm} \label{thm_group_basics}
         If $G$ is a group, and $a,b,c \in G$, then \begin{enumerate}
@@ -14,6 +18,7 @@
             \item $(a^{-1})^{-1}=a$.
             \item $(ab)^{-1} = b^{-1}a^{-1}$.
             \item if $ab=ac$, then $b=c$. Also, if $ba=ca$, then $b=c$.
+            \item For $n,m \in \mathbb{Z}$, $x^nx^m = x^{n+m}$ and $(x^n)^{-1} = x^{-n}.$
         \end{enumerate}
     \end{thm}
     
@@ -24,7 +29,26 @@
         \item The definition of an inverse shows that $a$ is an inverse of $a^{-1}$. From (ii), such an inverse is unique.
         \item $(ab)b^{-1}a^{-1} = a(bb^{-1})a^{-1} = aa^{-1} = e$. Similarly $b^{-1}a^{-1}(ab) = e$. From (ii), the inverse of $ab$ is unique.
         \item $ab=ac \implies a^{-1}ab=a^{-1}ac \implies b=c$. Similar argument for $ba=ca$.
+        \item TODO
         \end{enumerate}
     \end{proof}
+    
+    \begin{defn} \label{def_group_misc}
+        Let $G$ be a group. \begin{itemize}
+        \item $a,b \in G$ \emph{commute} if $ab=ba$.
+        \item The \emph{order} of $x \in G$, denoted $|x|$, is the smallest positive integer $n$ such that $x^n=1$. If no such $n$ exists, then $|x|=\infty$.
+        \item TODO: subgroup
+        \item TODO: cyclic subgroup
+    \end{itemize} \end{defn}
+    
+    \begin{defn} \label{def_group_example} \begin{itemize}
+        \item[]
+        \item TODO: Z/nZ
+        \item TODO: Sn
+    \end{itemize} \end{defn}
+    
+    \begin{defn}[Homomorphisms and Isomorphisms] \label{def_group_homomorphism}
+        Let $(G,\star)$, $(H,\diamond)$ be two groups. Then a map $\varphi: G \to H$ is a \emph{homomorphism} if for all $x,y \in G$, $\varphi(x \star y)=\varphi(x) \diamond \varphi(y)$. An \emph{isomorphism} is a bijective homomorphism.
+    \end{defn}
 
 \end{document}
