@@ -3,6 +3,8 @@
 \begin{document}
     \section{Group Basics}
     
+    \subsection{Groups}
+    
     The first thing we would encounter in abstract algebra is a group... but you already encountered it. Refer to the chapter "Algebraic Structures" for the definition of a group and an abelian group.
     
     If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$. The identity of $G$ will be denoted $e$ or $1$.
@@ -37,8 +39,7 @@
         Let $G$ be a group. \begin{itemize}
         \item $a,b \in G$ \emph{commute} if $ab=ba$.
         \item The \emph{order} of $x \in G$, denoted $|x|$, is the smallest positive integer $n$ such that $x^n=1$. If no such $n$ exists, then $|x|=\infty$.
-        \item TODO: subgroup
-        \item TODO: cyclic subgroup
+        \item The \emph{order} of $G$, denoted $|G|$, is the cardinality of $G$ as a set.
     \end{itemize} \end{defn}
     
     \begin{defn} \label{def_group_example} \begin{itemize}
@@ -47,8 +48,52 @@
         \item TODO: Sn
     \end{itemize} \end{defn}
     
+    \subsection{Isomorphism}
+    
+    Now, we want to tell whether two groups are "same," in the sense that there is a bijection between them preserving the relations.
+    
     \begin{defn}[Homomorphisms and Isomorphisms] \label{def_group_homomorphism}
-        Let $(G,\star)$, $(H,\diamond)$ be two groups. Then a map $\varphi: G \to H$ is a \emph{homomorphism} if for all $x,y \in G$, $\varphi(x \star y)=\varphi(x) \diamond \varphi(y)$. An \emph{isomorphism} is a bijective homomorphism.
+        Let $(G,\star)$, $(H,\diamond)$ be two groups. Then a map $\varphi: G \to H$ is a \emph{homomorphism} if for all $x,y \in G$, $\varphi(x \star y)=\varphi(x) \diamond \varphi(y)$. An \emph{isomorphism} is a bijective homomorphism. If there is an isomorphism between $G$ and $H$, we say they are \emph{isomorphic} and denote $G \cong H$.
+    \end{defn}
+    
+    We may skip $\star$ and $\diamond$ here too if the context is clear, but you have to understand which operations are used at each positions.
+    
+    \begin{thm} \label{thm_isomorphic_groups}
+        If $(G,\star)$ and $(H,\diamond)$ are isomorphic, with the isomorphism $\varphi$, then \begin{enumerate}
+            \item $|G| = |H|$.
+            \item $G$ is abelian iff $H$ is abelian.
+            \item For any $x \in G$, $|x| = |\varphi(x)|$.
+        \end{enumerate}
+    \end{thm}
+    
+    \begin{proof}
+    (1) $\varphi$ is bijective.
+    
+    (2) Suppose $G$ is abelian. Take $c,d \in H$. Since $\varphi$ is surjective, there are $a,b \in G$ such that $\varphi(a) = c$ and $\varphi(b) = d$. Then $cd = \varphi(a)\varphi(b) = \varphi(ab) = \varphi(ba) = \varphi(b)\varphi(a) = dc$. Therefore $H$ is abelian.
+    
+    Suppose $H$ is abelian. Take $a,b \in G$. Then $\varphi(ab) = \varphi(a)\varphi(b) = \varphi(b)\varphi(a) = \varphi(ba)$. Since $\varphi$ is injective, $ab = ba$. Therefore $G$ is abelian.
+    
+    (3) TODO
+    \end{proof}
+    
+    \subsection{Group Actions}
+    
+    \begin{defn}[Group Action] \label{def_group_action}
+        A \emph{group action} of a group $G$ on a set $A$ is a map $G \times A \to A$, mapping $g \times a$ to $g \cdot a$, such that for all $g_1,g_2 \in G$ and $a \in A$, \begin{enumerate}
+            \item $g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$, and
+            \item $1 \cdot a = a$.
+        \end{enumerate}
+        We say that $G$ \emph{acts} on $A$.
+    \end{defn}
+    
+    Again, we may skip $\cdot$.
+    
+    TODO: permutation representation
+    
+    \subsection{Subgroups}
+    
+    \begin{defn}[Subgroups] \label{def_subgroup}
+        Let $G$ be a group. A subset $H$ of $G$ is a \emph{subgroup} of $G$ if $H$ is nonempty, and for all $x,y \in H$, we have $xy \in H$ and $x^{-1} \in H$. We denote $H \leq G$.
     \end{defn}
 
 \end{document}
