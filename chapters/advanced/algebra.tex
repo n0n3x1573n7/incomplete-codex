@@ -7,14 +7,16 @@
     
     The first thing we would encounter in abstract algebra is a group... but you already encountered it. Refer to the chapter "Algebraic Structures" for the definition of a group and an abelian group.
     
-    If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$. The identity of $G$ will be denoted $e$ or $1$.
+    If the context is obvious, we will skip $\cdot$ and write $ab$ instead of $a \cdot b$. The identity of a group will be denoted $e$ or $1$.
+    
+    $G$ will always denote group in this chapter, unless stated otherwise.
     
     \begin{defn} \label{def_group_power}
         The product of $n$ occurrences of $x$ is denoted $x^n$. The product of $n$ occurrences of $x^{-1}$ is denoted $x^{-n}$. Also $x^0 = 1$.
     \end{defn}
     
-    \begin{thm} \label{thm_group_basics}
-        If $G$ is a group, and $a,b,c \in G$, then \begin{enumerate}
+    \begin{prop} \label{prop_group_basics}
+        If $a,b,c \in G$, then \begin{enumerate}
             \item the identity of $G$ is unique.
             \item the inverse $a^{-1}$ is unique.
             \item $(a^{-1})^{-1}=a$.
@@ -22,7 +24,7 @@
             \item if $ab=ac$, then $b=c$. Also, if $ba=ca$, then $b=c$.
             \item For $n,m \in \mathbb{Z}$, $x^nx^m = x^{n+m}$ and $(x^n)^{-1} = x^{-n}.$
         \end{enumerate}
-    \end{thm}
+    \end{prop}
     
     \begin{proof}
         \begin{enumerate} \item[]
@@ -35,8 +37,8 @@
         \end{enumerate}
     \end{proof}
     
-    \begin{defn} \label{def_group_misc}
-        Let $G$ be a group. \begin{itemize}
+    \begin{defn} \label{def_group_misc} \begin{itemize}
+        \item[]
         \item $a,b \in G$ \emph{commute} if $ab=ba$.
         \item The \emph{order} of $x \in G$, denoted $|x|$, is the smallest positive integer $n$ such that $x^n=1$. If no such $n$ exists, then $|x|=\infty$.
         \item The \emph{order} of $G$, denoted $|G|$, is the cardinality of $G$ as a set.
@@ -79,7 +81,7 @@
     \subsection{Group Actions}
     
     \begin{defn}[Group Action] \label{def_group_action}
-        A \emph{group action} of a group $G$ on a set $A$ is a map $G \times A \to A$, mapping $g \times a$ to $g \cdot a$, such that for all $g_1,g_2 \in G$ and $a \in A$, \begin{enumerate}
+        A \emph{group action} of $G$ on a set $A$ is a map $G \times A \to A$, mapping $g \times a$ to $g \cdot a$, such that for all $g_1,g_2 \in G$ and $a \in A$, \begin{enumerate}
             \item $g_1 \cdot (g_2 \cdot a) = (g_1g_2) \cdot a$, and
             \item $1 \cdot a = a$.
         \end{enumerate}
@@ -93,7 +95,57 @@
     \subsection{Subgroups}
     
     \begin{defn}[Subgroups] \label{def_subgroup}
-        Let $G$ be a group. A subset $H$ of $G$ is a \emph{subgroup} of $G$ if $H$ is nonempty, and for all $x,y \in H$, we have $xy \in H$ and $x^{-1} \in H$. We denote $H \leq G$.
+        A subset $H$ of $G$ is a \emph{subgroup} of $G$ if $H$ is nonempty, and for all $x,y \in H$, we have $xy \in H$ and $x^{-1} \in H$. We denote $H \leq G$.
     \end{defn}
+    
+    A subgroup is also a group. To see why, there is an element $x$ in $H$ since $H$ is nonempty, then $x^{-1} \in H$, and finally $x x^{-1} = 1 \in H$.
+    
+    \begin{prop}[The Subgroup Criterion] \label{prop_subgroup_criterion}
+        A subset $H$ of $G$ is a subgroup if and only if $H$ is nonempty and for all $x,y \in H$, $x y^{-1} \in H$. Also, a finite subset $H$ is a subgroup if and only if $H$ is nonempty and closed under multiplication.
+    \end{prop}
+    
+    \begin{proof}
+        $(\Rightarrow)$ Trivial.
+        
+        $(\Leftarrow)$ Since $H$ is nonempty, take an element $x \in H$. Then $x x^{-1} = 1 \in H$. This gives $1 x^{-1} = x^{-1} \in H$. Finally, $x (y^{-1})^{-1} = xy \in H$ since $y^{-1} \in H$.
+        
+        If $H$ is finite, then $|x|=n<\infty$. Therefore $x^{-1} = x^{n-1}$. Now we can use the first part of this proposition.
+    \end{proof}
+    
+    %\begin{defn} \label{def_centralizer}
+        %Assume $A$ is a nonempty subset of $G$. \begin{itemize}
+            %\item The \emph{centralizer} of $A$ in $G$ is $C_G(A) = \{g \in G | gag^{-1}=a \quad \forall a \in A\}$.
+            %\item The \emph{center} of $G$ is $Z(G) = \{g %\in G | gxg^{-1}=x \quad \forall x \in G\}$.
+            %\item The \emph{normalizer} of $A$ in $G$ is %$N_G(A) = \{g \in G | gAg^{-1}=A\}$.
+    %\end{itemize} \end{defn}
+    %TODO: stabilizers, kernels. But should we really talk about this here in the first place?
+    
+    \subsection{Cyclic Groups}
+    
+    \begin{defn}[Cyclic Group] \label{def_cyclic_group}
+        $G$ is \emph{cyclic} if $G = \{x^n | n \in \mathbb{Z}\}$ for some $x \in G$. For such $x$, we denote $G = \langle x \rangle$ and say $x$ is a \emph{generator} of $G$.
+    \end{defn}
+    
+    \begin{prop} \label{prop_cyclic_group_order}
+        $| \langle x \rangle | = |x|$ in $\langle x \rangle$. (These values can be infinite.)
+    \end{prop}
+    
+    \begin{proof}
+        TODO. Isn't it, like, trivial?? Right??
+    \end{proof}
+    
+    \begin{thm} \label{thm_cyclic_isomorphic}
+        Any two cyclic groups with the same order are isomorphic.
+    \end{thm}
+    
+    \begin{proof}
+        Suppose $| \langle x \rangle | = | \langle y \rangle | = n < \infty$. We will show that $\varphi: \langle x \rangle \to \langle y \rangle$ defined by $\varphi (x^k) = y^k$ is well-defined and an isomorphism.
+        
+        Suppose $x^a = x^b$. Then $x^{a-b} = 1$, and so $n | (a-b)$. Therefore $\varphi (x^a) = y^a = y^b = \varphi (x^b)$. This shows that $\varphi$ is well-defined.
+        
+        Next, $\varphi$ is clearly a homomorphism and a surjection. Since the two groups are finite, $\varphi$ is a bijection. Therefore $\varphi$ is an isomorphism.
+        
+        Next, if $| \langle x \rangle | = \infty$, then $\varphi: \mathbb{Z} \to \langle x \rangle$ defined by $\varphi (n) = x^n$ is an isomorphism.
+    \end{proof}
 
 \end{document}
