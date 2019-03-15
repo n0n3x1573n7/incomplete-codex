@@ -1,6 +1,40 @@
 %\documentclass{report}
 
 \begin{document}
-    \section{something something}
+    \section{Topological Space}
+    
+    \subsection{Topological Space}
+    
+    In analysis, we've dealt with functions in metric spaces and their properties. What we will do in this chapter is extend this notion to the spaces without metrics. But without metrics, our definition of open sets no longer makes sense. We need a new definition.
+    
+    Remember the theorem [\ref{thm_union_open}] stating that a union of open sets is open, and a finite intersection of open sets is also open? Well...
+    
+    \begin{defn}[Topological Space] \label{def_topological_space}
+        A \emph{topological space} is a set $X$ together with a collection $\mathcal{T}$ of subsetes of $X$ such that \begin{enumerate}
+            \item $\emptyset \in \mathcal{T}$ and $X \in \mathcal{T}$.
+            \item A union of sets in $\mathcal{T}$ is also in $\mathcal{T}$.
+            \item A finite intersection of sets in $\mathcal{T}$ is also in $\mathcal{T}$.
+        \end{enumerate}
+        
+        $\mathcal{T}$ is a \emph{topology} on $X$, and the sets in $T$ are called \emph{open} sets. The complement of an open set is a \emph{closed} set.
+    \end{defn}
+    
+    \begin{defn} \label{def_topological_space_example} \begin{itemize}
+        \item []
+        \item Given a set $X$, the power set $\mathcal{P}(X)$ is the \emph{discrete topology}. This space is called the \emph{discrete space}. The set $\{\emptyset, X\}$ is the \emph{indiscrete topology}.
+        \item A subset is \emph{cofinite}, and \emph{cocountable}, if its complement is finite, and countable, respectively. The set of $\emptyset$, $X$, and all cofinite subsets of $X$, together forms the \emph{cofinite topology}. Replacing cofinite with cocountable, we get the \emph{cocountable topology}.
+    \end{itemize}
+    \end{defn}
+    
+    From now on, we will assume $X$ and $Y$ are topological spaces, unless stated otherwise.
+    
+    \begin{defn} \label{def_topology_points}
+        Let $A \subseteq X$. \begin{itemize}
+            \item A point $x \in A$ is an \emph{interior point} of $A$ if some open neighborhood of $x$ is contained in $A$. The set of all interior points of $A$ is the \emph{interior} of $A$, denoted $int(A)$.
+            \item A point $x \in X$ is an \emph{adherent point} of $A$ if every open neighborhood of $x$ intersects $A$. The set of all adherent points of $A$ is the \emph{closure} of $A$, denoted $\bar{A}$.
+            \item The \emph{boundary} of $A$ is $\partial A = \bar{A} \cap \bar{(X \backslash A)}$.
+            \item $x \in X$ is a \emph{limit point} of $A$ if every open neighborhood of $x$ contains at least one point in $A$ different from $x$. The set of all limit points of $A$ is denoted $A'$.
+            \item $x \in A$ is an \emph{isolated point} of $A$ if some open neighborhood of $x$ does not contain any point in $A$ different from $x$. The set of all isolated points of $A$ is denoted $A^\cdot$.
+    \end{itemize} \end{defn}
 
 \end{document}
