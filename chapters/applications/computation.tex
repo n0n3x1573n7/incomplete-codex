@@ -3,7 +3,7 @@
 \begin{document}
     \section{Computability}
     
-    Turing Machine was already defined in [\ref{def_TM}], but let's write down the definition here for convenience:
+    Turing machine was already defined in [\ref{def_TM}], but let's write down the definition here for convenience:
     
     \begin{defn}[Turing Machine]
 		A Turing machine consists of:
@@ -30,13 +30,35 @@
 	\begin{defn}[Decision Problem] \label{def_problem} \begin{itemize}
 	    \item []
 	    \item A \emph{decision problem} is a subset of the set of natural numbers $\mathbb{N}$. We assume $0 \in \mathbb{N}$.
-	    \item An \emph{input} is a natural number that will be written on the initial tape in binary.
+	    \item An \emph{input} is a natural number that will be written on the initial tape in binary. The \emph{length} of the input is the number of cells required to represent it, which is $|x| = \lceil \log_2 (x+1) \rceil$.
 	    \item A Turing machine $M$ \emph{accepts} an input $x$ if it accepts with the given input $x$. Similarly, $M$ \emph{rejects} $x$ if it rejects with the given input $x$.
 	    \item A Turing machine $M$ \emph{decides} a decision problem $L$ if, for all $x \in \mathbb{N}$, $M$ accepts $x$ if $x \in L$ and $M$ rejects $x$ otherwise. In that case, $L$ is \emph{decidable}.
 	    \item A Turing machine $M$ \emph{semi-decides} a decision problem $L$ if, for all $x \in \mathbb{N}$, $M$ accepts $x$ if $x \in L$ and $M$ runs infinitely otherwise. In that case, $L$ is \emph{semi-decidable}.
 	\end{itemize} \end{defn}
 	
 	What if we want other types of inputs such as two natural numbers, rational numbers, ASCII strings, graphs, and so on? In that case, we can \emph{encode} them as natural numbers. For example, there are some easy-to-compute injection from $\mathbb{N}^2$ to $\mathbb{N}$, and we assume they are given as the encoded forms. But since there is no injection from $\mathbb{R}$ to $\mathbb{N}$, we cannot give real numbers as inputs.
+	
+	Note also that since a Turing machine itself is finite, the set of all Turing machines is countable. Therefore Turing machines can also be encoded, and even be given as an input to other Turing machines!
+	
+	Now, a natural question is whether undecidable problems exist at all. The answer is yes, because there are countably many Turing machines but uncountably many subsets of $\mathbb{N}$. We will also define one of the most important undecidable problem:
+	
+	\begin{defn}[Halting Problem] \label{def_halting}
+	    The \emph{halting problem} $\mathbf{HALT}$ is the set of pairs $(M,x) \in \mathbb{N}$ such that a Turing machine $M$ halts on input $x$. (Remind that $(M,x)$ is encoded into a single natural number.)
+	\end{defn}
+	
+	\begin{thm} \label{thm_halting}
+	    $\mathbf{HALT}$ is undecidable.
+	\end{thm}
+	
+	\begin{proof}
+	    Suppose there is a machine $N$ that decides $\mathbf{HALT}$. Construct another machine $N'$ that does the following: given input $x$, simulate $N$ on input $(x,x)$. If $N$ accepts it, run an infinite loop. Otherwise, accept.
+	    
+	    Now consider what happens with $N'$ is given the input $N'$. If $N'$ accepts itself, then it means $N$ rejects the input $(N',N')$, i.e. $N'$ on input $N'$ never halts. But this is a contradiction to the assumption that $N'$ accepts itself. On the other hand, if $N'$ runs an infinite loop, then it means $N$ accepts the input $(N',N')$, i.e. $N'$ on input $N'$ eventually halts. This is again a contradiction. Therefore no such $N$ exists.
+	\end{proof}
+	
+	However, it should be noted that $\mathbb{HALT}$ is semi-decidable, since we can just simulate $M$ on the input $x$ and accept if $M$ halts. If $M$ never halts, then our simulation would not halt either.
+	
+	(TODO next time: write simple results about decidability and semi-decidability.)
 
     \section{Computational Complexity}
     (TODO: Write something about asymptotic notation here)
