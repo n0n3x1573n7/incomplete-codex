@@ -1,0 +1,145 @@
+%\documentclass{report}
+
+\begin{document}
+    \section{Computability}
+    
+    Turing Machine was already defined in [\ref{def_TM}], but let's write down the definition here for convenience:
+    
+    \begin{defn}[Turing Machine]
+		A Turing machine consists of:
+		\begin{itemize}
+			\item A \emph{tape} divided into consecutive cells. Each cell contains a symbol from the tape alphabet, which contains a blank symbol and one or more other symbols. The tape is assumed to be infinitely long to the left; cells that have not been written before are assumed to be filled with the blank symbol.
+			\item A \emph{head} which can read a single symbol on the tape at a time, and is able to move one(and only one at once) cell to the right or the left.
+				\item A \emph{state register} which stores the state of the TM, starting from the starting state(defined below) and following the transition function's rule(also defined below).
+		\end{itemize}
+		Formally, a TM is a 7 tuple $(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})$ where:
+		\begin{itemize}
+			\item $Q$ is the set of states;
+			\item $\Gamma$ is the set of tape alphabet;
+			\item $b \in \Gamma$ is the blank symbol, the only symbol allowed to occur infinitely often at any step of the computation;
+			\item $\Sigma \subseteq \Gamma \textbackslash \{b\}$ is the set of input symbols, that is, the set of symbols allowed to appear in the initial tape contents;
+			\item $q_0 \in Q$ is the starting state;
+			\item $F \subseteq Q$ is the set of accepting states, and the initial tape contents is said to be accepted by $M$ if it eventually halts in a state from $F$;
+			\item $\delta$ is a partial function called the transition function of $(Q \textbackslash F) \times \Gamma \rightarrow Q \times \Gamma \times \{L,R\}$, where $L$ and $R$ signifies left and right shifts of the tape. If $\delta$ is undefined on the current state and the current tape symbol, then the machine halts.
+			\end{itemize}
+			Using the components of TM and the formal definition, the Turing machine accepts iff it halts on the set of accepting states, and it rejects iff it halts on the set of rejecting states. It may loop infinitely, of which it neither accepts nor rejects the tape.
+		\end{defn}
+	
+	Usually, the proofs involving Turing machines do not give a formal construction of the machines because it is an extremely tedious process. Instead the proof describes what the machine does. It would be intuitive to see that such a machine can indeed be constructed.
+	
+	\begin{defn}[Decision Problem] \label{def_problem} \begin{itemize}
+	    \item []
+	    \item A \emph{decision problem} is a subset of the set of natural numbers $\mathbb{N}$. We assume $0 \in \mathbb{N}$.
+	    \item An \emph{input} is a natural number that will be written on the initial tape in binary.
+	    \item A Turing machine $M$ \emph{accepts} an input $x$ if it accepts with the given input $x$. Similarly, $M$ \emph{rejects} $x$ if it rejects with the given input $x$.
+	    \item A Turing machine $M$ \emph{decides} a decision problem $L$ if, for all $x \in \mathbb{N}$, $M$ accepts $x$ if $x \in L$ and $M$ rejects $x$ otherwise. In that case, $L$ is \emph{decidable}.
+	    \item A Turing machine $M$ \emph{semi-decides} a decision problem $L$ if, for all $x \in \mathbb{N}$, $M$ accepts $x$ if $x \in L$ and $M$ runs infinitely otherwise. In that case, $L$ is \emph{semi-decidable}.
+	\end{itemize} \end{defn}
+	
+	What if we want other types of inputs such as two natural numbers, rational numbers, ASCII strings, graphs, and so on? In that case, we can \emph{encode} them as natural numbers. For example, there are some easy-to-compute injection from $\mathbb{N}^2$ to $\mathbb{N}$, and we assume they are given as the encoded forms. But since there is no injection from $\mathbb{R}$ to $\mathbb{N}$, we cannot give real numbers as inputs.
+
+    \section{Computational Complexity}
+    (TODO: Write something about asymptotic notation here)
+        
+    \begin{defn}[Asymptotic notation] \label{def_bigo}
+        Let $f$ and $g$ be two functions from $\mathbb{N}$ to $\mathbb{N}$. Then we say: \begin{itemize}
+            \item $f=O(g)$ if there is a constant $c$ such that $f(n) \leq c \cdot g(n)$ for every sufficiently large $n$. That is, $n>N$ for some $N$.
+            \item $f=\Omega(g)$ if $g=O(f)$.
+            \item $f=\Theta(g)$ if $f=O(g)$ and $g=O(f)$.
+            \item $f=o(g)$ if for every constant $c>0$, $f(n) < c \cdot g(n)$ for every sufficiently large $n$.
+            \item $f=\omega(g)$ if $g=o(f)$.
+        \end{itemize} 
+    \end{defn}
+        
+    \begin{defn}[P, NP, EXP] \label{def_comp_p}
+        \begin{itemize}
+            \item []
+            \item $\mathbf{P}$ is the set of boolean functions computable with a deterministic Turing machine in time $O(n^c)$ for some constant $c>0$.
+            \item $\mathbf{NP}$ is the set of boolean functions computable with a non-deterministic Turing machine in time $O(n^c)$ for some constant $c>0$.
+            \item $\mathbf{EXP}$ is the set of boolean functions computable with a deterministic Turing machine in time $O(2^{n^c})$ for some constant $c>0$.
+        \end{itemize}
+    \end{defn}
+        
+    \begin{thm} \label{thm_pnpexp}
+        $\mathbf{P} \subseteq \mathbf{NP} \subseteq \mathbf{EXP}$.
+    \end{thm}
+        
+    \begin{proof}
+        .
+    \end{proof}
+    
+    \section {Reduction}
+    Is there a polynomial-time algorithm for a given decision problem? Computer scientists are interested in this question because if there is one, it is usually a small-degree polynomial like $O(n^2)$ or $O(n^5)$. Some problems have a special property that if the problem has a polynomial-time algorithm, then several other problems do.
+        
+    \begin{defn}[Polynomial-time Karp reduction] \label{def_poly_karp}
+        A problem $A \subseteq \strs$ is \emph{polynomial-time Karp reducible} to $B \subseteq \strs$, denoted $A \leq_p B$, if there is a polynomial-time computable function $f: \strs \rightarrow \strs$ such that for every $x \in \strs$, $x \in A$ iff $f(x) \in B$.
+    \end{defn}
+        
+    The intuitive meaning is that a problem of $A$ can be "reduced" to a problem of $B$, and if we can solve $B$ in polynomial-time, then we can solve $A$ in polynomial-time too.
+        
+    \begin{defn}[NP-complete] \label{def_npc}
+        A problem $A$ is \emph{NP-hard} if every problem in $\mathbf{NP}$ is polynomial-time reducible to $A$, and \emph{NP-complete} if $A$ is NP-hard and NP.
+    \end{defn}
+        
+    \begin{thm} \label{thm_leqp_transitive}
+        \begin{enumerate}
+            \item[]
+            \item If $A \leq_p B$ and $B \leq_p C$, then $A \leq_p C$.
+            \item An NP-complete problem $A$ is in $\mathbf{P}$ iff $\mathbf{P}=\mathbf{NP}$.
+            \item If $A \leq_p B$ and $A$ is NP-hard, then $B$ is NP-hard.
+        \end{enumerate}
+        %If $A \leq_p B$ and $B \leq_p C$, then $A \leq_p C$. Also, an NP-complete problem $A$ is in $\mathbf{P}$ iff $\mathbf{P}=\mathbf{NP}$.
+    \end{thm}
+        
+    \begin{proof}
+        (1) Let $f$ be a reduction from $A$ to $B$ with polynomial time $p(n)$, and $g$ from $B$ to $C$ with $q(n)$. Then $g \circ f$ is a reduction from $A$ to $C$ with polynomial time $q(p(n))$.
+            
+        (2) Suppose $A$ is NP-complete and in $\mathbf{P}$. Then any problem $B$ in $\mathbf{NP}$ can be polynomial-time reduced to $A$, so transitivity implies that $B$ is polynomial-time computable. The converse is trivial.
+            
+        (3) Any problem $C$ in $\mathbf{NP}$ can be polynomial-time reduced to $A$. Transitivity implies that $C$ can be polynomial-time reduced to $B$.
+    \end{proof}
+        
+    Now the obvious question is, does such a strong problem actually exist? The answer is yes, and a lot of important problems are NP-complete.
+        
+    (TODO: SAT)
+        
+    Having proven that SAT is NP-hard, more problems can be proven NP-hard if we can reduce SAT to those problems in polynomial-time. Here are only a tiny fraction of the NP-complete problems:
+        
+    \begin{defn}[NP-complete problems] \label{def_npc_examples} \begin{itemize}
+        \item[]
+        \item The \emph{3-SAT problem} is a SAT problem where each clause contains exactly 3 variables.
+        \item Given a graph $G$ and an integer $0 \leq k \leq |V(G)|$, the \emph{clique problem} asks whether there is a complete induced subgraph of $G$ with size at least $k$.
+        \item The \emph{independent set problem} asks whether there is a subset $S$ of $V(G)$ with size at least $k$ such that no two vertices in $S$ are adjacent, and 0 otherwise.
+        \item The \emph{vertex cover problem} asks whether there is a subset $S$ of $V(G)$ with size at most $k$ such that each edge is adjacent to at least one vertex in $S$.
+        \item The \emph{chromatic number problem} asks whether $G$ is 3-colorable.
+        \item Given a set $S$ of integers and an integer $k$, the \emph{subset sum problem} asks whether there is a subset of $S$ whose sum of elements equals $k$.
+        \item Given an $n \times m$ matrix $A$ and an $n \times 1$ matrix $b$ of integers, the \emph{integer programming problem} asks whether there is an $m \times 1$ matrix $x$ of integers such that each element of $Ax+b$ is non-negative.
+    \end{itemize} \end{defn}
+        
+    \begin{thm} \label{thm_npc_examples}
+        All problems in [\ref{def_npc_examples}] are NP-complete.
+    \end{thm}
+        
+    \begin{proof}
+    Clearly all problems described are NP. We will only show that they are all NP-hard.
+        
+    If we can reduce SAT to 3-SAT in polynomial time, then [\ref{thm_leqp_transitive}] will show that 3-SAT is NP-hard. To do this, note that \begin{itemize}
+        \item $x$ is equivalent to $x \vee x \vee x$,
+        \item $x_1 \vee x_2$ is equivalent to $x_1 \vee x_2 \vee x_2$,
+        \item $x_1 \vee \cdots \vee x_n$ is equivalent to $(x_1 \vee x_2 \vee y_1) \wedge (\neg y_1 \vee x_3 \vee y_2) \wedge \cdots (\neg y_{n-4} \vee x_{n-2} \vee y_{n-3}) \wedge (\neg y_{n-3} \vee x_{n-1} \vee x_{n})$, where $n \geq 4$ and $y_1,\cdots,y_{n-3}$ are new variables unused in the original SAT formula.
+    \end{itemize}
+        
+    Next, we reduce 3-SAT to a clique problem. (TODO)
+        
+    $G$ has a clique of size $k$ iff $\bar{G}$ has an independent set of size $k$. This shows that clique and independent set are polynomial-time reducible to each other.
+        
+    $G$ has an independent set of size $k$ iff $G$ has a vertex cover of size $|V(G)| - k$, by taking the complement of the independent set. Therefore independent set and vertex cover are polynomial-time reducible to each other.
+        
+    We reduce 3-SAT to a chromatic number problem. (TODO)
+        
+    We reduce 3-SAT to a subset sum problem. (TODO)
+        
+    Finally, we reduce 3-SAT to an integer programming problem. Given a 3-SAT formula with $n$ variables, set $0 \leq x_i \leq 1$ for $i=1,\cdots,n$, and convert the clause $(x_a \vee x_b \vee x_c)$ into $x_a + x_b + x_c \geq 1$. If the clause contains $\neg x_a$, convert it to $1-x_a$. This system of inequalities can easily be converted to the matrix form.
+        
+    \end{proof}
+\end{document}
