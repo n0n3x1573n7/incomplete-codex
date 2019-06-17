@@ -30,7 +30,7 @@
             \item Two graphs $G$ and $H$ are \emph{isomorphic} if there are two bijections $f_V : V(G) \to V(H)$ and $f_E : E(G) \to E(H)$ such that for all $v \in V(G)$ and $e \in E(G)$, $v \sim_G e$ iff $f_V(v) \sim_H f_E(e)$.
         \end{itemize} \end{defn}
         
-        Note that some texts might use a different definition of graphs. One common definition is that $E(G)$ is a set of two-element subsets of $V(G)$. With this definition, our definition of a simple graph is just called a graph, and our definition of a graph is called a multigraph.
+        Note that some texts might use a different definition of graphs. One common definition is that $E(G)$ is a set of two-element subsets of $V(G)$. With this definition, our definition of a simple graph is just called a graph, and our definition of a graph is called a multigraph (and you need to change ``set'' to ``multiset'').
         
         \begin{defn}[Subgraph] \label{def_subgraph} \begin{itemize}
             \item[]
@@ -160,6 +160,26 @@
             A \emph{forest} is a simple graph without any cycle. A \emph{tree} is a connected forest. A \emph{leaf} of a forest is a vertex with degree 1.
         \end{defn}
         
+        Before moving on to the equivalence, we introduce two useful lemmas:
+        
+        \begin{lemma} \label{lem_tree_leaf}
+            A tree with at least two vertices has at least two leaves.
+        \end{lemma}
+        \begin{proof}
+            Let $P$ be a path with maximum length, and $x$ and $y$ be its end-vertices. Then $x \neq y$, and we claim that $x$ and $y$ are leaves. Suppose $x$ is not a leaf, so $x$ has an edge $e$ not used by $P$. Let $z$ be the other end of $e$. Since $P+e$ has no cycles, $z$ is not used by $P$. Therefore $e+P$ is a path longer than $P$, contradicting the maximality. Repeat this proof to show that $y$ is also a leaf.
+        \end{proof}
+        
+        \begin{lemma} \label{lem_tree_grow}
+            Let $G$ be a graph, $v \in V$, and $deg(v) = 1$. Then $G$ is a tree iff $G-v$ is a tree.
+        \end{lemma}
+        \begin{proof}
+            Suppose $G$ is a tree. Since $G$ is connected, for any two vertices $x \neq y$, there is a path from $x$ to $y$. Since $v$ has only one incident edge, this path does not contain $v$. Therefore this path is also a path on $G-v$. Clearly $G-v$ has no cycles. Therefore $G-v$ is a tree.
+            
+            Suppose $G$ is not a tree. If $G$ is disconnected, then $G-v$ is clearly disconnected. If $G$ has a cycle, then since this cycle does not contain $v$, it is also a cycle on $G-v$. Therefore $G-v$ is not a tree in either cases.
+        \end{proof}
+        
+        This enables us to apply induction on the number of vertices of a tree. Check the base case where there are $\leq 2$ vertices. Then, let $v$ be a leaf of a tree, and remove $v$. Since the resulting graph is also a tree, we can apply the inductive hypothesis. Then we can use this to prove the statement for the original tree.
+        
         \begin{thm} \label{thm_tree}
             The following statements are equivalent for a simple graph $G$: \begin{enumerate}
                 \item $G$ is a tree.
@@ -177,14 +197,6 @@
             %(4 $\Rightarrow$ 3) For any $x,y \in V$, $T+xy$ has a cycle and that cycle must contain $xy$. Removing $xy$ from the cycle yields a path from $x$ to $y$. Therefore $T$ is connected. Now suppose $T \backslash e$ is connected for some $e \in E$, and $e$ connects $x$ and $y$. There is a path from $y$ to $x$ in $T \backslash e$, and that path and $e$ creates a cycle in $T$: contradiction.
             
             %(3 $Righatrrow$ 2) $G$ is connected.
-        \end{proof}
-        
-        \begin{thm} \label{thm_tree_leaf}
-            A tree with at least 2 vertices has at least 2 leaves.
-        \end{thm}
-        
-        \begin{proof}
-            From [\ref{thm_tree}](5) and [\ref{lem_degree_sum}], the sum of degrees is $2|V|-2$. None of the degrees are 0. Therefore at least 2 degrees must equal 1.
         \end{proof}
         
         How can we figure out if a sequence is a degree sequence of some tree? It turns out to be a lot simpler than [\ref{thm_havel_hakimi}] and basically anything that makes sense can be a degree sequence of a tree:
