@@ -184,19 +184,24 @@
             The following statements are equivalent for a simple graph $G$: \begin{enumerate}
                 \item $G$ is a tree.
                 \item For any two vertices $u$ and $v$ of $G$, there is exactly one path connecting them.
-                \item $G$ is connected, and for any $e$ of $G$, $G \backslash e$ is disconnected.
+                \item $G$ is connected, and for any edge $e$ of $G$, $G \backslash e$ is disconnected.
                 \item $G$ has no cycle, and for any two vertices $u$ and $v$ not having an edge between them, $G+uv$ has a cycle.
                 \item $G$ is connected, and $|E| = |V|-1$.
             \end{enumerate}
         \end{thm}
 
         \begin{proof}
-            TODO
-            %(1 $\Rightarrow$ 4) $T$ has no cycles. For any $x,y \in V$, there is a path from $y$ to $x$. That path and $xy$ creates a cycle in $T+xy$.
+            (1 $\Rightarrow$ 2) Since $G$ is connected, there is a path. Next, induction on $|V|$. The base case $|V| \leq 2$ is trivial. From [\ref{lem_tree_leaf}] and [\ref{lem_tree_grow}], there is a leaf $v$ and $G-v$ is a tree. Any two vertices $a,b$ of $G-v$ has a unique path. Since a path from $a$ to $b$ in $G$ cannot contain $v$, there is a unique path in $G$ as well. Since $v$ is adjacent to a unique vertex $u$, and there is a unique path from $a$ to $u$, there is a unique path from $a$ to $v$ which is the path to $u$ plus the edge $uv$.
             
-            %(4 $\Rightarrow$ 3) For any $x,y \in V$, $T+xy$ has a cycle and that cycle must contain $xy$. Removing $xy$ from the cycle yields a path from $x$ to $y$. Therefore $T$ is connected. Now suppose $T \backslash e$ is connected for some $e \in E$, and $e$ connects $x$ and $y$. There is a path from $y$ to $x$ in $T \backslash e$, and that path and $e$ creates a cycle in $T$: contradiction.
+            (2 $\Rightarrow$ 3) Since every pair of vertices has a path, $G$ is connected. For any $e$, its two endpoints have a unique path which is $e$ itself. Therefore there is no path between them in $G \backslash e$.
             
-            %(3 $Righatrrow$ 2) $G$ is connected.
+            (3 $\Rightarrow$ 4) If $G$ has a cycle, then take any edge $e$ in the cycle $C$. In any walk that contains $e$, this $e$ can be replaced with walking the opposite direction on $C$ to form another valid walk. (The rigorous argument is left to the reader for exercise.) Therefore $G \backslash e$ is connected, contradiction. Next, since $G$ is connected, taking a path from $u$ to $v$ and then taking $uv$ gives a cycle in $G+uv$.
+            
+            (4 $\Rightarrow$ 1) If $G$ is disconnected, then connecting two vertices in different connected components does not give a cycle, contradiction. This is because once you take that edge, there is no way to come back to the starting vertex. Therefore $G$ is a connected graph with no cycle, i.e. a tree.
+            
+            (1 $\Rightarrow$ 5) $G$ is connected from the definition. Next, induction on $|V|$. The base case $|V| \leq 2$ is trivial. There is a leaf $v$ and $G-v$ is a tree. $G-v$ has $|E(G)|-1$ edges and $|V(G)|-1$, so $|E(G)|-1 = |V(G)|-2$.
+            
+            (5 $\Rightarrow$ 3) Adding an edge decreases the number of connected components by at most one. A graph with no edges has $|V|$ connected components. Therefore a graph with $|V|-2$ edges is disconnected.
         \end{proof}
         
         How can we figure out if a sequence is a degree sequence of some tree? It turns out to be a lot simpler than [\ref{thm_havel_hakimi}] and basically anything that makes sense can be a degree sequence of a tree:
