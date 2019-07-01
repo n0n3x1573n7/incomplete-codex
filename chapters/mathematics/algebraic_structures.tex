@@ -292,7 +292,11 @@
 				\\$\forall a,b,c \in F, (a+b) \cdot c=a \cdot c+b \cdot c$\\where $\cdot$ takes precedence over $+$.
 			\end{itemize}
 		\end{defn}
-
+		
+		\begin{thm}
+			Let $F$ be a field. Let $0$ be the additive identity of $F$. Then, $\forall a \in F, 0 \cdot a = 0$
+		\end{thm}
+		
 		\begin{defn}[Ordered Field] \label{def_ordered_field}
 			An \emph{ordered field} is a field $F$ which is an ordered set, such that the order is compatible with the field operations, that is:
 			\begin{itemize}
@@ -376,6 +380,85 @@
 				Hence they exist uniquely.
 		\end{proof}
 		
-		\subsection{Vector Space}
+		\subsection{Vector Space}\label{chap_vector_space}
+		\begin{defn}[Vector Space]
+			A \emph{vector space} over a field $F$ is a set $V$ together with two operations, addition($+:V\times V \rightarrow V$) and scalar multiplication($\cdot:F \times V \rightarrow V$), satisfying the following axioms:
+			\begin{itemize}
+				\item[(A)] \textbf{Axioms for Addition}
+				\begin{itemize}
+					\item[(A1)] \textbf{Closed under Addition}\\$\forall \vec{u} ,\vec{v} \in V, \vec{u}+\vec{v} \in V$
+					\item[(A2)] \textbf{Addition is Commutative}\\$\forall \vec{u}, \vec{v} \in V, \vec{u}+\vec{v}=\vec{v}+\vec{u}$
+					\item[(A3)] \textbf{Addition is Associative}\\$\forall \vec{u},\vec{v},\vec{w} \in v, (\vec{u}+\vec{v})+\vec{w}=\vec{u}+(\vec{v}+\vec{w})$
+					\item[(A4)] \textbf{Identity of Addition(Zero vector)}\\$\exists \vec{0} \in V, \forall \vec{u} \in F, \vec{0}+\vec{u}=\vec{u}+\vec{0}=\vec{u}$
+					\item[(A5)] \textbf{Inverse of Addition(Negative)}\\$\forall \vec{u} \in V, \exists -\vec{u} \in V, \vec{u}+(-\vec{u})=0$
+				\end{itemize}
+				\item[(M)] \textbf{Axioms for Scalar Multiplication}
+				\begin{itemize}
+					\item[(M1)] \textbf{Closed under Scalar Multiplication}\\$\forall k \in F, \vec{u} \in V, k \cdot \vec{u} \in V$
+					\item[(M2)] \textbf{Scalar Multiplication is Distributive(1)}\\$\forall k \in F, \vec{u}, \vec{v} \in V, k \cdot (\vec{u}+\vec{v})=k \cdot \vec{u} + k \cdot \vec{v}$
+					\item[(M3)] \textbf{Scalar Multiplication is Distributive(2)}\\$\forall k, m \in F, \vec{u} \in V, (k+m) \cdot \vec{u}=k \cdot \vec{u} + m \cdot \vec{u}$
+					\item[(M4)] \textbf{Scalar Multiplication is Associative}\\$\forall k, m \in F, \vec{u} \in V, (km) \cdot \vec{u}=k \cdot (m \cdot \vec{u})$
+					\item[(M5)] \textbf{Identity of Scalar Multiplication}\\$\exists 1 \in F, \forall \vec{u} \in V, 1 \cdot \vec{u}=\vec{u}$
+				\end{itemize}
+			\end{itemize}
+		\end{defn}
+	
+		\begin{thm}
+			Let $V$ be a vector space over a field $F$. $\vec{u} \in V$, $k \in F$, $0$ the additive identity of $F$, $1$ the multiplicative identity of $F$, $\vec{0}$ the additive identity of $V$. Then, the followings hold:
+			\begin{itemize}
+				\item $0 \cdot \vec{u} = \vec{0}$
+				\item $k \cdot \vec{0} = \vec{0}$
+				\item $-1 \cdot \vec{u} = -\vec{u}$
+				\item If $k \cdot \vec{u} = \vec{0}$, then $k=0$ or $\vec{u}=\vec{0}$.
+			\end{itemize}
+		\end{thm}
+		
+		\begin{defn}[Subspace of a Vector Space]
+			A subset $W$ of a vector space $V$ is called a \emph{subspace} of $V$ if $W$ is a vector space under the addition and scalar multiplication defined on $V$.
+		\end{defn}
+
+		\begin{thm}
+			If $W$ is a set of one or more vectors in a vector space $V$ over the field $F$, then $W$ is a subspace of $V$ iff the following conditions hold:
+			\begin{itemize}
+				\item $\forall \vec{u}, \vec{v} \in W, \vec{u}+\vec{v} \in W$
+				\item $\forall k \in F, \vec{u} \in W, k \cdot \vec{u} \in W$
+			\end{itemize}
+		\end{thm}
+	
+		\begin{thm}
+			If $W_1, W_2, \dots , W_r$ are subspaces of a vector space $V$, then $\cap_{i=1}^{r}W_i$ is also a subspace of $V$.
+		\end{thm}
+	
+		\begin{defn}[Linear Combination]
+			If $\vec{w}$ is a vector in a vector space $V$ over the field $F$, then $\vec{w}$ is said to be a \emph{Linear Combination} of the vectors $\vec{v_1}, \vec{v_2}, \dots, \vec{v_r} \in V$ if $\vec{w}$ can be expressed in the form $\vec{w}=\sum_{i=1}^{r}k_i\vec{v_i}$, where $k_1, k_2, \dots, k_r \in F$. These scalars are called the \emph{coefficients} of the linear combination.
+		\end{defn}
+	
+		\begin{defn}[Span]
+			The subspace of a vector space $V$ that is formed from all possible linear combinations of the vectors in a nonempty set $S$ is called the \emph{Span} of $S$, and we say that the vectors in $S$ \emph{span} that subspace.
+		\end{defn}
+	
+		\begin{thm}
+			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ and $S'=\{\vec{w_1}, \vec{w_2}, \dots, \vec{w_k}\}$ are nonempty sets of vectors in a vector space $V$, then $\verb|span|(S)=\verb|span|(S')$ iff each vector in $S$ is a linear combination of those in $S'$ and vice versa.
+		\end{thm}
+
+		\begin{defn}[Basis]
+			If $V$ is any vector space and $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a finite set of linearly independent vectors in $V$ which spans $V$, then $S$ is called a \emph{basis} for $V$.
+		\end{defn}
+	
+		\begin{thm}
+			All bases for a finite-dimensional vector space have the same number of vectors.
+		\end{thm}
+		
+		\begin{defn}[Dimension]
+			The \emph{dimension} of a finite-dimensional vector space $V$, denoted by $\dim (V)$, is defined to be the number of vectors in a basis for $V$. In addition, the zero vector space is defined to have dimension zero.
+		\end{defn}
+	
+		\begin{thm}
+			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a basis for a vector space $V$, then every vector $\vec{v}$ in $V$ can be expressed in the form $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ in exactly one way.
+		\end{thm}
+	
+		\begin{defn}[Coordinate]
+			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a basis for a vector space $V$ over the field $F$, and $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ is the expression for a vector $\vec{V}$ in terms of the basis $S$, then the scalars $c_1,c_2,\dots,c_n$ are called the \emph{coordinates} of $\vec{v}$ relative to the basis $S$. The vector $(c_1,c_2,\dots,c_n)$ in $F^n$ constructed from these coordinates is called the \emph{coordinate vector of $\vec{v}$ relative to $S$}, denoted by $(\vec{v})_S=(c_1,c_2,\dots,c_n)$.
+		\end{defn}
 
 \end{document}

@@ -1,12 +1,19 @@
 \documentclass{report}
 
 \begin{document}
-	Linear algebra, in sum, deals with vectors and matrices. It targets to solve a given set of linear equations with multiple variables.
-	\section{Vector}
-		\subsection{}
+Linear algebra, in sum, deals with vectors and matrices. It targets to solve a given set of linear equations with multiple variables.
+	\section{Vector Spaces}
+		For the definitions on vector spaces, subspaces, and bases, refer to the chapter \ref{chap_vector_space}.
+		\subsection{Linear Independence}
+		We now define linear independence, one of the most important concepts utilized in linear algebra.
+		\begin{defn}[Linear Independence]
+			if $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a nonempty set of vectors in a vector space $V$, then the vector equation $k_1\vec{v_1}+k_2\vec{v_2}+\dots+k_r\vec{v_r}=\vec{0}$ has at least one solution, namely, $k_1=0, k_2=0, \dots, k_r=0$, the \emph{trivial solution}. If this is the only solution, then $S$ is said to be a \emph{linearly independent set}. If there are solutions in addition to the trivial solution, then $S$ is said to be \emph{linearly dependent}.
+		\end{defn}
+		
+		\begin{thm}
+			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a set of vectors in $\mathbb{R}^n$. If $r>n$, then $S$ is linearly dependent.
+		\end{thm}
 	\section{Solving Equations}
-		\subsection{}
-	\section{Vector Spaces and Subspaces}
 		\subsection{}
 	\section{Orthogonality}
 		\subsection{}
