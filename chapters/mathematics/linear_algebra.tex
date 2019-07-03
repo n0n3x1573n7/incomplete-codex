@@ -13,9 +13,51 @@ Linear algebra, in sum, deals with vectors and matrices. It targets to solve a g
 		\begin{thm}
 			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a set of vectors in $\mathbb{R}^n$. If $r>n$, then $S$ is linearly dependent.
 		\end{thm}
+		
+		\subsection{Orthogonality}
+		\begin{defn}[Euclidean Inner Product]
+			Let $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ in $\mathbb{R}^n$. The inner product of the two vectors $\vec{u}$ and $\vec{v}$ is defined as
+			\begin{displaymath}
+				\vec{u}\cdot\vec{v}=\sum_{i=1}^{n}u_iv_i=u_1v_1+u_2v_2+\dots+u_nv_n
+			\end{displaymath}
+		\end{defn}
+		
+		\begin{defn}[Norm]
+			The \emph{norm} of $\vec{u}=(u_1,u_2,\dots,u_n)$ in $\mathbb{R}^n$, denoted $\|\vec{u}\|$, is defined by
+			\begin{displaymath}
+			\|\vec{u}\|=\sqrt{\vec{u} \cdot \vec{u}}=\sqrt{\sum_{i=1}^{n}u_i^2}=\sqrt{u_1^2+u_2^2+\dots+u_n^2}
+			\end{displaymath}
+		\end{defn}
+		
+		\begin{defn}[Unit vectors]
+			A vector $\vec{u}$ in $\mathbb{R}^n$ is said to be a unit vector iff $\|\vec{u}\|=1$.
+		\end{defn}
+		
+		\begin{defn}[Angle]
+			The \emph{angle} between two nonzero vectors $\vec{u}$ and $\vec{v}$ in $\mathbb{R}^n$ is defined by
+			\begin{displaymath}
+				\theta=\cos^{-1}(\frac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}\|})
+			\end{displaymath}
+		\end{defn}
+		
+		\begin{defn}[Orthogonal Vectors]
+			Two nonzero vectors $\vec{u}$ and $\vec{v}$ in $\mathbb{R}^n$ are said to be \emph{orthogonal} or \emph{perpendicular} if $\vec{u} \cdot \vec{v} = 0$.
+		\end{defn}
+		
+		\begin{defn}[Orthogonal set]
+			A nonempty set of vectors in $\mathbb{R}^n$ is called an \emph{orthogonal set} if all pairs of distinct vectors in the set are orthogonal. If they are also all unit vectors, it is called an \emph{orthonormal set}.\\
+			In other words, for a set $\{u_1, u_2, \dots, u_n\}$ to be orthogonal:
+			\begin{displaymath}
+				u_i \cdot u_j
+				\begin{cases}
+					\|u_i\|^2 & i=j\\
+					0 & i \ne j
+				\end{cases}
+			\end{displaymath}
+			And for the set to be orthonormal, in addition to above, $\forall i \in \{1, 2, \dots n\}, \|u_i\|=1$.
+		\end{defn}
+		
 	\section{Solving Equations}
-		\subsection{}
-	\section{Orthogonality}
 		\subsection{}
 	\section{Determinants}
 		\subsection{}
