@@ -56,17 +56,22 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{displaymath}
 			And for the set to be orthonormal, in addition to above, $\forall i \in \{1, 2, \dots n\}, \|u_i\|=1$.
 		\end{defn}
+	
 	\section{Matrix}
 		\subsection{Matrices and its operations}
 			\begin{defn}[Matrix]
 				A \emph{matrix} is a rectangular array of numbers. The numbers in the array are called the \emph{entries} in the matrix.
 			\end{defn}
+		
 			Equality, addition, and subtraction can only be defined on same-sized matrices, and is defined elementwise; scalar multiplication is also defined elementwise.
+			
 			\begin{defn}[Matrix Multiplication]
 				If $A$ is an $m \times r$ matrix and $B$ is an $r \times n$ matrix, then the \emph{product} $AB$ is the $m \times n$ matrix whose entries are determined as follows:
 				The entry of $AB$ on row $i$ and column $j$, multiply the corresponding entries from the row $i$ from $A$ and column $j$ from $B$, then add them all together.
 			\end{defn}
+		
 			Matrices of the same size may be used in a linear combination, just like vectors[\ref{def_linear_combination_vector}].
+			
 			\begin{defn}[Linear Combination of a Matrix]
 				If $A_1, A_2, \dots, A_r$ are matrices of the same size, and if $c_1, c_2, \dots, c_r$ are scalars, then an expression of the form
 				\begin{displaymath}
@@ -74,30 +79,93 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				\end{displaymath}
 				is called a \emph{linear combination} of $A_1, A_2, \dots, A_r$ with coefficients $c_1, c_2, \dots, c_r$.
 			\end{defn}
+			
 			\begin{thm}
 				If $A$ is an $m \times n$ matrix and if $\vec{x}$ is an $n \times 1$ column vector, then the product $A\vec{x}$ can be expressed as a linear combination of the column vectors of $A$ in which the coefficients are the entries of $\vec{x}$.
 			\end{thm}
+			
 			\begin{defn}[Transpose]
 				For any $m \times n$ matrix, then the \emph{transpose} of $A$, denoted by $A^T$, is defined to be the $n \times m$ matrix that results by interchanging the rows and columns of $A$; that is, the first column of $A^T$ is the first row of $A$ and so forth.
 			\end{defn}
+			
 			\begin{defn}[Trace]
 				For a square matrix $A$, the \emph{trace} of $A$, denoted $tr(A)$, is defined to be the sum of the entries on the main diagonal of $A$.
-			\end{defn}
+			
+		\end{defn}
+	
 	\section{Inverse}
-		\subsection{}
+		\subsection{Elementary Row Operations and Matrices}
+		
+		\begin{defn}[Elementary Row Operations]
+			The following three operations are said to be the \emph{elementary row operations} on a matrix:
+			\begin{enumerate}
+				\item Multiply a row through by a nonzero constant.
+				\item Interchange two rows.
+				\item Add a constant times one row to another.
+			\end{enumerate}
+		\end{defn}
+		
+		\begin{defn}[Elementary Row Matrices]
+			An $n \times n$ matrix is called an \emph{elementary matrix} if it can be obtained from the $n \times n$ identity matrix $I_n$ by performing a single elementary row operation.
+		\end{defn}
+		
+		\begin{thm}[Elementary Row Operations and Elementary Row Matrices]
+			If the elementary matrix $E$ results from performing a certain row operation on $I_m$ and $A$ is an $m \times n$ matrix, then the product $EA$ is the matrix that results when this same row operation is performed on $A$.
+		\end{thm}
+		
+		\subsection{Finding the Inverse for a Matrix}
+		\begin{defn}[Inverse]
+			If $A$ is a square matrix, and if a matrix $B$ of the same size can be found so that $AB=BA=I$, then $A$ is said to be \emph{invertible} or \emph{nonsingular} and $B$ is called an \emph{inverse} of $A$, denoted by $A^{-1}$. If no such matrix $B$ can be found, then $A$ is said to be \emph{singular} or \emph{non-invertible}.
+		\end{defn}
+		
+		\begin{thm}
+			If $B$ and $C$ are both inverses of the matrix $A$, then $B=C$.
+		\end{thm}
+		
+		\begin{thm}[Inverse of a 2-by-2 matrix]
+			The matrix
+			\begin{displaymath}
+				A=
+				\begin{bmatrix}
+					a & b \\ c & d
+				\end{bmatrix}
+			\end{displaymath}
+			is invertible iff $ad-bc\ne0$, in which case the inverse is given by:
+			\begin{displaymath}
+				A^{-1}=\frac{1}{ad-bc}
+				\begin{bmatrix}
+					d & -b \\ -c & a
+				\end{bmatrix}
+			\end{displaymath}
+		\end{thm}
+		
+		\begin{thm}
+			If $A$ and $B$ are invertible matrices with the same size, then $AB$ is invertible and $(AB)^{-1}=B^{-1}A^{-1}$.\\
+			In general, a product of any number of invertible matrices is invertible, and the inverse of the product is the product of the inverses in the reverse order.
+		\end{thm}
+		
+		\begin{thm}
+			Every elementary matrix is invertible, and the inverse is also an elementary matrix.
+		\end{thm}
+	
 	\section{Determinants}
 		\subsection{}
+	
 	\section{Eigenvalues and Eigenvectors}
 		\subsection{}
+	
 	\section{Solving Linear Equations}
 	We come to this final section, the ultimate target of linear algebra: solving a system of linear equations.
 		\subsection{Linear Equations to Matrices}
+		
 		\begin{defn}[Homogeneous Linear Equation]
 			A \emph{homogeneous linear equation} in the variables $x_1,x_2,\dots,x_n$ has the form $a_1x_1+a_2x_2+\dots+a_nx_n=0$, where $a_1a_2\dots a_n\ne0$.
 		\end{defn}
+		
 		A finite set of linear equations is called a \emph{system of linear equations}, or more briefly, a \emph{linear system}. The variables are called \emph{unknowns}. A \emph{solution} of a linear system in $x_1,x_2,\dots,x_n$ is a sequence of $n$ numbers $s_1,s_2,\dots,s_n$ for which the substitution $x_i=s_i$ makes each equation a true statement.
 		
 		The system of $m$ linear equations in $n$ unknowns,\\
+		
 		\begin{center}
 		\begin{tabular}{ccccccccc}
 			$a_{11}x_1$ & $+$ & $a_{12}x_2$ & $+$ & $\cdots$ & $+$ & $a_{1n}x_n$ & $=$ & $b_1$    \\
@@ -106,7 +174,9 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			$a_{m1}x_1$ & $+$ & $a_{m2}x_2$ & $+$ & $\cdots$ & $+$ & $a_{mn}x_n$ & $=$ & $b_m$   
 		\end{tabular}
 		\end{center}
+		
 		can be represented in matrices as follows:
+		
 		\begin{displaymath}
 			\begin{bmatrix}
 				a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -122,9 +192,11 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				b_1 \\ b_2 \\ \vdots \\ b_m
 			\end{bmatrix}
 		\end{displaymath}
+		
 		By designating the three matrices $A$, $\vec{x}$ and $\vec{b}$ respectively, we can say that $A\vec{x}=\vec{B}$. In this equation, $A$ is called the \emph{coefficient matrix} of the system.
 		
 		The \emph{augmented matrix} for the system is obtained by adjoining $\vec{b}$ to $A$ as the last column as follows:
+		
 		\begin{displaymath}
 			\left[\begin{array}{cccc|c}
 				a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
@@ -133,7 +205,8 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				a_{m1} & a_{m2} & \cdots & a_{mn} & b_m\\
 			\end{array}\right]
 		\end{displaymath}
-		
+	
+		Before ending this chapter, we summarize this chapter by gathering all the facts on invertible matrices, written in the appendix[\ref{equiv_invert}].
 \end{document}
 
 %Introduction to Linear Algebra 4th ed, Gilbert Strang

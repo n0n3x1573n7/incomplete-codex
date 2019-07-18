@@ -1,6 +1,32 @@
 %\documentclass{report}
 
 \begin{document}
+    \section{Equivalent Statements for Invertible Matrices}\label{equiv_invert}
+    		For $n \times n$ matrix $A$, the followings are equivalent:
+        \begin{enumerate}
+        	\item $A$ is invertible.
+        	\item $Ax=\mathbb{O}$ only has the trivial solution.
+        	\item The reduced row echelon form of $A$ is $I_n$.
+        	\item $A$ can be represented as a product of elementary matrices.
+        	\item $Ax=b$ is consistent $\forall n \times 1$ matrix $b$.
+        	\item $Ax=b$ has exactly one solution $\forall n \times 1$ matrix $b$.
+        	\item $\det(A)\ne0$.
+        	\item column vectors of $A$ are linearly independent.
+        	\item row vectors of $A$ are linearly independent.
+        	\item column vectors of $A$ span $\mathbb{R}^n$.
+        	\item row vectors of $A$ span $\mathbb{R}^n$.
+        	\item column vectors of $A$ form a basis for $\mathbb{R}^n$.
+        	\item row vectors of $A$ form a basis for $\mathbb{R}^n$.
+        	\item rank$(A)=n$
+        	\item nullity$(A)=0$
+        	\item $($Null$(A))^\perp=\mathbb{R}^n$
+        	\item $($Row$(A))^\perp=\{\mathbb{O}\}$
+        	\item range of $T_A$ is $\mathbb{R}^n$
+        	\item $T_A$ is one-to-one.
+        	\item $\lambda=0$ is not an eigenvalue of $A$.
+        	\item $A^TA$ is invertible.
+        \end{enumerate}
+        
     \section{Cook-Levin Theorem}
         In this section
     
