@@ -96,7 +96,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	\section{Inverse}
 		\subsection{Elementary Row Operations and Matrices}
 		
-		\begin{defn}[Elementary Row Operations]
+		\begin{defn}[Elementary Row Operations]\label{def_elementary_row_operations}
 			The following three operations are said to be the \emph{elementary row operations} on a matrix:
 			\begin{enumerate}
 				\item Multiply a row through by a nonzero constant.
@@ -112,6 +112,52 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\begin{thm}[Elementary Row Operations and Elementary Row Matrices]
 			If the elementary matrix $E$ results from performing a certain row operation on $I_m$ and $A$ is an $m \times n$ matrix, then the product $EA$ is the matrix that results when this same row operation is performed on $A$.
 		\end{thm}
+		
+		\begin{defn}[Reduced-row Echelon Form]
+			A matrix that is in its \emph{reduced-row echelon form(rref)} has the following properties:
+			\begin{enumerate}
+				\item If a row does not consist entirely of zeroes, then the first nonzero number in the row is a 1. We call this a \emph{leading 1}.
+				\item If there are any rows that consist entirely of zeroes, then they are grouped together at the bottom of the matrix.
+				\item In any two successive rows that do not consist entirely of zeroes, the leading 1 in the lower row occurs farther to the right than the leading 1 in the higher row.
+				\item Each column that contains a leading 1 has zeroes everywhere else in that column
+			\end{enumerate}
+			A matrix that has the first three properties is said to be in \emph{row echelon form}.
+		\end{defn}
+		
+		\begin{thm}
+			If $R$ is the reduced row echelon form of an $n \times n$ matrix $A$, then either $R$ has a row of zeroes or $R$ is the identity matrix $I_n$.
+		\end{thm}
+		
+		There are two important facts on echelon forms:
+		\begin{enumerate}
+			\item Every matrix has a unique rref.
+			\item Row echelon forms are not unique, but, they have the same:
+			\begin{itemize}
+				\item number of zero rows
+				\item positions of leading 1's
+					\subitem the positions are called the \emph{pivot positions} of A
+					\subitem the columns are called the \emph{pivot column} of A
+			\end{itemize}
+		\end{enumerate}
+		
+		\begin{mthd}[Gauss-Jordan Elimination]\label{mthd_gauss_jordan_elim}
+			This method will use elementary row operations and through two phases, forward and backward phases, reduces a matrix into its reduced row echelon form.
+			\begin{enumerate}[label=Phase \arabic*.]
+				\item Forward Phase\footnote{If only this phase is used to produce a row echelon form, this is called the Gaussian elimination.}
+				\begin{enumerate}[label=Step \arabic*.]
+					\item Locate the leftmost column that does not consist entirely of zeroes.
+					\item Interchange the top row with another row, if necessary, to bring a nonzero entry to the top of the column found in Step 1.
+					\item Multiply the first row by a constant so that it has a leading 1.
+					\item Add suitable multiples of the top row to the rows below so that all entries below the leading 1 become zeroes.
+					\item Reapply Step 1, ignoring the upper rows until the entire matrix is in row echelon form.
+				\end{enumerate}
+				\item Backward Phase
+				\begin{enumerate}[label=Step \arabic*.]
+					\setcounter{enumii}{6}
+					\item Beginning with the last nonzero row and working upward, add suitable multiples of each row to the rows above to make the entries above the leading 1's to 0.
+				\end{enumerate}
+			\end{enumerate}
+		\end{mthd}
 		
 		\subsection{Finding the Inverse for a Matrix}
 		\begin{defn}[Inverse]
@@ -145,8 +191,18 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\end{thm}
 		
 		\begin{thm}
+			If $A$ is invertible, then $A^T$ is also invertible, and $(A^T)^{-1}=(A^{-1})^T$.
+		\end{thm}
+		
+		\begin{thm}
 			Every elementary matrix is invertible, and the inverse is also an elementary matrix.
 		\end{thm}
+		
+		\begin{mthd}[Inversion Algorithm]
+			To find the inverse of an invertible matrix $A$, find a sequence of elementary row operations that reduces $A$ to the identity and then perform that same sequence of operations on $I_n$ to obtain $A^{-1}$.
+			
+			For easier approach, simply use Gauss-Jordan Elimination[\ref{mthd_gauss_jordan_elim}] to the augmented matrix $\left[A|I_n\right]$ so that it becomes $\left[I_n|A^{-1}\right]$.
+		\end{mthd}
 	
 	\section{Determinants}
 		\subsection{}
@@ -157,25 +213,30 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	\section{Solving Linear Equations}
 	We come to this final section, the ultimate target of linear algebra: solving a system of linear equations.
 		\subsection{Linear Equations to Matrices}
-		
-		\begin{defn}[Homogeneous Linear Equation]
-			A \emph{homogeneous linear equation} in the variables $x_1,x_2,\dots,x_n$ has the form $a_1x_1+a_2x_2+\dots+a_nx_n=0$, where $a_1a_2\dots a_n\ne0$.
-		\end{defn}
-		
-		A finite set of linear equations is called a \emph{system of linear equations}, or more briefly, a \emph{linear system}. The variables are called \emph{unknowns}. A \emph{solution} of a linear system in $x_1,x_2,\dots,x_n$ is a sequence of $n$ numbers $s_1,s_2,\dots,s_n$ for which the substitution $x_i=s_i$ makes each equation a true statement.
-		
-		The system of $m$ linear equations in $n$ unknowns,\\
+		A finite set of linear equations is called a \emph{system of linear equations}, or more briefly, a \emph{linear system}. The variables are called \emph{unknowns}.
 		
 		\begin{center}
-		\begin{tabular}{ccccccccc}
-			$a_{11}x_1$ & $+$ & $a_{12}x_2$ & $+$ & $\cdots$ & $+$ & $a_{1n}x_n$ & $=$ & $b_1$    \\
-			$a_{21}x_1$ & $+$ & $a_{22}x_2$ & $+$ & $\cdots$ & $+$ & $a_{2n}x_n$ & $=$ & $b_2$    \\
-			$\vdots$    &     & $\vdots$   &     &          &     & $\vdots$    &     & $\vdots$ \\
-			$a_{m1}x_1$ & $+$ & $a_{m2}x_2$ & $+$ & $\cdots$ & $+$ & $a_{mn}x_n$ & $=$ & $b_m$   
-		\end{tabular}
+			\begin{tabular}{ccccccccc}
+				$a_{11}x_1$ & $+$ & $a_{12}x_2$ & $+$ & $\cdots$ & $+$ & $a_{1n}x_n$ & $=$ & $b_1$    \\
+				$a_{21}x_1$ & $+$ & $a_{22}x_2$ & $+$ & $\cdots$ & $+$ & $a_{2n}x_n$ & $=$ & $b_2$    \\
+				$\vdots$    &     & $\vdots$   &     &          &     & $\vdots$    &     & $\vdots$ \\
+				$a_{m1}x_1$ & $+$ & $a_{m2}x_2$ & $+$ & $\cdots$ & $+$ & $a_{mn}x_n$ & $=$ & $b_m$   
+			\end{tabular}
 		\end{center}
 		
-		can be represented in matrices as follows:
+		A \emph{solution} of a linear system in $x_1,x_2,\dots,x_n$ is a sequence of $n$ numbers $s_1,s_2,\dots,s_n$ for which the substitution $x_i=s_i$ makes each equation a true statement.
+		
+		We say that a linear system is \emph{consistent} if it has at least one solution and \emph{inconsistent} if it has no solutions.
+		
+		\begin{thm}
+			A system of linear equations has zero, one, or infinitely many solutions. There are no possibilities.
+		\end{thm}
+		
+		If a linear system has infinitely many solutions, then a set of parametric equations from which all solutions can be obtained by assigning numerical values to the parameters is called a \emph{general solution} of the system.
+		
+		If all constant terms are zero, that is, $\forall i, b_i=0$, it is said to be \emph{homogeneous}. A homogeneous system of linear equations always is consistent since it has $\forall i, x_i=0$ as its solution: this is called the \emph{trivial solution}. If there are other solutions, they are called the \emph{nontrivial solution}.
+		
+		The system of linear equations above can be represented in a matrix multiplication as shown below:
 		
 		\begin{displaymath}
 			\begin{bmatrix}
@@ -193,9 +254,9 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{bmatrix}
 		\end{displaymath}
 		
-		By designating the three matrices $A$, $\vec{x}$ and $\vec{b}$ respectively, we can say that $A\vec{x}=\vec{B}$. In this equation, $A$ is called the \emph{coefficient matrix} of the system.
+		By designating the three matrices $A$, $\bf{x}$ and $\bf{b}$ respectively, we can say that $A\bf{x}=\bf{b}$. In this equation, $A$ is called the \emph{coefficient matrix} of the system.
 		
-		The \emph{augmented matrix} for the system is obtained by adjoining $\vec{b}$ to $A$ as the last column as follows:
+		The \emph{augmented matrix} for the system is obtained by adjoining $\bf{b}$ to $A$ as the last column as follows:
 		
 		\begin{displaymath}
 			\left[\begin{array}{cccc|c}
@@ -205,8 +266,50 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				a_{m1} & a_{m2} & \cdots & a_{mn} & b_m\\
 			\end{array}\right]
 		\end{displaymath}
+		
+		Note the correspondence between basic algebraic operations on a given set of linear systems and elementary row operations on the augmented matrix of the said systems. In the order in the definition [\ref{def_elementary_row_operations}], the correspondences are:
+		
+		\begin{enumerate}
+			\item Multiply an equation through by a nonzero constant
+			\item Interchange two equations	
+			\item Add a constant times one equation to another.
+		\end{enumerate}
+		
+		By applying elementary row operations to the augmented matrix, we can get to the point where the augmented matrix is reduced to its reduced row echelon form. The variables corresponding to the leading 1's in the augmented matrix is called the \emph{leading variables}. The remaining variables are called \emph{free variables}.
+		
+		There is an important theorem regarding the number of free variables and homogeneous systems:
+		
+		\begin{thm}[Free Variable Theorem for Homogeneous Systems]
+			If a homogeneous linear system has $n$ unknowns, and if the rref of its augmented matrix has $r$ nonzero rows, then the system has $n-r$ free variables.
+		\end{thm}
+		
+		\begin{coro}
+			A homogeneous linear system with more unknowns than equations has infinitely many solutions.
+		\end{coro}
+		
+		In the following sections on finding solutions or parametric equation for solutions where it applies, the coefficient matrix will be noted as $A$, the vector of variables will be noted as $\bf{x}$ and the variables as $x_1, x_2, \dots, x_n$, and the vector for the constants as $\bf{b}$.
+		
+		\subsection{Method of Inverses}
+		
+		This can be used iff $A$ is an invertible matrix.
+		
+		Find the inverse of $A$, $A^{-1}$.
+		The only possible solution is $\bf{x}=A^{-1}\bf{b}$.
+		
+		\subsection{Method of RREF}
+		
+		This can be used for any matrix $A$.
+		
+		\begin{enumerate}
+			\item Reduce the augmented matrix $\left[A|\bf{b}\right]$ to its RREF $\left[R|\bf{c}\right]$
+			\item See if $R$ has a zero row. If any of the value of $\bf{c}$ corresponding to the zero row is nonzero, the system is inconsistent.
+			\item Exchange the free variables with parametric variables.
+			\item Transpose the free variables to RHS so the leading variables(the pivots) are the only ones left on the LHS.
+			\item The resulting expressions are the parametric equation for solutions.
+		\end{enumerate}
+		
 	
-		Before ending this chapter, we summarize this chapter by gathering all the facts on invertible matrices, written in the appendix[\ref{equiv_invert}].
+	Before ending this chapter, we summarize this chapter by gathering all the facts on invertible matrices, written in the appendix[\ref{equiv_invert}].
 \end{document}
 
 %Introduction to Linear Algebra 4th ed, Gilbert Strang
