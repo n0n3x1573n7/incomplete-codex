@@ -168,7 +168,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			If $B$ and $C$ are both inverses of the matrix $A$, then $B=C$.
 		\end{thm}
 		
-		\begin{thm}[Inverse of a 2-by-2 matrix]
+		\begin{thm}[Inverse of a 2-by-2 matrix]\label{thm_inv_2_by_2}
 			The matrix
 			\begin{displaymath}
 				A=
@@ -205,10 +205,207 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\end{mthd}
 	
 	\section{Determinants}
-		\subsection{}
-	
+		Recall from [\ref{thm_inv_2_by_2}] that the $2 \times 2$ matrix $A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is invertible iff $ad-bc \ne 0$. The term $ad-bc$ is the determinant of the matrix $A$. \emph{Determinant} is a scalar value that can be computed from the elements of a square matrix which encodes certain properties of the matrix.
+		\subsection{Calculating Determinants}
+			There are two methods to calculate the determinant.
+			\subsubsection{Method of Cofactor Expansion}
+				\begin{defn}[Minors and Cofactors]
+					Let $A$ be a square matrix. Then the \emph{minor of entry $a_{ij}$}, denoted by $M_ij$, is defined to be the determinant of the submatrix that remains after the i-th row and j-th column are deleted from $A$. The number $C_{ij}=(-1)^{i+j}M_{ij}$ is called the \emph{cofactor of entry $a_{ij}$}.
+				\end{defn}
+				
+				\begin{defn}[Adjoint]
+					If $A$ is $n \times n$ matrix and $C_{ij}$ is the cofactor of $a_{ij}$, then the matrix
+					\begin{displaymath}
+					\begin{bmatrix}
+						C_{11} & C_{12} & \cdots & C_{1n} \\
+						C_{21} & C_{22} & \cdots & C_{2n} \\
+						\vdots & \vdots &        & \vdots \\
+						C_{n1} & C_{n2} & \cdots & C_{nn} \\
+					\end{bmatrix}
+					\end{displaymath}
+					is called the \emph{matrix of cofactors from $A$}. The transpose of this matrix is called the \emph{adjoint of $A$}, denoted by adj$(A)$.
+				\end{defn}
+				
+				\begin{defn}[Determinant]
+					If $A$ is an $n \times n$ matrix, then the number obtained by multiplying the entries in any row or column of $A$ by the corresponding cofactors and adding the resulting products is called the \emph{determinant} of $A$, and the sums themselves are called \emph{cofactor expansions} of $A$.
+					
+					The cofactor expansion along the j-th column is as follows:
+					\begin{displaymath}
+						\det(A)=a_{1j}C_{1j}+a_{2j}C_{2j}+\cdots+a_{nj}C_{nj}
+					\end{displaymath}
+					
+					and the cofactor expansion along the i-th row is as follows:
+					\begin{displaymath}
+						\det(A)=a_{i1}C_{i1}+a_{i2}C_{i2}+\cdots+a_{in}C_{in}
+					\end{displaymath}
+				\end{defn}
+				
+				\begin{thm}\label{thm_triangular_determinant}
+					If $A$ is an $n \times n$ triangular matrix, then $\det(A)$ is the product of entries on the main diagonal of the matrix; that is, $\det(A)=a_{11}a_{22}\cdots a_{nn}$.
+				\end{thm}
+			
+			\subsubsection{Method of Elementary Row Operations}
+				This section presents a series of theorems that can be proven with the cofactor expansion formula that will suffice by themselves, paired with the theorem for determinants for triangular matrices[\ref{thm_triangular_determinant}](or simply the fact that $\forall n, \det(I_n)=1$), to find the determinant by continuously applying elementary row operations to the target matrix.
+				\begin{thm}
+					Let $A$ be a square matrix. If $A$ has a row of zeroes or a column of zeroes, then $\det(A)=0$.
+				\end{thm}
+				
+				\begin{thm}
+					Let $A$ be a square matrix. Then $\det(A)=\det(A^T)$.
+				\end{thm}
+				
+				\begin{thm}\label{thm_row_ops_det}
+					Let $A$ be an $n \times n$ matrix.
+					\begin{enumerate}
+						\item If $B$ is the matrix that results when a single row or single column or $A$ is multiplies by a scalar $k$, then $\det(B)=k\det(A)$.
+						\item If $B$ is the matrix that results when two rows or two columns of $A$ are interchanged, then $\det(B)=-\det(A)$.
+						\item If $B$ is the matrix that results when a multiple of one row of $A$ is added to another row or when a multiple of one column is added another column, then $\det(B)=\det(A)$.
+					\end{enumerate}
+				\end{thm}
+				
+				\begin{coro}
+					Let $E$ be an $n \times n$ matrix.
+					\begin{enumerate}
+						\item If $E$ results from multiplying a row of $I_n$ by a nonzero number $k$, then $\det(E)=k$.
+						\item If $E$ results from interchanging two rows of $I_n$, then $det(E)=-1$.
+						\item If $E$ results from adding a multiple of one row of $I_n$ to another, then $\det(E)=1$.
+					\end{enumerate}
+				\end{coro}
+				
+				\begin{thm}
+					If $A$ is a square matrix with two proportional rows or two proportional columns, then $\det(A)=0$.
+				\end{thm}
+				
+				Often times, the method of elementary row operations may be applied partially to assist with cofactor expansion formula.
+			
+		\subsection{Properties of Determinants}
+			\begin{thm}
+				Let $A$, $B$, and $C$ be $n \times n$ matrices that differ only in a single row, say the r-th row, and assume that the r-th row of $C$ can be obtained by adding corresponding entries in the r-th row of $A$ and $B$. Then, $\det(C)=\det(A)+\det(B)$.
+				
+				The same result holds for columns.
+			\end{thm}
+			
+			Pairing the theorem above with theorem \ref{thm_row_ops_det}'s first fact, we can say that the determinant is a linear function of each row separately.
+			
+			\begin{thm}
+				A square matrix $A$ is invertible iff $\det(A) \ne 0$.
+			\end{thm}
+			
+			\begin{thm}
+				If $A$ and $B$ are square matrices of the same size, then $\det(AB)=\det(A)\det(B)$.
+			\end{thm}
+			
+			\begin{thm}
+				If $A$ is invertible, then
+				\begin{displaymath}
+					\det(A^{-1})=\frac{1}{\det(A)}
+				\end{displaymath}
+			\end{thm}
+			
+			\begin{thm}[Inverse of a Matrix using its Adjoint]
+				If $A$ is an invertible matrix, then
+				\begin{displaymath}
+					A^{-1}=\frac{1}{\det(A)}\verb|adj|(A)
+				\end{displaymath}
+			\end{thm}
+			
+			\begin{thm}[Cramer's Rule]
+				If $A\bf{x}=\bf{b}$ is a system of n linear equations such that $det(A)\ne0$, then the system has a unique solution. The solution is:
+				\begin{displaymath}
+					\forall i, x_i=\frac{\det(A_i)}{\det(A)}
+				\end{displaymath}
+				where $A_i$ is the matrix obtained by replacing the entries in the j-th column of $A$ by the entries in the matrix $\bf{b}$.
+			\end{thm}
+		
 	\section{Eigenvalues and Eigenvectors}
+		\subsection{Characteristic Polynomial}
+		
 		\subsection{}
+		
+	
+	\section{Special Matrices}
+		\subsection{Diagonal Matrices}
+		A \emph{diagonal matrix} is a square matrix in which all entries off the main diagonal are zero. They can be represented in the following form:
+		
+		\begin{displaymath}
+		D=
+		\begin{bmatrix}
+		d_1 & 0 & \cdots & 0 \\
+		0 & d_2 & \cdots & 0 \\
+		\vdots & \vdots &        & \vdots \\
+		0 & 0 & \cdots & d_n \\
+		\end{bmatrix}
+		\end{displaymath}
+		
+		A diagonal matrix is invertible iff all of its diagonal entries are nonzero, and its inverse is:
+		
+		\begin{displaymath}
+		D^{-1}=
+		\begin{bmatrix}
+		d_1^{-1} & 0 & \cdots & 0 \\
+		0 & d_2^{-1} & \cdots & 0 \\
+		\vdots & \vdots &        & \vdots \\
+		0 & 0 & \cdots & d_n^{-1} \\
+		\end{bmatrix}
+		\end{displaymath}
+		
+		It is easy to calculate powers of diagonal matrices. More specifically,
+		
+		\begin{displaymath}
+		D^{k}=
+		\begin{bmatrix}
+		d_1^{k} & 0 & \cdots & 0 \\
+		0 & d_2^{k} & \cdots & 0 \\
+		\vdots & \vdots &        & \vdots \\
+		0 & 0 & \cdots & d_n^{k} \\
+		\end{bmatrix}
+		\end{displaymath}
+		
+		\subsection{Triangular Matrices}
+		A \emph{lower triangular} matrix is a matrix in which all the entries above the main diagonal are zero; an \emph{upper triangular} matrix is a matrix in which all the entries below the main diagonal are zero. Either of they are called \emph{triangular}. They can be represented in the following form:
+		
+		\begin{displaymath}
+		L=
+			\begin{bmatrix}
+				l_{11}     & 0          & \cdots & 0              & 0      \\
+				l_{21}     & l_{22}     & \cdots & 0              & 0      \\
+				\vdots     & \vdots     &        & \vdots         & \vdots \\
+				l_{(n-1)1} & l_{(n-1)2} & \cdots & l_{(n-1)(n-1)} & 0      \\
+				l_{n1}     & l_{n2}     & \cdots & l_{n(n-1)}     & l_{nn} \\
+			\end{bmatrix}
+		, U=
+			\begin{bmatrix}
+				u_{11} & u_{12} & \cdots & u_{1(n-1)}     & u_{1n}     \\
+				0      & u_{22} & \cdots & u_{2(n-1)}     & u_{2n}     \\
+				\vdots & \vdots &        & \vdots         & \vdots     \\
+				0      & 0      & \cdots & u_{(n-1)(n-1)} & u_{(n-1)n} \\
+				0      & 0      & \cdots & 0              & u_{nn}     \\
+			\end{bmatrix}
+		\end{displaymath}
+		
+		\begin{thm}
+			\begin{enumerate}
+				\item The transpose of a lower triangular matrix is upper triangular, and vice versa.
+				\item The product of lower triangular matrices is lower triangular, and same for the upper triangular matrices.
+				\item A triangular matrix is invertible iff its diagonal entries are all nonzero.
+				\item The inverse of an invertible lower triangular matrix is lower triangular, and same for the invertible upper triangular matrices.
+			\end{enumerate}
+		\end{thm}
+		
+		\subsection{Symmetric Matrices}
+		A \emph{symmetric} matrix is a square matrix such that $S=S^T$. Specifically, $S$ is symmetric iff $\forall 1 \le i,j \le n, S_{ij}=S_{ji}$.
+		
+		It is important to note that for two symmetric matrices $A$ and $B$, $(AB)^T=B^TA^T=BA$, and therefore their product is not guaranteed to be symmetric unless $AB=BA$, that is, $A$ and $B$ commute.
+		
+		\begin{thm}
+			The product of two symmetric matrices is symmetric iff the matrices commute.
+		\end{thm}
+		
+		In general, a symmetric matrix may not be invertible. However if they are, the following theorem shows an interesting fact:
+		
+		\begin{thm}
+			If $A$ is an invertible symmetric matrix, then $A^{-1}$ is symmetric.
+		\end{thm}
 	
 	\section{Solving Linear Equations}
 	We come to this final section, the ultimate target of linear algebra: solving a system of linear equations.
