@@ -29,6 +29,13 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{displaymath}
 		\end{defn}
 		
+		\begin{defn}[Distance]
+			If $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then the \emph{distance} between $\vec{u}$ and $\vec{v}$, denoted $d(\vec{u},\vec{v})$, and define it to be:
+			\begin{displaymath}
+				d(\vec{u},\vec{v})=\|\vec{u}-\vec{v}\|=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2+\cdots+(u_n-v_n)^2}
+			\end{displaymath}
+		\end{defn}
+		
 		\begin{defn}[Unit vectors]
 			A vector $\vec{u}$ in $\mathbb{R}^n$ is said to be a unit vector iff $\|\vec{u}\|=1$.
 		\end{defn}
@@ -39,6 +46,29 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				\theta=\cos^{-1}(\frac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}\|})
 			\end{displaymath}
 		\end{defn}
+		
+		\begin{thm}[Cauchy-Schwarz Inequality]
+			If $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then $\left|\vec{u}\cdot\vec{v}\right| \le \|u\|\|v\|$. In terms of components:
+			\begin{displaymath}
+				\left|u_1v_1+u_2v_2+\cdots+u_nv_n\right| \le \left(u_1^2+u_2^2+\cdots+u_n^2\right)^{1/2} \left(v_1^2+v_2^2+\cdots+v_n^2\right)^{1/2}
+			\end{displaymath}
+		\end{thm}
+		
+		\begin{thm}[Triangle Inequality]
+			If $\vec{u}, \vec{v}, \vec{w}$ are vectors in $\mathbb{R}^n$, then:
+			\begin{itemize}
+				\item $\|\vec{u}+\vec{v}\| \ge \|\vec{u}\|+\|\vec{v}\|$: Triangle Inequality for Vectors
+				\item $d(\vec{u},\vec{v}) \ge d(\vec{u},\vec{v})+d(\vec{w},\vec{v})$: Triangle Inequality for Distances
+			\end{itemize}
+		\end{thm}
+		
+		\begin{thm}[Equations for Vectors within the Euclidean Space]
+			If $\vec{u}$ and $\vec{v}$ are vectors in $\mathbb{R}^n$
+			\begin{itemize}
+				\item $\|\vec{u}+\vec{v}\|^2+\|\vec{u}-\vec{v}\|^2=2\left(\|u\|^2+\|v\|^2\right)$: Parallelogram Equation for Vectors
+				\item $\vec{u}\cdot\vec{v}=\frac{1}{4}\|\vec{u}+\vec{v}\|^2-\frac{1}{4}\|\vec{u}-\vec{v}\|^2$
+			\end{itemize}
+		\end{thm}
 		
 		\begin{defn}[Orthogonal Vectors]
 			Two nonzero vectors $\vec{u}$ and $\vec{v}$ in $\mathbb{R}^n$ are said to be \emph{orthogonal} or \emph{perpendicular} if $\vec{u} \cdot \vec{v} = 0$.
@@ -55,6 +85,16 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				\end{cases}
 			\end{displaymath}
 			And for the set to be orthonormal, in addition to above, $\forall i \in \{1, 2, \dots n\}, \|u_i\|=1$.
+		\end{defn}
+		
+		\begin{thm}[Projection Theorem]
+			If $\vec{u}$ and $\vec{a}$ are vectors in $\mathbb{R}^n$ and if $\vec{a} \ne \vec{0}$, then $\vec{u}$ can be expresses in exactly one way in the form $\vec{u}=\vec{w_1}+\vec{w_2}$, where $\exists k \in \mathbb{R}, \vec{w_1}=k\vec{a}$ and $\vec{a} \cdot \vec{w_2}=0$.
+		\end{thm}
+		
+		In the theorem above, the vector $\vec{w_1}$ is called the \emph{orthogonal projection of $\vec{u}$ on $\vec{a}$} or \emph{vector component of $\vec{u}$ along $\vec{a}$}, and the vector $\vec{w_2}$ is called the \emph{vector component of $\vec{u}$ orthogonal to $\vec{a}$}.
+		
+		\begin{defn}[Projection]
+			Let $\vec{u}$ and $\vec{a} \ne \vec{0}$ be vectors in $\mathbb{R}^n$. The \emph{orthogonal projection of $\vec{u}$ on $\vec{a}$}, denoted $\verb|proj|_{\vec{a}}\vec{u}$
 		\end{defn}
 	
 	\section{Matrix}
@@ -493,7 +533,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		Find the inverse of $A$, $A^{-1}$.
 		The only possible solution is $\bf{x}=A^{-1}\bf{b}$.
 		
-		\subsection{Method of RREF}
+		\subsection{Method of RREF}\label{mthd_rref}
 		
 		This can be used for any matrix $A$.
 		
@@ -504,6 +544,32 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\item Transpose the free variables to RHS so the leading variables(the pivots) are the only ones left on the LHS.
 			\item The resulting expressions are the parametric equation for solutions.
 		\end{enumerate}
+		
+		\subsection{Method of Particular and Special Special Solutions}
+			
+			This can be used for any matrix $A$.
+			
+			This method is extremely similar to Method of RREF[\ref{mthd_rref}].
+			
+			In this method, we first find the nullspace of $A$.
+			
+			\begin{thm}
+				If $A$ is an $m \times n$ matrix, then the solution set of the homogeneous linear system $A\bf{x}=\bf{0}$ consists of all vectors in $\mathbb{R}^n$ that are orthogonal to every row vector of $A$.
+			\end{thm}
+			
+			\begin{thm}
+				The general solution of a consistent linear system $A\bf{x}=\bf{b}$ can be obtained by adding any specific solution of $A\bf{x}=\bf{b}$ to the general solution of $A\bf{x}=\bf{0}$.
+			\end{thm}
+			
+			The theorem above indicates that we need to find the nullspace of $A$ along with a specific solution of $A\bf{x}=\bf{b}$ to find the whole, general solution of $A\bf{x}=\bf{b}$.
+			
+			Using Gauss-Jordan Elimination[\ref{mthd_gauss_jordan_elim}], we reduce the augmented matrix $\left[A|\bf{b}\right]$ to its rref, and detect if there are any inconsistencies. This corresponds to the first step on Method of RREF.
+			
+			First, we find the nullspace for $A$. We get the basis vectors from the rref of $A$. This corresponds to the second and third steps on Method of RREF.
+			
+			Next, we find the specific solution of $A\bf{x}=\bf{b}$. From the rref of $\left[A|\bf{b}\right]$ say $\left[R|\bf{c}\right]$, solve the equation by setting all free variables to 0. In doing so, since all leading variables have coefficient 1, the values of $c$ immediately correspond to the specific solution of the leading variables. This process is therefore almost automatic.
+			
+			Now we have the nullspace of $A$ and the specific solution of $A\bf{x}=\bf{b}$; add those two together to gain the whole solution. This corresponds to the fourth and final steps on Method of RREF.
 		
 	
 	Before ending this chapter, we summarize this chapter by gathering all the facts on invertible matrices, written in the appendix[\ref{equiv_invert}].
