@@ -357,11 +357,46 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				where $A_i$ is the matrix obtained by replacing the entries in the j-th column of $A$ by the entries in the matrix $\bf{b}$.
 			\end{thm}
 		
+	\section{Matrices and Vector Spaces}
+		\subsection{Fundamental Spaces of a Matrix}
+		
+		\subsection{Matrix Transformation}
+			\subsubsection{Translating General Vector Spaces into $\mathbb{R}^n$}
+			
+			\subsubsection{Matrix Transformations from $\mathbb{R}^n$ to $\mathbb{R}^m$}
+		
 	\section{Eigenvalues and Eigenvectors}
 		\subsection{Characteristic Polynomial}
+			\begin{defn}[Characteristic Polynomial]\label{def_characteristic_polynomial}
+				The \emph{characteristic polynomial} of an $n \times n$ square matrix $A$ is defined to be
+				\begin{displaymath}
+					p_A(t)=\det(tI-A)
+				\end{displaymath}
+			\end{defn}
+			To name some of the properties of any given characteristic polynomial themselves, they are monic(meaning that the leading coefficient is 1), and has degree $n$.
+			
+			The characteristic polynomial encodes many properties of the matrix. The most obvious property would be $p_A(t)=\det(A)$, and a slightly less obvious one would be that the coefficient of the term $t^{n-1}$ equals tr$(A)$.
+			
+			You might be wondering, "Hey, why is this guy talking about some kind of polynomial in a chapter about eigenvalues and eigenvectors?" Well, that'll become obvious once you see the definition of eigenvalues and eigenvectors.
 		
-		\subsection{}
+		\subsection{Eigenvalues and Eigenvectors}
+		\begin{defn}[Eigenvalues and Eigenvectors]
+			If $A$ is an $n \times n$ matrix, then a nonzero vector $\bf{x}$ in $\mathbb{R}^n$ is called an \emph{eigenvector} of $A$ if $A\bf{x}=\lambda \bf{x}$ for some $\lambda \in \mathbb{R}$. $\lambda$ is called an \emph{eigenvalue} of $A$, and $\bf{x}$ is said to be an \emph{eigenvector corresponding to $\lambda$}.
+		\end{defn}
 		
+		Now since $A\bf{x}=\lambda \bf{x}=\lambda I_n \bf{x}$, it follows that $(\lambda I_n - A)\bf{x}=\bf{0}$. Hey, haven't we seen that equation before for the characteristic polynomial[\ref{def_characteristic_polynomial}]? We can change this equation into $p_A(\lambda)=0$, therefore the following theorem:
+		
+		\begin{thm}
+			For an $n \times n$ matrix A, $\lambda$ is an eigenvalue of $A$ iff $p_A(\lambda)=\det(\lambda I-A)=0$.
+		\end{thm}
+		
+		Now, visiting the
+		\ifcsname r@thm_fundamental_theorem_of_algebra \endcsname
+		Fundamental Theorem of Algebra[\ref{thm_fundamental_theorem_of_algebra}]%
+		\else
+		\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Fundamental Theorem of Algebra}
+		\fi
+		, we can see that there are exactly $n$ (possibly complex and multiple) roots of a characteristic polynomial of $n \times n$ matrix, and therefore can have up to $n$ distinct eigenvalues.
 	
 	\section{Special Matrices}
 		\subsection{Diagonal Matrices}
