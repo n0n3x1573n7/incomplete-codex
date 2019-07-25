@@ -1,5 +1,70 @@
-\documentclass{report}
+%\documentclass{report}
 
 \begin{document}
+    \section{Metric Spaces}
+    
+    \subsection{Topology of Metric Spaces}
+    
+    \begin{defn}[Metric Space] \label{def_metric_space}
+        A set $X$ equipped with a function $d:X \times X \rightarrow \mathbb{R}$ is a \emph{metric space} if $d$ satisfies, for all $p,q,r \in X$:\begin{enumerate}
+            \item $d(p,q)>0$ for $p \neq q$, and $d(p,p)=0$.
+            \item $d(p,q)=d(q,p)$.
+            \item $d(p,q) \leq d(p,r)+d(r,q)$. This inequality is called the \emph{triangle inequality}.
+        \end{enumerate}
+        The elements of $X$ are called \emph{point}s. The function $d$ is called a \emph{metric}.
+    \end{defn}
+    
+    \begin{defn} \label{def_analysis_top}
+        Let $X$ be a metric space, $E \subseteq X$, and $p \in X$. \begin{itemize}
+            \item A \emph{neighborhood} of $p$, denoted $N_r(p)$, is $\{q \in X | d(p,q) \leq r \}$, where $r>0$.
+            \item $p$ is a \emph{limit point} of $E$ if every neighborhood of $p$ contains $q \in E$ different from $p$. The set of all limit points of $E$ is denoted $E'$.
+            \item The \emph{boundary} of $E$ is (TODO)
+            \item $p$ is an \emph{interior point} of $E$ if there is a neighborhood of $p$ that is contained in $E$.
+            \item $p$ is an \emph{isolated point} of $E$ if $p \in E$ and $p$ is not a limit point of $E$.
+            \item $E$ is \emph{open} if every point in $E$ is an interior point.
+            \item $E$ is \emph{closed} if if every limit point of $E$ is in $E$.
+            \item $E$ is \emph{bounded} if there is a neighborhood of some $p$ that contains $E$.
+            \item $E$ is \emph{dense} if every point of $X$ is a limit point of $E$ or a point of $E$.
+        \end{itemize}
+    \end{defn}
+    
+    Here is a figure demonstrating these notions in the space $\mathbb{R}$ with the metric $d(x,y) = |x-y|$ and $E = [0,1) \cap \{2\}$:
+    
+    (TODO)
+    
+    Note that a set can be both open and closed. For example, an empty set is (vacuously) both open and closed. $X$ itself is also both open and closed. The notions in topology will be covered in greater detail in the Topology chapter.
+    
+    From now on, assume $X$ is always a metric space with the metric $d$, and $E \subseteq X$, unless stated otherwise.
+    
+    \begin{prop} \label{prop_analysis_top} \begin{enumerate} \item[]
+        \item A neighborhood is open.
+        \item If $p$ is a limit point of $E$, then every neighborhood contains infinitely many points of $E$.
+        \item $E$ is open iff $E^C$ is closed.
+        \item $E$ is closed iff $E^C$ is open.
+    \end{enumerate} \end{prop}
+    
+    \begin{proof}
+    1. Let $q \in N_r(p)$. Then $N_{r-d(p,q)}(q) \subseteq N_r(p)$ because, if $x \in N_{r-d(p,q)}(q)$, then $d(p,x) \leq d(p,q)+d(q,r) < d(p,q)+r-d(p,q) = r$ so $x \in N_r(p)$.
+    
+    2. Suppose some neighborhood $N_r(p)$ contains only finitely many points of $E$, namely $x_1$, $\cdots$, $x_k$. Let $r=min_{i=1}^k d(p,x_i)$. Then $N_r(p)$ contains no points of $E$, contradiction.
+    
+    3. TODO
+    
+    4. $E = (E^C)^C$.
+    \end{proof}
+    
+    \subsection{Compact Sets}
+    
+    \section{Sequences}
+    
+    \section{Series}
+    
+    \section{Continuity}
+    
+    \section{Differentiation}
+    
+    \section{Integral}
+    
+    \section{Sequences and Series of Functions}
 
 \end{document}
