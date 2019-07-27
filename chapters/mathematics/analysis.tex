@@ -34,7 +34,7 @@
     
     Note that a set can be both open and closed. For example, an empty set is (vacuously) both open and closed. $X$ itself is also both open and closed. The notions in topology will be covered in greater detail in the Topology chapter.
     
-    From now on, assume $X$ is always a metric space with the metric $d$, and $E \subseteq X$, unless stated otherwise.
+    \textbf{IMPORTANT: From now on in this chapter, assume $X$ is always a metric space with the metric $d$, and $E \subseteq X$, unless stated otherwise.}
     
     \begin{prop} \label{prop_analysis_top} \begin{enumerate} \item[]
         \item A neighborhood is open.
@@ -48,14 +48,32 @@
     
     2. Suppose some neighborhood $N_r(p)$ contains only finitely many points of $E$, namely $x_1$, $\cdots$, $x_k$. Let $r=min_{i=1}^k d(p,x_i)$. Then $N_r(p)$ contains no points of $E$, contradiction.
     
-    3. TODO
+    3. Suppose $E$ is open and $x$ is a limit point of $E^C$. Then since every neighborhood of $x$ intersects $E^C$, $x$ is not an interior point of $E$. Therefore $x \in E^C$. Conversely, suppose $E^C$ is closed and $x \in E$. Since $x \notin E^C$, $x$ is not a limit point of $E^C$. Therefore there is a neighborhood of $x$ which does not intersect $E^C$, and that is contained in $E$. Therefore $x$ is an interior point. 
     
     4. $E = (E^C)^C$.
     \end{proof}
     
+    \begin{prop} \label{prop_analysis_closure} \begin{enumerate} \item[]
+        \item TODO
+    \end{enumerate} \end{prop}
+    
+    \begin{proof}
+        TODO
+    \end{proof}
+    
     \subsection{Compact Sets}
     
+    \begin{defn}[Compact Set] \label{def_analysis_compact}
+        An \emph{open cover} of $E$ is a collection of open subsets of $X$ whose union contains $E$. A \emph{finite subcover} of an open cover is a finite subset whose union still contains $E$. $E$ is \emph{compact} if every open cover of $E$ contains a finite subcover.
+    \end{defn}
+    
+    TODO
+    
     \section{Sequences}
+    
+    \begin{defn}[Convergence] \label{def_analysis_converge}
+        A sequence $\{p_n\}$ in $X$ \emph{converges} to $p \in X$ if, for every $\epsilon > 0$, there is an integer $N$ such that $n \geq N$ implies $d(p_n, p) < \epsilon$. We also write $p_n \rightarrow p$, or $lim_{n \rightarrow p} p_n = p$. A sequence \emph{diverges} if it does not converge.
+    \end{defn}
     
     \section{Series}
     
