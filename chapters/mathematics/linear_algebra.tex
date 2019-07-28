@@ -87,6 +87,14 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			And for the set to be orthonormal, in addition to above, $\forall i \in \{1, 2, \dots n\}, \|u_i\|=1$.
 		\end{defn}
 		
+		\begin{defn}[Orthogonal Complement]
+			The \emph{orthogonal complement} of a subspace $W$ of a vector space $V$, denoted $W^\perp$, is defined to be the set of all vectors in $V$ that are orthogonal to every vector of $W$.
+		\end{defn}
+		
+		\begin{thm}
+			Suppose $W$ is a subspace of a vector space $V$. $W^\perp$ is also a subspace of $V$.
+		\end{thm}
+		
 		\begin{thm}[Projection Theorem]
 			If $\vec{u}$ and $\vec{a}$ are vectors in $\mathbb{R}^n$ and if $\vec{a} \ne \vec{0}$, then $\vec{u}$ can be expresses in exactly one way in the form $\vec{u}=\vec{w_1}+\vec{w_2}$, where $\exists k \in \mathbb{R}, \vec{w_1}=k\vec{a}$ and $\vec{a} \cdot \vec{w_2}=0$.
 		\end{thm}
@@ -359,6 +367,49 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 	\section{Matrices and Vector Spaces}
 		\subsection{Fundamental Spaces of a Matrix}
+		There are four important vector spaces on any given matrix, which are row, column, null, and left null spaces.
+		\begin{defn}[Fundamental Spaces of a Matrix]
+			\begin{itemize}
+				\item A \emph{Column space} of a matrix, denoted $im(A)$(image of $A$), $range(A)$(range of $A$), $col(A)$ or $C(A)$, is the vectors spanned by the column vectors of the matrix.
+				\item A \emph{Row space} of a matrix, denoted $col(A^T)$, and sometimes called the coimage, is the vectors spanned by the row vectors of the matrix.
+				\item A \emph{Null space} of a matrix, denoted $ker(A)$(kernel of $A$), $null(A)$ or $N(A)$, is the vector space of the solution vectors of the equation $A\bf{x}=\bf{0}$.
+				\item A \emph{Left Null space} of a matrix, denoted $null(A^T)$, and sometimes called the cokernel, is the vector space of the solutions vectors of the equation $A^T\bf{y}=\bf{0}$.
+			\end{itemize}
+			The four spaces together are called the fundamental spaces of a matrix.
+		\end{defn}
+		
+		\begin{defn}[Rank of a Matrix]
+			The rank of a matrix $A$, denoted $rank(A)$, is defined to be the dimension of the column space.
+		\end{defn}
+		
+		\begin{defn}[Full Rank]
+			A matrix is said to have \emph{full rank} if its rank is largest possible among the matrices of the same dimensions, which is the minimum of the number of rows and columns.
+		\end{defn}
+		
+		\begin{thm}
+			$rank(A)$ equals the number of nonzero rows in $rref(A)$.
+		\end{thm}
+		
+		From the definitions above, we gain the fundamental theorem of linear algebra.
+		
+		\begin{thm}[Fundamental Theorem of Linear Algebra, Pt. 1]
+			Suppose a matrix A is $m \times n$. Let $r=rank(A)$. Fundamental subspaces of the matrix $A$ has the following dimensions:
+
+			\begin{tabular}{ccc}
+				\textbf{Name of Subspace} & \textbf{Containing Space} & \textbf{Dimension} \\
+				Column Space ($C(A)$)             & $\mathbb{R}^m$            & $rank(A)=r$        \\
+				Null Space ($N(A)$)               & $\mathbb{R}^n$            & $nullity(A)=n-r$   \\
+				Row Space ($C(A^T)$)              & $\mathbb{R}^n$            & $rank(A)=r$        \\
+				Left Nullspace ($N(A^T)$)         & $\mathbb{R}^m$            & $corank(A)=m-r$   
+			\end{tabular}
+		\end{thm}
+		
+		\begin{thm}[Fundamental Theorem of Linear Algebra, Pt. 2]
+			\begin{itemize}
+				\item $N(A)^\perp=C(A^T)$ in $\mathbb{R}^n$, that is, nullspace and row space are orthogonal complements.
+				\item $C(A)^\perp=N(A^T)$ in $\mathbb{R}^m$, that is, column space and left null space are orthogonal complements.
+			\end{itemize}
+		\end{thm}
 		
 		\subsection{Matrix Transformation}
 			\subsubsection{Translating General Vector Spaces into $\mathbb{R}^n$}
