@@ -226,6 +226,8 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	
 	In words, this can be represented as follows: \textit{The columns of the transition matrix from an old basis to a new basis are the coordinate vectors of the old basis relative to the new basis.}
 	
+	The following theorem is about the invertibility[\ref{def_invertible_matrix}] of the transition matrix, which is written in a future section.
+	
 	\begin{thm}
 		If $P$ is the transition matrix from a basis $B'$ to a basis $B$ for a finite-dimensional vector space $V$, then $P$ is invertible and $P^{-1}$ is the transition matrix from $B$ to $B'$.
 	\end{thm}
@@ -308,7 +310,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\end{mthd}
 		
 		\subsection{Finding the Inverse for a Matrix}
-		\begin{defn}[Inverse]
+		\begin{defn}[Inverse]\label{def_invertible_matrix}
 			If $A$ is a square matrix, and if a matrix $B$ of the same size can be found so that $AB=BA=I$, then $A$ is said to be \emph{invertible} or \emph{nonsingular} and $B$ is called an \emph{inverse} of $A$, denoted by $A^{-1}$. If no such matrix $B$ can be found, then $A$ is said to be \emph{singular} or \emph{non-invertible}.
 		\end{defn}
 		
