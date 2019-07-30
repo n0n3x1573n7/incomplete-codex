@@ -189,8 +189,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\end{itemize}
 	\end{thm}
 	
-	\subsection{Matrix Transformation}
-	\subsubsection{Translating General Vector Spaces into $\mathbb{R}^n$}
+	\subsection{Change of Basis}
 	We start from the definition of basis[\ref{def_basis}] and the concept of coordinates[\ref{def_coordinate}]. We assume that the scalar is $\mathbb{R}$ for simplicity, although any other field may be used as a scalar.
 	
 	Say that we are talking about a general vector space $V$ over a scalar $F$ which has $S=\{\vec{v_1},\vec{v_2},\dots,\vec{v_n}\}$ as its basis, by theorem [\ref{thm_coordinate_unique}], any vector $\vec{v}\in V$ can be represented uniquely as $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_n\vec{v_n}$, where $c_i \in F$. Observe that the vector $(\vec{v})_S=(c_1,c_2,\dots,c_n) \in \mathbb{F}^n$, and hence once basis $S$ is given for a vector space $V$, theorem [\ref{thm_coordinate_unique}] ensures that this correspondence between vectors in $V$ and $\mathbb{F}^n$ is one-to-one.
@@ -199,12 +198,48 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	
 	In the special case where $V=\mathbb{R}^n$ and $S$ is the \emph{standard basis}, i.e. $S=\{e_1,e_2,\dots,e_n\}$ where $e_i$ has zeroes as all of its components except for the $i$-th component, the coordinate vector $(\vec{v})_S$ and the vector $\vec{v}$ are the same.
 	
-	\subsubsection{Change of Basis}
 	If $S=\{v_1,v_2,\dots,v_n\}$ is a basis for a finite-dimensional vector space $V$, and if $(\vec{v})_S=(c_1,c_2,\dots,c_n)$ is the coordinate vector of $\vec{v}$ relative to $S$, then the mapping $\vec{v} \rightarrow (\vec{v})_S$ creates a connection between vectors in the general vector space $V$ and vectors in the vector space $\mathbb{R}^n$, which is more familiar to handle. We call this mapping the \emph{coordinate map} from $V$ to $\mathbb{R}^n$. Since we have all the tools to analyze this when we represent this vector as a matrix, we will be representing this mapping in the matrix form,
 	\begin{displaymath}
 	[\bf{v}]_S=\begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}
 	\end{displaymath}
-	where the square brackets simply emphasize the fact that this is in a matrix of a column vector form.%TODO
+	where the square brackets simply emphasize the fact that this is in a matrix of a column vector form.
+	
+	The \emph{Change-of-Basis Problem} states the following:
+	
+	If $\bf{v}$ is a vector in a finite-dimensional vector space $V$, and if we change the basis for $V$ from a basis $B$ to basis $B'$, how are the coordinate vectors $[\bf{b}]_B$ and $[\bf{b}]_{B'}$ related?
+	
+	To solve this problem, let:
+	\begin{itemize}
+		\item $B=\{\bf{u_1},\bf{u_2},\dots,\bf{u_n}\}$
+		\item $M=\begin{bmatrix} \bf{u_1} & \bf{u_2} & \dots & \bf{u_n} \end{bmatrix}$
+		\item $B'=\{\bf{v_1},\bf{v_2},\dots,\bf{v_n}\}$
+		\item $N=\begin{bmatrix} \bf{v_1} & \bf{v_2} & \dots & \bf{v_n} \end{bmatrix}$
+		\item $(\bf{b})_B=(c_1,c_2,\dots,c_n)$
+		\item $(\bf{b})_{B'}=(d_1,d_2,\dots,d_n)$
+	\end{itemize}
+	
+	We can see from this that $M[\bf{b}]_B=N[\bf{b}]_{B'}=\bf{b}$.
+	
+	Since the vectors of $B'$ are all in the vector space $V$, we can calculate their coordinates with respect to $B$, so say that $\bf{p_i}=[\bf{v_i}]_B$.
+	
+	If we consider a matrix given by $P=\begin{bmatrix} \bf{p_1} & \bf{p_2} & \dots & \bf{p_n} \end{bmatrix}$, we can clearly see that $M=NP$. Substitution yields $NP[\bf{b}]_B=N[\bf{b}]_{B'}=\bf{b}$, which indicates, by the uniqueness of coordinates(theorem [\ref{thm_coordinate_unique}]), $[\bf{b}]_{B'}=P[\bf{b}]_B$. The matrix $P$, often denoted $P_{B \rightarrow B'}$ is called the \emph{transition matrix} from $B$ to $B'$.
+	
+	In words, this can be represented as follows: \textit{The columns of the transition matrix from an old basis to a new basis are the coordinate vectors of the old basis relative to the new basis.}
+	
+	\begin{thm}
+		If $P$ is the transition matrix from a basis $B'$ to a basis $B$ for a finite-dimensional vector space $V$, then $P$ is invertible and $P^{-1}$ is the transition matrix from $B$ to $B'$.
+	\end{thm}
+	
+	We now conclude this section by introducing a procedure for computing $P_{B \rightarrow B'}$:
+	\begin{mthd}[Computing a Transition Matrix $P_{B \rightarrow B'}$]
+		$B$ and $B'$ are basis for a finite-dimensional vector space $V$.
+		\begin{enumerate}[label=Step \arabic*.]
+			\item Form the matrix $[B'|B]$.
+			\item Use elementary row operations to reduce the matrix to its rref.
+			\item The resulting matrix is $[I|P_{B\rightarrow B'}]$.
+		\end{enumerate}
+	\end{mthd}
+	
 
 	\section{Inverse}
 		\subsection{Elementary Row Operations and Matrices}
@@ -321,6 +356,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			For easier approach, simply use Gauss-Jordan Elimination[\ref{mthd_gauss_jordan_elim}] to the augmented matrix $\left[A|I_n\right]$ so that it becomes $\left[I_n|A^{-1}\right]$.
 		\end{mthd}
 		
+	\subsection{Matrix Transformations from $\mathbb{R}^n$ to $\mathbb{R}^m$}
 	
 	\section{Determinants}
 		Recall from [\ref{thm_inv_2_by_2}] that the $2 \times 2$ matrix $A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is invertible iff $ad-bc \ne 0$. The term $ad-bc$ is the determinant of the matrix $A$. \emph{Determinant} is a scalar value that can be computed from the elements of a square matrix which encodes certain properties of the matrix.
