@@ -3,9 +3,9 @@
 \begin{document}
     \section{Equivalent Statements for Invertible Matrices}\label{equiv_invert}
     		For $n \times n$ matrix $A$, the followings are equivalent:
-        \begin{enumerate}
+        \begin{enumerate}[label=(\alph*)]
         	\item $A$ is invertible.
-        	\item $A\bf{x}=\mathbb{O}$ only has the trivial solution.
+        	\item $A\bf{x}=\bf{0}$ only has the trivial solution.
         	\item The reduced row echelon form of $A$ is $I_n$.
         	\item $A$ can be represented as a product of elementary matrices.
         	\item $A\bf{x}=\bf{b}$ is consistent $\forall n \times 1$ matrix $\bf{b}$.
@@ -26,6 +26,31 @@
         	\item $\lambda=0$ is not an eigenvalue of $A$.
         	\item $A^TA$ is invertible.
         \end{enumerate}
+    
+    \section{Formula for Projection Onto a Subspace}\label{fmla_proj_subspace}
+    	We are projecting the vector $\bf{b}$ onto a subspace of $\mathbb{R}^n$ with basis $S=\{\bf{a_1},\bf{a_2},\dots,\bf{a_n}\}$. Let $A=[\bf{a_1}|\bf{a_2}|\dots|\bf{a_n}]$. Then $A$ has linearly independent columns. We now come to theorem [\ref{thm_ata}].
+    	
+    	\begin{proof}[Proof for Theorem \ref{thm_ata}]
+    		Consider the following equation:
+    		\begin{displaymath}
+	    		A^TA\bf{x}=\bf{0}
+    		\end{displaymath}
+    		$A\bf{x}$ is an element in the column space of $A$ and also the null space of $A^T$. However since the two spaces are orthogonal complements, implying $A\bf{x}=\bf{0}$.
+    		
+    		If $A$ has linearly independent columns, then $A\bf{x}=\bf{0}$ implies $\bf{x}=\bf{0}$, hence $null(A^TA)=\{\bf{0}\}$. Since $A^TA$ is square, by theorem \ref{equiv_invert}, it is invertible.
+    	\end{proof}
+    	
+    	The combination $\bf{p}=\hat{x_1}\bf{a_1}+\dots+\hat{x_n}\bf{a_n}=A\hat{x}$ that is closest to $\bf{b}$ is derived by the equation $\bf{b}=\bf{p}+\bf{e}$, and since $\|\bf{e}\|$ must be minimized, it must pe perpendicular to $\verb|span|(S)$, and therefore $A^T\bf{e}=\bf{0}$. Rewriting the equation to $\bf{b}-\bf{p}=\bf{e}$ and multiplying $A^T$ to the left side, we get:
+    	\begin{displaymath}
+	    	A^T(\bf{b}-\bf{p})=A^T(\bf{b}-A\hat{x})=\bf{0} \\ A^TA\hat{x}=A^T\bf{b}
+    	\end{displaymath}
+    	And now by theorem [\ref{thm_ata}], $A^TA$ is invertible. Therefore $\hat{x}=(A^TA)^{-1}A^T\bf{b}$ and $\bf{p}=A\hat{x}=A(A^TA)^{-1}A^T\bf{b}$.
+    	
+    	This formula yields the $n \times n$ \emph{projection matrix} of $A$ that produces $\bf{p}=P\bf{b}$:
+    	\begin{displaymath}
+	    	P_A=A(A^TA)^{-1}A^T
+    	\end{displaymath}
+    	
         
     \section{Cook-Levin Theorem}
         In this section

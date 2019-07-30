@@ -382,7 +382,7 @@
 		
 		\subsection{Vector Space}\label{chap_vector_space}
 		\begin{defn}[Vector Space]
-			A \emph{vector space} over a field $F$ is a set $V$ together with two operations, addition($+:V\times V \rightarrow V$) and scalar multiplication($\cdot:F \times V \rightarrow V$), satisfying the following axioms:
+			A \emph{vector space} over a field(sometimes called the \emph{scalar} of the vector space) $F$ is a set $V$ together with two operations, addition($+:V\times V \rightarrow V$) and scalar multiplication($\cdot:F \times V \rightarrow V$), satisfying the following axioms:
 			\begin{itemize}
 				\item[(A)] \textbf{Axioms for Addition}
 				\begin{itemize}
@@ -441,7 +441,7 @@
 			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ and $S'=\{\vec{w_1}, \vec{w_2}, \dots, \vec{w_k}\}$ are nonempty sets of vectors in a vector space $V$, then $\verb|span|(S)=\verb|span|(S')$ iff each vector in $S$ is a linear combination of those in $S'$ and vice versa.
 		\end{thm}
 
-		\begin{defn}[Basis]
+		\begin{defn}[Basis]\label{def_basis}
 			If $V$ is any vector space and $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a finite set of linearly independent vectors in $V$ which spans $V$, then $S$ is called a \emph{basis} for $V$.
 		\end{defn}
 	
@@ -453,11 +453,11 @@
 			The \emph{dimension} of a finite-dimensional vector space $V$, denoted by $\dim (V)$, is defined to be the number of vectors in a basis for $V$. In addition, the zero vector space is defined to have dimension zero.
 		\end{defn}
 	
-		\begin{thm}
+		\begin{thm}[Uniqueness of Basis Representation]\label{thm_coordinate_unique}
 			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a basis for a vector space $V$, then every vector $\vec{v}$ in $V$ can be expressed in the form $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ in exactly one way.
 		\end{thm}
 	
-		\begin{defn}[Coordinate]
+		\begin{defn}[Coordinate]\label{def_coordinate}
 			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a basis for a vector space $V$ over the field $F$, and $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ is the expression for a vector $\vec{V}$ in terms of the basis $S$, then the scalars $c_1,c_2,\dots,c_n$ are called the \emph{coordinates} of $\vec{v}$ relative to the basis $S$. The vector $(c_1,c_2,\dots,c_n)$ in $F^n$ constructed from these coordinates is called the \emph{coordinate vector of $\vec{v}$ relative to $S$}, denoted by $(\vec{v})_S=(c_1,c_2,\dots,c_n)$.
 		\end{defn}
 
