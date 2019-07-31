@@ -7,71 +7,75 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\subsection{Linear Independence}
 		We now define linear independence, one of the most important concepts utilized in linear algebra.
 		\begin{defn}[Linear Independence]
-			if $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a nonempty set of vectors in a vector space $V$, then the vector equation $k_1\vec{v_1}+k_2\vec{v_2}+\dots+k_r\vec{v_r}=\vec{0}$ has at least one solution, namely, $k_1=0, k_2=0, \dots, k_r=0$, the \emph{trivial solution}. If this is the only solution, then $S$ is said to be a \emph{linearly independent set}. If there are solutions in addition to the trivial solution, then $S$ is said to be \emph{linearly dependent}.
+			if $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ is a nonempty set of vectors in a vector space $V$, then the vector equation $k_1\bm{v_1}+k_2\bm{v_2}+\dots+k_r\bm{v_r}=\bm{0}$ has at least one solution, namely, $k_1=0, k_2=0, \dots, k_r=0$, the \emph{trivial solution}. If this is the only solution, then $S$ is said to be a \emph{linearly independent set}. If there are solutions in addition to the trivial solution, then $S$ is said to be \emph{linearly dependent}.
 		\end{defn}
 		
 		\begin{thm}
-			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a set of vectors in $\mathbb{R}^n$. If $r>n$, then $S$ is linearly dependent.
+			Let $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ be a set of vectors in $\mathbb{R}^n$. If $r>n$, then $S$ is linearly dependent.
 		\end{thm}
 		
 		\subsection{Orthogonality}
+		Refer to Chapter \ref{chap_inner_product_space} on information on general inner product spaces and definition on the real inner product space.
 		\begin{defn}[Euclidean Inner Product]
-			Let $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ in $\mathbb{R}^n$. The inner product of the two vectors $\vec{u}$ and $\vec{v}$ is defined as
+			Let $\bm{u}=(u_1,u_2,\dots,u_n)$ and $\bm{v}=(v_1,v_2,\dots,v_n)$ in $\mathbb{R}^n$. The inner product of the two vectors $\bm{u}$ and $\bm{v}$ is defined as
 			\begin{displaymath}
-				\vec{u}\cdot\vec{v}=\sum_{i=1}^{n}u_iv_i=u_1v_1+u_2v_2+\dots+u_nv_n
+				\bm{u}\cdot\bm{v}=\sum_{i=1}^{n}u_iv_i=u_1v_1+u_2v_2+\dots+u_nv_n
+			\end{displaymath}
+			is called the \emph{Euclidean inner product} or \emph{standard inner product}.
+		\end{defn}
+		
+		We call $R^n$ with the Euclidean inner product \emph{Euclidean n-space}.
+		
+		\begin{defn}[Euclidean Norm]
+			The \emph{norm} of $\bm{u}=(u_1,u_2,\dots,u_n)$ in $\mathbb{R}^n$, denoted $\|\bm{u}\|$, is defined by
+			\begin{displaymath}
+			\|\bm{u}\|=\sqrt{\bm{u} \cdot \bm{u}}=\sqrt{\sum_{i=1}^{n}u_i^2}=\sqrt{u_1^2+u_2^2+\dots+u_n^2}
 			\end{displaymath}
 		\end{defn}
 		
-		\begin{defn}[Norm]
-			The \emph{norm} of $\vec{u}=(u_1,u_2,\dots,u_n)$ in $\mathbb{R}^n$, denoted $\|\vec{u}\|$, is defined by
+		\begin{defn}[Euclidean Distance]
+			If $\bm{u}=(u_1,u_2,\dots,u_n)$ and $\bm{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then the \emph{distance} between $\bm{u}$ and $\bm{v}$, denoted $d(\bm{u},\bm{v})$, and define it to be:
 			\begin{displaymath}
-			\|\vec{u}\|=\sqrt{\vec{u} \cdot \vec{u}}=\sqrt{\sum_{i=1}^{n}u_i^2}=\sqrt{u_1^2+u_2^2+\dots+u_n^2}
-			\end{displaymath}
-		\end{defn}
-		
-		\begin{defn}[Distance]
-			If $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then the \emph{distance} between $\vec{u}$ and $\vec{v}$, denoted $d(\vec{u},\vec{v})$, and define it to be:
-			\begin{displaymath}
-				d(\vec{u},\vec{v})=\|\vec{u}-\vec{v}\|=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2+\cdots+(u_n-v_n)^2}
+				d(\bm{u},\bm{v})=\|\bm{u}-\bm{v}\|=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2+\cdots+(u_n-v_n)^2}
 			\end{displaymath}
 		\end{defn}
 		
 		\begin{defn}[Unit vectors]
-			A vector $\vec{u}$ in $\mathbb{R}^n$ is said to be a unit vector iff $\|\vec{u}\|=1$.
+			A vector $\bm{u}$ in $\mathbb{R}^n$ is said to be a unit vector iff $\|\bm{u}\|=1$.
 		\end{defn}
 		
 		\begin{defn}[Angle]
-			The \emph{angle} between two nonzero vectors $\vec{u}$ and $\vec{v}$ in $\mathbb{R}^n$ is defined by
+			The \emph{angle} between two nonzero vectors $\bm{u}$ and $\bm{v}$ in $\mathbb{R}^n$ is defined by
 			\begin{displaymath}
-				\theta=\cos^{-1}(\frac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\|\vec{v}\|})
+				\theta=\cos^{-1}(\frac{\bm{u}\cdot\bm{v}}{\|\bm{u}\|\|\bm{v}\|})
 			\end{displaymath}
 		\end{defn}
 		
 		\begin{thm}[Cauchy-Schwarz Inequality]
-			If $\vec{u}=(u_1,u_2,\dots,u_n)$ and $\vec{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then $\left|\vec{u}\cdot\vec{v}\right| \le \|u\|\|v\|$. In terms of components:
+			If $\bm{u}=(u_1,u_2,\dots,u_n)$ and $\bm{v}=(v_1,v_2,\dots,v_n)$ are vectors in $\mathbb{R}^n$, then $\left|\bm{u}\cdot\bm{v}\right| \le \|u\|\|v\|$. In terms of components:
 			\begin{displaymath}
 				\left|u_1v_1+u_2v_2+\cdots+u_nv_n\right| \le \left(u_1^2+u_2^2+\cdots+u_n^2\right)^{1/2} \left(v_1^2+v_2^2+\cdots+v_n^2\right)^{1/2}
 			\end{displaymath}
 		\end{thm}
 		
 		\begin{thm}[Triangle Inequality]
-			If $\vec{u}, \vec{v}, \vec{w}$ are vectors in $\mathbb{R}^n$, then:
+			If $\bm{u}, \bm{v}, \bm{w}$ are vectors in $\mathbb{R}^n$, then:
 			\begin{itemize}
-				\item $\|\vec{u}+\vec{v}\| \ge \|\vec{u}\|+\|\vec{v}\|$: Triangle Inequality for Vectors
-				\item $d(\vec{u},\vec{v}) \ge d(\vec{u},\vec{v})+d(\vec{w},\vec{v})$: Triangle Inequality for Distances
+				\item $\|\bm{u}+\bm{v}\| \ge \|\bm{u}\|+\|\bm{v}\|$: Triangle Inequality for Vectors
+				\item $d(\bm{u},\bm{v}) \ge d(\bm{u},\bm{v})+d(\bm{w},\bm{v})$: Triangle Inequality for Distances
 			\end{itemize}
 		\end{thm}
 		
 		\begin{thm}[Equations for Vectors within the Euclidean Space]
-			If $\vec{u}$ and $\vec{v}$ are vectors in $\mathbb{R}^n$
+			If $\bm{u}$ and $\bm{v}$ are vectors in $\mathbb{R}^n$
 			\begin{itemize}
-				\item $\|\vec{u}+\vec{v}\|^2+\|\vec{u}-\vec{v}\|^2=2\left(\|u\|^2+\|v\|^2\right)$: Parallelogram Equation for Vectors
-				\item $\vec{u}\cdot\vec{v}=\frac{1}{4}\|\vec{u}+\vec{v}\|^2-\frac{1}{4}\|\vec{u}-\vec{v}\|^2$
+				\item $\|\bm{u}+\bm{v}\|^2+\|\bm{u}-\bm{v}\|^2=2\left(\|u\|^2+\|v\|^2\right)$: Parallelogram Equation for Vectors
+				\item $\bm{u}\cdot\bm{v}=\frac{1}{4}\|\bm{u}+\bm{v}\|^2-\frac{1}{4}\|\bm{u}-\bm{v}\|^2$
 			\end{itemize}
 		\end{thm}
 		
 		\begin{defn}[Orthogonal Vectors]
-			Two nonzero vectors $\vec{u}$ and $\vec{v}$ in $\mathbb{R}^n$ are said to be \emph{orthogonal} or \emph{perpendicular} if $\vec{u} \cdot \vec{v} = 0$.
+			Two nonzero vectors $\bm{u}$ and $\bm{v}$ in $\mathbb{R}^n$ are said to be \emph{orthogonal} or \emph{perpendicular} if $\bm{u} \cdot \bm{v} = 0$.
 		\end{defn}
 		
 		\begin{defn}[Orthogonal set]
@@ -87,26 +91,92 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			And for the set to be orthonormal, in addition to above, $\forall i \in \{1, 2, \dots n\}, \|u_i\|=1$.
 		\end{defn}
 		
+		\begin{defn}
+			An orthogonal set of nonzero vectors is linearly independent.
+		\end{defn}
+		
 		\begin{defn}[Orthogonal Complement]
-			The \emph{orthogonal complement} of a subspace $W$ of a vector space $V$, denoted $W^\perp$, is defined to be the set of all vectors in $V$ that are orthogonal to every vector of $W$.
+			The \emph{orthogonal complement} of a subspace $W$ of an inner product space $V$, denoted $W^\perp$, is defined to be the set of all vectors in $V$ that are orthogonal to every vector of $W$.
 		\end{defn}
 		
 		\begin{thm}
-			Suppose $W$ is a subspace of a vector space $V$. $W^\perp$ is also a subspace of $V$.
+			Suppose $W$ is a subspace of an inner product space $V$.
+			\begin{itemize}
+				\item $W^\perp$ is a subspace of $V$.
+				\item $W \cap W^\perp = \{\bm{0}\}$
+			\end{itemize}
 		\end{thm}
+		
+		\begin{thm}
+			Suppose $W$ is a subspace of an inner product space $V$. Then, $(W^\perp)^\perp=W$.
+		\end{thm}
+		
+		\begin{thm}\label{thm_projection_formula}
+			Let $S=\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$ be a basis for an inner product space $V$.
+			\begin{itemize}
+					\item If $S$ is an orthogonal basis for $V$, and $\bm{u} \in V$, then
+					\begin{displaymath}
+						\bm{u}=\frac{\left< \bm{u}, \bm{v_1} \right>}{\|v_1\|^2}\bm{v_1}+
+						       \frac{\left< \bm{u}, \bm{v_2} \right>}{\|v_2\|^2}\bm{v_2}+\cdots+
+						       \frac{\left< \bm{u}, \bm{v_n} \right>}{\|v_n\|^2}\bm{v_n}
+					\end{displaymath}
+					And thus
+					\begin{displaymath}
+						(\bm{u})_S=\left(\frac{\left< \bm{u}, \bm{v_1} \right>}{\|v_1\|^2},
+						\frac{\left< \bm{u}, \bm{v_2} \right>}{\|v_2\|^2},\cdots,
+						\frac{\left< \bm{u}, \bm{v_n} \right>}{\|v_n\|^2}\right)
+					\end{displaymath}
+					\item If $S$ is an orthonormal basis for $V$, and $\bm{u} \in V$, then
+					\begin{displaymath}
+						\bm{u}=\left< \bm{u}, \bm{v_1} \right>\bm{v_1}+
+						       \left< \bm{u}, \bm{v_2} \right>\bm{v_2}+\cdots+
+						       \left< \bm{u}, \bm{v_n} \right>\bm{v_n}
+					\end{displaymath}
+					And thus
+					\begin{displaymath}
+						(\bm{u})_S=\left(\left< \bm{u}, \bm{v_1} \right>,
+						\left< \bm{u}, \bm{v_2} \right>,\cdots,
+						\left< \bm{u}, \bm{v_n} \right>\right)
+					\end{displaymath}
+			\end{itemize}
+		\end{thm}
+
 		
 		\begin{thm}[Projection Theorem]
-			If $\vec{u}$ and $\vec{a}$ are vectors in $\mathbb{R}^n$ and if $\vec{a} \ne \vec{0}$, then $\vec{u}$ can be expresses in exactly one way in the form $\vec{u}=\vec{w_1}+\vec{w_2}$, where $\exists k \in \mathbb{R}, \vec{w_1}=k\vec{a}$ and $\vec{a} \cdot \vec{w_2}=0$.
+			If $W$ is a finite-dimensional subspace of an inner product space $V$, then every $\bm{u} \in V$ can be expressed in exactly one way in the form $\bm{u}=\bm{w_1}+\bm{w_2}$, where $\bm{w_1} \in W$ and $\bm{w_2} \in W^\perp$.
 		\end{thm}
 		
-		In the theorem above, the vector $\vec{w_1}$ is called the \emph{orthogonal projection of $\vec{u}$ on $\vec{a}$} or \emph{vector component of $\vec{u}$ along $\vec{a}$}, and the vector $\vec{w_2}$ is called the \emph{vector component of $\vec{u}$ orthogonal to $\vec{a}$}.
+		In the theorem above, the vector $\bm{w_1}$ is called the \emph{orthogonal projection of $\bm{u}$ on $W$} or \emph{vector component of $\bm{u}$ along $W$}, and the vector $\bm{w_2}$ is called the \emph{vector component of $\bm{u}$ orthogonal to $W$}. Calculating this can be done using the orthogonal or orthonormal basis of $W$, as given in theorem [\ref{thm_projection_formula}]. We also give a method to use any basis on appendix [\ref{fmla_proj_subspace}], although often times using orthonormal basis will yield a more comprehensive understanding of $\bm{u}$ through its coordinates. We now give the following theorem:
 		
-		\begin{defn}[Projection]
-			Let $\vec{u}$ and $\vec{a} \ne \vec{0}$ be vectors in $\mathbb{R}^n$. The \emph{orthogonal projection of $\vec{u}$ on $\vec{a}$}, denoted $\verb|proj|_{\vec{a}}\vec{u}$.
-		\end{defn}
+		\begin{thm}
+			Every nonzero finite-dimensional inner product space has an orthonormal basis.
+		\end{thm}
 		
-		\subsection{Projection onto a subspace}
-			We can also project the vector $\bf{b}$ onto a subspace of $\mathbb{R}^n$ with basis $S=\{\bf{a_1},\bf{a_2},\dots,\bf{a_n}\}$, which has a similar definition. Since projecting onto a single vector can be thought to be projecting onto a subspace with basis consisting of a single vector, we will be solving this generalized version to derive a formula in Appendix [\ref{fmla_proj_subspace}].
+		We now give a method to convert any given basis of a vector space to an orthogonal(or orthonormal) basis. This process is called the \emph{Gram-Schmidt Process}.
+		
+		\begin{mthd}[Gram-Schmidt Process]
+			To convert a basis $\{\bm{u_1},\bm{u_2},\dots,\bm{u_n}\}$ into an orthogonal basis $\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$, perform the following computations, where $W_i=span(\{u_k|k \le i\})$:
+			\begin{enumerate}
+				\item $\bm{v_1}=\bm{u_1}$
+				\item $\bm{v_2}=\bm{u_2}-\verb|proj|_{W_1}\bm{u_2}=\bm{u_2}-\frac{\left<\bm{u_2},\bm{v_1}\right>}{\|v_1\|^2}\bm{v_1}$
+				\item $\bm{v_3}=\bm{u_3}-\verb|proj|_{W_1}\bm{u_3}=\bm{u_3}-\frac{\left<\bm{u_3},\bm{v_1}\right>}{\|v_1\|^2}\bm{v_1}-\frac{\left<\bm{u_3},\bm{v_2}\right>}{\|v_2\|^2}\bm{v_2}$
+				\\ \vdots
+			\end{enumerate}
+			
+			And continue for $n$ steps.
+			
+			Note that $W_i=span(\{u_k|k \le i\})=span(\{v_k|k \le i\})$.
+			
+			Optionally, normalize to get the orthonormal basis.
+		\end{mthd}
+		
+		\begin{thm}
+			If $W$ is a finite-dimensional inner product space, then:
+			\begin{itemize}
+				\item Every orthogonal set of nonzero vectors in $W$ can be enlarged to an orthogonal basis for $W$.
+				\item Every orthonormal set in $W$ can be enlarged to an orthonormal basis for $W$.
+			\end{itemize}
+		\end{thm}
 	
 	\section{Matrix}
 		\subsection{Matrices and its operations}
@@ -132,7 +202,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{defn}
 			
 			\begin{thm}
-				If $A$ is an $m \times n$ matrix and if $\vec{x}$ is an $n \times 1$ column vector, then the product $A\vec{x}$ can be expressed as a linear combination of the column vectors of $A$ in which the coefficients are the entries of $\vec{x}$.
+				If $A$ is an $m \times n$ matrix and if $\bm{x}$ is an $n \times 1$ column vector, then the product $A\bm{x}$ can be expressed as a linear combination of the column vectors of $A$ in which the coefficients are the entries of $\bm{x}$.
 			\end{thm}
 			
 			\begin{defn}[Transpose]
@@ -148,10 +218,10 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	There are four important vector spaces on any given matrix, which are row, column, null, and left null spaces.
 	\begin{defn}[Fundamental Spaces of a Matrix]
 		\begin{itemize}
-			\item A \emph{Column space} of a matrix, denoted $im(A)$(image of $A$), $range(A)$(range of $A$), $col(A)$ or $C(A)$, is the vectors spanned by the column vectors of the matrix.
+			\item A \emph{Column space} of a matrix, denoted $im(A)$(image of $A$), $range(A)$(range of $A$), $col(A)$ or $C(A)$, is the vectors spanned by the column vectors of the matrix. $dim(col(A))$ is often called the \emph{rank} of $A$, denoted $rank(A)$.
 			\item A \emph{Row space} of a matrix, denoted $col(A^T)$, and sometimes called the coimage, is the vectors spanned by the row vectors of the matrix.
-			\item A \emph{Null space} of a matrix, denoted $ker(A)$(kernel of $A$), $null(A)$ or $N(A)$, is the vector space of the solution vectors of the equation $A\bf{x}=\bf{0}$.
-			\item A \emph{Left Null space} of a matrix, denoted $null(A^T)$, and sometimes called the cokernel, is the vector space of the solutions vectors of the equation $A^T\bf{y}=\bf{0}$.
+			\item A \emph{Null space} of a matrix, denoted $ker(A)$(kernel of $A$), $null(A)$ or $N(A)$, is the vector space of the solution vectors of the equation $A\bm{x}=\bm{0}$. $dim(null(A))$ is often called the \emph{nullity} of $A$, denoted $nullity(A)$.
+			\item A \emph{Left Null space} of a matrix, denoted $null(A^T)$, and sometimes called the cokernel, is the vector space of the solutions vectors of the equation $A^T\bm{y}=\bm{0}$.
 		\end{itemize}
 		The four spaces together are called the fundamental spaces of a matrix.
 	\end{defn}
@@ -192,37 +262,37 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 	\subsection{Change of Basis}
 	We start from the definition of basis[\ref{def_basis}] and the concept of coordinates[\ref{def_coordinate}]. We assume that the scalar is $\mathbb{R}$ for simplicity, although any other field may be used as a scalar.
 	
-	Say that we are talking about a general vector space $V$ over a scalar $F$ which has $S=\{\vec{v_1},\vec{v_2},\dots,\vec{v_n}\}$ as its basis, by theorem [\ref{thm_coordinate_unique}], any vector $\vec{v}\in V$ can be represented uniquely as $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_n\vec{v_n}$, where $c_i \in F$. Observe that the vector $(\vec{v})_S=(c_1,c_2,\dots,c_n) \in \mathbb{F}^n$, and hence once basis $S$ is given for a vector space $V$, theorem [\ref{thm_coordinate_unique}] ensures that this correspondence between vectors in $V$ and $\mathbb{F}^n$ is one-to-one.
+	Say that we are talking about a general vector space $V$ over a scalar $F$ which has $S=\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$ as its basis, by theorem [\ref{thm_coordinate_unique}], any vector $\bm{v}\in V$ can be represented uniquely as $\bm{v}=c_1\bm{v_1}+c_2\bm{v_2}+\dots+c_n\bm{v_n}$, where $c_i \in F$. Observe that the vector $(\bm{v})_S=(c_1,c_2,\dots,c_n) \in \mathbb{F}^n$, and hence once basis $S$ is given for a vector space $V$, theorem [\ref{thm_coordinate_unique}] ensures that this correspondence between vectors in $V$ and $\mathbb{F}^n$ is one-to-one.
 	
-	However this is not that simple. Suppose the ordering of the basis vectors is switched via a permutation $\sigma$, so that $S=\{u_i|u_i=v_{\sigma(i)}\}$. Now, the set of the basis stays the same, but $(\vec{v})_S=(c_{\sigma(1)},c_{\sigma(2)},\dots,c_{\sigma(n)})$. In this exact reason, when we determine the coordinates, an ordered set(i.e. a set in which ordering matters) is used. Some authors call a set of basis vectors of which changing the order is restricted an ordered basis. We simply opt to the solution that when discussing a vector space and its basis $S$, the order of the vectors in $S$ remain fixed unless stated otherwise.
+	However this is not that simple. Suppose the ordering of the basis vectors is switched via a permutation $\sigma$, so that $S=\{u_i|u_i=v_{\sigma(i)}\}$. Now, the set of the basis stays the same, but $(\bm{v})_S=(c_{\sigma(1)},c_{\sigma(2)},\dots,c_{\sigma(n)})$. In this exact reason, when we determine the coordinates, an ordered set(i.e. a set in which ordering matters) is used. Some authors call a set of basis vectors of which changing the order is restricted an ordered basis. We simply opt to the solution that when discussing a vector space and its basis $S$, the order of the vectors in $S$ remain fixed unless stated otherwise.
 	
-	In the special case where $V=\mathbb{R}^n$ and $S$ is the \emph{standard basis}, i.e. $S=\{e_1,e_2,\dots,e_n\}$ where $e_i$ has zeroes as all of its components except for the $i$-th component, the coordinate vector $(\vec{v})_S$ and the vector $\vec{v}$ are the same.
+	In the special case where $V=\mathbb{R}^n$ and $S$ is the \emph{standard basis}, i.e. $S=\{e_1,e_2,\dots,e_n\}$ where $e_i$ has zeroes as all of its components except for the $i$-th component, the coordinate vector $(\bm{v})_S$ and the vector $\bm{v}$ are the same.
 	
-	If $S=\{v_1,v_2,\dots,v_n\}$ is a basis for a finite-dimensional vector space $V$, and if $(\vec{v})_S=(c_1,c_2,\dots,c_n)$ is the coordinate vector of $\vec{v}$ relative to $S$, then the mapping $\vec{v} \rightarrow (\vec{v})_S$ creates a connection between vectors in the general vector space $V$ and vectors in the vector space $\mathbb{R}^n$, which is more familiar to handle. We call this mapping the \emph{coordinate map} from $V$ to $\mathbb{R}^n$. Since we have all the tools to analyze this when we represent this vector as a matrix, we will be representing this mapping in the matrix form,
+	If $S=\{v_1,v_2,\dots,v_n\}$ is a basis for a finite-dimensional vector space $V$, and if $(\bm{v})_S=(c_1,c_2,\dots,c_n)$ is the coordinate vector of $\bm{v}$ relative to $S$, then the mapping $\bm{v} \rightarrow (\bm{v})_S$ creates a connection between vectors in the general vector space $V$ and vectors in the vector space $\mathbb{R}^n$, which is more familiar to handle. We call this mapping the \emph{coordinate map} from $V$ to $\mathbb{R}^n$. Since we have all the tools to analyze this when we represent this vector as a matrix, we will be representing this mapping in the matrix form,
 	\begin{displaymath}
-	[\bf{v}]_S=\begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}
+	[\bm{v}]_S=\begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}
 	\end{displaymath}
 	where the square brackets simply emphasize the fact that this is in a matrix of a column vector form.
 	
 	The \emph{Change-of-Basis Problem} states the following:
 	
-	If $\bf{v}$ is a vector in a finite-dimensional vector space $V$, and if we change the basis for $V$ from a basis $B$ to basis $B'$, how are the coordinate vectors $[\bf{b}]_B$ and $[\bf{b}]_{B'}$ related?
+	If $\bm{v}$ is a vector in a finite-dimensional vector space $V$, and if we change the basis for $V$ from a basis $B$ to basis $B'$, how are the coordinate vectors $[\bm{b}]_B$ and $[\bm{b}]_{B'}$ related?
 	
 	To solve this problem, let:
 	\begin{itemize}
-		\item $B=\{\bf{u_1},\bf{u_2},\dots,\bf{u_n}\}$
-		\item $M=\begin{bmatrix} \bf{u_1} & \bf{u_2} & \dots & \bf{u_n} \end{bmatrix}$
-		\item $B'=\{\bf{v_1},\bf{v_2},\dots,\bf{v_n}\}$
-		\item $N=\begin{bmatrix} \bf{v_1} & \bf{v_2} & \dots & \bf{v_n} \end{bmatrix}$
-		\item $(\bf{b})_B=(c_1,c_2,\dots,c_n)$
-		\item $(\bf{b})_{B'}=(d_1,d_2,\dots,d_n)$
+		\item $B=\{\bm{u_1},\bm{u_2},\dots,\bm{u_n}\}$
+		\item $M=\begin{bmatrix} \bm{u_1} & \bm{u_2} & \dots & \bm{u_n} \end{bmatrix}$
+		\item $B'=\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$
+		\item $N=\begin{bmatrix} \bm{v_1} & \bm{v_2} & \dots & \bm{v_n} \end{bmatrix}$
+		\item $(\bm{b})_B=(c_1,c_2,\dots,c_n)$
+		\item $(\bm{b})_{B'}=(d_1,d_2,\dots,d_n)$
 	\end{itemize}
 	
-	We can see from this that $M[\bf{b}]_B=N[\bf{b}]_{B'}=\bf{b}$.
+	We can see from this that $M[\bm{b}]_B=N[\bm{b}]_{B'}=\bm{b}$.
 	
-	Since the vectors of $B'$ are all in the vector space $V$, we can calculate their coordinates with respect to $B$, so say that $\bf{p_i}=[\bf{v_i}]_B$.
+	Since the vectors of $B'$ are all in the vector space $V$, we can calculate their coordinates with respect to $B$, so say that $\bm{p_i}=[\bm{v_i}]_B$.
 	
-	If we consider a matrix given by $P=\begin{bmatrix} \bf{p_1} & \bf{p_2} & \dots & \bf{p_n} \end{bmatrix}$, we can clearly see that $M=NP$. Substitution yields $NP[\bf{b}]_B=N[\bf{b}]_{B'}=\bf{b}$, which indicates, by the uniqueness of coordinates(theorem [\ref{thm_coordinate_unique}]), $[\bf{b}]_{B'}=P[\bf{b}]_B$. The matrix $P$, often denoted $P_{B \rightarrow B'}$ is called the \emph{transition matrix} from $B$ to $B'$.
+	If we consider a matrix given by $P=\begin{bmatrix} \bm{p_1} & \bm{p_2} & \dots & \bm{p_n} \end{bmatrix}$, we can clearly see that $M=NP$. Substitution yields $NP[\bm{b}]_B=N[\bm{b}]_{B'}=\bm{b}$, which indicates, by the uniqueness of coordinates(theorem [\ref{thm_coordinate_unique}]), $[\bm{b}]_{B'}=P[\bm{b}]_B$. The matrix $P$, often denoted $P_{B \rightarrow B'}$ is called the \emph{transition matrix} from $B$ to $B'$.
 	
 	In words, this can be represented as follows: \textit{The columns of the transition matrix from an old basis to a new basis are the coordinate vectors of the old basis relative to the new basis.}
 	
@@ -385,26 +455,26 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{bmatrix}
 		\end{displaymath}
 		
-		or more briefly as $\bf{w}=A\bf{x}$.
+		or more briefly as $\bm{w}=A\bm{x}$.
 		
-		This can be viewed as a linear system, but if we consider $\bf{w}$ as a vector in $\mathbb{R}^m$ and $\bf{x}$ as a vector in $\mathbb{R}^n$, we can see this as a transformation. We call this \emph{matrix transformation}(or \emph{matrix operator} if $m=n$), denoted by $T_A:\mathbb{R}^n\rightarrow \mathbb{R}^m$, and thereby $\bf{w}=T_A(\bf{x})$, or sometimes $\bf{x} \xrightarrow{T_A} \bf{w}$. $T_A$ is called \emph{multiplication by $A$}, and the matrix $A$ is called the \emph{standard matrix} for the transformation.
+		This can be viewed as a linear system, but if we consider $\bm{w}$ as a vector in $\mathbb{R}^m$ and $\bm{x}$ as a vector in $\mathbb{R}^n$, we can see this as a transformation. We call this \emph{matrix transformation}(or \emph{matrix operator} if $m=n$), denoted by $T_A:\mathbb{R}^n\rightarrow \mathbb{R}^m$, and thereby $\bm{w}=T_A(\bm{x})$, or sometimes $\bm{x} \xrightarrow{T_A} \bm{w}$. $T_A$ is called \emph{multiplication by $A$}, and the matrix $A$ is called the \emph{standard matrix} for the transformation.
 		
 		\begin{thm}
-			For every matrix $A$, the matrix transformation $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ has the following properties for all vectors $\bf{u}$ and $\bf{v}$ and for every scalar $k$:
+			For every matrix $A$, the matrix transformation $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ has the following properties for all vectors $\bm{u}$ and $\bm{v}$ and for every scalar $k$:
 			\begin{enumerate}
-				\item $T_A(\bf{0})=\bf{0}$
-				\item $T_A(k\bf{u})=kT_A(\bf{u})$ [Homogeniety Property]
-				\item $T_A(\bf{u}+\bf{v})=T_A(\bf{u})+T_A(\bf{v})$ [Additivity Property]
-				\item $T_A(\bf{u}-\bf{v})=T_A(\bf{u})-T_A(\bf{v})$
+				\item $T_A(\bm{0})=\bm{0}$
+				\item $T_A(k\bm{u})=kT_A(\bm{u})$ [Homogeniety Property]
+				\item $T_A(\bm{u}+\bm{v})=T_A(\bm{u})+T_A(\bm{v})$ [Additivity Property]
+				\item $T_A(\bm{u}-\bm{v})=T_A(\bm{u})-T_A(\bm{v})$
 			\end{enumerate}
 		\end{thm}
 		
 		\begin{thm}
-			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ and $T_B:\mathbb{R}^n \rightarrow \mathbb{R}^m$ are matrix transformations, and if $\forall \bf{x} \in \mathbb{R}, T_A(\bf{x})=T_B(\bf{x})$, then $A=B$.
+			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ and $T_B:\mathbb{R}^n \rightarrow \mathbb{R}^m$ are matrix transformations, and if $\forall \bm{x} \in \mathbb{R}, T_A(\bm{x})=T_B(\bm{x})$, then $A=B$.
 		\end{thm}
 		
 		\begin{defn}
-			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^k$ and $T_B:\mathbb{R}^k \rightarrow \mathbb{R}^m$ are matrix transformations, the \emph{composition} of $T_B$ with $T_A$, denoted by $T_B \circ T_A$, is defined by $\bf{x} \xrightarrow{T_B \circ T_A} T_B(T_A(\bf{x}))$.
+			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^k$ and $T_B:\mathbb{R}^k \rightarrow \mathbb{R}^m$ are matrix transformations, the \emph{composition} of $T_B$ with $T_A$, denoted by $T_B \circ T_A$, is defined by $\bm{x} \xrightarrow{T_B \circ T_A} T_B(T_A(\bm{x}))$.
 		\end{defn}
 		
 		\begin{thm}
@@ -412,10 +482,10 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\end{thm}
 		
 		\begin{thm}
-			$T:\mathbb{R}^n\rightarrow\mathbb{R}^m$ is a matrix transformation iff the following relationships hold $\forall \bf{u}, \bf{v} \in \mathbb{R}^n$ and for every scalar $k$:
+			$T:\mathbb{R}^n\rightarrow\mathbb{R}^m$ is a matrix transformation iff the following relationships hold $\forall \bm{u}, \bm{v} \in \mathbb{R}^n$ and for every scalar $k$:
 			\begin{enumerate}
-				\item $T_A(\bf{u}+\bf{v})=T_A(\bf{u})+T_A(\bf{v})$ [Additivity Property]
-				\item $T_A(k\bf{u})=kT_A(\bf{u})$ [Homogeniety Property]
+				\item $T_A(\bm{u}+\bm{v})=T_A(\bm{u})+T_A(\bm{v})$ [Additivity Property]
+				\item $T_A(k\bm{u})=kT_A(\bm{u})$ [Homogeniety Property]
 			\end{enumerate}
 		\end{thm}
 		
@@ -531,11 +601,11 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{thm}
 			
 			\begin{thm}[Cramer's Rule]
-				If $A\bf{x}=\bf{b}$ is a system of n linear equations such that $det(A)\ne0$, then the system has a unique solution. The solution is:
+				If $A\bm{x}=\bm{b}$ is a system of n linear equations such that $det(A)\ne0$, then the system has a unique solution. The solution is:
 				\begin{displaymath}
 					\forall i, x_i=\frac{\det(A_i)}{\det(A)}
 				\end{displaymath}
-				where $A_i$ is the matrix obtained by replacing the entries in the j-th column of $A$ by the entries in the matrix $\bf{b}$.
+				where $A_i$ is the matrix obtained by replacing the entries in the j-th column of $A$ by the entries in the matrix $\bm{b}$.
 			\end{thm}
 		
 	\section{Eigenvalues and Eigenvectors}
@@ -554,10 +624,10 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 		\subsection{Eigenvalues and Eigenvectors}
 		\begin{defn}[Eigenvalues and Eigenvectors]
-			If $A$ is an $n \times n$ matrix, then a nonzero vector $\bf{x}$ in $\mathbb{R}^n$ is called an \emph{eigenvector} of $A$ if $A\bf{x}=\lambda \bf{x}$ for some $\lambda \in \mathbb{R}$. $\lambda$ is called an \emph{eigenvalue} of $A$, and $\bf{x}$ is said to be an \emph{eigenvector corresponding to $\lambda$}.
+			If $A$ is an $n \times n$ matrix, then a nonzero vector $\bm{x}$ in $\mathbb{R}^n$ is called an \emph{eigenvector} of $A$ if $A\bm{x}=\lambda \bm{x}$ for some $\lambda \in \mathbb{R}$. $\lambda$ is called an \emph{eigenvalue} of $A$, and $\bm{x}$ is said to be an \emph{eigenvector corresponding to $\lambda$}.
 		\end{defn}
 		
-		Now since $A\bf{x}=\lambda \bf{x}=\lambda I_n \bf{x}$, it follows that $(\lambda I_n - A)\bf{x}=\bf{0}$. Hey, haven't we seen that equation before for the characteristic polynomial[\ref{def_characteristic_polynomial}]? We can change this equation into $p_A(\lambda)=0$, therefore the following theorem:
+		Now since $A\bm{x}=\lambda \bm{x}=\lambda I_n \bm{x}$, it follows that $(\lambda I_n - A)\bm{x}=\bm{0}$. Hey, haven't we seen that equation before for the characteristic polynomial[\ref{def_characteristic_polynomial}]? We can change this equation into $p_A(\lambda)=0$, therefore the following theorem:
 		
 		\begin{thm}
 			For an $n \times n$ matrix A, $\lambda$ is an eigenvalue of $A$ iff $p_A(\lambda)=\det(\lambda I-A)=0$.
@@ -570,6 +640,26 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Fundamental Theorem of Algebra},
 		\fi
 		we can see that there are exactly $n$ (possibly complex and multiple) roots of a characteristic polynomial of $n \times n$ matrix, and therefore can have up to $n$ distinct eigenvalues.
+		
+		\begin{thm}
+			If $A$ is an $n \times n$ matrix, the following statements are equivalent:
+			\begin{enumerate}
+				\item $\lambda$ is an eigenvalue of $A$
+				\item The system of equations $(\lambda I-A)\bm{x}=\bm{0}$ has nontrivial solutions
+				\item There is a nonzero vector $\bm{x}$ such that $A\bm{x}=\lambda \bm{x}$
+				\item $\lambda$ is a solution of the characteristic equation $\det(\lambda I-A)=0$
+			\end{enumerate}
+		\end{thm}
+		
+		Since the eigenvectors corresponding to an eigenvalue $\lambda$ of a matrix $A$  are the nonzero vectors that satisfy the equation $(\lambda I-A)\bm{x}=\bm{0}$, these eigenvectors are the nonzero vectors in the null space of the matrix $\lambda I-A$. We call this null space the \emph{eigenspace} of $A$ corresponding to $\lambda$.
+		
+		\begin{thm}
+			If $k$ is a positive integer, $\lambda$ is an eigenvalue of a matrix $A$, and $\bm{x}$ is a corresponding eigenvector, then $\lambda^k$ is an eigenvalue of $A^k$ and $\bm{x}$ is a corresponding eigenvector.
+		\end{thm}
+		
+		\begin{thm}
+			A square matrix $A$ is invertible iff $\lambda=0$ is not an eigenvalue of $A$.
+		\end{thm}
 	
 	\section{Special Matrices}
 		\subsection{Diagonal Matrices}
@@ -655,9 +745,27 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			If $A$ is an invertible symmetric matrix, then $A^{-1}$ is symmetric.
 		\end{thm}
 		
-		\subsection{Positive Definite Matrices}%TODO
+		\subsection{Similar Matrices}
+		\begin{defn}[Similar Matrices]
+			If $A$ and $B$ are square matrices, then we say that \emph{$B$ is similar to $A$} or \emph{$A$ and $B$ are similar matrices} if there is an invertible matrix $P$ such that $B=P^{-1}AP$
+		\end{defn}
 		
-		\subsection{Similar Matrices}%TODO
+		\begin{thm}[Invariants of Similar Matrices]
+			Suppose $A$ and $B$ are similar matrices. The following properties are the same for $A$ and $B$: \\
+			\begin{tabular}{ll}
+				\multicolumn{1}{c}{\textbf{Property}} & \multicolumn{1}{c}{\textbf{Description}}             \\
+				Determinant                           & $\det(A)=\det(B)$                                    \\
+				Invertibility                         & $\exists A^{-1}$ iff $\exists B^{-1}$                \\
+				Rank                                  & $rank(A)=rank(B)$                                    \\
+				Nullity                               & $nullity(A)=nullity(B)$                              \\
+				Trace                                 & $tr(A)=tr(B)$                                        \\
+				Characteristic Polynomial             & $p_A(t)=p_B(t)$                                      \\
+				Eigenvalues                           & $p_A(\lambda)=0$ iff $p_B(\lambda)=0$                \\
+				Eigenspace dimension                  & $dim(null(\lambda I-A))=dim(null(\lambda I-A))$
+			\end{tabular}
+		\end{thm}
+		
+		\subsection{Positive Definite Matrices}%TODO
 		
 	
 	\section{Preprocessing Matrices for Easier Computation}
@@ -667,7 +775,35 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 		\subsection{QR-Decomposition}%TODO
 		
-		\subsection{Diagonalization of a Matrix}%TODO
+		\subsection{Diagonalization of a Matrix}
+			\begin{defn}[Diagonalizablility]
+				A square matrix $A$ is said to be \emph{diagonalizable} if it is similar to some diagonal matrix; that is, if there exists an invertible matrix $P$ such that $P^{-1}AP$ is diagonal. In this case the matrix $P$ is said to \emph{diagonalize} $A$.
+			\end{defn}
+			
+			\begin{thm}
+				If $A$ is an $n \times n$ matrix, $A$ is diagonalizable iff $A$ has $n$ linearly independent eigenvectors.
+			\end{thm}
+			
+			\begin{mthd}[Procedure for Diagonalizing a Matrix]
+				We assume that $A$ is an $n \times n$ matrix with $n$ linearly independent eigenvectors.
+				\begin{enumerate}
+					\item Find the eigenvalues $\lambda_i$ with their corresponding eigenvectors $\bm{p_i}$. This is the step where you can verify that this matrix is indeed diagonalizable.
+					\item Form the matrix $P=[\bm{p_1} | \bm{p_2} | \dots | \bm{p_n}]$.
+					\item The matrix $P^{-1}AP$ will be diagonal and have the eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$ corresponding to the eigenvectors $\bm{p_1},\bm{p_2},\dots,\bm{p_n}$ as its successive diagonal entries.
+				\end{enumerate}
+			\end{mthd}
+			
+			To help verify that the matrix is indeed diagonalizable, we give the following theorem:
+			
+			\begin{thm}
+				If $\bm{v_1},\bm{v_2},\dots,\bm{v_n}$ are eigenvectors of a matrix $A$ corresponding to distinct eigenvalues, then $\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$ is a linearly independent set.
+			\end{thm}
+			
+			and therefore follows the following theorem:
+			
+			\begin{thm}
+				If an $n \times n$ matrix $A$ has $n$ distinct eigenvalues, then $A$ is diagonalizable.
+			\end{thm}
 		
 		\subsection{Singular Value Decomposition(SVD)}%TODO
 	
@@ -715,9 +851,9 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{bmatrix}
 		\end{displaymath}
 		
-		By designating the three matrices $A$, $\bf{x}$ and $\bf{b}$ respectively, we can say that $A\bf{x}=\bf{b}$. In this equation, $A$ is called the \emph{coefficient matrix} of the system.
+		By designating the three matrices $A$, $\bm{x}$ and $\bm{b}$ respectively, we can say that $A\bm{x}=\bm{b}$. In this equation, $A$ is called the \emph{coefficient matrix} of the system.
 		
-		The \emph{augmented matrix} for the system is obtained by adjoining $\bf{b}$ to $A$ as the last column as follows:
+		The \emph{augmented matrix} for the system is obtained by adjoining $\bm{b}$ to $A$ as the last column as follows:
 		
 		\begin{displaymath}
 			\left[\begin{array}{cccc|c}
@@ -748,22 +884,22 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			A homogeneous linear system with more unknowns than equations has infinitely many solutions.
 		\end{coro}
 		
-		In the following sections on finding solutions or parametric equation for solutions where it applies, the coefficient matrix will be noted as $A$, the vector of variables will be noted as $\bf{x}$ and the variables as $x_1, x_2, \dots, x_n$, and the vector for the constants as $\bf{b}$.
+		In the following sections on finding solutions or parametric equation for solutions where it applies, the coefficient matrix will be noted as $A$, the vector of variables will be noted as $\bm{x}$ and the variables as $x_1, x_2, \dots, x_n$, and the vector for the constants as $\bm{b}$.
 		
 		\subsection{Method of Inverses}
 		
 		This can be used iff $A$ is an invertible matrix.
 		
 		Find the inverse of $A$, $A^{-1}$.
-		The only possible solution is $\bf{x}=A^{-1}\bf{b}$.
+		The only possible solution is $\bm{x}=A^{-1}\bm{b}$.
 		
 		\subsection{Method of RREF}\label{mthd_rref}
 		
 		This can be used for any matrix $A$.
 		
 		\begin{enumerate}
-			\item Reduce the augmented matrix $\left[A|\bf{b}\right]$ to its RREF $\left[R|\bf{c}\right]$
-			\item See if $R$ has a zero row. If any of the value of $\bf{c}$ corresponding to the zero row is nonzero, the system is inconsistent.
+			\item Reduce the augmented matrix $\left[A|\bm{b}\right]$ to its RREF $\left[R|\bm{c}\right]$
+			\item See if $R$ has a zero row. If any of the value of $\bm{c}$ corresponding to the zero row is nonzero, the system is inconsistent.
 			\item Exchange the free variables with parametric variables.
 			\item Transpose the free variables to RHS so the leading variables(the pivots) are the only ones left on the LHS.
 			\item The resulting expressions are the parametric equation for solutions.
@@ -778,22 +914,22 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			In this method, we first find the nullspace of $A$.
 			
 			\begin{thm}
-				If $A$ is an $m \times n$ matrix, then the solution set of the homogeneous linear system $A\bf{x}=\bf{0}$ consists of all vectors in $\mathbb{R}^n$ that are orthogonal to every row vector of $A$.
+				If $A$ is an $m \times n$ matrix, then the solution set of the homogeneous linear system $A\bm{x}=\bm{0}$ consists of all vectors in $\mathbb{R}^n$ that are orthogonal to every row vector of $A$.
 			\end{thm}
 			
 			\begin{thm}
-				The general solution of a consistent linear system $A\bf{x}=\bf{b}$ can be obtained by adding any specific solution of $A\bf{x}=\bf{b}$ to the general solution of $A\bf{x}=\bf{0}$.
+				The general solution of a consistent linear system $A\bm{x}=\bm{b}$ can be obtained by adding any specific solution of $A\bm{x}=\bm{b}$ to the general solution of $A\bm{x}=\bm{0}$.
 			\end{thm}
 			
-			The theorem above indicates that we need to find the nullspace of $A$ along with a specific solution of $A\bf{x}=\bf{b}$ to find the whole, general solution of $A\bf{x}=\bf{b}$.
+			The theorem above indicates that we need to find the nullspace of $A$ along with a specific solution of $A\bm{x}=\bm{b}$ to find the whole, general solution of $A\bm{x}=\bm{b}$.
 			
-			Using Gauss-Jordan Elimination[\ref{mthd_gauss_jordan_elim}], we reduce the augmented matrix $\left[A|\bf{b}\right]$ to its rref, and detect if there are any inconsistencies. This corresponds to the first step on Method of RREF.
+			Using Gauss-Jordan Elimination[\ref{mthd_gauss_jordan_elim}], we reduce the augmented matrix $\left[A|\bm{b}\right]$ to its rref, and detect if there are any inconsistencies. This corresponds to the first step on Method of RREF.
 			
 			First, we find the nullspace for $A$. We get the basis vectors from the rref of $A$. This corresponds to the second and third steps on Method of RREF.
 			
-			Next, we find the specific solution of $A\bf{x}=\bf{b}$. From the rref of $\left[A|\bf{b}\right]$ say $\left[R|\bf{c}\right]$, solve the equation by setting all free variables to 0. In doing so, since all leading variables have coefficient 1, the values of $c$ immediately correspond to the specific solution of the leading variables. This process is therefore almost automatic.
+			Next, we find the specific solution of $A\bm{x}=\bm{b}$. From the rref of $\left[A|\bm{b}\right]$ say $\left[R|\bm{c}\right]$, solve the equation by setting all free variables to 0. In doing so, since all leading variables have coefficient 1, the values of $c$ immediately correspond to the specific solution of the leading variables. This process is therefore almost automatic.
 			
-			Now we have the nullspace of $A$ and the specific solution of $A\bf{x}=\bf{b}$; add those two together to gain the whole solution. This corresponds to the fourth and final steps on Method of RREF.
+			Now we have the nullspace of $A$ and the specific solution of $A\bm{x}=\bm{b}$; add those two together to gain the whole solution. This corresponds to the fourth and final steps on Method of RREF.
 			
 		\subsection{Least Squares Approximation}%TODO
 			Sometimes there might not exist any solution for a given linear system. In this case, we have no choice but to find the best approximation of the linear system.

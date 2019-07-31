@@ -386,30 +386,31 @@
 			\begin{itemize}
 				\item[(A)] \textbf{Axioms for Addition}
 				\begin{itemize}
-					\item[(A1)] \textbf{Closed under Addition}\\$\forall \vec{u} ,\vec{v} \in V, \vec{u}+\vec{v} \in V$
-					\item[(A2)] \textbf{Addition is Commutative}\\$\forall \vec{u}, \vec{v} \in V, \vec{u}+\vec{v}=\vec{v}+\vec{u}$
-					\item[(A3)] \textbf{Addition is Associative}\\$\forall \vec{u},\vec{v},\vec{w} \in v, (\vec{u}+\vec{v})+\vec{w}=\vec{u}+(\vec{v}+\vec{w})$
-					\item[(A4)] \textbf{Identity of Addition(Zero vector)}\\$\exists \vec{0} \in V, \forall \vec{u} \in F, \vec{0}+\vec{u}=\vec{u}+\vec{0}=\vec{u}$
-					\item[(A5)] \textbf{Inverse of Addition(Negative)}\\$\forall \vec{u} \in V, \exists -\vec{u} \in V, \vec{u}+(-\vec{u})=0$
+					\item[(A1)] \textbf{Closed under Addition}\\$\forall \bm{u} ,\bm{v} \in V, \bm{u}+\bm{v} \in V$
+					\item[(A2)] \textbf{Addition is Commutative}\\$\forall \bm{u}, \bm{v} \in V, \bm{u}+\bm{v}=\bm{v}+\bm{u}$
+					\item[(A3)] \textbf{Addition is Associative}\\$\forall \bm{u},\bm{v},\bm{w} \in v, (\bm{u}+\bm{v})+\bm{w}=\bm{u}+(\bm{v}+\bm{w})$
+					\item[(A4)] \textbf{Identity of Addition(Zero vector)}\\$\exists \bm{0} \in V, \forall \bm{u} \in F, \bm{0}+\bm{u}=\bm{u}+\bm{0}=\bm{u}$
+					\item[(A5)] \textbf{Inverse of Addition(Negative)}\\$\forall \bm{u} \in V, \exists -\bm{u} \in V, \bm{u}+(-\bm{u})=0$
 				\end{itemize}
 				\item[(M)] \textbf{Axioms for Scalar Multiplication}
 				\begin{itemize}
-					\item[(M1)] \textbf{Closed under Scalar Multiplication}\\$\forall k \in F, \vec{u} \in V, k \cdot \vec{u} \in V$
-					\item[(M2)] \textbf{Scalar Multiplication is Distributive(1)}\\$\forall k \in F, \vec{u}, \vec{v} \in V, k \cdot (\vec{u}+\vec{v})=k \cdot \vec{u} + k \cdot \vec{v}$
-					\item[(M3)] \textbf{Scalar Multiplication is Distributive(2)}\\$\forall k, m \in F, \vec{u} \in V, (k+m) \cdot \vec{u}=k \cdot \vec{u} + m \cdot \vec{u}$
-					\item[(M4)] \textbf{Scalar Multiplication is Associative}\\$\forall k, m \in F, \vec{u} \in V, (km) \cdot \vec{u}=k \cdot (m \cdot \vec{u})$
-					\item[(M5)] \textbf{Identity of Scalar Multiplication}\\$\exists 1 \in F, \forall \vec{u} \in V, 1 \cdot \vec{u}=\vec{u}$
+					\item[(M1)] \textbf{Closed under Scalar Multiplication}\\$\forall k \in F, \bm{u} \in V, k \cdot \bm{u} \in V$
+					\item[(M2)] \textbf{Scalar Multiplication is Distributive(1)}\\$\forall k \in F, \bm{u}, \bm{v} \in V, k \cdot (\bm{u}+\bm{v})=k \cdot \bm{u} + k \cdot \bm{v}$
+					\item[(M3)] \textbf{Scalar Multiplication is Distributive(2)}\\$\forall k, m \in F, \bm{u} \in V, (k+m) \cdot \bm{u}=k \cdot \bm{u} + m \cdot \bm{u}$
+					\item[(M4)] \textbf{Scalar Multiplication is Associative}\\$\forall k, m \in F, \bm{u} \in V, (km) \cdot \bm{u}=k \cdot (m \cdot \bm{u})$
+					\item[(M5)] \textbf{Identity of Scalar Multiplication}\\$\exists 1 \in F, \forall \bm{u} \in V, 1 \cdot \bm{u}=\bm{u}$
 				\end{itemize}
 			\end{itemize}
+			A vector space over $\mathbb{R}$ is called a \emph{real vector space}.
 		\end{defn}
 	
 		\begin{thm}
-			Let $V$ be a vector space over a field $F$. $\vec{u} \in V$, $k \in F$, $0$ the additive identity of $F$, $1$ the multiplicative identity of $F$, $\vec{0}$ the additive identity of $V$. Then, the followings hold:
+			Let $V$ be a vector space over a field $F$. $\bm{u} \in V$, $k \in F$, $0$ the additive identity of $F$, $1$ the multiplicative identity of $F$, $\bm{0}$ the additive identity of $V$. Then, the followings hold:
 			\begin{itemize}
-				\item $0 \cdot \vec{u} = \vec{0}$
-				\item $k \cdot \vec{0} = \vec{0}$
-				\item $-1 \cdot \vec{u} = -\vec{u}$
-				\item If $k \cdot \vec{u} = \vec{0}$, then $k=0$ or $\vec{u}=\vec{0}$.
+				\item $0 \cdot \bm{u} = \bm{0}$
+				\item $k \cdot \bm{0} = \bm{0}$
+				\item $-1 \cdot \bm{u} = -\bm{u}$
+				\item If $k \cdot \bm{u} = \bm{0}$, then $k=0$ or $\bm{u}=\bm{0}$.
 			\end{itemize}
 		\end{thm}
 		
@@ -420,8 +421,8 @@
 		\begin{thm}
 			If $W$ is a set of one or more vectors in a vector space $V$ over the field $F$, then $W$ is a subspace of $V$ iff the following conditions hold:
 			\begin{itemize}
-				\item $\forall \vec{u}, \vec{v} \in W, \vec{u}+\vec{v} \in W$
-				\item $\forall k \in F, \vec{u} \in W, k \cdot \vec{u} \in W$
+				\item $\forall \bm{u}, \bm{v} \in W, \bm{u}+\bm{v} \in W$
+				\item $\forall k \in F, \bm{u} \in W, k \cdot \bm{u} \in W$
 			\end{itemize}
 		\end{thm}
 	
@@ -430,7 +431,7 @@
 		\end{thm}
 	
 		\begin{defn}[Linear Combination] \label{def_linear_combination_vector}
-			If $\vec{w}$ is a vector in a vector space $V$ over the field $F$, then $\vec{w}$ is said to be a \emph{Linear Combination} of the vectors $\vec{v_1}, \vec{v_2}, \dots, \vec{v_r} \in V$ if $\vec{w}$ can be expressed in the form $\vec{w}=\sum_{i=1}^{r}k_i\vec{v_i}$, where $k_1, k_2, \dots, k_r \in F$. These scalars are called the \emph{coefficients} of the linear combination.
+			If $\bm{w}$ is a vector in a vector space $V$ over the field $F$, then $\bm{w}$ is said to be a \emph{Linear Combination} of the vectors $\bm{v_1}, \bm{v_2}, \dots, \bm{v_r} \in V$ if $\bm{w}$ can be expressed in the form $\bm{w}=\sum_{i=1}^{r}k_i\bm{v_i}$, where $k_1, k_2, \dots, k_r \in F$. These scalars are called the \emph{coefficients} of the linear combination.
 		\end{defn}
 	
 		\begin{defn}[Span]
@@ -438,11 +439,11 @@
 		\end{defn}
 	
 		\begin{thm}
-			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ and $S'=\{\vec{w_1}, \vec{w_2}, \dots, \vec{w_k}\}$ are nonempty sets of vectors in a vector space $V$, then $\verb|span|(S)=\verb|span|(S')$ iff each vector in $S$ is a linear combination of those in $S'$ and vice versa.
+			If $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ and $S'=\{\bm{w_1}, \bm{w_2}, \dots, \bm{w_k}\}$ are nonempty sets of vectors in a vector space $V$, then $\verb|span|(S)=\verb|span|(S')$ iff each vector in $S$ is a linear combination of those in $S'$ and vice versa.
 		\end{thm}
 
 		\begin{defn}[Basis]\label{def_basis}
-			If $V$ is any vector space and $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a finite set of linearly independent vectors in $V$ which spans $V$, then $S$ is called a \emph{basis} for $V$.
+			If $V$ is any vector space and $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ is a finite set of linearly independent vectors in $V$ which spans $V$, then $S$ is called a \emph{basis} for $V$.
 		\end{defn}
 	
 		\begin{thm}
@@ -452,13 +453,89 @@
 		\begin{defn}[Dimension]
 			The \emph{dimension} of a finite-dimensional vector space $V$, denoted by $\dim (V)$, is defined to be the number of vectors in a basis for $V$. In addition, the zero vector space is defined to have dimension zero.
 		\end{defn}
+		
+		\begin{thm}[Plus/Minus Theorem]
+			Let $S$ be a nonempty set of vectors in a vector space $V$.
+			\begin{itemize}
+				\item If $S$ is a linearly independent set, and if $\bm{v}$ is a vector in $V$ that is outside of $span(S)$, then the set $S \cup \{\bm{v}\}$ that results by inserting $\bm{v}$ into $S$ is still linearly independent.
+				\item If $\bm{v} \in S$ is expressible as a linear combination of the vectors in $S-\{\bm{v}\}$, then $span(S)=span(S-\{\bm{v}\})$.
+			\end{itemize}
+		\end{thm}
+		
+		\begin{thm}
+			Let $V$ be an $n$ dimensional vector space, and let $S$ be a set in $V$ with exactly $n$ vectors. Then $S$ is a basis for $V$ iff $span(S)=V$ or $S$ is linearly independent.
+		\end{thm}
+		
+		\begin{thm}
+			Let $S$ be a finite set of vectors in a finite dimensional vector space $V$.
+			\begin{itemize}
+				\item If $S$ spans $V$ but is not a basis for $V$, then $S$ can be reduced to a basis for $V$ by removing appropriate vectors from $S$.
+				\item If $S$ is a linearly independent set that is not already a basis for $V$, then $S$ can be enlarged to a basis for $V$ by inserting appropriate vectors into $S$.
+			\end{itemize}
+		\end{thm}
+		
+		\begin{thm}
+			If $W$ is a subspace of a finite-dimensional vector space $V$, then:
+			\begin{itemize}
+				\item $W$ is finite dimensional
+				\item $dim(W) \le dim(V)$
+				\item $W=V$ iff $dim(W)=dim(V)$.
+			\end{itemize}
+		\end{thm}
 	
 		\begin{thm}[Uniqueness of Basis Representation]\label{thm_coordinate_unique}
-			If $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ is a basis for a vector space $V$, then every vector $\vec{v}$ in $V$ can be expressed in the form $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ in exactly one way.
+			If $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ is a basis for a vector space $V$, then every vector $\bm{v}$ in $V$ can be expressed in the form $\bm{v}=c_1\bm{v_1}+c_2\bm{v_2}+\dots+c_r\bm{v_r}$ in exactly one way.
 		\end{thm}
 	
 		\begin{defn}[Coordinate]\label{def_coordinate}
-			Let $S=\{\vec{v_1}, \vec{v_2}, \dots, \vec{v_r}\}$ be a basis for a vector space $V$ over the field $F$, and $\vec{v}=c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_r\vec{v_r}$ is the expression for a vector $\vec{V}$ in terms of the basis $S$, then the scalars $c_1,c_2,\dots,c_n$ are called the \emph{coordinates} of $\vec{v}$ relative to the basis $S$. The vector $(c_1,c_2,\dots,c_n)$ in $F^n$ constructed from these coordinates is called the \emph{coordinate vector of $\vec{v}$ relative to $S$}, denoted by $(\vec{v})_S=(c_1,c_2,\dots,c_n)$.
+			Let $S=\{\bm{v_1}, \bm{v_2}, \dots, \bm{v_r}\}$ be a basis for a vector space $V$ over the field $F$, and $\bm{v}=c_1\bm{v_1}+c_2\bm{v_2}+\dots+c_r\bm{v_r}$ is the expression for a vector $\bm{V}$ in terms of the basis $S$, then the scalars $c_1,c_2,\dots,c_n$ are called the \emph{coordinates} of $\bm{v}$ relative to the basis $S$. The vector $(c_1,c_2,\dots,c_n)$ in $F^n$ constructed from these coordinates is called the \emph{coordinate vector of $\bm{v}$ relative to $S$}, denoted by $(\bm{v})_S=(c_1,c_2,\dots,c_n)$.
 		\end{defn}
-
+		
+		\subsection{Inner Product Space}\label{chap_inner_product_space}
+			\begin{defn}[Inner Product Space]
+				An \emph{inner product} on a real vector space $V$ is a function that associates a real number $\left<\bm{u},\bm{v}\right>$ with each pair of vectors in $V$ in a such way that the following axioms are satisfied for all vectors $\bm{u},\bm{v},\bm{w}\in V$ and all scalars $k$.
+				\begin{enumerate}
+					\item $\left<\bm{u},\bm{v}\right>=\left<\bm{v},\bm{u}\right>$ [Symmetry Axiom]
+					\item $\left<\bm{u}+\bm{v},\bm{w}\right>=\left<\bm{u},\bm{w}\right>+\left<\bm{v},\bm{w}\right>$ [Additivity Axiom]
+					\item $\left<k\bm{u},\bm{v}\right>=k\left<\bm{u},\bm{v}\right>$ [Homogeneity Axiom]
+					\item $\left<\bm{v},\bm{v}\right> \ge 0$ and $\left<\bm{v},\bm{v}\right>=0$ iff $\bm{v}=\bm{0}$. [Positivity Axiom]
+				\end{enumerate}
+				A real vector space with an inner product is called a \emph{real inner product space}.
+			\end{defn}
+			
+			\begin{defn}[Norm and Distance]
+				If $V$ is a real inner product space, then the \emph{norm} or \emph{length} of a vector $\bm{v}$ in $V$, denoted by $\|\bm{v}\|$, is defined by
+				\begin{displaymath}
+					\|\bm{v}\|=\sqrt{\left<\bm{v},\bm{v}\right>}
+				\end{displaymath}
+				and the \emph{distance} between two vectors, denoted by $d(\bm{u},\bm{v})$, is defined by
+				\begin{displaymath}
+					d(\bm{u},\bm{v})=\|\bm{u}-\bm{v}\|=\sqrt{\left<\bm{u}-\bm{v},\bm{u}-\bm{v}\right>}
+				\end{displaymath}
+				A vector of norm 1 is called a \emph{unit vector}.
+			\end{defn}
+			
+			If $V$ is an inner product space, then the set of points in $V$ that satisfy $\|\bm{u}\|=1$ is called the \emph{unit sphere} or sometimes the \emph{unit circle} in $V$.
+			
+			\begin{thm}
+				If $\bm{u}$ and $\bm{v}$ are vectors in a real inner place $V$ and if $k$ is a scalar, then:
+				\begin{itemize}
+					\item $\|\bm{v}\| \ge 0$ with equality iff $\bm{v}=\bm{0}$
+					\item $\|k\bm{v}\|=|k|\|\bm{v}\|$
+					\item $d(\bm{u},\bm{v})=d(\bm{v},\bm{u})$
+					\item $d(\bm{u},\bm{v}) \ge 0$ with equality iff $\bm{u}=\bm{v}$
+				\end{itemize}
+			\end{thm}
+			
+			\begin{defn}
+				If $\bm{u}, \bm{v}, \bm{w} \in V$ and if $k$ is a scalar, then:
+				\begin{itemize}
+					\item $\left< \bm{0} , \bm{v} \right>=\left< \bm{v} , \bm{0} \right>=0$
+					\item $\left< \bm{u} , \bm{v}+\bm{w} \right>=\left< \bm{u} , \bm{v} \right>+\left< \bm{u} , \bm{w} \right>$
+					\item $\left< \bm{u} , \bm{v}-\bm{w} \right>=\left< \bm{u} , \bm{v} \right>-\left< \bm{u} , \bm{w} \right>$
+					\item $\left< \bm{u}-\bm{v} , \bm{w} \right>=\left< \bm{u} , \bm{w} \right>-\left< \bm{v} , \bm{w} \right>$
+					\item $k\left< \bm{u} , \bm{v} \right>=\left< \bm{u} , k\bm{v} \right>$
+				\end{itemize}
+			\end{defn}
+		
 \end{document}
