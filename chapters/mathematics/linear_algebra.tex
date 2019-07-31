@@ -360,6 +360,71 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 	\subsection{Matrix Transformations from $\mathbb{R}^n$ to $\mathbb{R}^m$}
 	
+		Recall that a \emph{function} is a rule that associates with each element of a set $A$ one and only one element in a set $B$. If $f$ associates the element $b \in B$ with $a \in A$, we write $b=f(a)$ and we say that $b$ is the \emph{image} of $a$ under $f$ or that $f(a)$ is the \emph{value} of $f$ at $a$. The set $A$ is called the \emph{domain} of $f$ and the set $B$ the \emph{codomain} of $f$. The set $f(A)=\{f(a)|a \in A\}$ is called the \emph{range} of $f$.
+		
+		\begin{defn}[Transformation]
+			If $V$ and $W$ are vector spaces, and if $f$ is a function with domain $V$ and codomain $W$, then we say that $f$ is a \emph{transformation} from $V$ to $W$ or that $f$ maps $V$ to $W$, which we denote with $f:V \rightarrow W$.
+			
+			In the special case where $V=W$, $f$ is also called an \emph{operator} on $V$.
+		\end{defn}
+		
+		Since we are talking about matrices, we are going to consider the transformations from $\mathbb{R}^n$ to $\mathbb{R}^m$ which can be represented as a matrix multiplication as follows:
+		\begin{displaymath}
+			\begin{bmatrix}
+				w_1 \\ w_2 \\ \vdots \\ w_m
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				a_{11} & a_{12} & \dots & a_{1n} \\
+				a_{21} & a_{22} & \dots & a_{2n} \\
+				\vdots & \vdots &       & \vdots \\
+				a_{n1} & a_{n2} & \dots & a_{nn}
+			\end{bmatrix}
+			\begin{bmatrix}
+				x_1 \\ x_2 \\ \vdots \\ x_n
+			\end{bmatrix}
+		\end{displaymath}
+		
+		or more briefly as $\bf{w}=A\bf{x}$.
+		
+		This can be viewed as a linear system, but if we consider $\bf{w}$ as a vector in $\mathbb{R}^m$ and $\bf{x}$ as a vector in $\mathbb{R}^n$, we can see this as a transformation. We call this \emph{matrix transformation}(or \emph{matrix operator} if $m=n$), denoted by $T_A:\mathbb{R}^n\rightarrow \mathbb{R}^m$, and thereby $\bf{w}=T_A(\bf{x})$, or sometimes $\bf{x} \xrightarrow{T_A} \bf{w}$. $T_A$ is called \emph{multiplication by $A$}, and the matrix $A$ is called the \emph{standard matrix} for the transformation.
+		
+		\begin{thm}
+			For every matrix $A$, the matrix transformation $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ has the following properties for all vectors $\bf{u}$ and $\bf{v}$ and for every scalar $k$:
+			\begin{enumerate}
+				\item $T_A(\bf{0})=\bf{0}$
+				\item $T_A(k\bf{u})=kT_A(\bf{u})$ [Homogeniety Property]
+				\item $T_A(\bf{u}+\bf{v})=T_A(\bf{u})+T_A(\bf{v})$ [Additivity Property]
+				\item $T_A(\bf{u}-\bf{v})=T_A(\bf{u})-T_A(\bf{v})$
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^m$ and $T_B:\mathbb{R}^n \rightarrow \mathbb{R}^m$ are matrix transformations, and if $\forall \bf{x} \in \mathbb{R}, T_A(\bf{x})=T_B(\bf{x})$, then $A=B$.
+		\end{thm}
+		
+		\begin{defn}
+			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^k$ and $T_B:\mathbb{R}^k \rightarrow \mathbb{R}^m$ are matrix transformations, the \emph{composition} of $T_B$ with $T_A$, denoted by $T_B \circ T_A$, is defined by $\bf{x} \xrightarrow{T_B \circ T_A} T_B(T_A(\bf{x}))$.
+		\end{defn}
+		
+		\begin{thm}
+			If $T_A:\mathbb{R}^n \rightarrow \mathbb{R}^k$ and $T_B:\mathbb{R}^k \rightarrow \mathbb{R}^m$ are matrix transformations, $T_B \circ T_A=T_{BA}$.
+		\end{thm}
+		
+		\begin{thm}
+			$T:\mathbb{R}^n\rightarrow\mathbb{R}^m$ is a matrix transformation iff the following relationships hold $\forall \bf{u}, \bf{v} \in \mathbb{R}^n$ and for every scalar $k$:
+			\begin{enumerate}
+				\item $T_A(\bf{u}+\bf{v})=T_A(\bf{u})+T_A(\bf{v})$ [Additivity Property]
+				\item $T_A(k\bf{u})=kT_A(\bf{u})$ [Homogeniety Property]
+			\end{enumerate}
+		\end{thm}
+		
+		The additivity and homogeneity properties in the theorem above are called \emph{linearity conditions}, and a transformation that satisfies these conditions is called a \emph{linear transformation}. Restating the theorem above gives the following:
+		
+		\begin{thm}
+			Every linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$ is a matrix transformation and vice versa.
+		\end{thm}
+	
 	\section{Determinants}
 		Recall from [\ref{thm_inv_2_by_2}] that the $2 \times 2$ matrix $A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is invertible iff $ad-bc \ne 0$. The term $ad-bc$ is the determinant of the matrix $A$. \emph{Determinant} is a scalar value that can be computed from the elements of a square matrix which encodes certain properties of the matrix.
 		\subsection{Calculating Determinants}
