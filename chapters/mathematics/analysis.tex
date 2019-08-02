@@ -75,6 +75,38 @@
         A sequence $\{p_n\}$ in $X$ \emph{converges} to $p \in X$ if, for every $\epsilon > 0$, there is an integer $N$ such that $n \geq N$ implies $d(p_n, p) < \epsilon$. We also write $p_n \rightarrow p$, or $lim_{n \rightarrow p} p_n = p$. A sequence \emph{diverges} if it does not converge.
     \end{defn}
     
+    \begin{prop} \label{prop_analysis_converge}
+        Let $\{p_n\}$ be a sequence in $X$. \begin{enumerate}
+        \item $\{p_n\} \rightarrow p \in X$ iff for every $N_r(p)$, there are only finitely many terms of $\{p_n\}$ that are not in $N_r(p)$.
+        \item If $\{p_n\}$ converges to both $p,q \in X$, then $p = q$.
+        \item If $\{p_n\}$ converges, then it is bounded.
+        \item If $p$ is a limit point of $E$, then there is a sequence in $E$ that converges to $p$.
+    \end{enumerate} \end{prop}
+    
+    \begin{proof}
+        1. Suppose $\{p_n\} \rightarrow p \in X$. Then for every $r > 0$, there is $N$ such that $n \geq N$ implies $d(p_n, p) < r$, i.e. $p_n \in N_r(p)$. Conversely, given $\epsilon > 0$, suppose there are only finitely many terms $p_{n_1}, p_{n_2}, \cdots, p_{n_k}$ that are not in $N_\epsilon (p)$. Then $n \geq n_k+1$ implies $p_n \in N_\epsilon (p)$, i.e. $d(p_n, p) < \epsilon$.
+        
+        2. Given any $\epsilon > 0$, take $N, M$ such that $n \geq N$ implies $d(p_n, p) < \epsilon / 2$ and $n \geq M$ implies $d(p_n, q) < \epsilon / 2$. Then $n \geq max(N,M)$ implies $d(p,q) \leq d(p_n,p) + d(p_n,q) < \epsilon$. Since $\epsilon$ is arbitrary, $p=q$.
+        
+        3. Let $p_n \rightarrow p$. Take $N$ such that $n \geq N$ implies $d(p_n, p) < 1$. Then every $p_n$ satisfies $d(p_n, p) \leq max(1, d(p_1,p), \cdots, d(p_N,p))$.
+        
+        4. Take each $p_n$ as any point in $E \cap N_{1/n}(p)$. Then for any $\epsilon > 0$, there is $N > 1/\epsilon$, and $n > N$ implies $d(p_n, p) < \epsilon$. Therefore $p_n \rightarrow p$.
+    \end{proof}
+    
+    \begin{defn}[Cauchy Sequence] \label{def_analysis_cauchy}
+        A sequence $\{p_n\}$ in $X$ is \emph{Cauchy} if for every $\epsilon > 0$ there is an integer $N$ such that $n,m \geq N$ implies $d(p_n,p_m) < \epsilon$.
+    \end{defn}
+    
+    Every convergent sequence is Cauchy, as we will show, but not every Cauchy sequence converges. For example, $\{1/n\}$ in the metric space $(0,1]$ does not converge.
+    
+    \begin{prop} \label{prop_analysis_convcauchy}
+        Every convergent sequence is Cauchy.
+    \end{prop}
+    
+    \begin{proof}
+        Let $p_n \rightarrow p$. Given $\epsilon > 0$, take $N$ such that $n \geq N$ implies $d(p_n, p) < \epsilon / 2$. Then $n,m \geq N$ implies $d(p_n, p_m) \leq d(p_n,p) + d(p_m,p) < \epsilon$.
+    \end{proof}
+    
     \section{Series}
     
     \section{Continuity}
