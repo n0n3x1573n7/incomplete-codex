@@ -154,7 +154,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 		We now give a method to convert any given basis of a vector space to an orthogonal(or orthonormal) basis. This process is called the \emph{Gram-Schmidt Process}.
 		
-		\begin{mthd}[Gram-Schmidt Process]
+		\begin{mthd}[Gram-Schmidt Process]\label{gram_schmidt_process}
 			To convert a basis $\{\bm{u_1},\bm{u_2},\dots,\bm{u_n}\}$ into an orthogonal basis $\{\bm{v_1},\bm{v_2},\dots,\bm{v_n}\}$, perform the following computations, where $W_i=span(\{u_k|k \le i\})$:
 			\begin{enumerate}
 				\item $\bm{v_1}=\bm{u_1}$
@@ -369,7 +369,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 					\item Interchange the top row with another row, if necessary, to bring a nonzero entry to the top of the column found in Step 1.
 					\item Multiply the first row by a constant so that it has a leading 1.
 					\item Add suitable multiples of the top row to the rows below so that all entries below the leading 1 become zeroes.
-					\item Reapply Step 1, ignoring the upper rows until the entire matrix is in row echelon form.
+					\item Restart from Step 1, ignoring the upper rows until the entire matrix is in row echelon form.
 				\end{enumerate}
 				\item Backward Phase
 				\begin{enumerate}[label=Step \arabic*.]
@@ -418,7 +418,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			$A^TA$ is invertible iff the column vectors of $A$ are linearly independent.
 		\end{thm}
 		
-		\begin{thm}
+		\begin{thm}\label{thm_elementary_invertible}
 			Every elementary matrix is invertible, and the inverse is also an elementary matrix.
 		\end{thm}
 		
@@ -769,11 +769,58 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 	
 	\section{Preprocessing Matrices for Easier Computation}
-	In this section we see methods for to preprocess matrices to enable easier and faster computation, including solving linear equations and calculating the power of a square matrix.
+	In this section we see methods for to preprocess matrices to enable easier and faster computation, including solving linear equations and calculating the power of a square matrix. This is often called a \emph{decomposition} or \emph{factorization} of a matrix.
 	
-		\subsection{LU-decomposition}%TODO
+		\subsection{LU-decomposition}
+			\emph{LU-decomposition} is a process of which we factorize a matrix $A$ into two matrices, $A=LU$, of which $L$ is a lower triangular matrix and $U$ is an upper triangular matrix.
 		
-		\subsection{QR-Decomposition}%TODO
+			We modify Gaussian Elimination[\ref{mthd_gauss_jordan_elim}]'s Forward Phase, of which we do not reorder the rows while we eliminate the matrix into its echelon form(or in this case, upper triangular matrix). Then we gain the following form:
+			\begin{displaymath}
+				(E_r\dots E_2E_1)A=U
+			\end{displaymath}
+			Now using theorem \ref{thm_elementary_invertible}, we know that the elementary matrices are invertible, and hence we gain the following:
+			\begin{displaymath}
+				A=(E_r\dots E_2E_1)^{-1}U=E_1^{-1}E_2^{-1}\dots E_r^{-1}U
+			\end{displaymath}
+			In the forward phase of the Gaussian Elimination, since we eliminate the possibility of permutation, all the elementary matrices will either be a constant multiple of a row, or subtraction of a multiple of an upper row from a lower row. We now give the following theorem:
+			\begin{thm}
+				If $A$ is a square matrix that can be reduced to a row echelon form $U$ by Gaussian Elimination without row interchanges, then $A$ can be factored as $A=LU$, where $L$ is a lower triangular matrix.
+			\end{thm}
+			
+			There are two major variants of LU-decomposition.
+			
+			First, note that LU-decomposition is not unique, since multiplying a nonzero $k$ to column $i$ in $L$ and dividing by $k$ to the row $i$ in $U$ will still give the multiplication result to be $A$. To solve this problem, we restrict the diagonal entries of the matrices $L$ and $U$ to all be ones, and introduce a diagonal matrix $D$ to the mix. By making this a three-matrix factorization, i.e. $A=LDU$, this is a unique decomposition. This is called the \emph{LDU-decomposition}.
+			
+			Second, we did not allow any row exchanges, but row exchanges are sometimes performed in computer algorithms to reduce roundoff errors that occur due to floating-point arithmetic. By allowing row exchanges, we can alter the decomposition to be $QA=LU$, where $Q$ is a permutation matrix. It is common to express this as $A=PLU$, where $P=Q^{-1}$, which is called the \emph{PLU-decomposition} of $A$.
+		
+		\subsection{QR-Decomposition}
+			We start with a matrix with linearly independent columns(hence, invertible) $A$. Since $A$'s columns are linearly independent, we can apply the Gram-Schmidt Process[\ref{gram_schmidt_process}] to orthonormalize its column vectors to, say a matrix $Q$.
+			
+			What we need to think about is how the columns of $A$(say $\bm{a_1}, \bm{a_2}, \dots, \bm{a_n}$) relate with columns of $Q$(say $\bm{q_1}, \bm{q_2}, \dots, \bm{q_n}$). If we follow the Gram-Schmidt Process, $\bm{a_k}$ can be represented as a linear combination of the vectors in the set $Q_k\{\bm{q_i}|1 \le i \le k\}$. Considering the fact that the projection of $\bm{a_i}$ onto the space $span(Q_k)$, according to the projection formula[\ref{thm_projection_formula}], is:
+			\begin{displaymath}
+				\sum_{i=1}^{n}\left<\bm{q_i},\bm{a_k}\right>q_i=\sum_{i=1}^{k}\left<\bm{q_i},\bm{a_k}\right>q_i
+			\end{displaymath}
+			Equality holds as $\bm{q_\alpha}$ and $\bm{a_\beta}$ are orthogonal if $\alpha>\beta$. Therefore the relationship between $A$ and $Q$ can be represented as follows:
+			\begin{displaymath}
+				A
+				=
+				Q
+				\begin{bmatrix}
+					\left<\bm{q_1}, \bm{a_1}\right> & \left<\bm{q_1}, \bm{a_2}\right> & \cdots & \left<\bm{q_1}, \bm{a_n}\right> \\
+					\left<\bm{q_2}, \bm{a_1}\right> & \left<\bm{q_2}, \bm{a_2}\right> & \cdots & \left<\bm{q_2}, \bm{a_n}\right> \\
+					\vdots                          & \vdots                          &        & \vdots                          \\
+					\left<\bm{q_n}, \bm{a_1}\right> & \left<\bm{q_n}, \bm{a_1}\right> & \cdots & \left<\bm{q_n}, \bm{a_n}\right> \\
+				\end{bmatrix}
+				=
+				Q
+				\begin{bmatrix}
+				\left<\bm{q_1}, \bm{a_1}\right> & \left<\bm{q_1}, \bm{a_2}\right> & \cdots & \left<\bm{q_1}, \bm{a_n}\right> \\
+				0                               & \left<\bm{q_2}, \bm{a_2}\right> & \cdots & \left<\bm{q_2}, \bm{a_n}\right> \\
+				\vdots                          & \vdots                          &        & \vdots                          \\
+				0                               & 0                               & \cdots & \left<\bm{q_n}, \bm{a_n}\right> \\
+				\end{bmatrix}
+			\end{displaymath}
+			or, $A=QR$. Note that $Q$ is an orthogonal matrix derived from Gram-Schmidt process and $R$ is an upper triangular matrix.
 		
 		\subsection{Diagonalization of a Matrix}
 			\begin{defn}[Diagonalizablility]
@@ -892,6 +939,17 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		
 		Find the inverse of $A$, $A^{-1}$.
 		The only possible solution is $\bm{x}=A^{-1}\bm{b}$.
+		
+		\subsection{Method of LU-decomposition}
+
+			This can be used for matrices which are LU-factorizable, i.e. we can use this if we can apply Gaussian Elimination without any row exchanges.
+			
+			\begin{enumerate}
+				\item We first decompose $A=LU$. The system in question then becomes $LU\bm{x}=\bm{b}$.
+				\item Let $\bm{y}=U\bm{x}$, where $\bm{y}=\begin{bmatrix}y_1 & y_2 & \dots & y_n \end{bmatrix}^T$. The system in question then becomes $L\bm{y}=\bm{b}$.
+				\item We know that $L$ is a lower triangular matrix; hence we can simply use front-substitution to find $y_i$ in order.
+				\item Now we have the equation $U\bm{x}=\bm{y}$, of which $\bm{y}$ is known. Since $U$ is an upper triangular matrix, we can use back-substitution to find $x_i$ in reverse order.
+			\end{enumerate}
 		
 		\subsection{Method of RREF}\label{mthd_rref}
 		
