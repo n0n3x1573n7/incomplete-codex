@@ -641,7 +641,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\fi
 		we can see that there are exactly $n$ (possibly complex and multiple) roots of a characteristic polynomial of $n \times n$ matrix, and therefore can have up to $n$ distinct eigenvalues.
 		
-		\begin{thm}
+		\begin{thm}[TFAE for eigenvalues]
 			If $A$ is an $n \times n$ matrix, the following statements are equivalent:
 			\begin{enumerate}
 				\item $\lambda$ is an eigenvalue of $A$
@@ -745,9 +745,56 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			If $A$ is an invertible symmetric matrix, then $A^{-1}$ is symmetric.
 		\end{thm}
 		
+		As a side note, a \emph{skew-symmetric} matrix is a square matrix such that $S=-S^T$.
+		
+		\subsection{Orthogonal Matrix}
+		\begin{defn}[Orthogonal Matrix]\ref{def_orthogonal_matrix}
+			A square matrix $A$ is said to be \emph{orthogonal} if its transpose is the same as its invers, that is, if $A^{-1}=A^T$, or equivalently, $AA^T=A^TA=I$.
+		\end{defn}
+		
+		\begin{thm}[TFAE for Orthogonal Matrices]
+			The followings are equivalent for an $n \times n$ matrix $A$
+			\begin{enumerate}
+				\item $A$ is orthogonal
+				\item The row vectors of $A$ form an orthonormal set in $\mathbb{R}^n$ with the Euclidean inner product
+				\item The column vectors of $A$ form an orthonormal set in $\mathbb{R}^n$ with the Euclidean inner product
+				\item $\|A\bf{x}\|=\|\bf{x}\|$ for $\bf{x} \in \mathbb{R}^n$
+				\item $A\bf{x} \cdot A\bf{y} = \bf{x} \cdot \bf{y}$ for all $\bf{x}, \bf{y} \in \mathbb{R}^n$
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			\begin{enumerate}
+				\item The inverse of an orthogonal matrix is orthogonal
+				\item A product of orthogonal matrices is orthogonal
+				\item If $A$ is orthogonal, then $\det(A)=\pm 1$.
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			If $S$ is an orthonormal basis for an n-dimensional inner product space $V$, and if:
+			\begin{displaymath}
+				(\bm{u})_S=(u_1,u_2,\dots,u_n), (\bm{v})_S=(v_1,v_2,\dots,v_n)
+			\end{displaymath}
+			then:
+			\begin{enumerate}
+				\item $\|\bm{u}\|=\sqrt{u_1^2+u_2^2+\cdots+u_n^2}$
+				\item $d(\bm{u},\bm{v})=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2+\cdots+(u_n-v_n)^2}$
+				\item $\left<\bm{u},\bm{v}\right>=u_1v_1+u_2v_2+\cdots+u_nv_n$
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			Let $V$ be a finite-dimensional inner product space. If $P$ is the transition matrix from one orthonormal basis for $V$ to another orthonormal basis for $V$, then $P$ is an orthogonal matrix.
+		\end{thm}
+		
 		\subsection{Similar Matrices}
 		\begin{defn}[Similar Matrices]
 			If $A$ and $B$ are square matrices, then we say that \emph{$B$ is similar to $A$} or \emph{$A$ and $B$ are similar matrices} if there is an invertible matrix $P$ such that $B=P^{-1}AP$
+		\end{defn}
+		
+		\begin{defn}[Orthogonally Similar Matrices]
+			If $A$ and $B$ are square matrices, then we say that $A$ and $B$ are \emph{orthogonally similar} if there is an orthogonal matrix $P$ such that $P^TAP=B$.
 		\end{defn}
 		
 		\begin{thm}[Invariants of Similar Matrices]
@@ -765,8 +812,13 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{tabular}
 		\end{thm}
 		
-		\subsection{Positive Definite Matrices}%TODO
+		\subsection{Positive Definite Matrices and Quadratic Forms}
+		Before talking about Positive Definite Matrices, we must first talk about Quadratic Forms.
+		%TODO
 		
+		\subsection{Hermitian, Unitary, and Normal Matrices}
+		If we talked about special real matrices, this section is on special complex matrices. Comparing with real matrices, Hermitian is similar to symmetric, Unitary is similar to Orthogonal.
+		%TODO
 	
 	\section{Preprocessing Matrices for Easier Computation}
 	In this section we see methods for to preprocess matrices to enable easier and faster computation, including solving linear equations and calculating the power of a square matrix. This is often called a \emph{decomposition} or \emph{factorization} of a matrix.
@@ -820,7 +872,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				0                               & 0                               & \cdots & \left<\bm{q_n}, \bm{a_n}\right> \\
 				\end{bmatrix}
 			\end{displaymath}
-			or, $A=QR$. Note that $Q$ is an orthogonal matrix derived from Gram-Schmidt process and $R$ is an upper triangular matrix.
+			or, $A=QR$. Note that $Q$ is an orthogonal matrix[\ref{def_orthogonal_matrix}] derived from Gram-Schmidt process and $R$ is an upper triangular matrix.
 		
 		\subsection{Diagonalization of a Matrix}
 			\begin{defn}[Diagonalizablility]
@@ -852,7 +904,41 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				If an $n \times n$ matrix $A$ has $n$ distinct eigenvalues, then $A$ is diagonalizable.
 			\end{thm}
 		
-		\subsection{Singular Value Decomposition(SVD)}%TODO
+		\subsection{Orthogonal Diagonalization}
+		\begin{defn}[Orthogonal Diagonalizability]
+			If $A$ is orthogonally similar to some diagonal matrix, i.e. for some diagonal matrix $D$, there exists an orthogonal matrix $P$ s.t. $P^TAP=D$, then we say that $A$ is \emph{orthogonally diagonalizable} and $P$ \emph{orthogonally diagonalizes} $A$.
+		\end{defn}
+		
+		The first goal in this section is to determine what conditions a matrix must satisfy to be orthogonally diagonalizable. Suppose $P^TAP=D$, where $P$ is orthogonal and $D$ is diagonal. Since $PP^T=P^TP=I$, $PP^TAPP^T=A=PDP^T$. Transpose both sides, we gain $A^T=(PDP^T)^T=PD^TP^T=PDP^T=A$, hence $A$ is symmetric.
+		
+		\begin{thm}[TFAE for Orthogonally Diagonalizable Matrix]
+			If $A$ is an $n \times n$ matrix, then the followings are equivalent:
+			\begin{enumerate}
+				\item $A$ is orthogonally diagonalizable
+				\item $A$ has an orthonormal set of $n$ eigenvectors
+				\item $A$ is symmetric.
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			If $A$ is a symmetric matrix, then:
+			\begin{itemize}
+				\item The eigenvalues of $A$ are all real.
+				\item Eigenvectors from different eigenspaces are orthogonal.
+			\end{itemize}
+		\end{thm}
+		
+		\begin{mthd}[Orthogonally Diagonalizing an $n \times n$ Symmetric Matrix]
+			To apply this, the matrix must be symmetric.
+			\begin{enumerate}
+				\item Find a basis for each eigenspace of $A$.
+				\item Apply the Gram-Schmidt process[\ref{gram_schmidt_process}] to each of these bases to obtain an orthonormal basis for each eigenspace.
+				\item Form the matrix $P$ whose columns are the vectors constructed in step 2. This matrix will orthogonally diagonalize $A$, and the eigenvalues on the diagonal of $D=P^TAP$ will be in the same order as their corresponding eigenvectors in $P$.
+			\end{enumerate}
+		\end{mthd}
+		
+		\subsection{Singular Value Decomposition(SVD)}
+		%TODO
 	
 	\section{Solving Linear Equations}
 	We come to this final section, the ultimate target of linear algebra: solving a system of linear equations.
