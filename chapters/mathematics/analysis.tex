@@ -111,6 +111,34 @@
     
     \section{Continuity}
     
+    \begin{defn}[Limits and Continuity] \label{def_analysis_continuity}
+        Let $X$ and $Y$ be metric spaces, each with metric $d_X$ and $d_Y$, $f$ maps $E$ to $Y$, and $p$ is a limit point of $E \subseteq X$. If for every $\epsilon > 0$ there is $\delta > 0$ such that $x \in E$ and $0 < d_X(x,p) < \delta$ implies $d_Y(f(x), q) < \epsilon$, then we write \emph{$f(x) \to q$ as $x \to p$}, or $\lim_{x \to p} f(x) = q$.
+        
+        $f$ is \emph{continuous at $p$} if for every $\epsilon > 0$ there is $\delta > 0$ such that $x \in E$ and $d_X(x,p) < \delta$ implies $d_Y(f(x),f(p)) < \epsilon$.
+        
+        $f$ is \emph{continuous on $X$} if it is continuous at every point of $X$.
+    \end{defn}
+    
+    This is clearly just an extension of the notion of limits and continuity you have seen in the calculus chapter.
+    
+    \textbf{From now on, we will also assume that $Y$ is a metric space. If $Y$ appears, we will use the metrics $d_X$ and $d_Y$ for $X$ and $Y$ each.}
+    
+    TODO
+    
+    \begin{thm} \label{thm_inverse_open}
+        $f : X \to Y$ is continuous on $X$ iff $f^{-1}(V)$ is open in $X$ for every $V$ open in $Y$.
+    \end{thm}
+    
+    \begin{proof}
+        Suppose $f$ is continuous on $X$ and $V$ is open in $Y$. We will show that every $p \in f^{-1}(V)$ is an interior point. Since $f(p) \in V$ and $V$ is open in $Y$, there is $\epsilon > 0$ such that $N_{\epsilon}(f(p)) \subseteq V$. Since $f$ is continuous at $p$, there is $\delta > 0$ such that $d_X(x,p) < \delta$ implies $d_Y(f(x),f(p)) < \epsilon$, which in turn implies $f(x) \in V$. Therefore $d_X(x,p) < \delta$ implies $x \in f^{-1}(V)$.
+        
+        Conversely, suppose $f^{-1}(V)$ is open in $X$ for every $V$ open in $Y$, $p \in X$, and $\epsilon > 0$. TODO
+    \end{proof}
+    
+    \begin{thm} \label{cor_inverse_closed}
+        $f : X \to Y$ is continuous on $X$ iff $f^{-1}(V)$ is closed in $X$ for every $V$ closed in $Y$.
+    \end{thm}
+    
     \section{Differentiation}
     
     \section{Integral}
