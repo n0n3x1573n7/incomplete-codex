@@ -812,13 +812,26 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{tabular}
 		\end{thm}
 		
-		\subsection{Positive Definite Matrices and Quadratic Forms}
-		Before talking about Positive Definite Matrices, we must first talk about Quadratic Forms.
-		%TODO
 		
+\begin{comment}
 		\subsection{Hermitian, Unitary, and Normal Matrices}
 		If we talked about special real matrices, this section is on special complex matrices. Comparing with real matrices, Hermitian is similar to symmetric, Unitary is similar to Orthogonal.
-		%TODO
+		
+		\begin{defn}[Conjugate Transpose of a Matrix]
+			If $A$ is a complex matrix, then the \emph{conjugate transpose} of $A$, denoted by $A^*$, is defined by $A^*=\bar{A}^T$, where $\bar{A}$ indicates elementwise conjugation of the matrix.
+		\end{defn}
+		
+		\begin{thm}
+			If $k$ is a complex scalar and if $A, B, C$ are complex matrices whose sizes are such that the stated operations can be performed, then:
+			\begin{enumerate}
+				\item $(A^*)^*=A$
+				\item $(A+B)^*=A^*+B^*$
+				\item $(A-B)^*=A^*-B^*$
+				\item $(kA)^*=\bar{k}A^*$
+				\item $(AB)^*=B^*A^*$
+			\end{enumerate}
+		\end{thm}
+\end{comment}
 	
 	\section{Preprocessing Matrices for Easier Computation}
 	In this section we see methods for to preprocess matrices to enable easier and faster computation, including solving linear equations and calculating the power of a square matrix. This is often called a \emph{decomposition} or \emph{factorization} of a matrix.
@@ -904,7 +917,7 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 				If an $n \times n$ matrix $A$ has $n$ distinct eigenvalues, then $A$ is diagonalizable.
 			\end{thm}
 		
-		\subsection{Orthogonal Diagonalization}
+		\subsection{Orthogonal Diagonalization}\label{chap_orthogonal_diagonalization}
 		\begin{defn}[Orthogonal Diagonalizability]
 			If $A$ is orthogonally similar to some diagonal matrix, i.e. for some diagonal matrix $D$, there exists an orthogonal matrix $P$ s.t. $P^TAP=D$, then we say that $A$ is \emph{orthogonally diagonalizable} and $P$ \emph{orthogonally diagonalizes} $A$.
 		\end{defn}
@@ -937,8 +950,161 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			\end{enumerate}
 		\end{mthd}
 		
+			Some matrices may not be orthogonally diagonalizable. However it may still be possible to achieve simplification through $P^TAP$ by choosing an appropriate orthogonal matrix $P$. We now give two theorems that illustrate this:
+			
+			\begin{thm}[Schur's Theorem]
+				If $A$ is an $n \times n$ matrix with real entries and real eigenvalues, then there is an orthogonal matrix $P$ such that $P^TAP$ is an upper triangular matrix of the form:
+				\begin{displaymath}
+					P^TAP=\begin{bmatrix}
+					\lambda_1 & \times & \times & \cdots & \times \\
+					0 & \lambda_2 & \times & \cdots & \times \\
+					0 & 0 & \lambda_3 & \cdots & \times \\
+					\vdots & \vdots & \vdots & \ddots & \vdots \\
+					0 & 0 & 0 & \cdots & \lambda_n
+					\end{bmatrix}
+				\end{displaymath}
+				which is called a \emph{Schur decomposition} of $A$.
+			\end{thm}
+			
+			\begin{thm}[Hessenberg's Theorem]
+				If $A$ is an $n \times n$ matrix with real entries, then there is an orthogonal matrix $P$ such that $P^TAP$ is a matrix of the form:
+				\begin{displaymath}
+				P^TAP=\begin{bmatrix}
+				\times & \times & \cdots & \times & \times & \times \\
+				\times & \times & \cdots & \times & \times & \times \\
+				0 & \times & \cdots & \times & \times & \times \\
+				\vdots & \vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & \times & \times & \times \\
+				0 & 0 & \cdots & 0 & \times & \times
+				\end{bmatrix}
+				\end{displaymath}
+				which is a matrix in which each entry below the subdiagonal is zero. This form of matrices are said to be in \emph{upper Hessenberg form}, and such decomposition is called an \emph{upper Hessenberg decomposition} of $A$.
+			\end{thm}
+		\subsubsection{Quadratic Forms and Definite Matrices}
+		The expressions of which we have been studying has the form $\sum_{i=1}^{n}a_ix_i$. They are called a \emph{linear form} on $\mathbb{R}^n$. In this chapter however we will be looking at equations of in the form of $\sum_{i=1}^{n}\sum_{j=1}^{n}a_{ij}x_ix_j$. This is called the \emph{quadratic forms} on $\mathbb{R}^n$, and the terms of the form $a_{ij}x_ix_j$ are called the \emph{cross product terms}. It is common to combine the cross product terms involving $x_ix_j$ with $x_jx_i$ to avoid duplicate term, hence when we put $a_{ij}=a_{ji}$, we get the following form:
+		\begin{displaymath}
+		\sum_{i=1}^{n}a_iix_i^2 + \sum_{i=1}^{n}\sum_{j=i}^{n}2a_{ij}x_ix_j
+		\end{displaymath}
+		If we let $\bm{x}$ be the column vector of the variables $x_i$, then the form above may be represented as following:
+		\begin{displaymath}
+		\begin{bmatrix}
+		x_1 & x_2 & \cdots & x_n
+		\end{bmatrix}
+		\begin{bmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots &       & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+		\end{bmatrix}
+		\begin{bmatrix}
+		x_1 \\ x_2 \\ \vdots \\ x_n
+		\end{bmatrix}
+		=\bm{x}^TA\bm{x}
+		\end{displaymath}
+		Since we assumed $a_{ij}=a_{ji}$, note that $A$ is symmetric. In general, if $A$ is a symmetric $n \times n$ matrix and $\bm{x}$ is an $n \times 1$ column vector of variables, then we call the function $Q_A(\bm{x})=\bm{x}^TA\bm{x}$ the \emph{quadratic form associated with $A$}. This can also be represented in a dot product notation as $Q_A(\bm{x})=\bm{x} \cdot A\bm{x}=A\bm{x} \cdot \bm{x}$
+		
+		To solve many questions arising from a quadratic form, many can be solved by simplifying the quadratic form $\bm{x}^TA\bm{x}$ by making the substitution $\bm{x}=P\bm{y}$, which will express the variables $x_1, x_2, \dots, x_n$ in terms of new variables $y_1, y_2, \dots, y_n$. If $P$ is invertible, we call this substitution a \emph{change of variable}, and if $P$ is orthogonal, then we call this an \emph{orthogonal change of variable}. By making this substitution:
+		\begin{displaymath}
+		\bm{x}^TA\bm{x}=(P\bm{y})^TA(P\bm{y})=\bm{y}^TP^TAP\bm{y}=\bm{y}^T(P^TAP)\bm{y}
+		\end{displaymath}
+		of which $B=P^TAP$ is symmetric. Hence this produces a new quadratic form $Q_B(\bm{y})$ in the variables $y_1, y_2, \dots, y_n$. If we somehow manage to choose an orthogonal $P$ to orthogonally diagonalize $A$, then $Q_B(\bm{y})=\sum_{i=1}^{n}\lambda_iy_i^2$. We have the following theorem:
+		\begin{thm}[The Principal Axes Theorem]
+			If $A$ is a symmetric $n \times n$ matrix, then there is an orthogonal change of variable that transforms the quadratic form $Q_A(\bm{x})=\bm{x}^TA\bm{x}$ into a quadratic form $Q_D(\bm{y})=\bm{y}^TD\bm{y}$ with no cross product terms. Specifically if $P$ orthogonally diagonalized $A$, then making the change of variable $\bm{x}=P\bm{y}$ will yield the quadratic form $\bm{x}^TA\bm{x}=\bm{y}^TD\bm{y}=\lambda_1y_1^2+\lambda_2y_2^2+\dots+\lambda_ny_n^2$, in which $\lambda_i$ are the eigenvalues of $A$ corresponding to the eigenvectors that form the successive columns of $P$.
+		\end{thm}
+		
+		\begin{defn}
+			A quadratic form $\bm{x}^TA\bm{x}$ is said to be:
+			\begin{itemize}
+				\item \emph{positive definite} if $\bm{x}^TA\bm{x}>0$ for $\bm{x} \ne \bm{0}$
+				\item \emph{negative definite} if $\bm{x}^TA\bm{x}<0$ for $\bm{x} \ne \bm{0}$
+				\item \emph{indefinite} if otherwise.
+			\end{itemize}
+		\end{defn}
+		
+		\begin{thm}
+			If $A$ is symmetric matrix, then:
+			\begin{itemize}
+				\item $A$ is positive definite iff all eivenvalues of $A$ are positive.
+				\item $A$ is negative definite iff all eivenvalues of $A$ are negative.
+				\item $A$ is indefinite iff there are positive and negative eivenvalues of $A$.
+			\end{itemize}
+		\end{thm}
+		
+		For the next theorem, we define the following:
+		\begin{defn}
+			The \emph{$k$-th principal submatrix} of an $n \times n$ matrix $A$ to be the $k \times k$ submatrix consisting of the first $k$ rows and columns of $A$.
+		\end{defn}
+		
+		\begin{thm}[TFAE for positive definite matrices]
+			When a symmetric matrix $A$ has one of the following five properties, it has them all:
+			\begin{enumerate}
+				\item All $n$ pivots are positive.
+				\item All $n$ determinants of principal submatrices are positive.
+				\item All $n$ eigenvalues are positive.
+				\item $\bm{x}^TA\bm{x}$ is positive except at $\bm{x}=0$. This is sometimes called the \emph{energy-based} definition.
+				\item $A=R^TR$ for a matrix $R$ with independent columns.
+			\end{enumerate}
+		\end{thm}
+		
 		\subsection{Singular Value Decomposition(SVD)}
-		%TODO
+		We saw, in diagonalization, that every symmetric matrix $A$ can be expressed as $A=PDP^T$ where $P$ is an $n \times n$ orthogonal matrix of eigenvectors of $A$. In this chapter, this will be referred to as an \emph{eigenvalue decomposition}. If it is not symmetric, it has a Hessenberg decomposition, and if it has real eigenvalues, it has a Schur decomposition.
+		
+		There are two alternate ways to decompose a general square matrix $A$.
+		
+		The first is $A=PJP^{-1}$, where $P$ is invertible but not necessarily orthogonal, and $J$ is "nearly diagonal", or in a \emph{Jordan Form}. Since using this decomposition is not that much popular in computations, we are simply going to refer to \href{https://en.wikipedia.org/wiki/Jordan_normal_form}{this Wikipedia article}.
+		
+		The next is $A=U\Sigma V^T$ in which $U$ and $V$ are orthogonal but not necessarily the same. This is called a \emph{Singular Value Decomposition}.
+		
+		The matrix products of the form $A^TA$ will play an important role in SVD, so we begin with the theorems:
+		\begin{thm}
+			If $A$ is an $m \times n$ matrix, then:
+			\begin{enumerate}
+				\item $A$ and $A^TA$ have the same null space
+				\item $A$ and $A^TA$ have the same row space
+				\item $A^T$ and $A^TA$ have the same columns space
+				\item $A$ and $A^TA$ have the same rank
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			If $A$ is an $m \times n$ matrix, then:
+			\begin{enumerate}
+				\item $A^TA$ is orthogonally diagonalizable.
+				\item The eigenvalues of $A^TA$ are nonnegative.
+			\end{enumerate}
+		\end{thm}
+		
+		We now give the definition of "singular value"(as in SVD):
+		
+		\begin{defn}[Singular Value]
+			If $A$ is an $m \times n$ matrix, and if $\lambda_1, \lambda_2, \dots, \lambda_n$ are the eigenvalues of $A^TA$, then the numbers $\sigma_i=\sqrt{\lambda_i}$ are called the \emph{singular values} of $A$.
+		\end{defn}
+		
+		Additionally, we define the \emph{main diagonal} of an $m \times n$ matrix to be the entries in the position $a_{ii}, 1 \le i \le \min(m,n)$. Now we can finally define SVD. The first given theorem is the brief form that captures the main idea, second theorem for helping the method for SVD, and the last method for an expanded form that spells out the details.
+		
+		\begin{thm}[Singular Value Decomposition]
+			If $A$ is an $m \times n$ matrix, then $A$ can be expressed in the form
+			\begin{displaymath}
+				A=U\Sigma V^T=\bm{u_1}\sigma_1\bm{v_1}^T+\bm{u_2}\sigma_2\bm{v_2}^T+\cdots+\bm{u_n}\sigma_n\bm{v_n}^T
+			\end{displaymath}
+			where $U$ and $V$ are orthogonal matrices and $\Sigma$ is an $m \times n$ matrix whose diagonal entries are the singular values of $A$ and whose other entries are zero.
+		\end{thm}
+		
+		\begin{thm}
+			Suppose $A=U\Sigma V^T=\bm{u_1}\sigma_1\bm{v_1}^T+\bm{u_2}\sigma_2\bm{v_2}^T+\cdots+\bm{u_n}\sigma_n\bm{v_n}^T$ is an SVD of $A$. Then, $A\bm{v_i}=\sigma_i\bm{u_i}$.
+		\end{thm}
+		
+		\begin{mthd}[Singular Value Decomposition(Expanded Form)]
+			If $A$ is an $m \times n$ matrix of rank $k$, then $A$ can be factored as $A=U \Sigma V^T$, in which $U$, $\Sigma$, $V$ have sizes $m \times m$, $m \times n$, and $n \times n$, respectively, using the following method:
+			\begin{enumerate}
+				\item Find $V=\begin{bmatrix} \bm{v_1} & \bm{v_2} & \cdots & \bm{v_n} \end{bmatrix}$ which orthogonally diagonalizes $A^TA$. Optionally, since $\bm{v_i}$ is an eigenvector of $A^TA$, sort it so that the eigenvector corresponding to the larger eigenvalue comes first.
+					\subitem This may be done in the following way: Find the eigenvalue and eigenvector pairs, $(\bm{v_i}, \lambda_i)$ pairs of $A^TA$, and optionally sort them as above. This will have $r=rank(A)$ vectors. Now, if there are any empty spots, use find the basis of the nullspace of $A$(which will contain $n-r$ vectors), orthonormalize them using the Gram-Schmidt Process along with the already established eigenvalues to an orthonormal basis for $\mathbb{R}^n$.
+				\item For each $\bm{v_i}$, calculate $A\bm{v_i}=\sigma_i\bm{u_i}$. Since $\bm{u_i}$ must be a unit vector, we can get:
+					\subitem $\sigma_i=\|A\bm{v_i}\|$
+					\subitem $\bm{u_i}=A\bm{v_i}/\sigma_i$, which is a unit eigenvector of $AA^T$.
+				\item If necessary, extend $U$ using the nullspace of $A^T$ using the Gram-Schmidt Process along with the already established $\bm{u_i}$ to an orthonormal basis for $\mathbb{R}^m$.
+			\end{enumerate}
+		\end{mthd}
 	
 	\section{Solving Linear Equations}
 	We come to this final section, the ultimate target of linear algebra: solving a system of linear equations.
