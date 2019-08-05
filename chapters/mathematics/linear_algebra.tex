@@ -494,6 +494,8 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 		\begin{thm}
 			Every linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$ is a matrix transformation and vice versa.
 		\end{thm}
+		
+		Now if we consider theorem [\ref{vector_space_euclidean_space}], we can represent vector spaces in euclidean vector spaces. If we have a transformation $T:U \rightarrow V$ of which $U$ is a vector space of dimension $m$ and $V$ is a vector space of dimension $n$, we can indirectly represent this as a matrix transformation $T':\mathbb{R}^m \rightarrow \mathbb{R}^n$. If $m=n$ and $T$ is one-to-one, the $T'$ will also be one-to-one, and therefore an inverse exists. Therefore the matrix that will represent $T'$ will be invertible.
 	
 	\section{Determinants}
 		Recall from [\ref{thm_inv_2_by_2}] that the $2 \times 2$ matrix $A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is invertible iff $ad-bc \ne 0$. The term $ad-bc$ is the determinant of the matrix $A$. \emph{Determinant} is a scalar value that can be computed from the elements of a square matrix which encodes certain properties of the matrix.
@@ -1242,9 +1244,41 @@ The target of Linear Algebra is to solve a system of homogenous linear equations
 			Now we have the nullspace of $A$ and the specific solution of $A\bm{x}=\bm{b}$; add those two together to gain the whole solution. This corresponds to the fourth and final steps on Method of RREF.
 			
 		\subsection{Least Squares Approximation}%TODO
-			Sometimes there might not exist any solution for a given linear system. In this case, we have no choice but to find the best approximation of the linear system.
-		
-	
+			Sometimes there might not exist any solution for a given linear system. In this case, we have no choice but to find the best approximation of the linear system. To formally state the problem, it goes as follows:
+			Given a linear system $A\bm{x}=\bm{b}$ of $m$ equations in $n$ unknowns, find a vector $\bm{x}$ that minimizes $\|\bm{b}-A\bm{x}\|$ with respect to the Euclidean inner product on $\mathbb{R}^m$. We call such an $\bm{x}$ a \emph{least squares solution} of the system, $\bm{b}-A\bm{x}$ the \emph{least squares error vector}, and $\|\bm{b}-A\bm{x}\|$ the \emph{least squares error}.
+			\begin{thm}[Best Approximation Theorem]
+				If $W$ is a finite-dimensional subspace of an inner product space $V$, and if $\bm{b} \in V$, then $\verb|proj|_W\bm{b}$ is the \emph{best approximation} to $\bm{b}$ from $W$ in the sense that for every $\bm{w} \in W \textbackslash \{\bm{b}\}$:
+				\begin{displaymath}
+					\|\bm{b}-\verb|proj|_W\bm{b}\| < \|\bm{b}-\bm{w}\|
+				\end{displaymath}
+			\end{thm}
+			
+			\begin{thm}
+				For every linear system $A\bm{x}=\bm{b}$, the system $A^TA\bm{x}=A^T\bm{b}$, called the \emph{normal equation} or the \emph{normal system} associated with $A\bm{x}=\bm{b}$, is consistent, and all solutions are least square solutions of $A\bm{x}=\bm{b}$.
+				
+				Moreover, if $W$ is the column space of $A$, and $\bm{x}$ is any least squares solution of $A\bm{x}=\bm{b}$, then the orthogonal projection of $\bm{b}$ on $W$ is $\verb|proj|_W\bm{b}=A\bm{x}$.
+			\end{thm}
+			
+			\begin{thm}
+				If $A$ is an $m \times n$ matrix with linearly independent column vectors, then for every $m \times 1$ matrix $\bm{b}$, the linear system $A\bm{x}=\bm{b}$ has a unique least squares solution. This solution is given by:
+				\begin{displaymath}
+					\bm{x}=(A^TA)^{-1}A^T\bm{b}
+				\end{displaymath}
+				Moreover, if $W$ is the column space of $A$, then the orthogonal projection of $\bm{b}$ on $W$ is:
+				\begin{displaymath}
+					\verb|proj|_W\bm{b}=A\bm{x}=A(A^TA)^{-1}A^T\bm{b}
+				\end{displaymath}
+			\end{thm}
+			
+			However the theorem above has limited practical usage, as it involves at least 3 matrix multiplications and one inversion. In reality, the least square solutions are typically found by using some variation of Gaussian elimination to solve the normal equations, or by using QR-decomposition and the following theorem:
+			
+			\begin{thm}
+				If $A$ is an $m \times n$ matrix with linearly independent column vectors, and if $A=QR$ is a QR-decomposition of $A$, then for each $\bm{b} \in \mathbb{R}^m$, the system $A\bm{x}=\bm{b}$ has a unique least squares solution given by:
+				\begin{displaymath}
+					\bm{x}=R^{-1}Q^T\bm{b}
+				\end{displaymath}
+			\end{thm}
+			
 	Before ending this chapter, we summarize this chapter by gathering all the facts on invertible matrices, written in the appendix[\ref{equiv_invert}].
 \end{document}
 

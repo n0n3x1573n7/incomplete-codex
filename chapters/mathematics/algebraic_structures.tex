@@ -492,7 +492,108 @@
 		\end{defn}
 		
 		\subsubsection{Linear Transformation}
-		%TODO
+		\begin{defn}
+			If $T:V\rightarrow W$ is a function from a vector space $V$ to a vector space $W$, then $T$ is called a \emph{linear transformation} from $V$ to $W$ if the following two properties hold for $\forall \bm{u}, \bm{v} \in V$ and for all scalars $k$:
+			\begin{enumerate}
+				\item $T(k\bm{u})=kT(\bm{u})$ [Homogeneity property]
+				\item $T(\bm{u}+\bm{v})=T(\bm{u})+T(\bm{v})$ [Additivity property]
+			\end{enumerate}
+			In the special case where $V=W$, the linear transformation $T$ is called a \emph{linear operator} on the vector space $V$.
+		\end{defn}
+		
+		\begin{thm}
+			If $T:V\rightarrow W$ is a linear transformation, then:
+			\begin{enumerate}
+				\item $T(\bm{0})=\bm{0}$
+				\item $\forall \bm{u}, \bm{v} \in V, T(\bm{u}-\bm{v})=T(\bm{u})-T(\bm{v})$
+			\end{enumerate}
+		\end{thm}
+		
+		\begin{thm}
+			Let $T:V \rightarrow W$ be a linear transformation, where $V$ is finite dimensional. If $S=\{\bm{v_1}, \bm{v_2}, \dots,\bm{v_n}\}$ is a basis for $V$, then the image of any vector $\bm{v} \in V$ can be expressed as:
+			\begin{displaymath}
+				T(\bm{v})=c_1T(\bm{v_1})+c_2T(\bm{v_2})+\cdots+c_nT(\bm{v_n})
+			\end{displaymath}
+			where $c_1,c_2,\dots,c_n$ are coefficients required to express $\bm{v}$ as a linear combination of the vectors in $S$.
+		\end{thm}
+		
+		\begin{defn}
+			If $T:V \rightarrow W$ is a linear transformation, then the set of vectors in $V$ that $T$ maps into $\bm{0}$ is called the \emph{kernel} of $T$, denoted $ker(T)$. The set of vectors in $W$ that are images under $T$ of at least one vector in $V$ is called the \emph{range} of $T$, denoted by $R(T)$.
+		\end{defn}
+		
+		\begin{thm}
+			If $T:V \rightarrow W$ is a linear transformation, then:
+			\begin{itemize}
+				\item $ker(T)$ is a subspace of $V$.
+				\item $R(T)$ is a subspace of $W$.
+			\end{itemize}
+		\end{thm}
+		
+		\begin{defn}
+			Let  $T:V \rightarrow W$ be a linear transformation. If the range of $T$ is finite-dimensional, then its dimension is called the \emph{rank of $T$}, denoted $rank(T)$; and if the kernel of $T$ is finite-dimensional, then its dimension is called the \emph{nullity of $T$}, denoted $nullity(T)$.
+		\end{defn}
+		
+		\begin{thm}[Dimension Theorem for Linear Transformations]
+			If $T:V \rightarrow W$ is a linear transformation from an n-dimensional vector space $V$, then $rank(T)+nullity(T)=n$.
+		\end{thm}
+		
+		\subsubsection{Isomorphism}
+		\begin{defn}[One-to-one]
+			If $T:V \rightarrow W$ is a linear transformation, then $T$ is said to be \emph{one-to-one} if $T$ maps distinct vectors in $V$ into distinct vectors in $W$.
+		\end{defn}
+		
+		\begin{defn}[Onto]
+			If $T:V \rightarrow W$ is a linear transformation, then $T$ is said to be \emph{onto} if every vector in $W$ is the image of at least one vector in $V$.
+		\end{defn}
+		
+		\begin{thm}[TFAE for one-to-one linear transformation]
+			If $T:V \rightarrow W$ is a linear transformation, then the following statements are equivalent:
+			\begin{itemize}
+				\item $T$ is one-to-one
+				\item $ker(T)=\{\bm{0}\}$
+			\end{itemize}
+		\end{thm}
+		
+		\begin{thm}[TFAE for linear operator]
+			If $T:V \rightarrow V$ is a linear operator for a finite-dimensional vector space $V$, then the following statements are equivalent:
+			\begin{itemize}
+				\item $T$ is one-to-one
+				\item $ker(T)=\{\bm{0}\}$
+				\item $T$ is onto(i.e. $R(T)=V$)
+			\end{itemize}
+		\end{thm}
+		
+		\begin{defn}[Isomorphism]
+			If a linear transformation $T:V \rightarrow W$ is one-to-one and onto, then $T$ is said to be an \emph{isomorphism}, and the vector spaces $V$ and $W$ are said to be \emph{isomorphic}.
+		\end{defn}
+		
+		\begin{thm}\label{vector_space_euclidean_space}
+			Every real n-dimensional vector space is isomorphic to $\mathbb{R}^n$.
+		\end{thm}
+		
+		\begin{defn}[Composition]
+			If $T_1:U \rightarrow V$ and $T_2:V \rightarrow W$ are linear transformations, then the \emph{composition of $T_2$ with $T_1$}, denoted $T_2 \circ T_1$, is the function defined by $(T_2 \circ T_1)(\bm{u})=T_2(T_1(\bm{u}))$ where $\bm{u} \in U$.
+		\end{defn}
+		
+		\begin{thm}
+			If $T_1:U \rightarrow V$ and $T_2:V \rightarrow W$ are linear transformations, then $(T_2 \circ T_1):U \rightarrow W$ is also a linear transformation.
+		\end{thm}
+		
+		\begin{defn}[Inverse]
+			If $T:V \rightarrow W$ is a one-to-one linear transformation, we define the \emph{inverse of $T$}, denoted $T^{-1}$, to be a function $T^{-1}:R(T) \rightarrow V$ of which $\forall \bm{v} \in V, (T^{-1} \circ T)(\bm{v})=\bm{v}$.
+		\end{defn}
+		
+		\begin{thm}
+			If $T:V \rightarrow W$ is a one-to-one linear transformation, then $T^{-1}$ is also a linear transformation.
+		\end{thm}
+		
+		\begin{thm}
+			If $T_1:U \rightarrow V$ and $T_2:V \rightarrow W$ are one-to-one linear transformations, then:
+			\begin{itemize}
+				\item $T_2 \circ T_1$ is one-to-one.
+				\item $(T_2 \circ T_1)^{-1}=T_1^{-1} \circ T_2^{-1}$
+			\end{itemize}
+		\end{thm}
 		
 		\subsection{Inner Product Space}\label{chap_inner_product_space}
 			\begin{defn}[Inner Product Space]
@@ -530,7 +631,7 @@
 				\end{itemize}
 			\end{thm}
 			
-			\begin{defn}
+			\begin{thm}
 				If $\bm{u}, \bm{v}, \bm{w} \in V$ and if $k$ is a scalar, then:
 				\begin{itemize}
 					\item $\left< \bm{0} , \bm{v} \right>=\left< \bm{v} , \bm{0} \right>=0$
@@ -539,6 +640,10 @@
 					\item $\left< \bm{u}-\bm{v} , \bm{w} \right>=\left< \bm{u} , \bm{w} \right>-\left< \bm{v} , \bm{w} \right>$
 					\item $k\left< \bm{u} , \bm{v} \right>=\left< \bm{u} , k\bm{v} \right>$
 				\end{itemize}
+			\end{thm}
+			
+			\begin{defn}[Inner Product Space Isomorphism]
+				If $V$ and $W$ are inner product spaces, then we call an isomorphism $T:V \rightarrow W$ an \emph{inner product space isomorphism} if $\left<T(\bm{u}),T(\bm{v})\right>=\left<\bm{u},\bm{v}\right>$
 			\end{defn}
 		
 \end{document}
