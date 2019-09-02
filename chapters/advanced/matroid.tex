@@ -1,6 +1,32 @@
 %\documentclass{report}
 
 \begin{document}
-    \section{something something}
+    \section{Introduction}
+    
+    \begin{defn}[Matroid] \label{def_matroid}
+        A \emph{matroid} is a pair $(E,\mathcal{I})$ where $E$ is finite and $\mathcal{I} \subseteq 2^E$, such that:\begin{enumerate}
+            \item[(C1)] $\emptyset \in \mathcal{I}$.
+            \item[(C2)] If $X \subseteq Y \in \mathcal{I}$, then $X \in \mathcal{I}$.
+            \item[(C3)] If $X,Y \in \mathcal{I}$ and $|X| < |Y|$, then there is $y \in Y$ such that $X \cup \{y\} \in \mathcal{I}$.
+        \end{enumerate}
+        $X \subseteq E$ is an \emph{independent set} if $X \in I$, otherwise it is \emph{dependent}. $X$ is a \emph{base} if it is a maximal independent set. $X$ is a \emph{circuit} if it is a minimal dependent set.
+    \end{defn}
+    
+    Why use the terms ``independent'', ``base'', and ``circuit''? Because the theory of matroids came from the attempt to generalize the notions in vector spaces and graphs. Here are the two most important matroids:
+    
+    \begin{defn}[Vector Matroid] \label{def_vector_matroid}
+        Let $A$ be an $R \times |E|$ matrix over a field $\mathbb{F}$, and $E$ be the set of column indices of $A$. Let $\mathcal{I}$ be the collection of subsets of $E$ such that the column vectors specified by the subset are linearly independent. Then $(E,\mathcal{I})$ is a matroid, called the \emph{vector matroid} of $A$, and is denoted $M(A)$. A matroid $M$ is \emph{representable over $\mathbb{F}$} if there is such a matrix $A$ for which $M = M(A)$. In that case, $A$ is a \emph{representation} of $M$.
+    \end{defn}
+    
+    \begin{defn}[Graphic Matroid] \label{def_graphic_matroid}
+        For a graph $G=(V,E)$, let $\mathcal{I}$ be the collection of subsets of $E$ that induces a forest. Then $(E,\mathcal{I})$ is a matroid, called the \emph{graphic matroid} of $G$, and is denoted $M(G)$.
+    \end{defn}
+    
+    Now we can see that the linearly independent sets of a vector space correspond to the independent sets of its matroid, and the cycles of a graph correspond to the circuits of its matroid.
+    
+    \begin{defn}[Uniform Matroid] \label{def_uniform_matroid}
+        A \emph{uniform matroid} $U_{r,n}$, where $r$ and $n$ are integers satisfying $0 \leq r \leq n \leq |E|$, is given by $X \in \mathcal{I} \iff |X| \leq r$.
+    \end{defn}
+    
 
 \end{document}
